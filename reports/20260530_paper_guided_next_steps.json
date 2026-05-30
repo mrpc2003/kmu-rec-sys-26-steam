@@ -1,102 +1,61 @@
 {
   "note": "Validation-only paper-guided next-step run. No Kaggle submission.",
-  "community_splits": [
-    {
-      "name": "val_random_communitypop_seed42",
-      "holdout": "random",
-      "negative": "communitypop",
-      "seed": 42,
-      "fold_train_rows": 165002,
-      "candidate_rows": 19996,
-      "users": 4736,
-      "positives": 9998,
-      "negatives": 9998,
-      "adjusted_users": [
-        {
-          "userID": "u57101927",
-          "requested_k": 1,
-          "actual_k": 0,
-          "train_n": 1
-        }
-      ],
-      "adjusted_user_count": 1,
-      "skipped_user_count": 1,
-      "community_meta": {
-        "n_users": 6710,
-        "n_items": 2437,
-        "n_communities": 24,
-        "svd_dim": 32,
-        "community_size_summary": {
-          "count": 24,
-          "mean": 279.5833333333333,
-          "std": 259.8425671867915,
-          "min": 51.0,
-          "p25": 125.75,
-          "p50": 231.5,
-          "p75": 342.5,
-          "p90": 434.4,
-          "p95": 452.09999999999997,
-          "p99": 1166.7899999999995,
-          "max": 1380.0
-        }
-      },
-      "duration_sec": 35.048
-    },
-    {
-      "name": "val_recent_communitypop_seed42",
-      "holdout": "recent",
-      "negative": "communitypop",
-      "seed": 42,
-      "fold_train_rows": 165002,
-      "candidate_rows": 19996,
-      "users": 4736,
-      "positives": 9998,
-      "negatives": 9998,
-      "adjusted_users": [
-        {
-          "userID": "u57101927",
-          "requested_k": 1,
-          "actual_k": 0,
-          "train_n": 1
-        }
-      ],
-      "adjusted_user_count": 1,
-      "skipped_user_count": 1,
-      "community_meta": {
-        "n_users": 6710,
-        "n_items": 2437,
-        "n_communities": 24,
-        "svd_dim": 32,
-        "community_size_summary": {
-          "count": 24,
-          "mean": 279.5833333333333,
-          "std": 272.02755936771473,
-          "min": 66.0,
-          "p25": 112.75,
-          "p50": 237.5,
-          "p75": 295.25,
-          "p90": 432.09999999999997,
-          "p95": 503.1999999999998,
-          "p99": 1231.6399999999996,
-          "max": 1446.0
-        }
-      },
-      "duration_sec": 38.972
-    }
-  ],
+  "community_splits": [],
   "results": [
     {
       "split": "val_random_sqrtpop_seed42",
       "rows": 19996,
       "train_rows": 165002,
-      "duration_sec": 323.199,
+      "duration_sec": 449.445,
       "summaries": [
         {
           "score_col": "score_next_blend_mean_z",
           "rows": 19996,
           "users": 4736,
-          "row_accuracy": 0.6459291858371674,
-          "per_user_mean_accuracy": 0.6608642236006544,
+          "row_accuracy": 0.6532306461292259,
+          "per_user_mean_accuracy": 0.6705195010396491,
+          "per_user_min_accuracy": 0.0,
+          "per_user_p05_accuracy": 0.0,
+          "per_user_p50_accuracy": 0.6666666666666666,
+          "per_user_p95_accuracy": 1.0,
+          "predicted_positive_total": 9998,
+          "true_positive_total": 9998,
+          "all_user_positive_counts_match": true
+        },
+        {
+          "score_col": "score_time_itemknn_bm25_hl90_top3",
+          "rows": 19996,
+          "users": 4736,
+          "row_accuracy": 0.6501300260052011,
+          "per_user_mean_accuracy": 0.6680421648040892,
+          "per_user_min_accuracy": 0.0,
+          "per_user_p05_accuracy": 0.0,
+          "per_user_p50_accuracy": 0.6666666666666666,
+          "per_user_p95_accuracy": 1.0,
+          "predicted_positive_total": 9998,
+          "true_positive_total": 9998,
+          "all_user_positive_counts_match": true
+        },
+        {
+          "score_col": "score_time_itemknn_bm25_hl365_top3",
+          "rows": 19996,
+          "users": 4736,
+          "row_accuracy": 0.6501300260052011,
+          "per_user_mean_accuracy": 0.6679365904797648,
+          "per_user_min_accuracy": 0.0,
+          "per_user_p05_accuracy": 0.0,
+          "per_user_p50_accuracy": 0.6666666666666666,
+          "per_user_p95_accuracy": 1.0,
+          "predicted_positive_total": 9998,
+          "true_positive_total": 9998,
+          "all_user_positive_counts_match": true
+        },
+        {
+          "score_col": "score_time_itemknn_bm25_hl730_top3",
+          "rows": 19996,
+          "users": 4736,
+          "row_accuracy": 0.6501300260052011,
+          "per_user_mean_accuracy": 0.6679365904797648,
           "per_user_min_accuracy": 0.0,
           "per_user_p05_accuracy": 0.0,
           "per_user_p50_accuracy": 0.6666666666666666,
@@ -232,6 +191,20 @@
           "all_user_positive_counts_match": true
         },
         {
+          "score_col": "score_next_blend_priority_z",
+          "rows": 19996,
+          "users": 4736,
+          "row_accuracy": 0.6149229845969194,
+          "per_user_mean_accuracy": 0.6175790988907766,
+          "per_user_min_accuracy": 0.0,
+          "per_user_p05_accuracy": 0.0,
+          "per_user_p50_accuracy": 0.6666666666666666,
+          "per_user_p95_accuracy": 1.0,
+          "predicted_positive_total": 9998,
+          "true_positive_total": 9998,
+          "all_user_positive_counts_match": true
+        },
+        {
           "score_col": "score_item_recency_log_pop365",
           "rows": 19996,
           "users": 4736,
@@ -274,20 +247,6 @@
           "all_user_positive_counts_match": true
         },
         {
-          "score_col": "score_next_blend_priority_z",
-          "rows": 19996,
-          "users": 4736,
-          "row_accuracy": 0.5922184436887378,
-          "per_user_mean_accuracy": 0.5982099203521901,
-          "per_user_min_accuracy": 0.0,
-          "per_user_p05_accuracy": 0.0,
-          "per_user_p50_accuracy": 0.6,
-          "per_user_p95_accuracy": 1.0,
-          "predicted_positive_total": 9998,
-          "true_positive_total": 9998,
-          "all_user_positive_counts_match": true
-        },
-        {
           "score_col": "score_review_pseudocat_affinity",
           "rows": 19996,
           "users": 4736,
@@ -307,6 +266,20 @@
           "users": 4736,
           "row_accuracy": 0.5824164832966593,
           "per_user_mean_accuracy": 0.5816152103981052,
+          "per_user_min_accuracy": 0.0,
+          "per_user_p05_accuracy": 0.0,
+          "per_user_p50_accuracy": 0.5,
+          "per_user_p95_accuracy": 1.0,
+          "predicted_positive_total": 9998,
+          "true_positive_total": 9998,
+          "all_user_positive_counts_match": true
+        },
+        {
+          "score_col": "score_cw_weighted_implicit_logit",
+          "rows": 19996,
+          "users": 4736,
+          "row_accuracy": 0.5673134626925385,
+          "per_user_mean_accuracy": 0.5742015830626027,
           "per_user_min_accuracy": 0.0,
           "per_user_p05_accuracy": 0.0,
           "per_user_p50_accuracy": 0.5,
@@ -377,20 +350,6 @@
           "users": 4736,
           "row_accuracy": 0.5241048209641929,
           "per_user_mean_accuracy": 0.5312214496733411,
-          "per_user_min_accuracy": 0.0,
-          "per_user_p05_accuracy": 0.0,
-          "per_user_p50_accuracy": 0.5,
-          "per_user_p95_accuracy": 1.0,
-          "predicted_positive_total": 9998,
-          "true_positive_total": 9998,
-          "all_user_positive_counts_match": true
-        },
-        {
-          "score_col": "score_cw_weighted_implicit_logit",
-          "rows": 19996,
-          "users": 4736,
-          "row_accuracy": 0.4344868973794759,
-          "per_user_mean_accuracy": 0.4256277218242679,
           "per_user_min_accuracy": 0.0,
           "per_user_p05_accuracy": 0.0,
           "per_user_p50_accuracy": 0.5,
@@ -501,20 +460,69 @@
           "score_graph_svd_k64",
           "score_time_itemknn_hl90_sum",
           "score_time_itemknn_hl90_top3",
+          "score_time_itemknn_bm25_hl90_top3",
           "score_time_itemknn_hl365_sum",
           "score_time_itemknn_hl365_top3",
+          "score_time_itemknn_bm25_hl365_top3",
           "score_time_ease_hl365_lambda1000",
           "score_time_itemknn_hl730_sum",
-          "score_time_itemknn_hl730_top3"
-        ]
+          "score_time_itemknn_hl730_top3",
+          "score_time_itemknn_bm25_hl730_top3"
+        ],
+        "feature_normalization": "within_user_zscore",
+        "cw_max_users": null,
+        "cw_max_pos_per_user": 20,
+        "row_accuracy": 0.5673134626925385
       }
     },
     {
       "split": "val_recent_sqrtpop_seed42",
       "rows": 19996,
       "train_rows": 165002,
-      "duration_sec": 323.285,
+      "duration_sec": 451.815,
       "summaries": [
+        {
+          "score_col": "score_time_itemknn_bm25_hl90_top3",
+          "rows": 19996,
+          "users": 4736,
+          "row_accuracy": 0.6228245649129825,
+          "per_user_mean_accuracy": 0.6319880328720788,
+          "per_user_min_accuracy": 0.0,
+          "per_user_p05_accuracy": 0.0,
+          "per_user_p50_accuracy": 0.6666666666666666,
+          "per_user_p95_accuracy": 1.0,
+          "predicted_positive_total": 9998,
+          "true_positive_total": 9998,
+          "all_user_positive_counts_match": true
+        },
+        {
+          "score_col": "score_time_itemknn_bm25_hl365_top3",
+          "rows": 19996,
+          "users": 4736,
+          "row_accuracy": 0.6227245449089818,
+          "per_user_mean_accuracy": 0.6320106559415769,
+          "per_user_min_accuracy": 0.0,
+          "per_user_p05_accuracy": 0.0,
+          "per_user_p50_accuracy": 0.6666666666666666,
+          "per_user_p95_accuracy": 1.0,
+          "predicted_positive_total": 9998,
+          "true_positive_total": 9998,
+          "all_user_positive_counts_match": true
+        },
+        {
+          "score_col": "score_time_itemknn_bm25_hl730_top3",
+          "rows": 19996,
+          "users": 4736,
+          "row_accuracy": 0.6227245449089818,
+          "per_user_mean_accuracy": 0.6320106559415769,
+          "per_user_min_accuracy": 0.0,
+          "per_user_p05_accuracy": 0.0,
+          "per_user_p50_accuracy": 0.6666666666666666,
+          "per_user_p95_accuracy": 1.0,
+          "predicted_positive_total": 9998,
+          "true_positive_total": 9998,
+          "all_user_positive_counts_match": true
+        },
         {
           "score_col": "score_time_itemknn_hl90_top3",
           "rows": 19996,
@@ -549,6 +557,20 @@
           "users": 4736,
           "row_accuracy": 0.6194238847769554,
           "per_user_mean_accuracy": 0.6299419661878544,
+          "per_user_min_accuracy": 0.0,
+          "per_user_p05_accuracy": 0.0,
+          "per_user_p50_accuracy": 0.6666666666666666,
+          "per_user_p95_accuracy": 1.0,
+          "predicted_positive_total": 9998,
+          "true_positive_total": 9998,
+          "all_user_positive_counts_match": true
+        },
+        {
+          "score_col": "score_next_blend_mean_z",
+          "rows": 19996,
+          "users": 4736,
+          "row_accuracy": 0.6190238047609522,
+          "per_user_mean_accuracy": 0.6238349479406222,
           "per_user_min_accuracy": 0.0,
           "per_user_p05_accuracy": 0.0,
           "per_user_p50_accuracy": 0.6666666666666666,
@@ -600,20 +622,6 @@
           "all_user_positive_counts_match": true
         },
         {
-          "score_col": "score_next_blend_mean_z",
-          "rows": 19996,
-          "users": 4736,
-          "row_accuracy": 0.6085217043408682,
-          "per_user_mean_accuracy": 0.612333045793161,
-          "per_user_min_accuracy": 0.0,
-          "per_user_p05_accuracy": 0.0,
-          "per_user_p50_accuracy": 0.6666666666666666,
-          "per_user_p95_accuracy": 1.0,
-          "predicted_positive_total": 9998,
-          "true_positive_total": 9998,
-          "all_user_positive_counts_match": true
-        },
-        {
           "score_col": "score_review_pseudocat_affinity",
           "rows": 19996,
           "users": 4736,
@@ -636,6 +644,20 @@
           "per_user_min_accuracy": 0.0,
           "per_user_p05_accuracy": 0.0,
           "per_user_p50_accuracy": 0.6,
+          "per_user_p95_accuracy": 1.0,
+          "predicted_positive_total": 9998,
+          "true_positive_total": 9998,
+          "all_user_positive_counts_match": true
+        },
+        {
+          "score_col": "score_next_blend_priority_z",
+          "rows": 19996,
+          "users": 4736,
+          "row_accuracy": 0.5868173634726945,
+          "per_user_mean_accuracy": 0.5826702300078122,
+          "per_user_min_accuracy": 0.0,
+          "per_user_p05_accuracy": 0.0,
+          "per_user_p50_accuracy": 0.5714285714285714,
           "per_user_p95_accuracy": 1.0,
           "predicted_positive_total": 9998,
           "true_positive_total": 9998,
@@ -726,11 +748,11 @@
           "all_user_positive_counts_match": true
         },
         {
-          "score_col": "score_next_blend_priority_z",
+          "score_col": "score_review_pseudocat_log_pop",
           "rows": 19996,
           "users": 4736,
-          "row_accuracy": 0.5540108021604321,
-          "per_user_mean_accuracy": 0.5543585442742515,
+          "row_accuracy": 0.546009201840368,
+          "per_user_mean_accuracy": 0.5469329487524388,
           "per_user_min_accuracy": 0.0,
           "per_user_p05_accuracy": 0.0,
           "per_user_p50_accuracy": 0.5,
@@ -740,11 +762,11 @@
           "all_user_positive_counts_match": true
         },
         {
-          "score_col": "score_review_pseudocat_log_pop",
+          "score_col": "score_cw_weighted_implicit_logit",
           "rows": 19996,
           "users": 4736,
-          "row_accuracy": 0.546009201840368,
-          "per_user_mean_accuracy": 0.5469329487524388,
+          "row_accuracy": 0.5448089617923585,
+          "per_user_mean_accuracy": 0.54325150777659,
           "per_user_min_accuracy": 0.0,
           "per_user_p05_accuracy": 0.0,
           "per_user_p50_accuracy": 0.5,
@@ -804,20 +826,6 @@
           "per_user_min_accuracy": 0.0,
           "per_user_p05_accuracy": 0.0,
           "per_user_p50_accuracy": 0.5,
-          "per_user_p95_accuracy": 1.0,
-          "predicted_positive_total": 9998,
-          "true_positive_total": 9998,
-          "all_user_positive_counts_match": true
-        },
-        {
-          "score_col": "score_cw_weighted_implicit_logit",
-          "rows": 19996,
-          "users": 4736,
-          "row_accuracy": 0.39827965593118625,
-          "per_user_mean_accuracy": 0.39386672037782233,
-          "per_user_min_accuracy": 0.0,
-          "per_user_p05_accuracy": 0.0,
-          "per_user_p50_accuracy": 0.3333333333333333,
           "per_user_p95_accuracy": 1.0,
           "predicted_positive_total": 9998,
           "true_positive_total": 9998,
@@ -925,26 +933,89 @@
           "score_graph_svd_k64",
           "score_time_itemknn_hl90_sum",
           "score_time_itemknn_hl90_top3",
+          "score_time_itemknn_bm25_hl90_top3",
           "score_time_itemknn_hl365_sum",
           "score_time_itemknn_hl365_top3",
+          "score_time_itemknn_bm25_hl365_top3",
           "score_time_ease_hl365_lambda1000",
           "score_time_itemknn_hl730_sum",
-          "score_time_itemknn_hl730_top3"
-        ]
+          "score_time_itemknn_hl730_top3",
+          "score_time_itemknn_bm25_hl730_top3"
+        ],
+        "feature_normalization": "within_user_zscore",
+        "cw_max_users": null,
+        "cw_max_pos_per_user": 20,
+        "row_accuracy": 0.5448089617923585
       }
     },
     {
       "split": "val_random_popbin_seed42",
       "rows": 19996,
       "train_rows": 165002,
-      "duration_sec": 307.066,
+      "duration_sec": 441.968,
       "summaries": [
+        {
+          "score_col": "score_time_itemknn_bm25_hl730_top3",
+          "rows": 19996,
+          "users": 4736,
+          "row_accuracy": 0.5699139827965594,
+          "per_user_mean_accuracy": 0.5847408649217859,
+          "per_user_min_accuracy": 0.0,
+          "per_user_p05_accuracy": 0.0,
+          "per_user_p50_accuracy": 0.5,
+          "per_user_p95_accuracy": 1.0,
+          "predicted_positive_total": 9998,
+          "true_positive_total": 9998,
+          "all_user_positive_counts_match": true
+        },
+        {
+          "score_col": "score_time_itemknn_bm25_hl365_top3",
+          "rows": 19996,
+          "users": 4736,
+          "row_accuracy": 0.5697139427885577,
+          "per_user_mean_accuracy": 0.5843185676244886,
+          "per_user_min_accuracy": 0.0,
+          "per_user_p05_accuracy": 0.0,
+          "per_user_p50_accuracy": 0.5,
+          "per_user_p95_accuracy": 1.0,
+          "predicted_positive_total": 9998,
+          "true_positive_total": 9998,
+          "all_user_positive_counts_match": true
+        },
+        {
+          "score_col": "score_time_itemknn_bm25_hl90_top3",
+          "rows": 19996,
+          "users": 4736,
+          "row_accuracy": 0.5695139027805561,
+          "per_user_mean_accuracy": 0.5840722275343986,
+          "per_user_min_accuracy": 0.0,
+          "per_user_p05_accuracy": 0.0,
+          "per_user_p50_accuracy": 0.5,
+          "per_user_p95_accuracy": 1.0,
+          "predicted_positive_total": 9998,
+          "true_positive_total": 9998,
+          "all_user_positive_counts_match": true
+        },
         {
           "score_col": "score_next_blend_mean_z",
           "rows": 19996,
           "users": 4736,
-          "row_accuracy": 0.5634126825365073,
-          "per_user_mean_accuracy": 0.5767679104336177,
+          "row_accuracy": 0.5665133026605321,
+          "per_user_mean_accuracy": 0.5804176765833838,
+          "per_user_min_accuracy": 0.0,
+          "per_user_p05_accuracy": 0.0,
+          "per_user_p50_accuracy": 0.5,
+          "per_user_p95_accuracy": 1.0,
+          "predicted_positive_total": 9998,
+          "true_positive_total": 9998,
+          "all_user_positive_counts_match": true
+        },
+        {
+          "score_col": "score_next_blend_priority_z",
+          "rows": 19996,
+          "users": 4736,
+          "row_accuracy": 0.5600120024004801,
+          "per_user_mean_accuracy": 0.5599210556858583,
           "per_user_min_accuracy": 0.0,
           "per_user_p05_accuracy": 0.0,
           "per_user_p50_accuracy": 0.5,
@@ -996,20 +1067,6 @@
           "all_user_positive_counts_match": true
         },
         {
-          "score_col": "score_next_blend_priority_z",
-          "rows": 19996,
-          "users": 4736,
-          "row_accuracy": 0.5560112022404481,
-          "per_user_mean_accuracy": 0.5586813696702677,
-          "per_user_min_accuracy": 0.0,
-          "per_user_p05_accuracy": 0.0,
-          "per_user_p50_accuracy": 0.5,
-          "per_user_p95_accuracy": 1.0,
-          "predicted_positive_total": 9998,
-          "true_positive_total": 9998,
-          "all_user_positive_counts_match": true
-        },
-        {
           "score_col": "score_time_itemknn_hl365_top3",
           "rows": 19996,
           "users": 4736,
@@ -1043,6 +1100,20 @@
           "users": 4736,
           "row_accuracy": 0.5558111622324465,
           "per_user_mean_accuracy": 0.5666560464463425,
+          "per_user_min_accuracy": 0.0,
+          "per_user_p05_accuracy": 0.0,
+          "per_user_p50_accuracy": 0.5,
+          "per_user_p95_accuracy": 1.0,
+          "predicted_positive_total": 9998,
+          "true_positive_total": 9998,
+          "all_user_positive_counts_match": true
+        },
+        {
+          "score_col": "score_cw_weighted_implicit_logit",
+          "rows": 19996,
+          "users": 4736,
+          "row_accuracy": 0.5545109021804361,
+          "per_user_mean_accuracy": 0.554792324570285,
           "per_user_min_accuracy": 0.0,
           "per_user_p05_accuracy": 0.0,
           "per_user_p50_accuracy": 0.5,
@@ -1206,20 +1277,6 @@
           "all_user_positive_counts_match": true
         },
         {
-          "score_col": "score_cw_weighted_implicit_logit",
-          "rows": 19996,
-          "users": 4736,
-          "row_accuracy": 0.5179035807161432,
-          "per_user_mean_accuracy": 0.521566366765791,
-          "per_user_min_accuracy": 0.0,
-          "per_user_p05_accuracy": 0.0,
-          "per_user_p50_accuracy": 0.5,
-          "per_user_p95_accuracy": 1.0,
-          "predicted_positive_total": 9998,
-          "true_positive_total": 9998,
-          "all_user_positive_counts_match": true
-        },
-        {
           "score_col": "score_hours_affinity",
           "rows": 19996,
           "users": 4736,
@@ -1349,20 +1406,69 @@
           "score_graph_svd_k64",
           "score_time_itemknn_hl90_sum",
           "score_time_itemknn_hl90_top3",
+          "score_time_itemknn_bm25_hl90_top3",
           "score_time_itemknn_hl365_sum",
           "score_time_itemknn_hl365_top3",
+          "score_time_itemknn_bm25_hl365_top3",
           "score_time_ease_hl365_lambda1000",
           "score_time_itemknn_hl730_sum",
-          "score_time_itemknn_hl730_top3"
-        ]
+          "score_time_itemknn_hl730_top3",
+          "score_time_itemknn_bm25_hl730_top3"
+        ],
+        "feature_normalization": "within_user_zscore",
+        "cw_max_users": null,
+        "cw_max_pos_per_user": 20,
+        "row_accuracy": 0.5545109021804361
       }
     },
     {
       "split": "val_random_communitypop_seed42",
       "rows": 19996,
       "train_rows": 165002,
-      "duration_sec": 309.001,
+      "duration_sec": 426.157,
       "summaries": [
+        {
+          "score_col": "score_cw_weighted_implicit_logit",
+          "rows": 19996,
+          "users": 4736,
+          "row_accuracy": 0.5534106821364273,
+          "per_user_mean_accuracy": 0.5551193743319566,
+          "per_user_min_accuracy": 0.0,
+          "per_user_p05_accuracy": 0.0,
+          "per_user_p50_accuracy": 0.5,
+          "per_user_p95_accuracy": 1.0,
+          "predicted_positive_total": 9998,
+          "true_positive_total": 9998,
+          "all_user_positive_counts_match": true
+        },
+        {
+          "score_col": "score_time_itemknn_bm25_hl90_top3",
+          "rows": 19996,
+          "users": 4736,
+          "row_accuracy": 0.5357071414282857,
+          "per_user_mean_accuracy": 0.540887255432897,
+          "per_user_min_accuracy": 0.0,
+          "per_user_p05_accuracy": 0.0,
+          "per_user_p50_accuracy": 0.5,
+          "per_user_p95_accuracy": 1.0,
+          "predicted_positive_total": 9998,
+          "true_positive_total": 9998,
+          "all_user_positive_counts_match": true
+        },
+        {
+          "score_col": "score_time_itemknn_bm25_hl730_top3",
+          "rows": 19996,
+          "users": 4736,
+          "row_accuracy": 0.5354070814162832,
+          "per_user_mean_accuracy": 0.540401613541005,
+          "per_user_min_accuracy": 0.0,
+          "per_user_p05_accuracy": 0.0,
+          "per_user_p50_accuracy": 0.5,
+          "per_user_p95_accuracy": 1.0,
+          "predicted_positive_total": 9998,
+          "true_positive_total": 9998,
+          "all_user_positive_counts_match": true
+        },
         {
           "score_col": "score_review_pseudocat_affinity",
           "rows": 19996,
@@ -1378,11 +1484,11 @@
           "all_user_positive_counts_match": true
         },
         {
-          "score_col": "score_cw_weighted_implicit_logit",
+          "score_col": "score_time_itemknn_bm25_hl365_top3",
           "rows": 19996,
           "users": 4736,
-          "row_accuracy": 0.5339067813562712,
-          "per_user_mean_accuracy": 0.5386505014280507,
+          "row_accuracy": 0.5353070614122825,
+          "per_user_mean_accuracy": 0.5403593838112752,
           "per_user_min_accuracy": 0.0,
           "per_user_p05_accuracy": 0.0,
           "per_user_p50_accuracy": 0.5,
@@ -1518,6 +1624,20 @@
           "all_user_positive_counts_match": true
         },
         {
+          "score_col": "score_next_blend_mean_z",
+          "rows": 19996,
+          "users": 4736,
+          "row_accuracy": 0.5216043208641729,
+          "per_user_mean_accuracy": 0.5266734751932121,
+          "per_user_min_accuracy": 0.0,
+          "per_user_p05_accuracy": 0.0,
+          "per_user_p50_accuracy": 0.5,
+          "per_user_p95_accuracy": 1.0,
+          "predicted_positive_total": 9998,
+          "true_positive_total": 9998,
+          "all_user_positive_counts_match": true
+        },
+        {
           "score_col": "score_text_len_affinity",
           "rows": 19996,
           "users": 4736,
@@ -1532,25 +1652,11 @@
           "all_user_positive_counts_match": true
         },
         {
-          "score_col": "score_next_blend_mean_z",
-          "rows": 19996,
-          "users": 4736,
-          "row_accuracy": 0.513002600520104,
-          "per_user_mean_accuracy": 0.5165533797318336,
-          "per_user_min_accuracy": 0.0,
-          "per_user_p05_accuracy": 0.0,
-          "per_user_p50_accuracy": 0.5,
-          "per_user_p95_accuracy": 1.0,
-          "predicted_positive_total": 9998,
-          "true_positive_total": 9998,
-          "all_user_positive_counts_match": true
-        },
-        {
           "score_col": "score_next_blend_priority_z",
           "rows": 19996,
           "users": 4736,
-          "row_accuracy": 0.5059011802360472,
-          "per_user_mean_accuracy": 0.5039047410860733,
+          "row_accuracy": 0.514002800560112,
+          "per_user_mean_accuracy": 0.5146350190244104,
           "per_user_min_accuracy": 0.0,
           "per_user_p05_accuracy": 0.0,
           "per_user_p50_accuracy": 0.5,
@@ -1773,19 +1879,26 @@
           "score_graph_svd_k64",
           "score_time_itemknn_hl90_sum",
           "score_time_itemknn_hl90_top3",
+          "score_time_itemknn_bm25_hl90_top3",
           "score_time_itemknn_hl365_sum",
           "score_time_itemknn_hl365_top3",
+          "score_time_itemknn_bm25_hl365_top3",
           "score_time_ease_hl365_lambda1000",
           "score_time_itemknn_hl730_sum",
-          "score_time_itemknn_hl730_top3"
-        ]
+          "score_time_itemknn_hl730_top3",
+          "score_time_itemknn_bm25_hl730_top3"
+        ],
+        "feature_normalization": "within_user_zscore",
+        "cw_max_users": null,
+        "cw_max_pos_per_user": 20,
+        "row_accuracy": 0.5534106821364273
       }
     },
     {
       "split": "val_recent_communitypop_seed42",
       "rows": 19996,
       "train_rows": 165002,
-      "duration_sec": 304.848,
+      "duration_sec": 428.162,
       "summaries": [
         {
           "score_col": "score_review_pseudocat_blend",
@@ -1807,6 +1920,62 @@
           "users": 4736,
           "row_accuracy": 0.5517103420684136,
           "per_user_mean_accuracy": 0.5571188589691879,
+          "per_user_min_accuracy": 0.0,
+          "per_user_p05_accuracy": 0.0,
+          "per_user_p50_accuracy": 0.5,
+          "per_user_p95_accuracy": 1.0,
+          "predicted_positive_total": 9998,
+          "true_positive_total": 9998,
+          "all_user_positive_counts_match": true
+        },
+        {
+          "score_col": "score_cw_weighted_implicit_logit",
+          "rows": 19996,
+          "users": 4736,
+          "row_accuracy": 0.5391078215643129,
+          "per_user_mean_accuracy": 0.5396028619404442,
+          "per_user_min_accuracy": 0.0,
+          "per_user_p05_accuracy": 0.0,
+          "per_user_p50_accuracy": 0.5,
+          "per_user_p95_accuracy": 1.0,
+          "predicted_positive_total": 9998,
+          "true_positive_total": 9998,
+          "all_user_positive_counts_match": true
+        },
+        {
+          "score_col": "score_time_itemknn_bm25_hl730_top3",
+          "rows": 19996,
+          "users": 4736,
+          "row_accuracy": 0.5346069213842769,
+          "per_user_mean_accuracy": 0.5424148364526654,
+          "per_user_min_accuracy": 0.0,
+          "per_user_p05_accuracy": 0.0,
+          "per_user_p50_accuracy": 0.5,
+          "per_user_p95_accuracy": 1.0,
+          "predicted_positive_total": 9998,
+          "true_positive_total": 9998,
+          "all_user_positive_counts_match": true
+        },
+        {
+          "score_col": "score_time_itemknn_bm25_hl90_top3",
+          "rows": 19996,
+          "users": 4736,
+          "row_accuracy": 0.5346069213842769,
+          "per_user_mean_accuracy": 0.5422459175337464,
+          "per_user_min_accuracy": 0.0,
+          "per_user_p05_accuracy": 0.0,
+          "per_user_p50_accuracy": 0.5,
+          "per_user_p95_accuracy": 1.0,
+          "predicted_positive_total": 9998,
+          "true_positive_total": 9998,
+          "all_user_positive_counts_match": true
+        },
+        {
+          "score_col": "score_time_itemknn_bm25_hl365_top3",
+          "rows": 19996,
+          "users": 4736,
+          "row_accuracy": 0.534506901380276,
+          "per_user_mean_accuracy": 0.5422036878040167,
           "per_user_min_accuracy": 0.0,
           "per_user_p05_accuracy": 0.0,
           "per_user_p50_accuracy": 0.5,
@@ -1914,6 +2083,34 @@
           "all_user_positive_counts_match": true
         },
         {
+          "score_col": "score_next_blend_mean_z",
+          "rows": 19996,
+          "users": 4736,
+          "row_accuracy": 0.5108021604320864,
+          "per_user_mean_accuracy": 0.5179702124089459,
+          "per_user_min_accuracy": 0.0,
+          "per_user_p05_accuracy": 0.0,
+          "per_user_p50_accuracy": 0.5,
+          "per_user_p95_accuracy": 1.0,
+          "predicted_positive_total": 9998,
+          "true_positive_total": 9998,
+          "all_user_positive_counts_match": true
+        },
+        {
+          "score_col": "score_next_blend_priority_z",
+          "rows": 19996,
+          "users": 4736,
+          "row_accuracy": 0.5099019803960793,
+          "per_user_mean_accuracy": 0.5084650026878645,
+          "per_user_min_accuracy": 0.0,
+          "per_user_p05_accuracy": 0.0,
+          "per_user_p50_accuracy": 0.5,
+          "per_user_p95_accuracy": 1.0,
+          "predicted_positive_total": 9998,
+          "true_positive_total": 9998,
+          "all_user_positive_counts_match": true
+        },
+        {
           "score_col": "score_graph_svd_k64",
           "rows": 19996,
           "users": 4736,
@@ -1933,20 +2130,6 @@
           "users": 4736,
           "row_accuracy": 0.5033006601320265,
           "per_user_mean_accuracy": 0.5081145027279896,
-          "per_user_min_accuracy": 0.0,
-          "per_user_p05_accuracy": 0.0,
-          "per_user_p50_accuracy": 0.5,
-          "per_user_p95_accuracy": 1.0,
-          "predicted_positive_total": 9998,
-          "true_positive_total": 9998,
-          "all_user_positive_counts_match": true
-        },
-        {
-          "score_col": "score_next_blend_mean_z",
-          "rows": 19996,
-          "users": 4736,
-          "row_accuracy": 0.4962992598519704,
-          "per_user_mean_accuracy": 0.5001747434518815,
           "per_user_min_accuracy": 0.0,
           "per_user_p05_accuracy": 0.0,
           "per_user_p50_accuracy": 0.5,
@@ -2017,34 +2200,6 @@
           "users": 4736,
           "row_accuracy": 0.48189637927585516,
           "per_user_mean_accuracy": 0.47615467312218956,
-          "per_user_min_accuracy": 0.0,
-          "per_user_p05_accuracy": 0.0,
-          "per_user_p50_accuracy": 0.5,
-          "per_user_p95_accuracy": 1.0,
-          "predicted_positive_total": 9998,
-          "true_positive_total": 9998,
-          "all_user_positive_counts_match": true
-        },
-        {
-          "score_col": "score_next_blend_priority_z",
-          "rows": 19996,
-          "users": 4736,
-          "row_accuracy": 0.47319463892778557,
-          "per_user_mean_accuracy": 0.4750531595103963,
-          "per_user_min_accuracy": 0.0,
-          "per_user_p05_accuracy": 0.0,
-          "per_user_p50_accuracy": 0.5,
-          "per_user_p95_accuracy": 1.0,
-          "predicted_positive_total": 9998,
-          "true_positive_total": 9998,
-          "all_user_positive_counts_match": true
-        },
-        {
-          "score_col": "score_cw_weighted_implicit_logit",
-          "rows": 19996,
-          "users": 4736,
-          "row_accuracy": 0.45429085817163434,
-          "per_user_mean_accuracy": 0.4521917499199571,
           "per_user_min_accuracy": 0.0,
           "per_user_p05_accuracy": 0.0,
           "per_user_p50_accuracy": 0.5,
@@ -2197,12 +2352,19 @@
           "score_graph_svd_k64",
           "score_time_itemknn_hl90_sum",
           "score_time_itemknn_hl90_top3",
+          "score_time_itemknn_bm25_hl90_top3",
           "score_time_itemknn_hl365_sum",
           "score_time_itemknn_hl365_top3",
+          "score_time_itemknn_bm25_hl365_top3",
           "score_time_ease_hl365_lambda1000",
           "score_time_itemknn_hl730_sum",
-          "score_time_itemknn_hl730_top3"
-        ]
+          "score_time_itemknn_hl730_top3",
+          "score_time_itemknn_bm25_hl730_top3"
+        ],
+        "feature_normalization": "within_user_zscore",
+        "cw_max_users": null,
+        "cw_max_pos_per_user": 20,
+        "row_accuracy": 0.5391078215643129
       }
     }
   ]

@@ -1,0 +1,8 @@
+[score] val_random_sqrtpop_seed42
+[score] val_recent_sqrtpop_seed42
+WARNING: score_cw_weighted_implicit_logit row_accuracy=0.544809 < 0.55 on val_recent_sqrtpop_seed42 (CW-lite regression)
+[score] val_random_popbin_seed42
+[score] val_random_communitypop_seed42
+[score] val_recent_communitypop_seed42
+WARNING: score_cw_weighted_implicit_logit row_accuracy=0.539108 < 0.55 on val_recent_communitypop_seed42 (CW-lite regression)
+{"report_md": "reports/20260530_paper_guided_next_steps.md", "report_json": "reports/20260530_paper_guided_next_steps.json", "splits": 5, "community_splits": 0}

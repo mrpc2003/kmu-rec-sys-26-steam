@@ -54,6 +54,10 @@ from recsys_played_utils import (  # noqa: E402
     user_histories,
     write_json,
 )
+from score_popularity_itemknn_ease import (  # noqa: E402
+    bm25_weight,
+    compute_item_similarity,
+)
 
 
 @dataclass(frozen=True)
@@ -61,6 +65,24 @@ class CommunitySplitConfig:
     holdout: str
     seed: int
     name: str
+
+
+@dataclass(frozen=True)
+class FeatureConfig:
+    """Drives identical feature construction for candidate rows and CW logit training pairs."""
+
+    seed: int = 42
+    n_communities: int = 24
+    comm_svd_dim: int = 32
+    half_lives: tuple[int, ...] = (90, 365, 730)
+    ease_half_life: int = 365
+    ease_lambda: float = 1000.0
+    svd_dim: int = 64
+    text_clusters: int = 32
+    text_svd_dim: int = 32
+    text_max_features: int = 50000
+    cw_max_users: int | None = None
+    cw_max_pos_per_user: int = 20
 
 
 def choose_positives(user_df: pd.DataFrame, k: int, holdout: str, rng: np.random.Generator) -> pd.DataFrame:
@@ -493,6 +515,22 @@ def ease_scores(X: sp.csr_matrix, candidates: pd.DataFrame, user_to_idx: dict[st
     return out
 
 
+def itemknn_top3_from_sim(sim: np.ndarray, X: sp.csr_matrix, candidates: pd.DataFrame, user_to_idx: dict[str, int], item_to_idx: dict[str, int]) -> np.ndarray:
+    score_top3 = np.zeros(len(candidates), dtype=np.float32)
+    for n, (uid, gid) in enumerate(candidates[["userID", "gameID"]].itertuples(index=False)):
+        ui = user_to_idx.get(str(uid))
+        gi = item_to_idx.get(str(gid))
+        if ui is None or gi is None:
+            continue
+        hist = X.indices[X.indptr[ui] : X.indptr[ui + 1]]
+        if hist.size == 0:
+            continue
+        vals = sim[gi, hist]
+        k = min(3, vals.size)
+        score_top3[n] = float(np.partition(vals, -k)[-k:].mean())
+    return score_top3
+
+
 def add_time_decay_graph_scores(train_df: pd.DataFrame, scored: pd.DataFrame, half_lives: list[int], ease_half_life: int, ease_lambda: float) -> tuple[pd.DataFrame, dict[str, object]]:
     out = scored.copy()
     user_to_idx, item_to_idx, _, _ = build_maps(train_df)
@@ -503,6 +541,9 @@ def add_time_decay_graph_scores(train_df: pd.DataFrame, scored: pd.DataFrame, ha
         ssum, stop3 = cosine_itemknn_scores(X, out, user_to_idx, item_to_idx)
         out[f"score_time_itemknn_hl{hl}_sum"] = ssum
         out[f"score_time_itemknn_hl{hl}_top3"] = stop3
+        X_bm25 = bm25_weight(X)
+        sim_bm25 = compute_item_similarity(X_bm25)
+        out[f"score_time_itemknn_bm25_hl{hl}_top3"] = itemknn_top3_from_sim(sim_bm25, X, out, user_to_idx, item_to_idx)
         if hl == ease_half_life:
             out[f"score_time_ease_hl{hl}_lambda{ease_lambda:g}"] = ease_scores(X, out, user_to_idx, item_to_idx, ease_lambda)
         meta[f"hl{hl}_matrix_nnz"] = int(X.nnz)
@@ -619,47 +660,68 @@ def feature_columns(df: pd.DataFrame) -> list[str]:
     return [c for c in allow if c in df.columns]
 
 
-def add_weighted_implicit_logit(train_df: pd.DataFrame, scored: pd.DataFrame, raw_train_json: Path, seed: int, feature_cols: list[str]) -> tuple[pd.DataFrame, dict[str, object]]:
+def build_feature_frame(train_df: pd.DataFrame, base: pd.DataFrame, raw_train_json: Path, fcfg: FeatureConfig) -> tuple[pd.DataFrame, dict[str, object]]:
+    scored = add_basic_stats(train_df, base)
+    scored, comm_meta = add_community_scores(train_df, scored, seed=fcfg.seed, n_communities=fcfg.n_communities, svd_dim=fcfg.comm_svd_dim)
+    scored, graph_meta = add_time_decay_graph_scores(train_df, scored, half_lives=list(fcfg.half_lives), ease_half_life=fcfg.ease_half_life, ease_lambda=fcfg.ease_lambda)
+    scored, svd_meta = add_svd_scores(train_df, scored, dim=fcfg.svd_dim, seed=fcfg.seed)
+    scored, text_meta = add_review_pseudocat_scores(train_df, scored, raw_train_json, seed=fcfg.seed, clusters=fcfg.text_clusters, svd_dim=fcfg.text_svd_dim, max_features=fcfg.text_max_features)
+    metas: dict[str, object] = {"community_meta": comm_meta, "graph_meta": graph_meta, "svd_meta": svd_meta, "text_meta": text_meta}
+    return scored, metas
+
+
+def add_weighted_implicit_logit(train_df: pd.DataFrame, scored: pd.DataFrame, raw_train_json: Path, fcfg: FeatureConfig, feature_cols: list[str]) -> tuple[pd.DataFrame, dict[str, object]]:
     out = scored.copy()
-    train_pairs = sample_weighted_training_pairs(train_df, seed=seed)
-    train_scored = add_basic_stats(train_df, train_pairs)
-    train_scored, _ = add_community_scores(train_df, train_scored, seed=seed, n_communities=24, svd_dim=32)
-    # The expensive graph/text features are omitted for training examples; fill missing with 0 after selecting columns.
-    for col in feature_cols:
-        if col not in train_scored.columns:
-            train_scored[col] = 0.0
-    X = train_scored[feature_cols].replace([np.inf, -np.inf], 0.0).fillna(0.0).to_numpy(dtype=np.float32)
+    train_pairs = sample_weighted_training_pairs(train_df, seed=fcfg.seed, max_users=fcfg.cw_max_users, max_pos_per_user=fcfg.cw_max_pos_per_user)
+    train_scored, _ = build_feature_frame(train_df, train_pairs, raw_train_json, fcfg)
+    missing = [c for c in feature_cols if c not in train_scored.columns]
+    if missing:
+        raise RuntimeError(f"CW logit feature mismatch: training pairs lack columns produced for candidates: {missing}")
+
+    # Raw features let the logit key on absolute popularity, which sign-flips at
+    # inference because train negatives (community-pop) and eval negatives differ
+    # in scale.  Within-user z-scoring both sides removes that confound.
+    train_norm = normalize_within_user(train_scored, feature_cols)
+    out_norm = normalize_within_user(out, feature_cols)
+    z_cols = [f"z_{c}" for c in feature_cols]
+
+    X = train_norm[z_cols].replace([np.inf, -np.inf], 0.0).fillna(0.0).to_numpy(dtype=np.float32)
     y = train_scored["Label"].astype(int).to_numpy()
     w = train_scored["sample_weight"].astype(float).to_numpy()
     clf = make_pipeline(
         StandardScaler(),
-        LogisticRegression(max_iter=250, C=0.7, solver="lbfgs", random_state=seed),
+        LogisticRegression(max_iter=250, C=0.7, solver="lbfgs", random_state=fcfg.seed),
     )
     clf.fit(X, y, logisticregression__sample_weight=w)
-    Xc = out[feature_cols].replace([np.inf, -np.inf], 0.0).fillna(0.0).to_numpy(dtype=np.float32)
+    Xc = out_norm[z_cols].replace([np.inf, -np.inf], 0.0).fillna(0.0).to_numpy(dtype=np.float32)
     out["score_cw_weighted_implicit_logit"] = clf.decision_function(Xc).astype(np.float32)
     meta = {
         "train_pairs": int(len(train_pairs)),
         "positive_train_pairs": int(train_pairs["Label"].sum()),
         "negative_train_pairs": int((1 - train_pairs["Label"]).sum()),
         "feature_columns": feature_cols,
+        "feature_normalization": "within_user_zscore",
+        "cw_max_users": fcfg.cw_max_users,
+        "cw_max_pos_per_user": fcfg.cw_max_pos_per_user,
     }
     return out, meta
 
 
-def score_split(split_dir: Path, raw_train_json: Path, out_root: Path, seed: int) -> dict[str, object]:
+def score_split(split_dir: Path, raw_train_json: Path, out_root: Path, seed: int, fcfg: FeatureConfig | None = None) -> dict[str, object]:
     started = time.time()
+    fcfg = fcfg or FeatureConfig(seed=seed)
     train_df = load_train_interactions(split_dir / "train_interactions.csv")
     candidates = load_pairs_csv(split_dir / "candidates.csv")
-    scored = add_basic_stats(train_df, candidates)
-    scored, comm_meta = add_community_scores(train_df, scored, seed=seed, n_communities=24, svd_dim=32)
-    scored, graph_meta = add_time_decay_graph_scores(train_df, scored, half_lives=[90, 365, 730], ease_half_life=365, ease_lambda=1000.0)
-    scored, svd_meta = add_svd_scores(train_df, scored, dim=64, seed=seed)
-    scored, text_meta = add_review_pseudocat_scores(train_df, scored, raw_train_json, seed=seed, clusters=32, svd_dim=32, max_features=50000)
+    scored, metas = build_feature_frame(train_df, candidates, raw_train_json, fcfg)
     fcols = feature_columns(scored)
-    scored, cw_meta = add_weighted_implicit_logit(train_df, scored, raw_train_json, seed=seed, feature_cols=fcols)
+    scored, cw_meta = add_weighted_implicit_logit(train_df, scored, raw_train_json, fcfg, feature_cols=fcols)
 
-    # Blends: all normalized within user to respect per-user top-half ranking.
+    cw_summary, _ = evaluate_tophalf(scored, "score_cw_weighted_implicit_logit", label_col="Label", user_col="userID", id_col="ID", tie_cols=[("pop_count", True), ("gameID", False)])
+    cw_row_acc = float(cw_summary["row_accuracy"])
+    cw_meta["row_accuracy"] = cw_row_acc
+    if cw_row_acc < 0.55:
+        print(f"WARNING: score_cw_weighted_implicit_logit row_accuracy={cw_row_acc:.6f} < 0.55 on {split_dir.name} (CW-lite regression)", file=sys.stderr, flush=True)
+
     base_cols = feature_columns(scored) + ["score_cw_weighted_implicit_logit"]
     scored = normalize_within_user(scored, base_cols)
     zcols = [f"z_{c}" for c in base_cols if f"z_{c}" in scored.columns]
@@ -690,10 +752,10 @@ def score_split(split_dir: Path, raw_train_json: Path, out_root: Path, seed: int
         "train_rows": int(len(train_df)),
         "duration_sec": round(time.time() - started, 3),
         "summaries": summaries,
-        "community_meta": comm_meta,
-        "graph_meta": graph_meta,
-        "svd_meta": svd_meta,
-        "text_meta": text_meta,
+        "community_meta": metas["community_meta"],
+        "graph_meta": metas["graph_meta"],
+        "svd_meta": metas["svd_meta"],
+        "text_meta": metas["text_meta"],
         "cw_meta": cw_meta,
     }
     write_json(split_out / "summary.json", result)
