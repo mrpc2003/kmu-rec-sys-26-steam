@@ -1,8 +1,10 @@
 {
   "mean_lightgcn": 0.63883,
   "mean_fixed_blend": 0.64106,
-  "mean_stack_logreg": 0.64933,
-  "mean_stack_lightgbm": 0.64729,
+  "mean_stack_logreg_strat": 0.64933,
+  "mean_stack_lightgbm_strat": 0.64729,
+  "mean_stack_logreg_group": 0.6493,
+  "mean_stack_lightgbm_group": 0.64703,
   "splits": {
     "val_random_sqrtpop_seed42": {
       "rows": 19996,
@@ -10,10 +12,14 @@
       "lightgcn": 0.67483,
       "lightgcn_ref": 0.67483,
       "fixed_blend_ref": 0.67704,
-      "stack_logreg_oof": 0.67944,
-      "stack_logreg_vs_lgcn": 0.0046,
-      "stack_lightgbm_oof": 0.66963,
-      "stack_lightgbm_vs_lgcn": -0.0052
+      "stack_logreg_strat_oof": 0.67944,
+      "stack_logreg_strat_vs_lgcn": 0.0046,
+      "stack_lightgbm_strat_oof": 0.66963,
+      "stack_lightgbm_strat_vs_lgcn": -0.0052,
+      "stack_logreg_group_oof": 0.67914,
+      "stack_logreg_group_vs_lgcn": 0.0043,
+      "stack_lightgbm_group_oof": 0.67013,
+      "stack_lightgbm_group_vs_lgcn": -0.0047
     },
     "val_recent_sqrtpop_seed42": {
       "rows": 19996,
@@ -21,10 +27,14 @@
       "lightgcn": 0.63963,
       "lightgcn_ref": 0.63963,
       "fixed_blend_ref": 0.64053,
-      "stack_logreg_oof": 0.64973,
-      "stack_logreg_vs_lgcn": 0.0101,
-      "stack_lightgbm_oof": 0.65493,
-      "stack_lightgbm_vs_lgcn": 0.0153
+      "stack_logreg_strat_oof": 0.64973,
+      "stack_logreg_strat_vs_lgcn": 0.0101,
+      "stack_lightgbm_strat_oof": 0.65493,
+      "stack_lightgbm_strat_vs_lgcn": 0.0153,
+      "stack_logreg_group_oof": 0.64923,
+      "stack_logreg_group_vs_lgcn": 0.0096,
+      "stack_lightgbm_group_oof": 0.65423,
+      "stack_lightgbm_group_vs_lgcn": 0.0146
     },
     "val_random_popbin_seed42": {
       "rows": 19996,
@@ -32,14 +42,19 @@
       "lightgcn": 0.60202,
       "lightgcn_ref": 0.60202,
       "fixed_blend_ref": 0.60562,
-      "stack_logreg_oof": 0.61882,
-      "stack_logreg_vs_lgcn": 0.0168,
-      "stack_lightgbm_oof": 0.61732,
-      "stack_lightgbm_vs_lgcn": 0.0153
+      "stack_logreg_strat_oof": 0.61882,
+      "stack_logreg_strat_vs_lgcn": 0.0168,
+      "stack_lightgbm_strat_oof": 0.61732,
+      "stack_lightgbm_strat_vs_lgcn": 0.0153,
+      "stack_logreg_group_oof": 0.61952,
+      "stack_logreg_group_vs_lgcn": 0.0175,
+      "stack_lightgbm_group_oof": 0.61672,
+      "stack_lightgbm_group_vs_lgcn": 0.0147
     }
   },
-  "best_method": {
-    "name": "mean_stack_logreg",
-    "mean_acc": 0.64933
-  }
+  "best_honest_method": {
+    "name": "mean_stack_logreg_group",
+    "mean_acc": 0.6493
+  },
+  "leakage_gap_logreg": 3e-05
 }

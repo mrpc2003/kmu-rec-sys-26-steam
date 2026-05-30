@@ -22,7 +22,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import StratifiedKFold
+from sklearn.model_selection import StratifiedKFold, GroupKFold
 from sklearn.preprocessing import StandardScaler
 
 ROOT = Path("/opt/data/kaggle/kmu-rec-sys-26-steam")
@@ -92,12 +92,25 @@ def build_features(split: str) -> tuple[pd.DataFrame, list[str]]:
     return m, feat_cols
 
 
-def oof_predict(m: pd.DataFrame, feat_cols: list[str], model: str) -> np.ndarray:
+def oof_predict(m: pd.DataFrame, feat_cols: list[str], model: str,
+                fold_mode: str = "strat") -> np.ndarray:
+    """fold_mode: 'strat' (row-level StratifiedKFold) or 'group' (user-level GroupKFold).
+
+    'group'묶음은 같은 유저의 모든 candidate를 한 fold에 두어 within-user 피처 누수를 차단한다.
+    """
     X = m[feat_cols].to_numpy(dtype=np.float64)
     y = m["Label"].to_numpy(dtype=int)
     oof = np.zeros(len(m), dtype=np.float64)
-    skf = StratifiedKFold(n_splits=N_FOLDS, shuffle=True, random_state=SEED)
-    for tr, va in skf.split(X, y):
+    if fold_mode == "strat":
+        splitter = StratifiedKFold(n_splits=N_FOLDS, shuffle=True, random_state=SEED)
+        folds = splitter.split(X, y)
+    elif fold_mode == "group":
+        groups = m["userID"].to_numpy()
+        splitter = GroupKFold(n_splits=N_FOLDS)
+        folds = splitter.split(X, y, groups=groups)
+    else:
+        raise ValueError(fold_mode)
+    for tr, va in folds:
         if model == "logreg":
             sc = StandardScaler()
             Xtr = sc.fit_transform(X[tr])
@@ -127,28 +140,31 @@ def decode(m: pd.DataFrame, score_col: str) -> float:
 
 def main():
     results = {}
+    fold_modes = ["strat", "group"]
     for split in SPLITS:
         m, feat_cols = build_features(split)
-        print(f"\n== {split} ==  rows={len(m)} feats={len(feat_cols)}", flush=True)
+        print(f"\n== {split} ==  rows={len(m)} feats={len(feat_cols)} "
+              f"users={m['userID'].nunique()}", flush=True)
 
         lg_acc = decode(m, "score_lightgcn")
-
         row = {"rows": len(m), "n_features": len(feat_cols),
                "lightgcn": round(lg_acc, 5),
                "lightgcn_ref": LGCN_REF[split],
                "fixed_blend_ref": FIXED_BLEND_REF[split]}
 
-        for model in ["logreg", "lightgbm"]:
-            try:
-                m[f"stack_{model}"] = oof_predict(m, feat_cols, model)
-                acc = decode(m, f"stack_{model}")
-                row[f"stack_{model}_oof"] = round(acc, 5)
-                row[f"stack_{model}_vs_lgcn"] = round(acc - lg_acc, 5)
-                print(f"  {model}: OOF={acc:.5f}  Δvs_LGCN={acc-lg_acc:+.5f}  "
-                      f"Δvs_fixedblend={acc-FIXED_BLEND_REF[split]:+.5f}", flush=True)
-            except Exception as e:
-                row[f"stack_{model}_error"] = str(e)
-                print(f"  {model}: ERROR {e}", flush=True)
+        for fold_mode in fold_modes:
+            for model in ["logreg", "lightgbm"]:
+                key = f"stack_{model}_{fold_mode}"
+                try:
+                    m[key] = oof_predict(m, feat_cols, model, fold_mode=fold_mode)
+                    acc = decode(m, key)
+                    row[f"{key}_oof"] = round(acc, 5)
+                    row[f"{key}_vs_lgcn"] = round(acc - lg_acc, 5)
+                    print(f"  [{fold_mode:5s}] {model:8s}: OOF={acc:.5f}  "
+                          f"Δvs_LGCN={acc-lg_acc:+.5f}", flush=True)
+                except Exception as e:
+                    row[f"{key}_error"] = str(e)
+                    print(f"  [{fold_mode:5s}] {model:8s}: ERROR {e}", flush=True)
 
         results[split] = row
 
@@ -160,44 +176,66 @@ def main():
     summary = {
         "mean_lightgcn": mean_of("lightgcn"),
         "mean_fixed_blend": round(float(np.mean(list(FIXED_BLEND_REF.values()))), 5),
-        "mean_stack_logreg": mean_of("stack_logreg_oof"),
-        "mean_stack_lightgbm": mean_of("stack_lightgbm_oof"),
+        "mean_stack_logreg_strat": mean_of("stack_logreg_strat_oof"),
+        "mean_stack_lightgbm_strat": mean_of("stack_lightgbm_strat_oof"),
+        "mean_stack_logreg_group": mean_of("stack_logreg_group_oof"),
+        "mean_stack_lightgbm_group": mean_of("stack_lightgbm_group_oof"),
         "splits": results,
     }
-    # decide best
-    cands = {k: summary[k] for k in ["mean_lightgcn", "mean_fixed_blend",
-                                     "mean_stack_logreg", "mean_stack_lightgbm"]
-             if summary.get(k) is not None}
-    best = max(cands.items(), key=lambda kv: kv[1])
-    summary["best_method"] = {"name": best[0], "mean_acc": best[1]}
+    # Honest best uses GROUP (user-level) OOF only — strat may leak via within-user feats
+    honest_cands = {k: summary[k] for k in
+                    ["mean_lightgcn", "mean_fixed_blend",
+                     "mean_stack_logreg_group", "mean_stack_lightgbm_group"]
+                    if summary.get(k) is not None}
+    best = max(honest_cands.items(), key=lambda kv: kv[1])
+    summary["best_honest_method"] = {"name": best[0], "mean_acc": best[1]}
+    # leakage diagnostic: strat - group gap
+    summary["leakage_gap_logreg"] = (
+        round(summary["mean_stack_logreg_strat"] - summary["mean_stack_logreg_group"], 5)
+        if summary.get("mean_stack_logreg_strat") and summary.get("mean_stack_logreg_group")
+        else None
+    )
     OUT_JSON.write_text(json.dumps(summary, indent=2, ensure_ascii=False))
 
     md = ["# LightGCN + Stage2 Stacking Meta-Learner (OOF validation)\n"]
+    md.append("Honest evaluation uses **user-level GroupKFold** (group); row-level "
+              "StratifiedKFold (strat) is shown only as a leakage diagnostic — "
+              "within-user z/rank features can leak across rows of the same user.\n")
     md.append(f"- mean LightGCN: **{summary['mean_lightgcn']}**")
     md.append(f"- mean fixed-blend: {summary['mean_fixed_blend']}")
-    md.append(f"- mean stack-logreg (OOF): {summary['mean_stack_logreg']}")
-    md.append(f"- mean stack-lightgbm (OOF): {summary['mean_stack_lightgbm']}")
-    md.append(f"- **best method: {best[0]} = {best[1]}**\n")
-    md.append("| split | LightGCN | fixed-blend | stack-logreg | stack-lgbm |")
-    md.append("|---|---:|---:|---:|---:|")
+    md.append(f"- mean stack-logreg [group/honest]: {summary['mean_stack_logreg_group']}")
+    md.append(f"- mean stack-lightgbm [group/honest]: {summary['mean_stack_lightgbm_group']}")
+    md.append(f"- mean stack-logreg [strat/diag]: {summary['mean_stack_logreg_strat']}")
+    md.append(f"- mean stack-lightgbm [strat/diag]: {summary['mean_stack_lightgbm_strat']}")
+    md.append(f"- logreg strat−group leakage gap: {summary['leakage_gap_logreg']}")
+    md.append(f"- **best honest method: {best[0]} = {best[1]}**\n")
+    md.append("| split | LightGCN | fixed | lr-strat | lr-group | lgbm-strat | lgbm-group |")
+    md.append("|---|---:|---:|---:|---:|---:|---:|")
     for s in SPLITS:
         r = results[s]
         md.append(
             f"| {s.replace('val_','').replace('_seed42','')} "
             f"| {r.get('lightgcn','-')} | {r.get('fixed_blend_ref','-')} "
-            f"| {r.get('stack_logreg_oof','-')} | {r.get('stack_lightgbm_oof','-')} |"
+            f"| {r.get('stack_logreg_strat_oof','-')} | {r.get('stack_logreg_group_oof','-')} "
+            f"| {r.get('stack_lightgbm_strat_oof','-')} | {r.get('stack_lightgbm_group_oof','-')} |"
         )
     md.append("\n## Interpretation\n")
-    if best[0].startswith("mean_stack") and best[1] > summary["mean_lightgcn"]:
-        md.append(f"- Stacking beats LightGCN by {best[1]-summary['mean_lightgcn']:+.5f} on mean OOF "
+    honest_gain = best[1] - summary["mean_lightgcn"]
+    if best[0].startswith("mean_stack") and honest_gain > 0:
+        md.append(f"- Honest (GroupKFold) stacking beats LightGCN by {honest_gain:+.5f} "
                   f"→ a full-data stacker is worth materializing as a submission candidate (pending approval).")
     else:
-        md.append("- Stacking does NOT beat LightGCN alone on honest OOF "
-                  "→ keep LightGCN single-axis; the oracle gap is not extractable by a row-level meta-learner "
-                  "from these features. Focus on stronger base axes (sweep / new families).")
+        md.append("- On honest user-level GroupKFold, stacking does NOT beat LightGCN alone "
+                  "→ the StratifiedKFold gain was leakage from within-user features. "
+                  "Keep LightGCN single-axis; focus on stronger base axes (sweep / new families).")
+    if summary["leakage_gap_logreg"] and summary["leakage_gap_logreg"] > 0.003:
+        md.append(f"- ⚠ Large strat−group gap ({summary['leakage_gap_logreg']:+.5f}) confirms "
+                  "within-user feature leakage in the row-level CV.")
     OUT_MD.write_text("\n".join(md))
     print(f"\nsaved: {OUT_JSON}\nsaved: {OUT_MD}")
-    print(f"\nBEST: {best[0]} = {best[1]} (LightGCN={summary['mean_lightgcn']})")
+    print(f"\nBEST HONEST: {best[0]} = {best[1]} (LightGCN={summary['mean_lightgcn']}, "
+          f"honest_gain={honest_gain:+.5f})")
+    print(f"leakage_gap_logreg(strat-group) = {summary['leakage_gap_logreg']}")
 
 
 if __name__ == "__main__":
