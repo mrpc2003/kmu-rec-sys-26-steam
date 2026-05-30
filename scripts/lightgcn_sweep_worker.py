@@ -21,7 +21,8 @@ import sys
 sys.path.insert(0, str(ROOT / "scripts"))
 from recsys_played_utils import (
     DEFAULT_DATA_DIR, build_user_item_matrix, load_train_json,
-    load_pairs_csv, ensure_dir, write_json,
+    load_pairs_csv, load_train_interactions, evaluate_tophalf,
+    ensure_dir, write_json,
 )
 from lightgcn_train import LightGCN, build_norm_adj, sample_bpr_batch, score_candidates
 
@@ -48,21 +49,16 @@ ALL_CONFIGS = [
 
 
 def eval_split(split_name, user_np, item_np, u2i, i2i) -> float:
+    """Canonical eval: candidates.csv + evaluate_tophalf row_accuracy (matches baseline)."""
     split_path = ROOT / "artifacts/validation" / split_name
-    val_pairs = pd.read_csv(split_path / "val_pairs.csv")
-    scores = score_candidates(val_pairs, user_np, item_np, u2i, i2i)
-    val_pairs = val_pairs.copy()
-    val_pairs["score"] = scores
-    correct = total = 0
-    for _, grp in val_pairs.groupby("userID"):
-        k = len(grp) // 2
-        if k == 0:
-            continue
-        top_ids = grp.nlargest(k, "score")["ID"].values
-        labels = grp.set_index("ID")["Label"]
-        correct += int(labels.loc[top_ids].sum())
-        total += k
-    return correct / total if total > 0 else 0.0
+    candidates = load_pairs_csv(split_path / "candidates.csv")
+    scores = score_candidates(candidates, user_np, item_np, u2i, i2i)
+    candidates = candidates.copy()
+    candidates["score_lightgcn"] = scores
+    summary, _ = evaluate_tophalf(
+        candidates, "score_lightgcn", label_col="Label", user_col="userID", id_col="ID"
+    )
+    return float(summary["row_accuracy"])
 
 
 def train_lgcn(mat, n_users, n_items, emb_dim, n_layers, reg, device):

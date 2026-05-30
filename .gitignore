@@ -51,3 +51,4 @@ reports/deep_eda/*.csv
 # Logs that may include local runtime details; explicitly add reviewed logs if needed
 *.tmp
 *.bak
+reports/crashed_sweep_*/
