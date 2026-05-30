@@ -1,0 +1,36 @@
+{
+  "note": "Sweep-best configs gated on uniform (public surrogate). No Kaggle submission.",
+  "anchor_uniform": 0.75445,
+  "ensemble_uniform": 0.76145,
+  "configs": [
+    {
+      "tag": "emb128_L4_reg1e-03",
+      "sweep_hard_mean_delta": 0.00326,
+      "uniform_acc": 0.76205,
+      "vs_anchor": 0.0076,
+      "vs_ensemble": 0.0006,
+      "beats_anchor": true,
+      "beats_ensemble": true
+    },
+    {
+      "tag": "emb128_L3_reg1e-03",
+      "sweep_hard_mean_delta": 0.00223,
+      "uniform_acc": 0.75815,
+      "vs_anchor": 0.0037,
+      "vs_ensemble": -0.0033,
+      "beats_anchor": true,
+      "beats_ensemble": false
+    },
+    {
+      "tag": "emb128_L4_reg1e-04",
+      "sweep_hard_mean_delta": 0.0031,
+      "uniform_acc": 0.75775,
+      "vs_anchor": 0.0033,
+      "vs_ensemble": -0.0037,
+      "beats_anchor": true,
+      "beats_ensemble": false
+    }
+  ],
+  "missing": [],
+  "verdict": "emb128_L4_reg1e-03 BEATS the seed ensemble on uniform (0.76205 > 0.76145) — new strongest candidate."
+}

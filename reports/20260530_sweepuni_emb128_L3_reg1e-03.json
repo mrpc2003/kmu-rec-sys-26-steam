@@ -1,0 +1,36 @@
+{
+  "note": "LightGCN GPU validation-only. No Kaggle submission.",
+  "results": [
+    {
+      "split": "val_random_uniform_seed42",
+      "summary": {
+        "score_col": "score_lightgcn",
+        "rows": 19996,
+        "users": 4736,
+        "row_accuracy": 0.7581516303260653,
+        "per_user_mean_accuracy": 0.7810462734907636,
+        "per_user_min_accuracy": 0.0,
+        "per_user_p05_accuracy": 0.0,
+        "per_user_p50_accuracy": 1.0,
+        "per_user_p95_accuracy": 1.0,
+        "predicted_positive_total": 9998,
+        "true_positive_total": 9998,
+        "all_user_positive_counts_match": true
+      },
+      "train_meta": {
+        "emb_dim": 128,
+        "n_layers": 3,
+        "lr": 0.001,
+        "reg": 0.001,
+        "epochs": 200,
+        "batch_size": 4096,
+        "n_users": 6710,
+        "n_items": 2437,
+        "n_interactions": 165002,
+        "final_loss": 0.237355974689126,
+        "train_seconds": 1618.5,
+        "device": "cuda:3"
+      }
+    }
+  ]
+}
