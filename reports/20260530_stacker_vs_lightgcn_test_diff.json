@@ -1,0 +1,47 @@
+{
+  "total": 19998,
+  "disagree": 1560,
+  "disagree_frac": 0.078,
+  "stacker_promoted": 780,
+  "stacker_demoted": 780,
+  "promoted_item_pop_mean": 57.1,
+  "demoted_item_pop_mean": 105.2,
+  "all_item_pop_mean": 129.5,
+  "by_item_pop_bin": [
+    {
+      "pop_bin": 0,
+      "mean_pop": 19.1,
+      "n": 4188,
+      "disagree": 356,
+      "frac": 0.085
+    },
+    {
+      "pop_bin": 1,
+      "mean_pop": 34.0,
+      "n": 3880,
+      "disagree": 349,
+      "frac": 0.0899
+    },
+    {
+      "pop_bin": 2,
+      "mean_pop": 64.8,
+      "n": 3961,
+      "disagree": 404,
+      "frac": 0.102
+    },
+    {
+      "pop_bin": 3,
+      "mean_pop": 139.0,
+      "n": 3983,
+      "disagree": 334,
+      "frac": 0.0839
+    },
+    {
+      "pop_bin": 4,
+      "mean_pop": 393.1,
+      "n": 3986,
+      "disagree": 117,
+      "frac": 0.0294
+    }
+  ]
+}
