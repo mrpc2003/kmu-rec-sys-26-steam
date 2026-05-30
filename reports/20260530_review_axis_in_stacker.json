@@ -1,0 +1,27 @@
+{
+  "mean_lightgcn": 0.63883,
+  "stacker_base_mean": 0.64843,
+  "stacker_plus_review_mean": 0.6483,
+  "review_increment": -0.00013,
+  "review_helps": false,
+  "detail": {
+    "base": {
+      "n_features": 17,
+      "per_split": {
+        "val_random_sqrtpop_seed42": 0.67934,
+        "val_recent_sqrtpop_seed42": 0.64853,
+        "val_random_popbin_seed42": 0.61742
+      },
+      "mean": 0.64843
+    },
+    "plus_review": {
+      "n_features": 26,
+      "per_split": {
+        "val_random_sqrtpop_seed42": 0.67914,
+        "val_recent_sqrtpop_seed42": 0.65213,
+        "val_random_popbin_seed42": 0.61362
+      },
+      "mean": 0.6483
+    }
+  }
+}
