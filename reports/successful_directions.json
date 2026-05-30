@@ -1,0 +1,23 @@
+[
+  {
+    "id": "lightgcn_full_train_20260530",
+    "submitted_file": "artifacts/lightgcn_20260530/test_full_train/candidate_lightgcn_full_train.csv",
+    "sha256": "a3dbe043f0f8b781d8c35aea88b7a1f561fa7b705b34edf6c7b7d0451eceb2a6",
+    "public_score": 0.76245,
+    "prev_best": 0.74594,
+    "delta": 0.01651,
+    "validation_mean_lightgcn": 0.6388,
+    "validation_mean_stage2": 0.6255,
+    "transfer_ratio": 1.2414,
+    "family": "graph_cf_lightgcn_bpr",
+    "config": {
+      "emb_dim": 64,
+      "n_layers": 3,
+      "lr": 0.001,
+      "reg": 0.0001,
+      "batch_size": 4096,
+      "epochs": 200,
+      "seed": 42
+    }
+  }
+]

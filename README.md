@@ -162,3 +162,13 @@ git diff --cached --stat
 - `wandb_runs/`
 - `.sisyphus/`
 - `.env`, `.netrc`, token/key/credential 파일
+
+## 제출 결과
+
+| 일자(KST) | 후보 | Public | Δ vs 이전 best | 비고 |
+|---|---|---:|---:|---|
+| 2026-05-30 12:44 | Stage2 mean-z blend (BM25 + EASE + ALS) | 0.74594 | — | 첫 제출 |
+| 2026-05-30 18:48 | **LightGCN full-train (BPR 200ep, emb64 L3)** | **0.76245** | **+0.01651** | 신규 best, validation transfer ratio 1.24 |
+
+상세: `reports/20260530T184752KST_lightgcn_full_train_post_analysis.md`
+
