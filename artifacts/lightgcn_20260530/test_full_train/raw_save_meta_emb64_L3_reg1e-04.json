@@ -1,0 +1,19 @@
+{
+  "config": {
+    "emb_dim": 64,
+    "n_layers": 3,
+    "reg": 0.0001,
+    "lr": 0.001,
+    "epochs": 200,
+    "batch_size": 4096,
+    "seed": 42,
+    "device": "cuda:0",
+    "tag": "emb64_L3_reg1e-04"
+  },
+  "raw_scores_path": "/opt/data/kaggle/kmu-rec-sys-26-steam/artifacts/lightgcn_20260530/test_full_train/lightgcn_test_raw_scores_emb64_L3_reg1e-04.csv",
+  "verify_candidate_path": "/opt/data/kaggle/kmu-rec-sys-26-steam/artifacts/lightgcn_20260530/test_full_train/candidate_verify_emb64_L3_reg1e-04.csv",
+  "verify_sha256": "a3dbe043f0f8b781d8c35aea88b7a1f561fa7b705b34edf6c7b7d0451eceb2a6",
+  "submitted_sha256": "a3dbe043f0f8b781d8c35aea88b7a1f561fa7b705b34edf6c7b7d0451eceb2a6",
+  "reproduces_submitted": true,
+  "train_seconds": 1731.6
+}
