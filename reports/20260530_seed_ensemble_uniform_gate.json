@@ -1,0 +1,23 @@
+{
+  "note": "Decisive gate: seed ensemble on uniform (public surrogate). No Kaggle submission.",
+  "split": "val_random_uniform_seed42",
+  "seeds_present": [
+    42,
+    123,
+    2024,
+    7
+  ],
+  "seeds_missing": [],
+  "rows": 19996,
+  "per_seed_acc": {
+    "score_seed42": 0.75445,
+    "score_seed123": 0.75735,
+    "score_seed2024": 0.75775,
+    "score_seed7": 0.75805
+  },
+  "ensemble_acc": 0.76145,
+  "seed42_uniform_ref": 0.75445,
+  "ens_vs_seed42_uniform": 0.007,
+  "verdict": "ROBUST_GAIN",
+  "interpretation": "Ensemble beats seed42 on the real public surrogate -> strong submit candidate."
+}
