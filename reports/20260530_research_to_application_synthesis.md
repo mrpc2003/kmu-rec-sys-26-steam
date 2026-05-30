@@ -23,7 +23,7 @@
 | Time-decay ItemKNN | 최근 상호작용 가중 (recency) | recent split 보조, 약함 | 기각 |
 | **리뷰 강화 추천** (text-aware) | 리뷰 텍스트 TF-IDF user-item cosine | 단독 0.61/0.59/0.52 · stacker 증분 **−0.00013** | ❌ **직교성 미확인, 기각** |
 | Stacking / 메타러닝 | base 모델 행별 게이팅 학습 | 정직 OOF +0.0105 → **public −0.0089 (0.75355)** | ❌ **public 회귀, 기각** |
-| **Seed 앙상블** (분산 감소) | 동일 config 다중 seed raw-score 평균 | hard +0.0041 · **uniform +0.00700 (0.76145)** | ✅ **견고 보완 확정 (제출 후보)** |
+| **Seed 앙상블** (분산 감소) | 동일 config 다중 seed raw-score 평균 | hard +0.0041 · uniform +0.00700 → **public 0.77125 (+0.00880)** | ✅ **제출·검증 완료, 신규 최고** |
 
 ---
 
@@ -83,7 +83,7 @@
 |---|---|
 | LightGCN 단일 (anchor) | ✅ 제출됨, public 0.76245, SHA `a3dbe04…` |
 | logreg stacker (pooled OOF +0.0091) | ❌ 제출됨, public 0.75355 회귀 → 기각, 교훈 보존 |
-| **Seed 앙상블 (4-seed)** | ✅ uniform +0.00700 ROBUST_GAIN, 후보 materialize (SHA `dcc578de…`), **제출 승인 대기** |
+| **Seed 앙상블 (4-seed)** | ✅ **제출·채점 완료, public 0.77125 (+0.00880 vs anchor) — 신규 최고**. uniform 게이트 예측(+0.00700) 대비 전이비 1.26 (단일 LightGCN 1.24와 일치) |
 | LightGCN 하이퍼파라미터 sweep (17 config) | 🔄 마지막 emb256 config 진행 중. 완료 시 top config을 **uniform에서 재검증** 후에만 채택 |
 | (미탐색) LightGCL / 그래프 contrastive | sweep·앙상블 확정 후 비교 검토 |
 
@@ -99,5 +99,6 @@
    과적합해 실제 public에서 반대로 작동할 수 있다(stacker −0.0089가 실증).
 3. 이번 탐색의 최대 산출물은 단일 후보가 아니라 **방법론적 발견**이다:
    *어느 validation split이 public surrogate인지(=uniform)를 먼저 식별하고, 모든 후보를 그 위에서 게이트하라.*
-4. 그 게이트를 통과한 유일한 견고 보완은 **seed 앙상블(+0.00700 on uniform, ROBUST_GAIN)** —
-   검증 라벨을 학습하지 않아 stacker의 실패 모드를 구조적으로 회피한다. 현재 제출 승인 대기.
+4. 그 게이트를 통과한 유일한 견고 보완은 **seed 앙상블** — 검증 라벨을 학습하지 않아 stacker의
+   실패 모드를 구조적으로 회피한다. **제출·채점 결과 public 0.77125 (+0.00880 vs anchor)로 신규 최고 기록**,
+   uniform 게이트 예측(+0.00700)이 실제 전이(+0.00880, 전이비 1.26)로 확증됐다.
