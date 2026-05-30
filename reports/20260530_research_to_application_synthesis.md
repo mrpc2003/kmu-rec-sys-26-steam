@@ -23,7 +23,7 @@
 | Time-decay ItemKNN | 최근 상호작용 가중 (recency) | recent split 보조, 약함 | 기각 |
 | **리뷰 강화 추천** (text-aware) | 리뷰 텍스트 TF-IDF user-item cosine | 단독 0.61/0.59/0.52 · stacker 증분 **−0.00013** | ❌ **직교성 미확인, 기각** |
 | Stacking / 메타러닝 | base 모델 행별 게이팅 학습 | 정직 OOF +0.0105 → **public −0.0089 (0.75355)** | ❌ **public 회귀, 기각** |
-| **Seed 앙상블** (분산 감소) | 동일 config 다중 seed raw-score 평균 | hard +0.0041 · uniform +0.00700 → **public 0.77125 (+0.00880)** | ✅ **제출·검증 완료, 신규 최고** |
+| **Seed 앙상블** (분산 감소) | 동일 config 다중 seed raw-score 평균 | emb64: uniform +0.00700 → public **0.77125** · emb128_L4: uniform +0.0036 vs emb64 → public **0.77745** | ✅ **제출·검증 완료, 최종 best** |
 
 ---
 
@@ -83,7 +83,8 @@
 |---|---|
 | LightGCN 단일 (anchor) | ✅ 제출됨, public 0.76245, SHA `a3dbe04…` |
 | logreg stacker (pooled OOF +0.0091) | ❌ 제출됨, public 0.75355 회귀 → 기각, 교훈 보존 |
-| **Seed 앙상블 (4-seed)** | ✅ **제출·채점 완료, public 0.77125 (+0.00880 vs anchor) — 신규 최고**. uniform 게이트 예측(+0.00700) 대비 전이비 1.26 (단일 LightGCN 1.24와 일치) |
+| **emb128_L4_reg1e-3 4-seed 앙상블** | ✅ **제출·채점 완료, public 0.77745 — 최종 best**. emb64 대비 uniform +0.0036 → public +0.0062(전이비 1.72), 투영 ~0.776 적중. final-2 #1, 재현 SHA `7e3191de…` |
+| **emb64_L3_reg1e-4 4-seed 앙상블** | ✅ 제출 public 0.77125, 아키텍처 다양성 final-2 #2 후보, 재현 SHA `dcc578de…` |
 | LightGCN 하이퍼파라미터 sweep (17 config) | 🔄 마지막 emb256 config 진행 중. 완료 시 top config을 **uniform에서 재검증** 후에만 채택 |
 | (미탐색) LightGCL / 그래프 contrastive | sweep·앙상블 확정 후 비교 검토 |
 

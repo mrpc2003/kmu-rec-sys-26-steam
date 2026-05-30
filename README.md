@@ -170,7 +170,8 @@ git diff --cached --stat
 | 2026-05-30 12:44 | Stage2 mean-z blend (BM25 + EASE + ALS) | 0.74594 | — | 첫 제출 |
 | 2026-05-30 18:48 | LightGCN full-train (BPR 200ep, emb64 L3 reg1e-4, seed42) | 0.76245 | +0.01651 | anchor, 재현 SHA `a3dbe04…`, transfer ratio 1.24 |
 | 2026-05-30 21:03 | logreg stacker (LightGCN+Stage2, within-user z/rank) | 0.75355 | −0.00890 | ❌ 회귀, 검증 negative 샘플러 과적합 (`reports/20260530_stacker_submission_post_analysis.md`) |
-| 2026-05-31 01:01 | **4-seed LightGCN 앙상블 (seeds 42/123/2024/7, 동일 config, raw score 평균)** | **0.77125** | **+0.00880** | 🏆 신규 best, uniform 게이트 +0.00700 → public +0.00880(전이비 1.26) 확증, 재현 SHA `dcc578de…` (`reports/20260530_ecampus_repro_seed_ens_077125.md`) |
+| 2026-05-31 01:01 | 4-seed LightGCN 앙상블 (emb64 L3 reg1e-4, seeds 42/123/2024/7) | 0.77125 | +0.00880 | uniform 게이트 +0.00700 → public +0.00880(전이비 1.26), 재현 SHA `dcc578de…` (`reports/20260530_ecampus_repro_seed_ens_077125.md`) |
+| 2026-05-31 02:?? | **4-seed LightGCN 앙상블 (emb128 L4 reg1e-3, seeds 42/123/2024/7)** | **0.77745** | **+0.00620** | 🏆 최종 best, uniform 게이트 +0.0036 vs emb64 → public +0.0062(전이비 1.72), 투영 ~0.776 적중, 재현 SHA `7e3191de…` (`reports/20260530_ecampus_repro_emb128L4r3_077745.md`) |
 
 상세: `reports/20260530T184752KST_lightgcn_full_train_post_analysis.md`,
 `reports/20260530_stacker_submission_post_analysis.md`,
