@@ -1,0 +1,98 @@
+{
+  "note": "LightGCN GPU validation-only. No Kaggle submission.",
+  "results": [
+    {
+      "split": "val_random_sqrtpop_seed42",
+      "summary": {
+        "score_col": "score_lightgcn",
+        "rows": 19996,
+        "users": 4736,
+        "row_accuracy": 0.6748349669933987,
+        "per_user_mean_accuracy": 0.6958414959134531,
+        "per_user_min_accuracy": 0.0,
+        "per_user_p05_accuracy": 0.0,
+        "per_user_p50_accuracy": 0.75,
+        "per_user_p95_accuracy": 1.0,
+        "predicted_positive_total": 9998,
+        "true_positive_total": 9998,
+        "all_user_positive_counts_match": true
+      },
+      "train_meta": {
+        "emb_dim": 64,
+        "n_layers": 3,
+        "lr": 0.001,
+        "reg": 0.0001,
+        "epochs": 200,
+        "batch_size": 4096,
+        "n_users": 6710,
+        "n_items": 2437,
+        "n_interactions": 165002,
+        "final_loss": 0.1711122166365385,
+        "train_seconds": 1613.5,
+        "device": "cuda:0"
+      }
+    },
+    {
+      "split": "val_recent_sqrtpop_seed42",
+      "summary": {
+        "score_col": "score_lightgcn",
+        "rows": 19996,
+        "users": 4736,
+        "row_accuracy": 0.639627925585117,
+        "per_user_mean_accuracy": 0.6461580062217397,
+        "per_user_min_accuracy": 0.0,
+        "per_user_p05_accuracy": 0.0,
+        "per_user_p50_accuracy": 0.6666666666666666,
+        "per_user_p95_accuracy": 1.0,
+        "predicted_positive_total": 9998,
+        "true_positive_total": 9998,
+        "all_user_positive_counts_match": true
+      },
+      "train_meta": {
+        "emb_dim": 64,
+        "n_layers": 3,
+        "lr": 0.001,
+        "reg": 0.0001,
+        "epochs": 200,
+        "batch_size": 4096,
+        "n_users": 6710,
+        "n_items": 2437,
+        "n_interactions": 165002,
+        "final_loss": 0.1728879764676094,
+        "train_seconds": 1608.0,
+        "device": "cuda:0"
+      }
+    },
+    {
+      "split": "val_random_popbin_seed42",
+      "summary": {
+        "score_col": "score_lightgcn",
+        "rows": 19996,
+        "users": 4736,
+        "row_accuracy": 0.6020204040808161,
+        "per_user_mean_accuracy": 0.6238745216130085,
+        "per_user_min_accuracy": 0.0,
+        "per_user_p05_accuracy": 0.0,
+        "per_user_p50_accuracy": 0.6666666666666666,
+        "per_user_p95_accuracy": 1.0,
+        "predicted_positive_total": 9998,
+        "true_positive_total": 9998,
+        "all_user_positive_counts_match": true
+      },
+      "train_meta": {
+        "emb_dim": 64,
+        "n_layers": 3,
+        "lr": 0.001,
+        "reg": 0.0001,
+        "epochs": 200,
+        "batch_size": 4096,
+        "n_users": 6710,
+        "n_items": 2437,
+        "n_interactions": 165002,
+        "final_loss": 0.1711122166365385,
+        "train_seconds": 1639.0,
+        "device": "cuda:0"
+      }
+    }
+  ]
+}

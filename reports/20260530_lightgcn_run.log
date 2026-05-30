@@ -1,0 +1,38 @@
+Installed 36 packages in 4.47s
+[LightGCN] val_random_sqrtpop_seed42: 6710 users, 2437 items, 165002 interactions
+  [LightGCN] epoch 1/200 loss=0.691398 elapsed=8.6s
+  [LightGCN] epoch 20/200 loss=0.457183 elapsed=161.9s
+  [LightGCN] epoch 40/200 loss=0.439773 elapsed=323.2s
+  [LightGCN] epoch 60/200 loss=0.402369 elapsed=484.5s
+  [LightGCN] epoch 80/200 loss=0.375787 elapsed=645.7s
+  [LightGCN] epoch 100/200 loss=0.334834 elapsed=807.0s
+  [LightGCN] epoch 120/200 loss=0.292487 elapsed=968.3s
+  [LightGCN] epoch 140/200 loss=0.256387 elapsed=1129.6s
+  [LightGCN] epoch 160/200 loss=0.223990 elapsed=1290.9s
+  [LightGCN] epoch 180/200 loss=0.195599 elapsed=1452.2s
+  [LightGCN] epoch 200/200 loss=0.171112 elapsed=1613.5s
+[LightGCN] val_recent_sqrtpop_seed42: 6710 users, 2437 items, 165002 interactions
+  [LightGCN] epoch 1/200 loss=0.691421 elapsed=8.1s
+  [LightGCN] epoch 20/200 loss=0.459408 elapsed=160.8s
+  [LightGCN] epoch 40/200 loss=0.437924 elapsed=321.6s
+  [LightGCN] epoch 60/200 loss=0.402127 elapsed=482.3s
+  [LightGCN] epoch 80/200 loss=0.370464 elapsed=643.2s
+  [LightGCN] epoch 100/200 loss=0.332777 elapsed=804.1s
+  [LightGCN] epoch 120/200 loss=0.292839 elapsed=964.9s
+  [LightGCN] epoch 140/200 loss=0.256083 elapsed=1125.7s
+  [LightGCN] epoch 160/200 loss=0.224277 elapsed=1286.5s
+  [LightGCN] epoch 180/200 loss=0.196588 elapsed=1447.2s
+  [LightGCN] epoch 200/200 loss=0.172888 elapsed=1608.0s
+[LightGCN] val_random_popbin_seed42: 6710 users, 2437 items, 165002 interactions
+  [LightGCN] epoch 1/200 loss=0.691398 elapsed=8.0s
+  [LightGCN] epoch 20/200 loss=0.457183 elapsed=161.2s
+  [LightGCN] epoch 40/200 loss=0.439773 elapsed=322.4s
+  [LightGCN] epoch 60/200 loss=0.402369 elapsed=487.3s
+  [LightGCN] epoch 80/200 loss=0.375787 elapsed=654.8s
+  [LightGCN] epoch 100/200 loss=0.334834 elapsed=827.3s
+  [LightGCN] epoch 120/200 loss=0.292487 elapsed=994.3s
+  [LightGCN] epoch 140/200 loss=0.256387 elapsed=1155.4s
+  [LightGCN] epoch 160/200 loss=0.223990 elapsed=1316.6s
+  [LightGCN] epoch 180/200 loss=0.195599 elapsed=1477.8s
+  [LightGCN] epoch 200/200 loss=0.171112 elapsed=1639.0s
+{"report_md": "reports/20260530_lightgcn.md", "report_json": "reports/20260530_lightgcn.json", "splits": 3}
