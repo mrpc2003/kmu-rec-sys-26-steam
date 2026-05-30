@@ -1,0 +1,84 @@
+{
+  "rows": 19998,
+  "disagree_rows": 3098,
+  "disagree_frac": 0.1549154915491549,
+  "promoted_count": 1549,
+  "demoted_count": 1549,
+  "promoted_item_pop_mean": 69.32859909619108,
+  "demoted_item_pop_mean": 99.22078760490639,
+  "all_item_pop_mean": 129.45599559955997,
+  "by_user_bucket": [
+    {
+      "bucket": "2",
+      "users": 2141,
+      "total_n": 4282,
+      "total_d": 604,
+      "frac_dis": 0.1410555815039701
+    },
+    {
+      "bucket": "3-4",
+      "users": 1307,
+      "total_n": 5228,
+      "total_d": 812,
+      "frac_dis": 0.15531752104055088
+    },
+    {
+      "bucket": "5-6",
+      "users": 665,
+      "total_n": 3990,
+      "total_d": 648,
+      "frac_dis": 0.162406015037594
+    },
+    {
+      "bucket": "7-10",
+      "users": 454,
+      "total_n": 3948,
+      "total_d": 602,
+      "frac_dis": 0.1524822695035461
+    },
+    {
+      "bucket": "11+",
+      "users": 170,
+      "total_n": 2550,
+      "total_d": 432,
+      "frac_dis": 0.16941176470588235
+    }
+  ],
+  "by_item_pop_bin": [
+    {
+      "pop_bin": 0,
+      "n": 4188,
+      "dis": 541,
+      "frac_dis": 0.12917860553963706,
+      "mean_pop": 19.060888252149
+    },
+    {
+      "pop_bin": 1,
+      "n": 3880,
+      "dis": 707,
+      "frac_dis": 0.18221649484536082,
+      "mean_pop": 33.980927835051546
+    },
+    {
+      "pop_bin": 2,
+      "n": 3961,
+      "dis": 946,
+      "frac_dis": 0.23882857864175713,
+      "mean_pop": 64.76874526634688
+    },
+    {
+      "pop_bin": 3,
+      "n": 3983,
+      "dis": 656,
+      "frac_dis": 0.16469997489329652,
+      "mean_pop": 139.0456942003515
+    },
+    {
+      "pop_bin": 4,
+      "n": 3986,
+      "dis": 248,
+      "frac_dis": 0.06221776216758655,
+      "mean_pop": 393.0807827395886
+    }
+  ]
+}
