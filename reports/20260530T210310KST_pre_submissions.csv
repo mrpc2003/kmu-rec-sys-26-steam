@@ -1,0 +1,3 @@
+fileName,date,description,status,publicScore,privateScore
+candidate_lightgcn_full_train.csv,2026-05-30 09:48:32.613000,LightGCN full-train BPR 200ep emb64 L3 lr1e-3 reg1e-4; val sqrtpop=0.6748 recent=0.6396 popbin=0.6020 (Stage2+0.011~0.015),SubmissionStatus.COMPLETE,0.76245,
+candidate_score_blend_mean_z.csv,2026-05-30 03:44:14.063000,first stage2 mean-z blend: itemknn_bm25_top3 + ease1000 + als_popa2; sqrtpop val row_acc 0.659732,SubmissionStatus.COMPLETE,0.74594,
