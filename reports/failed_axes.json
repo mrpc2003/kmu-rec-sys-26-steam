@@ -1,0 +1,16 @@
+[
+  {
+    "id": "stacker_logreg_lightgcn_stage2_20260530",
+    "submitted_file": "artifacts/stacker_20260530/test_candidate/candidate_stacker_logreg_emb64_L3_reg1e-04.csv",
+    "sha256": "ebd69b42548f4c48651905d54bd1e985d0bbbe57a7aa3db846b6ca05fdc637a0",
+    "public_score": 0.75355,
+    "anchor_at_submit": 0.76245,
+    "delta_vs_anchor": -0.0089,
+    "predicted_pooled_oof_gain": 0.00907,
+    "actual_transfer_ratio": -0.981,
+    "method": "logreg meta-learner over LightGCN + Stage2(mean_z, itemknn_bm25_top3, ease1000, als_popa2) + within-user z/rank + log_pop + cand_count; pooled-val train, per-user top-half decode",
+    "honest_validation": "user-level GroupKFold OOF +0.00907, leakage gap 3e-5 (passed leakage check but DID NOT transfer)",
+    "failure_hypothesis": "meta-learner exploited validation negative-sampler artifacts (log_pop weight -0.42, within-user Stage2 z) that correlate with constructed sqrtpop/popbin/recent negatives but NOT with the true hidden-test negative distribution; single robust LightGCN generalized better",
+    "correlation_policy": "do NOT resubmit any LightGCN+Stage2 meta-learner that leans on popularity/within-user-Stage2 features without an out-of-distribution negative-sampler validation; honest GroupKFold alone is insufficient gating here"
+  }
+]
