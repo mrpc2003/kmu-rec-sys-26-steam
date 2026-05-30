@@ -1,0 +1,24 @@
+{
+  "note": "emb128_L4_reg1e-3 4-seed ensemble test candidate. No Kaggle submission.",
+  "file": "/opt/data/kaggle/kmu-rec-sys-26-steam/artifacts/lightgcn_emb128L4r3_fulltest/test_candidate/candidate_lightgcn_emb128L4r3_seed_ens.csv",
+  "sha256": "7e3191dead2d85637dbf01f7ad50aeb61394c6b709959f2c2850bc53c430c195",
+  "rows": 19998,
+  "label_1": 9999,
+  "label_0": 9999,
+  "bad_users": 0,
+  "ids_contiguous": true,
+  "labels_binary": true,
+  "rowdiff_vs_emb64_ens": 924,
+  "rowdiff_frac": 0.0462,
+  "seeds": [
+    42,
+    123,
+    2024,
+    7
+  ],
+  "uniform_gate": {
+    "emb128_ens": 0.76505,
+    "emb64_ens": 0.76145,
+    "delta": 0.0036
+  }
+}
