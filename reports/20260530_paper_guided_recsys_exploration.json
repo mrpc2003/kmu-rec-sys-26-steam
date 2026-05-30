@@ -1,0 +1,90 @@
+{
+  "created_kst": "2026-05-30",
+  "scope": "KMU RecSys 26 Steam paper-guided no-submit exploration",
+  "no_kaggle_submission": true,
+  "selected_paper_families": [
+    {
+      "priority": 1,
+      "title": "Unbiased Recommender Learning from Implicit Feedback via Weakly Supervised Learning (PURL)",
+      "year": 2025,
+      "source": "ICML 2025 / OpenReview",
+      "url": "https://openreview.net/forum?id=0E5rZOGA13",
+      "project_action": "Implement PU/weak-supervised or corrected weighted implicit loss as candidate score axis; combine with top-half calibration."
+    },
+    {
+      "priority": 2,
+      "title": "Towards Reliable Negative Sampling for Recommendation with Implicit Feedback via In-Community Popularity",
+      "year": 2026,
+      "source": "arXiv",
+      "url": "https://arxiv.org/abs/2602.18759",
+      "project_action": "Build community-aware validation negatives using ALS/SVD user communities and in-community popular unseen items."
+    },
+    {
+      "priority": 3,
+      "title": "TFPS: Temporal Filtration-enhanced Positive Sample Set Construction Method for Implicit Collaborative Filtering",
+      "year": 2026,
+      "source": "arXiv",
+      "url": "https://arxiv.org/abs/2602.22521",
+      "project_action": "Sweep time-decay edge weights and recent-positive filtered graphs."
+    },
+    {
+      "priority": 4,
+      "title": "Correct and Weight: A Simple Yet Effective Loss for Implicit Feedback Recommendation",
+      "year": 2026,
+      "source": "arXiv",
+      "url": "https://arxiv.org/abs/2601.04291",
+      "project_action": "Weight sampled negatives by reliability/popularity/community exposure and correct false-negative risk."
+    },
+    {
+      "priority": 5,
+      "title": "LightGCL: Simple Yet Effective Graph Contrastive Learning for Recommendation",
+      "year": 2023,
+      "source": "ICLR / OpenReview",
+      "url": "https://openreview.net/forum?id=FKXVK9dyMM",
+      "project_action": "Use SVD/global graph features first; postpone full contrastive training until auxiliary gain is proven."
+    },
+    {
+      "priority": 6,
+      "title": "SymCERE: Symmetric Contrastive Learning for Robust Review-Enhanced Recommendation",
+      "year": 2025,
+      "source": "arXiv",
+      "url": "https://arxiv.org/abs/2504.02195",
+      "project_action": "Use train review profiles as semantic cluster/regularizer only; not as a direct hidden-label oracle."
+    },
+    {
+      "priority": 7,
+      "title": "CPGRec+: A Balance-oriented Framework for Personalized Video Game Recommendations",
+      "year": 2026,
+      "source": "ACM TOIS / arXiv",
+      "url": "https://arxiv.org/abs/2604.14586",
+      "project_action": "Approximate categories with train-only interaction/text clusters; do not scrape Steam metadata."
+    }
+  ],
+  "local_probe_summary": {
+    "paper_guided_feature_probe": {
+      "report": "reports/20260530_paper_guided_feature_probe.md",
+      "best_by_split": {
+        "val_random_sqrtpop_seed42": {"score": "score_item_log_pop", "row_accuracy": 0.614323, "per_user_mean_accuracy": 0.630155},
+        "val_recent_sqrtpop_seed42": {"score": "score_item_recency_log_pop", "row_accuracy": 0.587417, "per_user_mean_accuracy": 0.58782},
+        "val_random_popbin_seed42": {"score": "score_blend_graph_time_hours", "row_accuracy": 0.55041, "per_user_mean_accuracy": 0.5499},
+        "val_random_uniform_seed42": {"score": "score_item_log_pop", "row_accuracy": 0.720644, "per_user_mean_accuracy": 0.742005}
+      }
+    },
+    "review_tfidf_probe": {
+      "report": "reports/20260530_review_tfidf_probe.md",
+      "interpretation": "TF-IDF user-item review cosine is not strong enough as a standalone scorer; retain as semantic cluster or blend axis candidate."
+    }
+  },
+  "recommended_next_steps": [
+    "Build ICPNS-style community-aware validation split.",
+    "Implement PURL/CW-style weighted implicit scorer and blend with current Stage2.",
+    "Sweep time-decay edge weights for EASE/ItemKNN/ALS and validate on recent + sqrt-pop.",
+    "Use train-only review embeddings for pseudo-category clusters if pop-bin complementary gain is observed.",
+    "Defer full graph contrastive/LLM training until cheap axes show consistent validation gain."
+  ],
+  "promotion_gates": {
+    "primary": "Improve val_random_sqrtpop_seed42 over current Stage2 or provide low-correlation blend gain.",
+    "stress": "No material degradation on val_recent_sqrtpop_seed42 and val_random_popbin_seed42.",
+    "constraints": "Per-user top-half positive counts preserved; no external Steam scraping; reproducible code/seed/data fingerprint."
+  }
+}

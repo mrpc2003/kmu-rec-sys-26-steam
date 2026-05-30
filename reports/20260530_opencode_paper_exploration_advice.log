@@ -1,0 +1,37 @@
+[0m
+> Sisyphus - Ultraworker · gpt-5.4-mini-fast
+[0m
+I detect analysis intent — you want a validation-only research memo that maps recent recommender-paper families into safe, reproducible experiments without touching Kaggle submission or hidden labels. My approach: synthesize the current harness + data signals and rank experiments by ROI.
+
+## Advisor memo: validation-only exploratory roadmap
+
+| Rank | Experiment family | Expected ROI | Cost | Data signals to use | Main failure risks | Gating metrics |
+|---|---|---:|---:|---|---|---|
+| 1 | **Negative sampling / debiasing portfolio** | **Very high** | Low | `item_n` popularity, user degree, `hours_transformed`, sqrt-pop vs pop-bin vs hard negatives | Validation mismatch; easy splits overstate gains; sampler too similar to train and leaks “easy mode” | Primary: per-user top-half Accuracy on **sqrtpop**; Stress: **popbin** + **recent**; candidate KS on item popularity median |
+| 2 | **Implicit-feedback weak supervision** (confidence-weighted ALS/BPR/EASE variants) | **High** | Medium | Binary interactions + confidence from `hours_transformed`, recency weights, user/item degree priors | Overfitting to popularity; marginal gains disappear after top-half conversion; too many hyperparams | Primary: sqrtpop top-half Accuracy; compare against current blend; keep `Label=1` count exactly 50% |
+| 3 | **Sequential / time-aware CF** | **Medium-high** | Medium | `date` aggregates only: user/item last-seen time, recency decay, recent item popularity, time-bucket counts | Test has no explicit sequence input; row order is not sequential; gains may be local-only | Holdout: `recent` split top-half Accuracy; secondary: sqrtpop; sanity check recency feature ablation |
+| 4 | **Graph CF / contrastive CF** (LightGCN/SGL/SimGCL-style) | **Medium** | High | User-item bipartite graph, edge weights from `hours_transformed`, degree-normalized neighbors | Strong compute cost; may collapse to item popularity; contrastive regularization may not help on small item universe | Primary: sqrtpop; compare to ALS/EASE blend; verify no split overlap and stable across seeds |
+| 5 | **Text-enhanced review modeling** (LLM/embedding reranker) | **Low-medium** | High | Review text aggregates per user/item, blank-text rate, text length, lexical profile embeddings | Test lacks text; many blanks; likely reranker-only and weak signal; expensive to maintain reproducibly | Only accept if it improves the existing blend on sqrtpop **and** does not hurt recent/popbin |
+
+## What I would do first
+1. **Sampler portfolio first**: build `uniform / sqrtpop / popbin / hard` validation as the main scientific control.
+2. **Weak-supervision CF next**: sweep confidence-weighted ALS/BPR/EASE on the same candidate rows.
+3. **Then time-aware**: only recency features that can be computed from train alone.
+4. **Graph CF** only if it beats the current blended baseline on sqrtpop and doesn’t degrade stress splits.
+5. **Text/LLM** only as a reranker, not backbone.
+
+## Hard gating rule
+Do **not** promote any model to submission-candidate status unless it:
+- improves **sqrtpop** primary gate,
+- remains competitive on **recent** and **popbin** stress gates,
+- preserves **per-user top-half** constraints,
+- is fully reproducible (code, seed, data fingerprint, SHA256, environment),
+- and can be re-run locally for eCampus.
+
+## Practical interpretation
+Given the current project state, the highest-return path is **better validation alignment + calibrated implicit CF**, not a big jump to heavier models. The next best “paper-family” experiments are:
+- **debiasing/sampling**, then
+- **confidence-weighted implicit MF**, then
+- **LightGCN-style graph CF**.
+
+VERDICT: ADVISORY_COMPLETE
