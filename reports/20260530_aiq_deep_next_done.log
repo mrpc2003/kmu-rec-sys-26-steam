@@ -1,0 +1,5 @@
+AIQ_DEEP_DONE
+job_id 23659d8d-d79f-430e-89cb-c074d6a5093f
+status success
+bytes 45459
+source_counts {'found': 40, 'cited': 21, 'report': 20, 'artifact_entries': 61}

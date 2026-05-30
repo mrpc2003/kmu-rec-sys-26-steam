@@ -1,0 +1,8 @@
+START 2026-05-30T05:21:11+0000
+[score] val_random_sqrtpop_seed42
+[score] val_recent_sqrtpop_seed42
+[score] val_random_popbin_seed42
+[score] val_random_communitypop_seed42
+[score] val_recent_communitypop_seed42
+{"report_md": "reports/20260530_paper_guided_next_steps.md", "report_json": "reports/20260530_paper_guided_next_steps.json", "splits": 5, "community_splits": 2}
+DONE_EXIT 0

@@ -1,0 +1,530 @@
+{
+  "job_id": "23659d8d-d79f-430e-89cb-c074d6a5093f",
+  "status": "success",
+  "agent_type": null,
+  "report": "# KMU Steam RecSys Next-Step Validation Memo\n\n## 1. Competition-Specific Validation Frame\n\nThe useful next step is not another broad model sweep; it is a validation framework that matches the competition mechanics. `kmu-rec-sys-26-steam` is a binary implicit-feedback task: for each `(userID, gameID)` pair, predict whether the user played the game. The metric is Accuracy, the test set is exactly 50% played and 50% non-played, and the current inference shape already matches that prior: rank candidate games inside each user candidate set and label the top half as played. All test users and items are seen in train, so cold-start methods and external Steam metadata are unnecessary. The current baseline family—popularity, BPR, ItemKNN BM25, EASE, ALS, and z-score blends—should remain the comparison point, especially the current Stage2/z-score blend and the approved 0.74594 public score context.\n\nThe main local risk is validating against the wrong negative distribution. Implicit-feedback data are missing-not-at-random: unobserved pairs mix true negatives, unexposed items, and hidden positives, so uniform missing-as-negative validation can reward the wrong model [1][2]. The four actions below should therefore be treated as controlled ablations over local validation and stress gates, not as Kaggle probing. Every experiment should output a score for: global balanced Accuracy, `sqrt-pop`, `recent`, `pop-bin`, and exact `per-user top-half` inference. Promote only changes that improve local top-half Accuracy versus the Stage2/z-score blend and do not collapse any stress gate.\n\nRecommended shared gates:\n\n- **per-user top-half:** for each user in `pairs.csv`-shaped validation candidates, sort scores and mark exactly `floor(n_u/2)` or the provided half as positive.\n- **sqrt-pop:** re-evaluate or reweight candidates by `sqrt(train_item_count)` bins to detect popularity-only gains.\n- **recent:** evaluate held-out positives from the most recent review-date quantile separately.\n- **pop-bin:** split candidate games into item-popularity quantiles and require gains inside bins, not only globally.\n\n## 2. ICPNS / Community-Aware Negatives\n\n### Evidence base\n\nICPNS—In-Community Popularity Negative Sampling—argues that reliable negatives in implicit recommendation can be found by using user communities: if an item is popular inside a user’s latent community but the user has no interaction with it, the missing interaction is more likely to represent non-preference than a random unobserved item [3][4]. The key implementation idea is not simply “sample popular items.” It is “sample items popular among similar users,” with smoothing so that globally dominant items do not overwhelm the negative pool [3]. This aligns with MNAR/exposure-aware evaluation work: exposure is not observed directly, but popularity within a relevant neighborhood is a plausible exposure proxy [1][2].\n\n### Exact adaptation\n\nUse ICPNS first for **local validation and negative sampling**, not as a new production model.\n\n1. Train or reuse train-only user embeddings from ALS/BPR/EASE score space. No external metadata is needed.\n2. Cluster users with deterministic KMeans, e.g. `k ∈ {16, 32, 64}`, `random_state=2026`.\n3. For each cluster `c`, compute smoothed community popularity:\n `pop_c(i) = count(interactions in c for item i) + beta * global_pop(i)`.\n4. For each user `u`, define candidate negatives among train-seen games not interacted by `u`; for validation, restrict to a `pairs.csv`-like candidate construction if available.\n5. Sample hard negatives with probability proportional to `pop_c(i)^gamma`, where `gamma=0.5` is the first `sqrt-pop` setting.\n6. Train BPR/logistic ranker or build validation folds with these negatives; final inference still ranks candidate games per user and labels the top half.\n\nA good validation variant is: hold out one or more known positives per user, then pair them with community-popular unobserved items rather than uniform unobserved items. This creates a harder local split closer to the competition’s balanced played/non-played construction.\n\n### Lightweight first experiment and gates\n\nImplement `make_icpns_split.py`:\n\n- Inputs: `train.json`, fixed seed, existing ALS/BPR user vectors.\n- Outputs: `val_pairs_icpns.csv`, `val_labels_icpns.csv`, `community_id.npy`, `community_pop.npz`.\n- Grid: `k={16,32}`, `gamma={0.5,0.75}`, `beta={0.0,0.1}`.\n- Evaluate the unchanged Stage2 blend and one retrained BPR/ALS model on this split.\n\nStress gates:\n\n- `sqrt-pop`: compare `gamma=0.5` against `gamma=1.0`; reject if gains exist only at `gamma=1.0`.\n- `recent`: recompute `pop_c_recent(i)` using only recent interactions and test whether recent positives improve.\n- `pop-bin`: sample equal negatives per item-popularity bin; require no large loss in low/mid-pop bins.\n- `per-user top-half`: never tune a global threshold; always use per-user candidate sorting.\n\n### Failure risks and reject criteria\n\nReject ICPNS as a training sampler if it improves hard-negative validation but reduces original local top-half Accuracy by more than about 0.002–0.003, or if gains are concentrated only in the highest popularity bin. Also reject if user clusters are unstable across seeds, because community popularity then becomes noise. A common failure mode is treating very high-exposure missing items as “safe negatives”; in this competition, they may still be hidden positives. Clip or cap negative weights instead of making hard assumptions.\n\n### eCampus reproducibility\n\nStore cluster assignments, item counts, split files, random seeds, and exact sklearn/scipy versions. The method is fully train-only and does not require Steam scraping or Kaggle submissions.\n\n## 3. PU-Learning / Correct-and-Weight Weighted Implicit Scorer\n\n### Evidence base\n\nPU-learning treats implicit recommendation as positive-unlabeled learning: observed interactions are positives, while missing entries are unlabeled, not confirmed negatives [5][6]. PURL-style work addresses class-prior estimation under MNAR implicit data, while Correct-and-Weight proposes correcting sampled-negative losses by accounting for hidden-positive contamination in the unlabeled pool [5][7]. This is directly relevant because the current system likely trains or blends models that score sampled missing pairs as negatives. Hu, Koren, and Volinsky’s implicit ALS confidence formulation is the classic lightweight alternative: assign higher confidence to observed interactions, commonly expressed as `c_ui = 1 + alpha * r_ui`, and keep unobserved entries low-confidence rather than equally negative [8].\n\n### Exact adaptation\n\nDo **CW-lite** before implementing full PURL. The goal is a weighted scorer over existing model outputs, not a new deep architecture.\n\nConstruct a training table of positive train interactions and sampled unlabeled negatives. For each `(u,i)`, compute features:\n\n- existing Stage2/z-score blend score;\n- popularity score and `sqrt(pop_i)`;\n- ALS/EASE/ItemKNN/BPR scores;\n- optional community popularity `pop_c(i)` from ICPNS;\n- optional recency score.\n\nThen train a regularized logistic or pairwise ranker with sample weights:\n\n- positive weight: `w_pos = 1 + alpha * clip(hours_transformed, 0, hmax)`;\n- optional temporal positive weight: multiply by decay from section 4;\n- negative/unlabeled reliability: `w_neg = clip(a*sqrt_pop + b*community_pop + c*recent_pop, lo, hi)`.\n\nThe scorer’s output is still just `score(u,i)`. At inference, score each user’s candidates and label the top half. This preserves the 50/50 test prior and avoids threshold calibration errors.\n\n### Lightweight first experiment and gates\n\nImplement `train_cw_lite_blender.py`:\n\n- Model: `sklearn.linear_model.LogisticRegression` or LightGBM if already in environment; otherwise keep sklearn for reproducibility.\n- Positives: observed interactions from a train fold.\n- Negatives: one ICPNS negative and one uniform negative per positive, both flagged by source.\n- Weights: `w_pos ∈ {1, 1+10*log_hours_clipped, 1+40*log_hours_clipped}`; `w_neg ∈ {1, sqrt_pop_clipped, community_pop_clipped}`.\n- Validation: held-out local balanced candidate set with per-user top-half labeling.\n\nStress gates:\n\n- `sqrt-pop`: if `w_neg=sqrt_pop` helps global Accuracy but hurts low-pop bins, do not promote.\n- `recent`: test whether adding recency weight improves recent positives without hurting old/evergreen items.\n- `pop-bin`: report Accuracy by item-popularity quantile.\n- `per-user top-half`: use rank only; ignore probability threshold calibration.\n\n### Failure risks and reject criteria\n\nReject if the weighted scorer improves log loss/AUC but not top-half Accuracy; ranking is the competition-relevant output. Reject if class weighting makes the model nearly monotonic in popularity, visible as a gain only in high-pop bins. Reject if local improvement over Stage2/z-score blend is less than roughly 0.001–0.002 across two deterministic folds, because added complexity is not justified. Avoid full PURL/PPT unless CW-lite shows a signal; class-prior estimation can be fragile when true positive rates vary by user.\n\n### eCampus reproducibility\n\nSave the exact negative table, weights, fold IDs, feature matrix column order, model coefficients, and seed. Use deterministic sparse-matrix generation. No hidden labels or public leaderboard feedback should enter the weights.\n\n## 4. Time-Decay Positive Weighting / TFPS-Like Filtration\n\n### Evidence base\n\nTemporal recommenders use decay functions to model preference shift, commonly exponential `w=exp(-alpha*Delta t)` or reciprocal/linear forms such as `w=1/(1+alpha*Delta t)` [9][10]. EASE is a closed-form shallow autoencoder over a sparse interaction matrix, so changing the matrix weights changes the Gram matrix without changing the model family [11]. ItemKNN BM25 similarly depends on the weighted interaction matrix and can be recomputed cheaply [12][13]. TFPS-style temporal filtration frames the problem as selecting a higher-quality positive sample set using temporal graph filtration; for this competition, the safe adaptation is a simple decay/windowed positive matrix rather than a complex graph pipeline [14].\n\n### Exact adaptation\n\nUse train `date` only. Treat the maximum train date as the anchor; do not use test timing or external release dates.\n\nCreate matrix variants:\n\n- `X_binary[u,i]=1` baseline;\n- `X_hours[u,i]=clip(hours_transformed, 0, q95)`;\n- `X_decay[u,i]=X_binary[u,i] * exp(-ln(2) * age_days / half_life)`;\n- `X_hours_decay[u,i]=clip(hours_transformed)*decay`.\n\nRun each through existing EASE, ItemKNN BM25, and ALS scripts. Do not replace the main blend immediately; add each temporal model as a z-scored candidate feature and test blend deltas.\n\nTFPS-lite should be implemented as a filtration flag:\n\n- keep all positives for the main model;\n- for auxiliary temporal models, drop bottom `{10%,20%,30%}` oldest interactions per user only if the user has at least `m` interactions;\n- never drop the only signal for sparse users.\n\n### Lightweight first experiment and gates\n\nImplement `build_temporal_matrices.py`:\n\n- Half-lives: `{30, 90, 180, 365, none}` days.\n- Positive strength: `{binary, clipped_log_hours}`.\n- Models: ItemKNN BM25 first, then EASE if runtime is acceptable, then ALS.\n- Output: per-model validation predictions and z-scored blend columns.\n\nStress gates:\n\n- `recent`: primary gate; recent held-out positives should improve.\n- `sqrt-pop`: ensure recency is not just recommending recently popular global hits.\n- `pop-bin`: require at least neutral performance in mid/low-pop bins.\n- `per-user top-half`: unchanged final decision rule.\n\n### Failure risks and reject criteria\n\nSteam games can be evergreen, and review date may not equal play date. Aggressive decay can erase stable long-term preferences and hurt sparse users. Reject temporal weighting if the best half-life improves the recent gate but drops global top-half Accuracy by more than 0.002–0.003, or if all gains disappear after adding the model as a z-scored blend feature. Park TFPS-lite if filtration helps dense users but hurts users with fewer than five interactions.\n\n### eCampus reproducibility\n\nCache parsed dates, anchor date, half-life, and matrix variant names. Store sparse matrices or hashes. Use fixed package versions for `implicit`, `scipy`, and any BM25 implementation.\n\n## 5. Train-Only Review Embeddings and Pseudo-Categories\n\n### Evidence base\n\nHybrid recommenders can use content features alongside collaborative signals, and Steam review recommendation examples show that train-side review/content features are feasible [15][16][17]. However, recent analysis warns that content representations do not automatically improve recommendation, so this should be a small auxiliary blend feature, not a replacement for collaborative scores [18]. Sentence-Transformers documentation supports deterministic embedding and clustering workflows for sentence/document groups [19][20].\n\n### Exact adaptation\n\nUse only `data/train.json` review text. Do not scrape Steam genres, tags, descriptions, or store pages.\n\nFirst route should be classical and cheap:\n\n1. Aggregate review text by `gameID`.\n2. Build TF-IDF with fixed tokenizer/min_df/max_features.\n3. Reduce with TruncatedSVD to `{32,64,128}` dimensions.\n4. Cluster item vectors with KMeans `{32,64,128}` pseudo-categories.\n5. For each user, compute a centroid of games they reviewed/played.\n6. For each candidate `(u,i)`, compute text features: cosine(user_text_centroid, item_text_vector), same-cluster historical count, cluster popularity residual, and item text-SVD norm.\n7. Add these as z-scored features to the existing blend/CW-lite scorer.\n\nOptional public pretrained route: `sentence-transformers/all-MiniLM-L6-v2`, pinned package version and model revision. Compute review embeddings train-only, average by item, reduce to 32–64 dims, then reuse the same clustering and centroid features. This is allowed only if the model download/version is reproducible in eCampus.\n\n### Lightweight first experiment and gates\n\nImplement `build_text_pseudocat_features.py`:\n\n- Baseline text: TF-IDF + SVD64 + KMeans64.\n- Feature output: `text_cos`, `same_cluster_count`, `cluster_pop_resid`, `item_text_svd_*` if using a linear scorer.\n- Blend: add only `text_cos` and `same_cluster_count` first; avoid hundreds of dense columns until a signal appears.\n\nStress gates:\n\n- `pop-bin`: primary gate. Text is useful only if it separates games of similar popularity.\n- `sqrt-pop`: check whether text gains survive popularity softening.\n- `recent`: check whether text clusters generalize to recent preferences.\n- `per-user top-half`: final rank-only evaluation.\n\n### Failure risks and reject criteria\n\nPrevious TF-IDF was weak standalone, so reject any text feature that does not improve the blend. Reject if global top-half Accuracy drops, even if pop-bin improves, unless the feature can be gated only for ambiguous same-popularity candidates. Reject sentence-transformer embeddings if reproducibility is not clean or runtime is too high for eCampus. Do not fine-tune on external Steam corpora.\n\n### eCampus reproducibility\n\nSave TF-IDF vocabulary, SVD components, KMeans centers, item vectors, user centroid recipe, package versions, and seeds. For pretrained embeddings, record model name, revision, `sentence-transformers` version, device, batch size, and cached model hash.\n\n## 6. Prioritized Implementation Roadmap\n\n| Priority | Action | Code artifact | First hyperparameters | Validation split | Stress gates | Promote criterion | Reject criterion | Runtime/risk |\n|---:|---|---|---|---|---|---|---|---|\n| 1 | ICPNS validation split | `make_icpns_split.py` | `k={16,32}`, `gamma=0.5`, `beta={0,0.1}` | held-out positives + community-popular unobserved negatives | sqrt-pop, pop-bin, top-half | Stage2 ranking stable and new split better predicts known local failures | unstable clusters or popularity-only gains | low runtime, medium validation-risk |\n| 2 | Temporal matrices | `build_temporal_matrices.py` | half-life `{90,180,365}`, binary/log-hours | same fold as baseline | recent, pop-bin, top-half | temporal model adds ≥0.001–0.002 blend Accuracy and helps recent gate | global loss >0.002–0.003 | low/medium runtime, low code-risk |\n| 3 | CW-lite scorer | `train_cw_lite_blender.py` | pos `1+alpha*log_hours`, neg `sqrt_pop/community` clipped | ICPNS + baseline split | all four | consistent top-half gain over z-score blend | AUC/logloss gain without Accuracy gain | medium runtime, medium overfit-risk |\n| 4 | Text pseudo-cats | `build_text_pseudocat_features.py` | TF-IDF/SVD64/KMeans64 | same fold | pop-bin primary | blend gain in same-popularity bins without global loss | no blend gain or reproducibility burden | low classical route; medium pretrained route |\n\nSuggested one-day order: build ICPNS split first, because it improves every later validation decision; run temporal ItemKNN BM25 second, because it is the cheapest model-side ablation; train CW-lite on existing predictions third; add text pseudo-categories last and only as a low-dimensional blend feature.\n\n## 7. Reproducibility, eCampus Packaging, and Compliance\n\nEach experiment should have a config file with seed, fold IDs, candidate construction, matrix variant, hyperparameters, and exact package versions. Cache all generated artifacts: split files, sparse matrices, item/user maps, feature matrices, model outputs, and final per-user rankings. The final evaluator should be a single deterministic script that enforces per-user top-half predictions and prints global, sqrt-pop, recent, and pop-bin Accuracy.\n\nCompliance boundaries are straightforward: use `train.json` and `pairs.csv` only; do not scrape Steam metadata; do not infer hidden labels; do not use public leaderboard feedback as validation; do not submit to Kaggle without explicit approval. Public pretrained models for review embeddings are acceptable only when the model identity, version, cache, and inference settings are reproducible.\n\n## Sources\n\n[1] Unbiased Offline Recommender Evaluation for Missing-Not-At-Random Implicit Feedback: https://www.cs.cornell.edu/~ylongqi/paper/YangCXWBE18.pdf  \n[2] Positive-Unlabeled Learning in Implicit Feedback from Data Missing-Not-At-Random Perspective: https://pmc.ncbi.nlm.nih.gov/articles/PMC12839574  \n[3] Towards Reliable Negative Sampling for Recommendation with Implicit Feedback via In-Community Popularity: https://arxiv.org/html/2602.18759v1  \n[4] Towards Reliable Negative Sampling for Recommendation with Implicit Feedback via In-Community Popularity: https://arxiv.org/abs/2602.18759  \n[5] Unbiased Recommender Learning from Implicit Feedback via Weakly Supervised Learning: https://openreview.net/forum?id=0E5rZOGA13  \n[6] Positive unlabeled learning for building recommender systems in a parliamentary setting: https://arxiv.org/abs/2401.10961  \n[7] Correct and Weight: A Simple Yet Effective Loss for Implicit Feedback Recommendation: https://arxiv.org/html/2601.04291v1  \n[8] Collaborative Filtering for Implicit Feedback Datasets: https://www.semanticscholar.org/paper/Collaborative-Filtering-for-Implicit-Feedback-Hu-Koren/184b7281a87ee16228b24716ca02b29519d52eb5  \n[9] Application of collaborative filtering algorithm based on time decay function in music teaching recommendation model: https://pmc.ncbi.nlm.nih.gov/articles/PMC11639207  \n[10] Exponential Decay Function-Based Time-Aware Recommender System: https://thesai.org/Downloads/Volume13No10/Paper_71-Exponential_Decay_Function_Based_Time_Aware_Recommender_System.pdf  \n[11] Embarrassingly Shallow Autoencoders for Sparse Data: https://arxiv.org/pdf/1905.03375  \n[12] Collaborative Filtering based Recommender Systems for Implicit Feedback Data: https://blog.reachsumit.com/posts/2022/09/explicit-implicit-cf  \n[13] Recommender baselines extended tutorial — RecTools documentation: https://rectools.readthedocs.io/en/v0.7.0/examples/tutorials/baselines_extended_tutorial.html  \n[14] TFPS: A Temporal Filtration-enhanced Positive Sample Set: https://arxiv.org/pdf/2602.22521  \n[15] Games Recommender System using LightFM on Steam Dataset: https://medium.com/@speedfirefox1/games-recommender-system-using-lightfm-on-steam-dataset-76b05de4c187  \n[16] steam-recsys GitHub repository: https://github.com/thehir0/steam-recsys  \n[17] Steam recommendation system: https://arxiv.org/pdf/2305.04890  \n[18] Do Recommender Systems Really Leverage Multimodal Content?: https://arxiv.org/html/2508.04571v1  \n[19] Clustering — Sentence Transformers documentation: https://sbert.net/examples/sentence_transformer/applications/clustering/README.html  \n[20] How can one use Sentence Transformers for clustering sentences or documents by topic or content similarity?: https://milvus.io/ai-quick-reference/how-can-one-use-sentence-transformers-for-clustering-sentences-or-documents-by-topic-or-content-similarity\n",
+  "sources": {
+    "found_urls": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC13009167",
+      "https://medium.com/@speedfirefox1/games-recommender-system-using-lightfm-on-steam-dataset-76b05de4c187",
+      "https://www.thebump.com/a/best-baby-gates",
+      "https://arxiv.org/pdf/2305.04890",
+      "https://www.semanticscholar.org/paper/Collaborative-Filtering-for-Implicit-Feedback-Hu-Koren/184b7281a87ee16228b24716ca02b29519d52eb5",
+      "https://datajobs.com/data-science-repo/Recommender-Systems-[Netflix",
+      "https://arxiv.org/abs/2401.10961",
+      "https://www.nytimes.com/wirecutter/reviews/best-baby-gate",
+      "https://milvus.io/ai-quick-reference/how-can-one-use-sentence-transformers-for-clustering-sentences-or-documents-by-topic-or-content-similarity",
+      "https://www.cs.cornell.edu/~ylongqi/paper/YangCXWBE18.pdf",
+      "https://rectools.readthedocs.io/en/v0.7.0/examples/tutorials/baselines_extended_tutorial.html",
+      "https://thesai.org/Downloads/Volume13No10/Paper_71-Exponential_Decay_Function_Based_Time_Aware_Recommender_System.pdf",
+      "https://arxiv.org/pdf/2602.22521",
+      "https://dl.acm.org/doi/10.1145/3357384.3357919",
+      "https://openreview.net/forum?id=0E5rZOGA13",
+      "https://arxiv.org/pdf/2602.18759",
+      "https://arxiv.org/pdf/2601.04291",
+      "https://github.com/thehir0/steam-recsys",
+      "https://www.arxiv.org/abs/2407.06740v1",
+      "https://blog.reachsumit.com/posts/2022/09/explicit-implicit-cf",
+      "https://actsusanli.medium.com/building-a-recommender-system-with-implicit-feedback-datasets-using-alternating-least-squares-64d4f5ba3c57",
+      "https://arxiv.org/abs/2602.18759",
+      "https://apps.dtic.mil/sti/pdfs/ADA505646.pdf",
+      "https://arxiv.org/pdf/2604.15573",
+      "https://openreview.net/forum?id=mxIGQ0bIum&referrer=%5Bthe+profile+of+Harald+Steck%5D%28%2Fprofile%3Fid%3D~Harald_Steck1%29",
+      "https://epub.ub.uni-muenchen.de/70657/1/BA_Wimmer.pdf",
+      "https://arxiv.org/pdf/1905.03375",
+      "https://arxiv.org/html/2508.04571v1",
+      "https://sbert.net/examples/sentence_transformer/applications/clustering/README.html",
+      "https://arxiv.org/pdf/2003.01892",
+      "https://fcd.ugr.es/sites/centros/fcd/public/ficheros/PROYECTO2023/Deep_Learning_Recommendation_Model_for_Personaliza.pdf",
+      "https://www.stepbystepdatascience.com/ease",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12839574",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11639207",
+      "https://arxiv.org/html/2601.04291v1",
+      "https://cs229.stanford.edu/proj2014/Christopher%20Aberger,%20Recommender.pdf",
+      "https://arxiv.org/pdf/1909.03601",
+      "https://alphaxiv.org/overview/2504.02288v1",
+      "https://arxiv.org/html/2602.18759v1",
+      "https://www.arxiv.org/pdf/2504.02288v2"
+    ],
+    "cited_urls": [
+      "https://medium.com/@speedfirefox1/games-recommender-system-using-lightfm-on-steam-dataset-76b05de4c187",
+      "https://arxiv.org/pdf/2305.04890",
+      "https://www.semanticscholar.org/paper/Collaborative-Filtering-for-Implicit-Feedback-Hu-Koren/184b7281a87ee16228b24716ca02b29519d52eb5",
+      "https://arxiv.org/abs/2401.10961",
+      "https://milvus.io/ai-quick-reference/how-can-one-use-sentence-transformers-for-clustering-sentences-or-documents-by-topic-or-content-similarity",
+      "https://www.cs.cornell.edu/~ylongqi/paper/YangCXWBE18.pdf",
+      "https://rectools.readthedocs.io/en/v0.7.0/examples/tutorials/baselines_extended_tutorial.html",
+      "https://thesai.org/Downloads/Volume13No10/Paper_71-Exponential_Decay_Function_Based_Time_Aware_Recommender_System.pdf",
+      "https://arxiv.org/pdf/2602.22521",
+      "https://openreview.net/forum?id=0E5rZOGA13",
+      "https://arxiv.org/pdf/2602.18759",
+      "https://github.com/thehir0/steam-recsys",
+      "https://blog.reachsumit.com/posts/2022/09/explicit-implicit-cf",
+      "https://arxiv.org/abs/2602.18759",
+      "https://arxiv.org/pdf/1905.03375",
+      "https://arxiv.org/html/2508.04571v1",
+      "https://sbert.net/examples/sentence_transformer/applications/clustering/README.html",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12839574",
+      "https://arxiv.org/html/2601.04291v1",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11639207",
+      "https://arxiv.org/html/2602.18759v1"
+    ],
+    "report_urls": [
+      "https://www.cs.cornell.edu/~ylongqi/paper/YangCXWBE18.pdf",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12839574",
+      "https://arxiv.org/html/2602.18759v1",
+      "https://arxiv.org/abs/2602.18759",
+      "https://openreview.net/forum?id=0E5rZOGA13",
+      "https://arxiv.org/abs/2401.10961",
+      "https://arxiv.org/html/2601.04291v1",
+      "https://www.semanticscholar.org/paper/Collaborative-Filtering-for-Implicit-Feedback-Hu-Koren/184b7281a87ee16228b24716ca02b29519d52eb5",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11639207",
+      "https://thesai.org/Downloads/Volume13No10/Paper_71-Exponential_Decay_Function_Based_Time_Aware_Recommender_System.pdf",
+      "https://arxiv.org/pdf/1905.03375",
+      "https://blog.reachsumit.com/posts/2022/09/explicit-implicit-cf",
+      "https://rectools.readthedocs.io/en/v0.7.0/examples/tutorials/baselines_extended_tutorial.html",
+      "https://arxiv.org/pdf/2602.22521",
+      "https://medium.com/@speedfirefox1/games-recommender-system-using-lightfm-on-steam-dataset-76b05de4c187",
+      "https://github.com/thehir0/steam-recsys",
+      "https://arxiv.org/pdf/2305.04890",
+      "https://arxiv.org/html/2508.04571v1",
+      "https://sbert.net/examples/sentence_transformer/applications/clustering/README.html",
+      "https://milvus.io/ai-quick-reference/how-can-one-use-sentence-transformers-for-clustering-sentences-or-documents-by-topic-or-content-similarity"
+    ],
+    "artifact_entries": [
+      {
+        "type": "citation_source",
+        "url": "https://arxiv.org/pdf/2601.04291",
+        "name": "https://arxiv.org/pdf/2601.04291",
+        "workflow": "planner-agent",
+        "timestamp": "2026-05-30T04:45:38.482285+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12839574",
+        "name": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12839574",
+        "workflow": "planner-agent",
+        "timestamp": "2026-05-30T04:45:38.482547+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://arxiv.org/html/2602.18759v1",
+        "name": "https://arxiv.org/html/2602.18759v1",
+        "workflow": "planner-agent",
+        "timestamp": "2026-05-30T04:45:38.504904+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13009167",
+        "name": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13009167",
+        "workflow": "planner-agent",
+        "timestamp": "2026-05-30T04:45:38.505234+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://medium.com/@speedfirefox1/games-recommender-system-using-lightfm-on-steam-dataset-76b05de4c187",
+        "name": "https://medium.com/@speedfirefox1/games-recommender-system-using-lightfm-on-steam-dataset-76b05de4c187",
+        "workflow": "planner-agent",
+        "timestamp": "2026-05-30T04:45:40.620226+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://arxiv.org/pdf/2305.04890",
+        "name": "https://arxiv.org/pdf/2305.04890",
+        "workflow": "planner-agent",
+        "timestamp": "2026-05-30T04:45:40.620468+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11639207",
+        "name": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11639207",
+        "workflow": "planner-agent",
+        "timestamp": "2026-05-30T04:45:41.296941+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://actsusanli.medium.com/building-a-recommender-system-with-implicit-feedback-datasets-using-alternating-least-squares-64d4f5ba3c57",
+        "name": "https://actsusanli.medium.com/building-a-recommender-system-with-implicit-feedback-datasets-using-alternating-least-squares-64d4f5ba3c57",
+        "workflow": "planner-agent",
+        "timestamp": "2026-05-30T04:45:41.297188+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://arxiv.org/pdf/1905.03375",
+        "name": "https://arxiv.org/pdf/1905.03375",
+        "workflow": "planner-agent",
+        "timestamp": "2026-05-30T04:45:51.456506+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://www.stepbystepdatascience.com/ease",
+        "name": "https://www.stepbystepdatascience.com/ease",
+        "workflow": "planner-agent",
+        "timestamp": "2026-05-30T04:45:51.456744+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://www.cs.cornell.edu/~ylongqi/paper/YangCXWBE18.pdf",
+        "name": "https://www.cs.cornell.edu/~ylongqi/paper/YangCXWBE18.pdf",
+        "workflow": "planner-agent",
+        "timestamp": "2026-05-30T04:45:51.682378+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://arxiv.org/pdf/1909.03601",
+        "name": "https://arxiv.org/pdf/1909.03601",
+        "workflow": "planner-agent",
+        "timestamp": "2026-05-30T04:45:51.682592+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://cs229.stanford.edu/proj2014/Christopher%20Aberger,%20Recommender.pdf",
+        "name": "https://cs229.stanford.edu/proj2014/Christopher%20Aberger,%20Recommender.pdf",
+        "workflow": "planner-agent",
+        "timestamp": "2026-05-30T04:45:52.372879+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://www.semanticscholar.org/paper/Collaborative-Filtering-for-Implicit-Feedback-Hu-Koren/184b7281a87ee16228b24716ca02b29519d52eb5",
+        "name": "https://www.semanticscholar.org/paper/Collaborative-Filtering-for-Implicit-Feedback-Hu-Koren/184b7281a87ee16228b24716ca02b29519d52eb5",
+        "workflow": "planner-agent",
+        "timestamp": "2026-05-30T04:45:52.373116+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://arxiv.org/html/2508.04571v1",
+        "name": "https://arxiv.org/html/2508.04571v1",
+        "workflow": "planner-agent",
+        "timestamp": "2026-05-30T04:45:52.453368+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://openreview.net/forum?id=mxIGQ0bIum&referrer=%5Bthe+profile+of+Harald+Steck%5D%28%2Fprofile%3Fid%3D~Harald_Steck1%29",
+        "name": "https://openreview.net/forum?id=mxIGQ0bIum&referrer=%5Bthe+profile+of+Harald+Steck%5D%28%2Fprofile%3Fid%3D~Harald_Steck1%29",
+        "workflow": "planner-agent",
+        "timestamp": "2026-05-30T04:45:52.453589+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://github.com/thehir0/steam-recsys",
+        "name": "https://github.com/thehir0/steam-recsys",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-05-30T04:49:19.068526+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://alphaxiv.org/overview/2504.02288v1",
+        "name": "https://alphaxiv.org/overview/2504.02288v1",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-05-30T04:49:21.575359+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://www.arxiv.org/pdf/2504.02288v2",
+        "name": "https://www.arxiv.org/pdf/2504.02288v2",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-05-30T04:49:21.575630+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://openreview.net/forum?id=0E5rZOGA13",
+        "name": "https://openreview.net/forum?id=0E5rZOGA13",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-05-30T04:49:21.819791+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://arxiv.org/abs/2602.18759",
+        "name": "https://arxiv.org/abs/2602.18759",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-05-30T04:49:25.717721+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://sbert.net/examples/sentence_transformer/applications/clustering/README.html",
+        "name": "https://sbert.net/examples/sentence_transformer/applications/clustering/README.html",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-05-30T04:49:25.832222+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://milvus.io/ai-quick-reference/how-can-one-use-sentence-transformers-for-clustering-sentences-or-documents-by-topic-or-content-similarity",
+        "name": "https://milvus.io/ai-quick-reference/how-can-one-use-sentence-transformers-for-clustering-sentences-or-documents-by-topic-or-content-similarity",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-05-30T04:49:25.832459+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://arxiv.org/html/2601.04291v1",
+        "name": "https://arxiv.org/html/2601.04291v1",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-05-30T04:49:28.756030+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://thesai.org/Downloads/Volume13No10/Paper_71-Exponential_Decay_Function_Based_Time_Aware_Recommender_System.pdf",
+        "name": "https://thesai.org/Downloads/Volume13No10/Paper_71-Exponential_Decay_Function_Based_Time_Aware_Recommender_System.pdf",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-05-30T04:49:29.131911+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://arxiv.org/pdf/2602.18759",
+        "name": "https://arxiv.org/pdf/2602.18759",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-05-30T04:49:31.792581+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://arxiv.org/pdf/2602.22521",
+        "name": "https://arxiv.org/pdf/2602.22521",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-05-30T04:49:33.056844+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://apps.dtic.mil/sti/pdfs/ADA505646.pdf",
+        "name": "https://apps.dtic.mil/sti/pdfs/ADA505646.pdf",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-05-30T04:49:33.057141+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://blog.reachsumit.com/posts/2022/09/explicit-implicit-cf",
+        "name": "https://blog.reachsumit.com/posts/2022/09/explicit-implicit-cf",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-05-30T04:49:38.603090+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://rectools.readthedocs.io/en/v0.7.0/examples/tutorials/baselines_extended_tutorial.html",
+        "name": "https://rectools.readthedocs.io/en/v0.7.0/examples/tutorials/baselines_extended_tutorial.html",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-05-30T04:49:38.603376+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://arxiv.org/abs/2401.10961",
+        "name": "https://arxiv.org/abs/2401.10961",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-05-30T04:49:39.606080+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://www.arxiv.org/abs/2407.06740v1",
+        "name": "https://www.arxiv.org/abs/2407.06740v1",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-05-30T04:49:39.606337+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://epub.ub.uni-muenchen.de/70657/1/BA_Wimmer.pdf",
+        "name": "https://epub.ub.uni-muenchen.de/70657/1/BA_Wimmer.pdf",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-05-30T04:49:44.576552+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://datajobs.com/data-science-repo/Recommender-Systems-[Netflix",
+        "name": "https://datajobs.com/data-science-repo/Recommender-Systems-[Netflix",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-05-30T04:49:44.576815+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://www.nytimes.com/wirecutter/reviews/best-baby-gate",
+        "name": "https://www.nytimes.com/wirecutter/reviews/best-baby-gate",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-05-30T04:50:01.215182+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://www.thebump.com/a/best-baby-gates",
+        "name": "https://www.thebump.com/a/best-baby-gates",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-05-30T04:50:01.215440+00:00"
+      },
+      {
+        "type": "citation_use",
+        "url": "https://arxiv.org/html/2602.18759v1",
+        "name": "https://arxiv.org/html/2602.18759v1",
+        "workflow": null,
+        "timestamp": "2026-05-30T04:50:05.326845+00:00"
+      },
+      {
+        "type": "citation_use",
+        "url": "https://arxiv.org/abs/2602.18759",
+        "name": "https://arxiv.org/abs/2602.18759",
+        "workflow": null,
+        "timestamp": "2026-05-30T04:50:05.327023+00:00"
+      },
+      {
+        "type": "citation_use",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12839574",
+        "name": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12839574",
+        "workflow": null,
+        "timestamp": "2026-05-30T04:50:05.327183+00:00"
+      },
+      {
+        "type": "citation_use",
+        "url": "https://arxiv.org/pdf/2602.18759",
+        "name": "https://arxiv.org/pdf/2602.18759",
+        "workflow": null,
+        "timestamp": "2026-05-30T04:50:05.327335+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://arxiv.org/pdf/2003.01892",
+        "name": "https://arxiv.org/pdf/2003.01892",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-05-30T04:50:08.374738+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://arxiv.org/pdf/2604.15573",
+        "name": "https://arxiv.org/pdf/2604.15573",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-05-30T04:50:08.374997+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://dl.acm.org/doi/10.1145/3357384.3357919",
+        "name": "https://dl.acm.org/doi/10.1145/3357384.3357919",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-05-30T04:50:49.089424+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://fcd.ugr.es/sites/centros/fcd/public/ficheros/PROYECTO2023/Deep_Learning_Recommendation_Model_for_Personaliza.pdf",
+        "name": "https://fcd.ugr.es/sites/centros/fcd/public/ficheros/PROYECTO2023/Deep_Learning_Recommendation_Model_for_Personaliza.pdf",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-05-30T04:50:49.089675+00:00"
+      },
+      {
+        "type": "citation_use",
+        "url": "https://www.cs.cornell.edu/~ylongqi/paper/YangCXWBE18.pdf",
+        "name": "https://www.cs.cornell.edu/~ylongqi/paper/YangCXWBE18.pdf",
+        "workflow": null,
+        "timestamp": "2026-05-30T04:55:36.358163+00:00"
+      },
+      {
+        "type": "citation_use",
+        "url": "https://openreview.net/forum?id=0E5rZOGA13",
+        "name": "https://openreview.net/forum?id=0E5rZOGA13",
+        "workflow": null,
+        "timestamp": "2026-05-30T04:55:36.358448+00:00"
+      },
+      {
+        "type": "citation_use",
+        "url": "https://arxiv.org/abs/2401.10961",
+        "name": "https://arxiv.org/abs/2401.10961",
+        "workflow": null,
+        "timestamp": "2026-05-30T04:55:36.358611+00:00"
+      },
+      {
+        "type": "citation_use",
+        "url": "https://arxiv.org/html/2601.04291v1",
+        "name": "https://arxiv.org/html/2601.04291v1",
+        "workflow": null,
+        "timestamp": "2026-05-30T04:55:36.358749+00:00"
+      },
+      {
+        "type": "citation_use",
+        "url": "https://www.semanticscholar.org/paper/Collaborative-Filtering-for-Implicit-Feedback-Hu-Koren/184b7281a87ee16228b24716ca02b29519d52eb5",
+        "name": "https://www.semanticscholar.org/paper/Collaborative-Filtering-for-Implicit-Feedback-Hu-Koren/184b7281a87ee16228b24716ca02b29519d52eb5",
+        "workflow": null,
+        "timestamp": "2026-05-30T04:55:36.358884+00:00"
+      },
+      {
+        "type": "citation_use",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11639207",
+        "name": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11639207",
+        "workflow": null,
+        "timestamp": "2026-05-30T04:55:36.359015+00:00"
+      },
+      {
+        "type": "citation_use",
+        "url": "https://thesai.org/Downloads/Volume13No10/Paper_71-Exponential_Decay_Function_Based_Time_Aware_Recommender_System.pdf",
+        "name": "https://thesai.org/Downloads/Volume13No10/Paper_71-Exponential_Decay_Function_Based_Time_Aware_Recommender_System.pdf",
+        "workflow": null,
+        "timestamp": "2026-05-30T04:55:36.359147+00:00"
+      },
+      {
+        "type": "citation_use",
+        "url": "https://arxiv.org/pdf/1905.03375",
+        "name": "https://arxiv.org/pdf/1905.03375",
+        "workflow": null,
+        "timestamp": "2026-05-30T04:55:36.359278+00:00"
+      },
+      {
+        "type": "citation_use",
+        "url": "https://blog.reachsumit.com/posts/2022/09/explicit-implicit-cf",
+        "name": "https://blog.reachsumit.com/posts/2022/09/explicit-implicit-cf",
+        "workflow": null,
+        "timestamp": "2026-05-30T04:55:36.364532+00:00"
+      },
+      {
+        "type": "citation_use",
+        "url": "https://rectools.readthedocs.io/en/v0.7.0/examples/tutorials/baselines_extended_tutorial.html",
+        "name": "https://rectools.readthedocs.io/en/v0.7.0/examples/tutorials/baselines_extended_tutorial.html",
+        "workflow": null,
+        "timestamp": "2026-05-30T04:55:36.364795+00:00"
+      },
+      {
+        "type": "citation_use",
+        "url": "https://arxiv.org/pdf/2602.22521",
+        "name": "https://arxiv.org/pdf/2602.22521",
+        "workflow": null,
+        "timestamp": "2026-05-30T04:55:36.364865+00:00"
+      },
+      {
+        "type": "citation_use",
+        "url": "https://medium.com/@speedfirefox1/games-recommender-system-using-lightfm-on-steam-dataset-76b05de4c187",
+        "name": "https://medium.com/@speedfirefox1/games-recommender-system-using-lightfm-on-steam-dataset-76b05de4c187",
+        "workflow": null,
+        "timestamp": "2026-05-30T04:55:36.364932+00:00"
+      },
+      {
+        "type": "citation_use",
+        "url": "https://github.com/thehir0/steam-recsys",
+        "name": "https://github.com/thehir0/steam-recsys",
+        "workflow": null,
+        "timestamp": "2026-05-30T04:55:36.364990+00:00"
+      },
+      {
+        "type": "citation_use",
+        "url": "https://arxiv.org/pdf/2305.04890",
+        "name": "https://arxiv.org/pdf/2305.04890",
+        "workflow": null,
+        "timestamp": "2026-05-30T04:55:36.365052+00:00"
+      },
+      {
+        "type": "citation_use",
+        "url": "https://arxiv.org/html/2508.04571v1",
+        "name": "https://arxiv.org/html/2508.04571v1",
+        "workflow": null,
+        "timestamp": "2026-05-30T04:55:36.365109+00:00"
+      },
+      {
+        "type": "citation_use",
+        "url": "https://sbert.net/examples/sentence_transformer/applications/clustering/README.html",
+        "name": "https://sbert.net/examples/sentence_transformer/applications/clustering/README.html",
+        "workflow": null,
+        "timestamp": "2026-05-30T04:55:36.365168+00:00"
+      },
+      {
+        "type": "citation_use",
+        "url": "https://milvus.io/ai-quick-reference/how-can-one-use-sentence-transformers-for-clustering-sentences-or-documents-by-topic-or-content-similarity",
+        "name": "https://milvus.io/ai-quick-reference/how-can-one-use-sentence-transformers-for-clustering-sentences-or-documents-by-topic-or-content-similarity",
+        "workflow": null,
+        "timestamp": "2026-05-30T04:55:36.365223+00:00"
+      }
+    ],
+    "counts": {
+      "found": 40,
+      "cited": 21,
+      "report": 20,
+      "artifact_entries": 61
+    }
+  }
+}
