@@ -1,0 +1,25 @@
+{
+  "note": "emb128_L4_reg1e-3 4-seed ensemble vs emb64_L3_reg1e-4 4-seed ensemble on uniform. No submission.",
+  "split": "val_random_uniform_seed42",
+  "seeds_present": [
+    42,
+    123,
+    2024,
+    7
+  ],
+  "emb128_per_seed_uniform": {
+    "score_seed42": 0.76205,
+    "score_seed123": 0.76275,
+    "score_seed2024": 0.76435,
+    "score_seed7": 0.76325
+  },
+  "emb128_ensemble_uniform": 0.76505,
+  "emb64_ensemble_uniform_ref": 0.76145,
+  "emb128_single_seed42_ref": 0.76205,
+  "anchor_uniform": 0.75445,
+  "emb128ens_vs_emb64ens": 0.0036,
+  "emb128ens_vs_anchor": 0.0106,
+  "noise_band": 0.0007,
+  "tier": "UPGRADE",
+  "verdict": "emb128_L4_reg1e-3 ensemble (0.76505) beats emb64 ensemble (0.76145) by +0.00360 > noise 0.0007 -> genuine upgrade, consider as new primary."
+}
