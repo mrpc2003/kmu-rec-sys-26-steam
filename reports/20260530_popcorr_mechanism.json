@@ -1,0 +1,62 @@
+{
+  "random_uniform": {
+    "lightgcn_base": 0.75445,
+    "alpha_0.0": 0.75445,
+    "alpha_0.1": 0.75125,
+    "alpha_0.25": 0.73655,
+    "alpha_0.5": 0.68704,
+    "alpha_1.0": 0.52,
+    "best_alpha": 0.0,
+    "best_delta_vs_base": -0.0
+  },
+  "random_sqrtpop": {
+    "lightgcn_base": 0.67483,
+    "alpha_0.0": 0.67483,
+    "alpha_0.1": 0.67644,
+    "alpha_0.25": 0.67984,
+    "alpha_0.5": 0.65583,
+    "alpha_1.0": 0.55111,
+    "best_alpha": 0.25,
+    "best_delta_vs_base": 0.00501
+  },
+  "recent_sqrtpop": {
+    "lightgcn_base": 0.63963,
+    "alpha_0.0": 0.63963,
+    "alpha_0.1": 0.63873,
+    "alpha_0.25": 0.63073,
+    "alpha_0.5": 0.60512,
+    "alpha_1.0": 0.5161,
+    "best_alpha": 0.0,
+    "best_delta_vs_base": 0.0
+  },
+  "random_popbin": {
+    "lightgcn_base": 0.60202,
+    "alpha_0.0": 0.60202,
+    "alpha_0.1": 0.60452,
+    "alpha_0.25": 0.60382,
+    "alpha_0.5": 0.58562,
+    "alpha_1.0": 0.53951,
+    "best_alpha": 0.1,
+    "best_delta_vs_base": 0.0025
+  },
+  "random_communitypop": {
+    "lightgcn_base": 0.57231,
+    "alpha_0.0": 0.57231,
+    "alpha_0.1": 0.57421,
+    "alpha_0.25": 0.57822,
+    "alpha_0.5": 0.57251,
+    "alpha_1.0": 0.55021,
+    "best_alpha": 0.25,
+    "best_delta_vs_base": 0.00591
+  },
+  "recent_communitypop": {
+    "lightgcn_base": 0.55551,
+    "alpha_0.0": 0.55551,
+    "alpha_0.1": 0.55281,
+    "alpha_0.25": 0.54291,
+    "alpha_0.5": 0.52691,
+    "alpha_1.0": 0.4923,
+    "best_alpha": 0.0,
+    "best_delta_vs_base": -0.0
+  }
+}
