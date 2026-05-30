@@ -1,0 +1,34 @@
+{
+  "project": "kmu-rec-sys-26-steam",
+  "entity": "mrpc2003-kookmin-university",
+  "runs": [
+    {
+      "kind": "score_dir",
+      "score_dir": "artifacts/scores/val_random_sqrtpop_seed42_proto",
+      "name": "20260530-wandb-setup2-val_random_sqrtpop_seed42_proto",
+      "id": "l9fen68z",
+      "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/l9fen68z"
+    },
+    {
+      "kind": "score_dir",
+      "score_dir": "artifacts/scores/val_random_popbin_seed42_proto",
+      "name": "20260530-wandb-setup2-val_random_popbin_seed42_proto",
+      "id": "lz9xqxrj",
+      "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/lz9xqxrj"
+    },
+    {
+      "kind": "score_dir",
+      "score_dir": "artifacts/scores/val_recent_sqrtpop_seed42_proto",
+      "name": "20260530-wandb-setup2-val_recent_sqrtpop_seed42_proto",
+      "id": "hlyd7idr",
+      "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/hlyd7idr"
+    },
+    {
+      "kind": "score_dir",
+      "score_dir": "artifacts/scores/test_pairs_full_train_proto",
+      "name": "20260530-wandb-setup2-test_pairs_full_train_proto",
+      "id": "4ytpir0v",
+      "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/4ytpir0v"
+    }
+  ]
+}

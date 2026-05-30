@@ -1,0 +1,104 @@
+{
+  "project": "kmu-rec-sys-26-steam",
+  "entity": "mrpc2003-kookmin-university",
+  "runs": [
+    {
+      "kind": "score_dir",
+      "score_dir": "artifacts/scores/test_pairs_full_train_stage2_blend",
+      "name": "20260530-all-summary-test_pairs_full_train_stage2_blend",
+      "id": "rjz3713y",
+      "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/rjz3713y"
+    },
+    {
+      "kind": "score_dir",
+      "score_dir": "artifacts/scores/test_pairs_full_train_stage2_cf",
+      "name": "20260530-all-summary-test_pairs_full_train_stage2_cf",
+      "id": "nm05u48j",
+      "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/nm05u48j"
+    },
+    {
+      "kind": "score_dir",
+      "score_dir": "artifacts/scores/test_pairs_full_train_stage2_itemease",
+      "name": "20260530-all-summary-test_pairs_full_train_stage2_itemease",
+      "id": "l4wl5dnz",
+      "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/l4wl5dnz"
+    },
+    {
+      "kind": "score_dir",
+      "score_dir": "artifacts/scores/val_random_popbin_seed42_stage2_blend",
+      "name": "20260530-all-summary-val_random_popbin_seed42_stage2_blend",
+      "id": "7oyc6ju7",
+      "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/7oyc6ju7"
+    },
+    {
+      "kind": "score_dir",
+      "score_dir": "artifacts/scores/val_random_popbin_seed42_stage2_cf",
+      "name": "20260530-all-summary-val_random_popbin_seed42_stage2_cf",
+      "id": "q2pxuai7",
+      "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/q2pxuai7"
+    },
+    {
+      "kind": "score_dir",
+      "score_dir": "artifacts/scores/val_random_popbin_seed42_stage2_itemease",
+      "name": "20260530-all-summary-val_random_popbin_seed42_stage2_itemease",
+      "id": "ygwpvm6t",
+      "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/ygwpvm6t"
+    },
+    {
+      "kind": "score_dir",
+      "score_dir": "artifacts/scores/val_random_sqrtpop_seed42_proto_htr",
+      "name": "20260530-all-summary-val_random_sqrtpop_seed42_proto_htr",
+      "id": "z4t2zsqt",
+      "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/z4t2zsqt"
+    },
+    {
+      "kind": "score_dir",
+      "score_dir": "artifacts/scores/val_random_sqrtpop_seed42_stage2_blend",
+      "name": "20260530-all-summary-val_random_sqrtpop_seed42_stage2_blend",
+      "id": "ox15hv3h",
+      "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/ox15hv3h"
+    },
+    {
+      "kind": "score_dir",
+      "score_dir": "artifacts/scores/val_random_sqrtpop_seed42_stage2_cf",
+      "name": "20260530-all-summary-val_random_sqrtpop_seed42_stage2_cf",
+      "id": "98z7q043",
+      "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/98z7q043"
+    },
+    {
+      "kind": "score_dir",
+      "score_dir": "artifacts/scores/val_random_sqrtpop_seed42_stage2_itemease",
+      "name": "20260530-all-summary-val_random_sqrtpop_seed42_stage2_itemease",
+      "id": "x1mfhaz7",
+      "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/x1mfhaz7"
+    },
+    {
+      "kind": "score_dir",
+      "score_dir": "artifacts/scores/val_random_uniform_seed42_proto",
+      "name": "20260530-all-summary-val_random_uniform_seed42_proto",
+      "id": "x5jl9uxa",
+      "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/x5jl9uxa"
+    },
+    {
+      "kind": "score_dir",
+      "score_dir": "artifacts/scores/val_recent_sqrtpop_seed42_stage2_blend",
+      "name": "20260530-all-summary-val_recent_sqrtpop_seed42_stage2_blend",
+      "id": "mdspq2fq",
+      "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/mdspq2fq"
+    },
+    {
+      "kind": "score_dir",
+      "score_dir": "artifacts/scores/val_recent_sqrtpop_seed42_stage2_cf",
+      "name": "20260530-all-summary-val_recent_sqrtpop_seed42_stage2_cf",
+      "id": "ceatm3el",
+      "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/ceatm3el"
+    },
+    {
+      "kind": "score_dir",
+      "score_dir": "artifacts/scores/val_recent_sqrtpop_seed42_stage2_itemease",
+      "name": "20260530-all-summary-val_recent_sqrtpop_seed42_stage2_itemease",
+      "id": "841gn6t5",
+      "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/841gn6t5"
+    }
+  ]
+}

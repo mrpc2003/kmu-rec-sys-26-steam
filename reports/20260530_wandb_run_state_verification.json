@@ -1,0 +1,173 @@
+[
+  {
+    "id": "j6bgvwk1",
+    "name": "20260530-wandb-setup-validation-splits",
+    "state": "finished",
+    "best_score_col": null,
+    "best_row_accuracy": null,
+    "artifact_mode": null,
+    "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/j6bgvwk1"
+  },
+  {
+    "id": "l9fen68z",
+    "name": "20260530-wandb-setup2-val_random_sqrtpop_seed42_proto",
+    "state": "finished",
+    "best_score_col": "score_ease_lambda1000",
+    "best_row_accuracy": 0.6463292658531706,
+    "artifact_mode": null,
+    "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/l9fen68z"
+  },
+  {
+    "id": "lz9xqxrj",
+    "name": "20260530-wandb-setup2-val_random_popbin_seed42_proto",
+    "state": "finished",
+    "best_score_col": "score_ease_lambda300",
+    "best_row_accuracy": 0.5630126025205041,
+    "artifact_mode": null,
+    "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/lz9xqxrj"
+  },
+  {
+    "id": "hlyd7idr",
+    "name": "20260530-wandb-setup2-val_recent_sqrtpop_seed42_proto",
+    "state": "finished",
+    "best_score_col": "score_itemknn_top3",
+    "best_row_accuracy": 0.6194238847769554,
+    "artifact_mode": null,
+    "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/hlyd7idr"
+  },
+  {
+    "id": "4ytpir0v",
+    "name": "20260530-wandb-setup2-test_pairs_full_train_proto",
+    "state": "finished",
+    "best_score_col": null,
+    "best_row_accuracy": null,
+    "artifact_mode": null,
+    "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/4ytpir0v"
+  },
+  {
+    "id": "rjz3713y",
+    "name": "20260530-all-summary-test_pairs_full_train_stage2_blend",
+    "state": "finished",
+    "best_score_col": null,
+    "best_row_accuracy": null,
+    "artifact_mode": "summary",
+    "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/rjz3713y"
+  },
+  {
+    "id": "nm05u48j",
+    "name": "20260530-all-summary-test_pairs_full_train_stage2_cf",
+    "state": "finished",
+    "best_score_col": null,
+    "best_row_accuracy": null,
+    "artifact_mode": "summary",
+    "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/nm05u48j"
+  },
+  {
+    "id": "l4wl5dnz",
+    "name": "20260530-all-summary-test_pairs_full_train_stage2_itemease",
+    "state": "finished",
+    "best_score_col": null,
+    "best_row_accuracy": null,
+    "artifact_mode": "summary",
+    "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/l4wl5dnz"
+  },
+  {
+    "id": "7oyc6ju7",
+    "name": "20260530-all-summary-val_random_popbin_seed42_stage2_blend",
+    "state": "finished",
+    "best_score_col": "score_blend_mean_z",
+    "best_row_accuracy": 0.5908181636327265,
+    "artifact_mode": "summary",
+    "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/7oyc6ju7"
+  },
+  {
+    "id": "q2pxuai7",
+    "name": "20260530-all-summary-val_random_popbin_seed42_stage2_cf",
+    "state": "finished",
+    "best_score_col": "score_als_f32_it30_alpha20",
+    "best_row_accuracy": 0.5817163432686537,
+    "artifact_mode": "summary",
+    "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/q2pxuai7"
+  },
+  {
+    "id": "ygwpvm6t",
+    "name": "20260530-all-summary-val_random_popbin_seed42_stage2_itemease",
+    "state": "finished",
+    "best_score_col": "score_itemknn_bm25_top3",
+    "best_row_accuracy": 0.5699139827965594,
+    "artifact_mode": "summary",
+    "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/ygwpvm6t"
+  },
+  {
+    "id": "z4t2zsqt",
+    "name": "20260530-all-summary-val_random_sqrtpop_seed42_proto_htr",
+    "state": "finished",
+    "best_score_col": "score_ease_lambda1000",
+    "best_row_accuracy": 0.6463292658531706,
+    "artifact_mode": "summary",
+    "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/z4t2zsqt"
+  },
+  {
+    "id": "ox15hv3h",
+    "name": "20260530-all-summary-val_random_sqrtpop_seed42_stage2_blend",
+    "state": "finished",
+    "best_score_col": "score_blend_mean_z",
+    "best_row_accuracy": 0.6597319463892779,
+    "artifact_mode": "summary",
+    "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/ox15hv3h"
+  },
+  {
+    "id": "98z7q043",
+    "name": "20260530-all-summary-val_random_sqrtpop_seed42_stage2_cf",
+    "state": "finished",
+    "best_score_col": "score_als_f32_it30_alpha20_popa2",
+    "best_row_accuracy": 0.6509301860372074,
+    "artifact_mode": "summary",
+    "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/98z7q043"
+  },
+  {
+    "id": "x1mfhaz7",
+    "name": "20260530-all-summary-val_random_sqrtpop_seed42_stage2_itemease",
+    "state": "finished",
+    "best_score_col": "score_itemknn_bm25_top3",
+    "best_row_accuracy": 0.6501300260052011,
+    "artifact_mode": "summary",
+    "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/x1mfhaz7"
+  },
+  {
+    "id": "x5jl9uxa",
+    "name": "20260530-all-summary-val_random_uniform_seed42_proto",
+    "state": "finished",
+    "best_score_col": "score_itemknn_sum",
+    "best_row_accuracy": 0.7406481296259252,
+    "artifact_mode": "summary",
+    "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/x5jl9uxa"
+  },
+  {
+    "id": "mdspq2fq",
+    "name": "20260530-all-summary-val_recent_sqrtpop_seed42_stage2_blend",
+    "state": "finished",
+    "best_score_col": "score_blend_mean_z",
+    "best_row_accuracy": 0.6260252050410082,
+    "artifact_mode": "summary",
+    "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/mdspq2fq"
+  },
+  {
+    "id": "ceatm3el",
+    "name": "20260530-all-summary-val_recent_sqrtpop_seed42_stage2_cf",
+    "state": "finished",
+    "best_score_col": "score_als_htr_f32_it30_alpha20_popa1",
+    "best_row_accuracy": 0.6149229845969194,
+    "artifact_mode": "summary",
+    "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/ceatm3el"
+  },
+  {
+    "id": "841gn6t5",
+    "name": "20260530-all-summary-val_recent_sqrtpop_seed42_stage2_itemease",
+    "state": "finished",
+    "best_score_col": "score_itemknn_bm25_top3",
+    "best_row_accuracy": 0.6228245649129825,
+    "artifact_mode": "summary",
+    "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/841gn6t5"
+  }
+]

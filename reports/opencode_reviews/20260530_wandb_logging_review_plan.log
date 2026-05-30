@@ -1,0 +1,11 @@
+[93m[1m! [0m agent "plan" is a subagent, not a primary agent. Falling back to default agent
+[0m
+> Sisyphus - Ultraworker · gpt-5.5
+[0m
+VERDICT: PASS
+
+- No API keys/tokens are read, printed, logged, or committed in the reviewed code/report.
+- W&B imports are lazy in the utility module, so core scripts can still run without W&B unless logging is requested.
+- Kaggle submission risk appears controlled: reviewed scripts write/log artifacts only and do not call Kaggle APIs.
+- Caution: `--wandb-artifact-mode full` / `--artifact-mode full` can upload `candidate_scores.csv` and `prediction_csv/*.csv` to W&B, including test prediction files. This is documented, default is safer `summary`, but use only intentionally.
+- Minor robustness risk: `summarize_prediction_dir()` reads every prediction CSV fully with pandas; large full-artifact/test directories may be slow or memory-heavy, but this is not a secret/no-submit violation.

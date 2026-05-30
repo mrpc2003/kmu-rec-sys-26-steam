@@ -1,0 +1,53 @@
+# Secrets / credentials
+.env
+*.env
+.netrc
+*.pem
+*.key
+*.token
+*.secret
+.kaggle/
+
+# Raw Kaggle / local data
+data/
+input/
+*.zip
+*.parquet
+*.feather
+*.h5
+*.hdf5
+
+# Large/generated experiment outputs
+artifacts/
+submissions/
+wandb_runs/
+wandb/
+.sisyphus/
+.cache/
+outputs/
+checkpoints/
+models/
+
+# Python/runtime caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# Generated large report tables kept local by default
+reports/deep_eda/*.csv
+
+# OS/editor noise
+.DS_Store
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# Logs that may include local runtime details; explicitly add reviewed logs if needed
+*.tmp
+*.bak
