@@ -1,0 +1,74 @@
+{
+  "seeds_used": [
+    42,
+    123,
+    2024,
+    7
+  ],
+  "mean_ensemble": 0.64293,
+  "mean_single_seed42": 0.63883,
+  "mean_gain": 0.0041,
+  "splits": {
+    "val_random_sqrtpop_seed42": {
+      "seeds_present": [
+        42,
+        123,
+        2024,
+        7
+      ],
+      "per_seed_acc": {
+        "score_seed42": 0.67483,
+        "score_seed123": 0.67984,
+        "score_seed2024": 0.67984,
+        "score_seed7": 0.67694
+      },
+      "ensemble_acc": 0.68274,
+      "single_seed42_ref": 0.67483,
+      "ens_vs_seed42": 0.00791
+    },
+    "val_recent_sqrtpop_seed42": {
+      "seeds_present": [
+        42,
+        123,
+        2024,
+        7
+      ],
+      "per_seed_acc": {
+        "score_seed42": 0.63963,
+        "score_seed123": 0.64083,
+        "score_seed2024": 0.63973,
+        "score_seed7": 0.63773
+      },
+      "ensemble_acc": 0.64073,
+      "single_seed42_ref": 0.63963,
+      "ens_vs_seed42": 0.0011
+    },
+    "val_random_popbin_seed42": {
+      "seeds_present": [
+        42,
+        123,
+        2024,
+        7
+      ],
+      "per_seed_acc": {
+        "score_seed42": 0.60202,
+        "score_seed123": 0.60392,
+        "score_seed2024": 0.60182,
+        "score_seed7": 0.60452
+      },
+      "ensemble_acc": 0.60532,
+      "single_seed42_ref": 0.60202,
+      "ens_vs_seed42": 0.0033
+    }
+  },
+  "test_candidate": {
+    "file": "/opt/data/kaggle/kmu-rec-sys-26-steam/artifacts/lightgcn_seed_ensemble/test_candidate/candidate_lightgcn_seed_ens.csv",
+    "sha256": "dcc578de495f98133d1cbccfcb53a156f7d1f46973f571164b6ec90605d937f7",
+    "rows": 19998,
+    "label_1": 9999,
+    "label_0": 9999,
+    "bad_users": 0,
+    "rowdiff_vs_single_lgcn": 1176,
+    "rowdiff_frac": 0.0588
+  }
+}
