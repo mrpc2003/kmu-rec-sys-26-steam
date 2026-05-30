@@ -6,14 +6,23 @@ Kaggle [`kmu-rec-sys-26-steam`](https://www.kaggle.com/competitions/kmu-rec-sys-
 
 ## 대회 요약
 
-- Task: Steam 유저-게임 pair에 대해 `played` 여부를 예측하는 이진 추천 문제
-- 제출 형식: `ID,Label`
+자세한 대회 설명·제출/윤리 규칙·재현성 기준은 [`docs/competition_brief_and_rules.md`](docs/competition_brief_and_rules.md)에 정리합니다.
+
+- Task: Steam 리뷰 데이터 기반 `userID, gameID` pair의 `played` 여부를 예측하는 이진 추천 문제
+- Train data: `data/train.json`에 약 **175,000건**의 리뷰가 있으며, 각 인스턴스는 `userID`, `gameID`, `text`, `date`, `hours`, `hours_transformed=log2(1+hours)` 필드를 포함합니다.
+- Test pairs: 대회 설명상 `pairs_Played.csv`, 현재 로컬 파일명은 `data/pairs.csv`입니다. 각 row의 `userID, gameID`에 대해 played 예측값을 제출합니다.
+- 제출 형식: `ID,Label`, `Label ∈ {0,1}`
+- 평가 지표: Accuracy. 테스트셋은 played/non-played가 **정확히 1:1**이며, Public LB는 테스트셋 절반만 반영하고 전체 점수는 대회 종료 후 공개됩니다.
+- Baseline: `baseline.py`는 user 무관 popularity baseline, `baseline_bpr.py`는 popularity + BPR baseline입니다.
 - 현재 로컬 관찰: `pairs.csv`의 각 user 후보 수가 짝수이고, 후보별 상위 절반을 `Label=1`로 내는 top-half ranking 제출이 자연스럽습니다.
 - 주요 검증 전략: 실제 test 구조를 반영하기 위해 user 단위 후보군을 유지하고, unseen negative sampling은 uniform보다 `sqrt(popularity)`/pop-bin이 더 현실적인 surrogate로 취급합니다.
 
 ## 현재 작업 원칙
 
-- Kaggle 제출은 사용자 명시 승인 후 **한 번씩만** 수행합니다.
+- Kaggle 제출은 사용자 명시 승인 후 **한 파일씩만** 수행합니다.
+- Steam 리뷰 직접 수집, 리버스엔지니어링, hidden label 외부 획득, private test 역추적 등은 금지합니다.
+- 공개되어 누구나 사용할 수 있는 pretrained 모델은 사용할 수 있으나, 사용 근거와 재현 조건을 기록합니다.
+- 최종 선택 가능한 제출은 2개이며, 선택한 제출은 eCampus에 동일 결과 재현 코드/조건/실행 절차를 제출해야 하므로 후보 CSV SHA256, 생성 명령, seed, 데이터 fingerprint, 환경, Git 상태를 기록합니다.
 - validation 우선으로 실험하고, W&B에는 `no-submit` tag를 유지합니다.
 - 기본 W&B artifact mode는 `summary`입니다. 큰 CSV 업로드가 필요할 때만 `full`을 명시합니다.
 - raw data와 생성 캐시는 `.gitignore`로 제외합니다.
@@ -23,6 +32,7 @@ Kaggle [`kmu-rec-sys-26-steam`](https://www.kaggle.com/competitions/kmu-rec-sys-
 
 | 경로 | 내용 | Git |
 |---|---|---|
+| `docs/` | 대회 설명, 운영/윤리/재현성 규칙 | tracked |
 | `scripts/` | validation split, scoring, blending, W&B logging, EDA 스크립트 | tracked |
 | `reports/` | EDA/validation/W&B/OpenCode/제출 preflight 리포트 | tracked, 단 대용량 CSV preview 일부 제외 |
 | `data/` | 로컬 Kaggle 원본 데이터 | ignored |
