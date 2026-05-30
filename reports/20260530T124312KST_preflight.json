@@ -1,0 +1,97 @@
+{
+  "timestamp_kst": "20260530T124312KST",
+  "competition": "kmu-rec-sys-26-steam",
+  "candidate": "artifacts/scores/test_pairs_full_train_stage2_blend/prediction_csv/candidate_score_blend_mean_z.csv",
+  "sha256": "5f93cf1be4066c1bb28dac846a0ba3849807b01e367dd9ca810a73146d458d34",
+  "rows": 19998,
+  "columns": [
+    "ID",
+    "Label"
+  ],
+  "label_counts": {
+    "0": 9999,
+    "1": 9999
+  },
+  "users": 4737,
+  "per_user_tophalf_bad_users": 0,
+  "diff_vs_played_bpr_rows": 3566,
+  "diff_vs_played_baseline_rows": 4876,
+  "pre_submissions_csv": "reports/20260530T124312KST_pre_submissions.csv",
+  "pre_submissions_stderr": "",
+  "live_submission_rows_parsed": 0,
+  "quota_count_complete_or_pending_today_utc": 0,
+  "checks": [
+    {
+      "name": "candidate_exists",
+      "ok": true,
+      "detail": "artifacts/scores/test_pairs_full_train_stage2_blend/prediction_csv/candidate_score_blend_mean_z.csv"
+    },
+    {
+      "name": "columns_exact",
+      "ok": true,
+      "detail": [
+        "ID",
+        "Label"
+      ]
+    },
+    {
+      "name": "row_count_expected",
+      "ok": true,
+      "detail": 19998
+    },
+    {
+      "name": "ids_unique",
+      "ok": true,
+      "detail": "unique=19998 rows=19998"
+    },
+    {
+      "name": "ids_contiguous_and_ordered",
+      "ok": true,
+      "detail": "first=[0, 1, 2] last=[19995, 19996, 19997]"
+    },
+    {
+      "name": "labels_binary",
+      "ok": true,
+      "detail": [
+        0,
+        1
+      ]
+    },
+    {
+      "name": "no_nan_inf_labels",
+      "ok": true,
+      "detail": "labels parsed as integer 0/1"
+    },
+    {
+      "name": "balanced_labels",
+      "ok": true,
+      "detail": "label1=9999 label0=9999"
+    },
+    {
+      "name": "pairs_row_count_match",
+      "ok": true,
+      "detail": "pairs=19998 cand=19998"
+    },
+    {
+      "name": "pairs_id_order_match",
+      "ok": true,
+      "detail": "candidate ID order matches pairs.csv"
+    },
+    {
+      "name": "per_user_tophalf",
+      "ok": true,
+      "detail": "users=4737 bad_users=0"
+    },
+    {
+      "name": "not_previously_submitted_filename",
+      "ok": true,
+      "detail": "candidate_name=candidate_score_blend_mean_z.csv live_rows=0"
+    },
+    {
+      "name": "daily_quota_available",
+      "ok": true,
+      "detail": "counted_complete_or_pending_rows=0/5; no submissions found=True"
+    }
+  ],
+  "preflight_passed": true
+}

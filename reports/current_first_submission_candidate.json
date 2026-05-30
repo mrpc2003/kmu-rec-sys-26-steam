@@ -1,0 +1,50 @@
+{
+  "candidate_path": "artifacts/scores/test_pairs_full_train_stage2_blend/prediction_csv/candidate_score_blend_mean_z.csv",
+  "candidate_sha256": "5f93cf1be4066c1bb28dac846a0ba3849807b01e367dd9ca810a73146d458d34",
+  "candidate_rows": 19998,
+  "candidate_label1": 9999,
+  "candidate_label0": 9999,
+  "candidate_id_contiguous": true,
+  "candidate_per_user_tophalf_bad_users": 0,
+  "diff_vs_bpr_rows": 3566,
+  "diff_vs_popularity_rows": 4876,
+  "validation_rows": [
+    [
+      "Random sqrt-pop / Stage2 blend",
+      "score_blend_mean_z",
+      0.6597319463892779,
+      0.6754207608442806
+    ],
+    [
+      "Random sqrt-pop / ItemKNN+EASE",
+      "score_itemknn_bm25_top3",
+      0.6501300260052011,
+      0.6679365904797648
+    ],
+    [
+      "Random sqrt-pop / ALS CF",
+      "score_als_f32_it30_alpha20_popa2",
+      0.6509301860372074,
+      0.6702081726444391
+    ],
+    [
+      "Recent holdout / Stage2 blend",
+      "score_blend_mean_z",
+      0.6260252050410082,
+      0.6299619700832695
+    ],
+    [
+      "Random pop-bin / Stage2 blend",
+      "score_blend_mean_z",
+      0.5908181636327265,
+      0.6061714291257877
+    ],
+    [
+      "Random uniform / Proto",
+      "score_itemknn_sum",
+      0.7406481296259252,
+      0.7643310930934286
+    ]
+  ],
+  "generated_at_kst": "2026-05-30T12:42:05+09:00"
+}

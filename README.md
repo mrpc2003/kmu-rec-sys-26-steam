@@ -1,25 +1,69 @@
 # KMU RecSys 26 Steam
 
-Kaggle `kmu-rec-sys-26-steam` 추천시스템 대회 작업 저장소입니다.
+Kaggle [`kmu-rec-sys-26-steam`](https://www.kaggle.com/competitions/kmu-rec-sys-26-steam) 추천시스템 대회 작업 저장소입니다.
 
-이 저장소는 **코드, 검증 리포트, 실험 추적 설정**을 보관합니다. 원본 Kaggle 데이터, 대용량 score/artifact, W&B local run blob, 제출 후보 CSV, credential은 커밋하지 않습니다.
+이 저장소는 **재현 가능한 코드, 검증 리포트, 실험 추적 설정, 공개 가능한 요약 산출물**만 보관합니다. 원본 Kaggle 데이터, 대용량 score/artifact, W&B local run blob, 제출 후보 CSV, credential은 커밋하지 않습니다.
+
+## 대회 요약
+
+- Task: Steam 유저-게임 pair에 대해 `played` 여부를 예측하는 이진 추천 문제
+- 제출 형식: `ID,Label`
+- 현재 로컬 관찰: `pairs.csv`의 각 user 후보 수가 짝수이고, 후보별 상위 절반을 `Label=1`로 내는 top-half ranking 제출이 자연스럽습니다.
+- 주요 검증 전략: 실제 test 구조를 반영하기 위해 user 단위 후보군을 유지하고, unseen negative sampling은 uniform보다 `sqrt(popularity)`/pop-bin이 더 현실적인 surrogate로 취급합니다.
 
 ## 현재 작업 원칙
 
-- Kaggle 제출은 사용자 명시 승인 전 금지합니다.
+- Kaggle 제출은 사용자 명시 승인 후 **한 번씩만** 수행합니다.
 - validation 우선으로 실험하고, W&B에는 `no-submit` tag를 유지합니다.
 - 기본 W&B artifact mode는 `summary`입니다. 큰 CSV 업로드가 필요할 때만 `full`을 명시합니다.
 - raw data와 생성 캐시는 `.gitignore`로 제외합니다.
+- GitHub에는 코드/리포트 중심으로 올리고, `data/`, `artifacts/`, `submissions/`, `wandb_runs/`는 로컬 전용으로 유지합니다.
 
 ## 주요 디렉터리
 
-| 경로 | 내용 |
-|---|---|
-| `scripts/` | validation split, scoring, blending, W&B logging, EDA 스크립트 |
-| `reports/` | EDA/validation/W&B/OpenCode 검증 리포트 |
-| `data/` | 로컬 Kaggle 원본 데이터. Git 제외 |
-| `artifacts/` | 로컬 score/artifact 산출물. Git 제외 |
-| `wandb_runs/` | W&B local cache/run blobs. Git 제외 |
+| 경로 | 내용 | Git |
+|---|---|---|
+| `scripts/` | validation split, scoring, blending, W&B logging, EDA 스크립트 | tracked |
+| `reports/` | EDA/validation/W&B/OpenCode/제출 preflight 리포트 | tracked, 단 대용량 CSV preview 일부 제외 |
+| `data/` | 로컬 Kaggle 원본 데이터 | ignored |
+| `artifacts/` | 로컬 score/artifact 산출물 | ignored |
+| `submissions/` | 수동 제출용 CSV 보관 위치 | ignored |
+| `wandb_runs/` | W&B local cache/run blobs | ignored |
+
+## 현재 검증 결과 요약
+
+Stage2 기준으로 ItemKNN BM25, EASE, ALS CF score를 만들고, user별 후보군 안에서 score ranking을 top-half `Label=1`로 변환했습니다. 현재 첫 제출 후보는 validation surrogate에서 가장 안정적으로 높은 `score_blend_mean_z`입니다.
+
+| 검증 split / family | best score column | row accuracy | per-user mean accuracy |
+|---|---:|---:|---:|
+| Random sqrt-pop / Stage2 blend | `score_blend_mean_z` | 0.659732 | 0.675421 |
+| Random sqrt-pop / ItemKNN+EASE | `score_itemknn_bm25_top3` | 0.650130 | 0.667937 |
+| Random sqrt-pop / ALS CF | `score_als_f32_it30_alpha20_popa2` | 0.650930 | 0.670208 |
+| Recent holdout / Stage2 blend | `score_blend_mean_z` | 0.626025 | 0.629962 |
+| Random pop-bin / Stage2 blend | `score_blend_mean_z` | 0.590818 | 0.606171 |
+| Random uniform / Proto | `score_itemknn_sum` | 0.740648 | 0.764331 |
+
+Uniform split 점수가 높게 나오는 것은 test negative 구조와 다를 가능성이 있어, 실제 제출 판단에서는 `sqrt-pop`/recent 계열을 더 중시합니다.
+
+## 첫 제출 후보
+
+- 후보 파일: `artifacts/scores/test_pairs_full_train_stage2_blend/prediction_csv/candidate_score_blend_mean_z.csv`
+- SHA256: `5f93cf1be4066c1bb28dac846a0ba3849807b01e367dd9ca810a73146d458d34`
+- 행 수: `19,998`
+- 컬럼: `ID,Label`
+- Label 분포: `0=9,999`, `1=9,999`
+- ID: `0..19997` 연속
+- User별 top-half 제약 위반: `0` users
+- 공식 `played_bpr.csv` 대비 다른 행: `3,566`
+- 공식 popularity baseline 대비 다른 행: `4,876`
+
+## 제출 기록
+
+| KST timestamp | submitted file | public score | status | report |
+|---|---|---:|---|---|
+| `20260530T124312KST` | `candidate_score_blend_mean_z.csv` | **0.74594** | `SubmissionStatus.COMPLETE` | `reports/20260530T124312KST_submission_analysis.md` |
+
+첫 제출 결과는 random sqrt-pop validation surrogate `0.659732`보다 높게 나왔습니다. 따라서 다음 단계는 단순 popularity/BPR 재제출보다, 현재 public anchor를 기준으로 같은 top-half ranking 제약을 유지하면서 blend/sequence/graph 계열을 재검증하는 방향이 좋습니다.
 
 ## W&B
 
@@ -58,6 +102,26 @@ env -u VIRTUAL_ENV UV_NO_ACTIVE_VENV=1 \
     --wandb \
     --wandb-tags validation,stage2,no-submit \
     --wandb-artifact-mode summary
+```
+
+## 제출 preflight 예시
+
+```bash
+cd /opt/data/kaggle/kmu-rec-sys-26-steam
+export HOME=/opt/data/home
+
+python3 - <<'PY'
+import csv
+from pathlib import Path
+p = Path('artifacts/scores/test_pairs_full_train_stage2_blend/prediction_csv/candidate_score_blend_mean_z.csv')
+with p.open(newline='') as f:
+    rows = list(csv.DictReader(f))
+assert rows and list(rows[0].keys()) == ['ID', 'Label']
+assert len(rows) == 19998
+assert [int(r['ID']) for r in rows] == list(range(len(rows)))
+assert {int(r['Label']) for r in rows} <= {0, 1}
+print('ok')
+PY
 ```
 
 ## 보안/업로드 제외

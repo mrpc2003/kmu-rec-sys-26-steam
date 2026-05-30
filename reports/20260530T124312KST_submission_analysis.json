@@ -1,0 +1,17 @@
+{
+  "timestamp_kst": "20260530T124312KST",
+  "competition": "kmu-rec-sys-26-steam",
+  "submitted_file": "candidate_score_blend_mean_z.csv",
+  "submitted_at_utc": "2026-05-30 03:44:14.063000",
+  "description": "first stage2 mean-z blend: itemknn_bm25_top3 + ease1000 + als_popa2; sqrtpop val row_acc 0.659732",
+  "status": "SubmissionStatus.COMPLETE",
+  "public_score": 0.74594,
+  "private_score": null,
+  "candidate_path": "artifacts/scores/test_pairs_full_train_stage2_blend/prediction_csv/candidate_score_blend_mean_z.csv",
+  "candidate_sha256": "5f93cf1be4066c1bb28dac846a0ba3849807b01e367dd9ca810a73146d458d34",
+  "validation_row_accuracy_point": 0.6597319463892779,
+  "public_minus_validation_accuracy": 0.08620805361072215,
+  "quota_used_this_session": 1,
+  "submission_stdout": "Successfully submitted to KMURecSys26_Steam",
+  "submission_stderr_summary": "upload progress only"
+}

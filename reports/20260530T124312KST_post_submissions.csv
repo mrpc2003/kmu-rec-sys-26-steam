@@ -1,0 +1,2 @@
+fileName,date,description,status,publicScore,privateScore
+candidate_score_blend_mean_z.csv,2026-05-30 03:44:14.063000,first stage2 mean-z blend: itemknn_bm25_top3 + ease1000 + als_popa2; sqrtpop val row_acc 0.659732,SubmissionStatus.COMPLETE,0.74594,
