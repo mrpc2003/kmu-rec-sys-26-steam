@@ -14,6 +14,12 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
+# Eager-import pandas' CSV writer so a long training run followed by a concurrent to_csv()
+# across parallel workers cannot hit a lazy-import race (observed:
+# ModuleNotFoundError: No module named 'pandas.io.formats.csvs' when 3 workers finish together).
+import pandas  # noqa: F401
+import pandas.io.formats.csvs  # noqa: F401
+
 ROOT = Path("/opt/data/kaggle/kmu-rec-sys-26-steam")
 import sys
 sys.path.insert(0, str(ROOT / "scripts"))
