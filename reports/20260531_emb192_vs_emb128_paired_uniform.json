@@ -1,0 +1,20 @@
+{
+  "note": "Paired emb192 vs emb128 4-seed ensemble on uniform split. No submission.",
+  "split": "val_random_uniform_seed42",
+  "rows": 19996,
+  "decode_row_acc_emb128": 0.76505,
+  "decode_row_acc_emb192": 0.76615,
+  "disagree_rows": 660,
+  "disagree_frac": 0.033,
+  "mcnemar": {
+    "emb192_right_emb128_wrong": 341,
+    "emb128_right_emb192_wrong": 319,
+    "both_right": 14979,
+    "both_wrong": 4357,
+    "discordant_pairs": 660,
+    "net_emb192_minus_emb128": 22,
+    "p_two_sided": 0.41371
+  },
+  "tier": "POSITIVE_NOT_SIGNIFICANT",
+  "verdict": "emb192 wins 341 vs 319 on discordant rows (net +22), but McNemar p=0.4137 >= 0.05 -> directionally positive yet NOT statistically significant. The +0.0011 edge is within paired noise; a submission is a low-confidence bet (real downside risk it lands <= 0.77745)."
+}
