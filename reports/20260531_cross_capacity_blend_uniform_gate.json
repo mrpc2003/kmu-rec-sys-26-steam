@@ -1,0 +1,22 @@
+{
+  "note": "Cross-capacity emb128+emb192 blend uniform gate + paired McNemar. No submission.",
+  "split": "val_random_uniform_seed42",
+  "rows": 19996,
+  "emb128_ens_uniform": 0.76505,
+  "emb192_ens_uniform": 0.76615,
+  "corr_withinuser_z_128_192": 0.9864,
+  "blend_z_uniform": 0.76545,
+  "blend_raw8_uniform": 0.76555,
+  "emb128_ens_ref": 0.76505,
+  "blend_vs_ref": 0.0004,
+  "noise": 0.0007,
+  "mcnemar": {
+    "blend_right_emb128_wrong": 157,
+    "emb128_right_blend_wrong": 149,
+    "discordant": 306,
+    "p_two_sided": 0.6891,
+    "decode_disagree_rows": 306
+  },
+  "tier": "NO_GAIN",
+  "verdict": "blend_z 0.76545 vs ref 0.76505 = +0.00040 (<= noise). corr_z(128,192)=0.986; cross-capacity blend gives no uniform gain. Keep emb128 4-seed (public 0.77745)."
+}
