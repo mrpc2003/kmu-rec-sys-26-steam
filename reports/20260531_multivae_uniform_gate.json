@@ -1,0 +1,16 @@
+{
+  "note": "MultiVAE latent-VAE reconstruction CF uniform gate. No submission.",
+  "split": "val_random_uniform_seed42",
+  "rows": 19996,
+  "tag": "multivae_h600_z200_d0.5_beta0.2_seed42",
+  "train_seconds": 28.7,
+  "solo_uniform": 0.72995,
+  "corr_withinuser_z": 0.798,
+  "blend50_uniform": 0.75655,
+  "emb128_ens_ref": 0.76505,
+  "blend50_vs_ref": -0.0085,
+  "pop_floor": 0.684,
+  "noise": 0.0007,
+  "tier": "REDUNDANT",
+  "verdict": "solo 0.72995 (>=floor), corr_z 0.798, blend 0.75655 vs ref -0.00850 within/under noise -> redundant with backbone (like EASE), no new axis."
+}

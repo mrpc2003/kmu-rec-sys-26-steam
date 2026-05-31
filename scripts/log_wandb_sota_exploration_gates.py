@@ -27,6 +27,7 @@ GATES = [
     ("gate-turbocf-graph-filter", "reports/20260531_turbocf_uniform_gate.json", "graph-filter-cf-gate"),
     ("gate-alpharec-lm-rep", "reports/20260531_alpharec_core_uniform_gate.json", "lm-rep-cf-gate"),
     ("gate-dns-hard-negative", "reports/20260531_dns_uniform_gate.json", "hard-negative-gate"),
+    ("gate-multivae-latent-vae", "reports/20260531_multivae_uniform_gate.json", "latent-vae-cf-gate"),
 ]
 
 
