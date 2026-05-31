@@ -1,0 +1,28 @@
+{
+  "runs": [
+    {
+      "name": "gate-xsimgcl-noise-cl",
+      "id": "lzrkoixf",
+      "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/lzrkoixf",
+      "tier": "TIED_OR_WEAK"
+    },
+    {
+      "name": "gate-turbocf-graph-filter",
+      "id": "01kmz3h1",
+      "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/01kmz3h1",
+      "tier": "REDUNDANT"
+    },
+    {
+      "name": "gate-alpharec-lm-rep",
+      "id": "st76xxf5",
+      "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/st76xxf5",
+      "tier": "REJECT_WEAK"
+    },
+    {
+      "name": "gate-dns-hard-negative",
+      "id": "guwyr31v",
+      "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/guwyr31v",
+      "tier": "TIED_ENSEMBLE_LEVEL"
+    }
+  ]
+}

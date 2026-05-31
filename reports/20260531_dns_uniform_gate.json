@@ -1,0 +1,38 @@
+{
+  "note": "DNS pool-sweep uniform gate (emb128 L4 reg1e-3). No submission.",
+  "split": "val_random_uniform_seed42",
+  "emb128_ens_ref": 0.76505,
+  "single_seed_ref": 0.762,
+  "noise": 0.0007,
+  "control_pool1": 0.76565,
+  "results": [
+    {
+      "pool": 1,
+      "uniform_acc": 0.76565,
+      "train_s": 1044.6
+    },
+    {
+      "pool": 8,
+      "uniform_acc": 0.67734,
+      "train_s": 1051.7
+    },
+    {
+      "pool": 16,
+      "uniform_acc": 0.65243,
+      "train_s": 1029.8
+    },
+    {
+      "pool": 32,
+      "uniform_acc": 0.62633,
+      "train_s": 1054.3
+    }
+  ],
+  "best": {
+    "pool": 1,
+    "uniform_acc": 0.76565,
+    "vs_ens_ref": 0.0006
+  },
+  "missing": [],
+  "tier": "TIED_ENSEMBLE_LEVEL",
+  "verdict": "DNS pool=1 single model 0.76565 ~ emb128 4-seed ensemble 0.76505 (Δ+0.00060); a SINGLE DNS model matching a 4-seed ensemble is promising -> a DNS seed ensemble may exceed it; consider escalation."
+}
