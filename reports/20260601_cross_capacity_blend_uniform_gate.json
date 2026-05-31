@@ -1,0 +1,16 @@
+{
+  "note": "cross-capacity emb128(+)emb192 blend uniform gate. No submission.",
+  "split": "val_random_uniform_seed42",
+  "rows": 19996,
+  "emb128_4seed_uniform": 0.76505,
+  "emb192_4seed_uniform": 0.76615,
+  "ref_emb128": 0.76505,
+  "blend_raw_uniform": 0.76555,
+  "blend_z_uniform": 0.76545,
+  "delta_raw_vs_ref": 0.0005,
+  "delta_z_vs_ref": 0.0004,
+  "delta_best_vs_ref": 0.0005,
+  "noise_band": 0.0007,
+  "tier": "TIED",
+  "verdict": "blend best 0.76555 vs ref = +0.00050, within noise 0.0007 -> saturated, no clear gain"
+}
