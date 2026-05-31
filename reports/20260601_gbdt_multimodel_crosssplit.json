@@ -1,0 +1,38 @@
+{
+  "note": "Multi-model GBDT (lightgcn+itemknn+ease+pop) cross-split. User-requested model collaboration. No submission.",
+  "train_splits": [
+    "val_random_uniform_seed123",
+    "val_random_uniform_seed7"
+  ],
+  "eval_split": "val_random_uniform_seed42",
+  "features": [
+    "lightgcn",
+    "score_itemknn_top3",
+    "score_ease_lambda300",
+    "score_pop_log",
+    "z_lightgcn",
+    "z_score_itemknn_top3",
+    "z_score_ease_lambda300",
+    "z_score_pop_log"
+  ],
+  "gbdt_solo_acc": 0.76515,
+  "lightgcn_solo_on_eval": 0.76505,
+  "gbdt_minus_lightgcn": 0.0001,
+  "corr_z_gbdt_vs_lightgcn": 0.9681,
+  "eq_blend_acc": 0.76515,
+  "eq_blend_minus_ref": 0.0001,
+  "emb128_ref": 0.76505,
+  "floor": 0.684,
+  "noise": 0.0007,
+  "feature_importance_gain": {
+    "z_lightgcn": 83299,
+    "lightgcn": 32322,
+    "z_score_pop_log": 12448,
+    "z_score_itemknn_top3": 10524,
+    "z_score_ease_lambda300": 6949,
+    "score_itemknn_top3": 5909,
+    "score_pop_log": 5623,
+    "score_ease_lambda300": 5070
+  },
+  "tier": "REDUNDANT"
+}
