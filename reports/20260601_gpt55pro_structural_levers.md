@@ -152,3 +152,44 @@ residual z_i는 **item-level marginal** 신호("item i는 전역적으로 hidden
 uniform 게이트를 통과하지 못했다. 이는 단일 모델 패밀리의 포화를 넘어,
 **이 대회 데이터 구조 자체가 (graph co-occurrence 외의) 추가 신호원을 거의 담고 있지 않다**는
 직접 증거다. 남은 유효 후보군이 구조적으로 매우 좁다.
+
+---
+
+## 캡스톤: Gate-floor bootstrap 분석 — 모든 게이트의 통계적 바닥 검증
+
+지금까지 모든 후보는 단일 uniform split + noise band 0.0007로 게이트됐다. 그 split의
+**고유 표본분산**을 처음으로 측정했다 (CPU-only, 학습 없음, 제출 없음).
+
+### PART A — 단일 모델 절대정확도 부트스트랩 (user 재표집, B=2000)
+- base emb128 4-seed: mean 0.76505, SE **0.00367**, 95%CI [0.75784, 0.77204], 반폭 **0.00710**
+- 해석: 절대 정확도는 ±0.007 이하로 못 좁힌다. **단, 게이트는 절대값이 아니라 paired 비교를 쓰므로 이것이 게이트를 무효화하지 않음.**
+
+### PART B — paired Δ 부트스트랩 (실제 emb128−emb64 예시, 동일 user 재표집)
+- point Δ=+0.00360, **paired-SE=0.00181**, 95%CI [+0.00000, +0.00712], **MDE ≈ 0.00355**
+- paired-SE가 절대 SE의 절반 → between-user 분산 상쇄. **이것이 줄곧 McNemar(paired)를 쓴 이유의 직접 입증.**
+- **판정 GATE_BLUNT:** 게이트 임계 0.003이 paired noise floor(MDE 0.00355) **안에** 있다.
+  진짜 +0.003급 효과조차 단일 split에선 noise와 구분 불가.
+  - 우리가 "깨끗한 monotone gain"이라 본 emb64→emb128(+0.0036)조차 단일 split CI 하한이 0을 건드림
+    (실제론 진짜 이득: public 0.77125→0.77745, +0.0062 전이 확인).
+  - emb192 McNemar p=0.41이 "동전던지기"로 나온 것도 이 floor로 설명됨(효과가 진짜 null).
+
+### PART C — 경계 오류 환원가능성 (정직한 분해)
+rank-K_u(마지막 선택) vs rank-K_u+1(첫 탈락) 경계쌍 n=4037, 이 쌍들에서 base 정확도 0.7615.
+"어느 쪽이 positive인가"를 covariate diff로 분리:
+| covariate | AUC | 해석 |
+|---|---|---|
+| date overlap (d_ov) | **0.510** | 신규 직교축인데 **경계에서 무신호** (temporal closure 재확인) |
+| item popularity (d_pop) | 0.664 | 유일한 비자명 신호이나 **이미 −0.0195로 닫은 popularity trap** |
+| model score gap (d_score) | 0.741 | 모델 자기신호 = 순환적, 새 축 아님 |
+- **판정: 신규 직교 covariate(date)로 경계 오류 환원 불가 = 구조적 천장.**
+  유일한 above-chance 신호는 public surrogate에서 실패가 입증된 popularity trap뿐.
+
+### 결론 & 미래 인프라
+1. **이번 세션 closure는 전부 견고함** — 모든 음성이 0(subset)이거나 큰 음수라 blunt-gate "애매 구간"(+0.001~0.003)에 없음. 거짓 음성 피해자 0건.
+2. **미래 진짜 +0.003급 후보는 단일 split으로 게이트 불가** → uniform seed {42, 7, 123} **3-split 패널**로
+   재검증해 paired-SE를 √3배(→~0.001) 축소해야 함. 이 split들은 빌드 완료(`val_random_uniform_seed{7,123}`).
+3. 76.5% 천장은 public 전이 가능한 직교 정보의 한계. 더 올리려면 새 정보원이 필요한데 데이터에 없음.
+
+## 트랙 4: hours confidence-weighted LightGCN
+
+(4×V100 병렬 실측 결과 — 아래 갱신)
