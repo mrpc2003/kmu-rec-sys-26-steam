@@ -1,0 +1,23 @@
+{
+  "submission": "emb128_L4_reg1e-3 8-seed ensemble (raw-mean, per-user top-half)",
+  "public_score": 0.77625,
+  "ref_emb128_4seed_public": 0.77745,
+  "delta_vs_emb128_4seed": -0.0012,
+  "uniform_gate": "TIED (8seed 0.76465 vs 4seed 0.76505, Δ=-0.0004, within noise 0.0007)",
+  "rowdiff_vs_emb128_4seed": 222,
+  "rowdiff_frac": 0.0111,
+  "interpretation": "8-seed scored LOWER on public (-0.00120), consistent with its slightly-lower uniform surrogate (-0.0004). Sign preserved (negative->negative), magnitude amplified ~3x. Pure seed-variance reduction did NOT help: the 4-seed ensemble already averages out seed noise, and adding 4 more seeds only pulled predictions toward the per-seed mean, which on this particular public half-set is marginally worse than the 4-seed mean.",
+  "cross_submission_lesson": {
+    "cross_capacity_blend": {"uniform_delta": 0.0005, "public_delta": -0.0003, "sign": "FLIPPED"},
+    "eight_seed": {"uniform_delta": -0.0004, "public_delta": -0.0012, "sign": "PRESERVED"},
+    "conclusion": "Sub-MDE uniform deltas (|Δ|<0.0007) do NOT reliably predict public sign: one flipped, one preserved. Confirms the within-noise band is genuinely uninformative for ranking candidates. Only deltas >= MDE (0.00355) on a 3-split panel should be trusted."
+  },
+  "today_quota_slate": {
+    "emb128_4seed": 0.77745,
+    "emb192_4seed": 0.77715,
+    "cross_capacity_blend_128_192": 0.77715,
+    "eight_seed_expansion": 0.77625,
+    "verdict": "All 3 of today's reads (emb192, cross-cap, 8-seed) scored AT or BELOW emb128 4-seed (0.77745). emb128 4-seed remains the undisputed final #1. No validated candidate beats it."
+  },
+  "no_further_validated_candidate": true
+}
