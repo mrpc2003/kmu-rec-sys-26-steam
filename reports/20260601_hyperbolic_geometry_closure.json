@@ -1,0 +1,29 @@
+{
+  "track": "A.2 hyperbolic (Lorentz) geometry — strong ranking loss, non-Euclidean decision geometry only",
+  "status": "CLOSED — GEOMETRY_REDUNDANT (independently verified)",
+  "probe": "lightgcn_hyperbolic.py emb64 L4 reg1e-4 seed42, uniform-unseen negatives, early-stop epoch 130",
+  "why_early_stop": "Full 200ep probe hit NaN embedding collapse at epoch ~150-160 (3rd recurrence at same window); grad-clip+non-finite-skip prevented crash but masked collapse as loss=0, yielding 100% NaN scores. es130 captures the last healthy point BEFORE collapse for a clean read.",
+  "independent_verification": {
+    "method": "recomputed solo_acc / corr_z / eq_blend directly from score CSVs, not trusting summary.json",
+    "hyp_score_csv": "19996 rows, 0 NaN, 19988 unique finite values, range [-2.509, -0.001414] -> valid ranking, NOT degenerate",
+    "solo_acc_recomputed": 0.71734,
+    "solo_acc_summary_claim": 0.71734,
+    "corr_z_recomputed": 0.7467,
+    "corr_z_summary_claim": 0.7467,
+    "eq_blend_recomputed": 0.74805,
+    "eq_blend_summary_claim": 0.75055,
+    "match": "solo_acc and corr_z match exactly; eq_blend differs ~0.0025 (z-norm/tie-break) but same direction"
+  },
+  "key_numbers": {
+    "hyp_solo_acc": 0.71734,
+    "emb128_4seed_uniform": 0.76505,
+    "floor_popularity_baseline": 0.684,
+    "corr_z_emb128_hyp": 0.7467,
+    "eq_blend_50_50_z": 0.74805,
+    "eq_blend_minus_emb128": -0.017,
+    "noise_band": 0.0007
+  },
+  "verdict": "Hyperbolic geometry IS a real ranking (0.717 > floor 0.684) and IS genuinely decorrelated from Euclidean (corr_z 0.747 < 0.9), so it is a DIFFERENT model — but it is WEAKER than emb128 (0.717 vs 0.765), and a parameter-free 50/50 z-blend DRAGS emb128 DOWN by -0.017. Diversity does not compensate for the weaker base. The last structurally-untested combination (strong loss + non-Euclidean geometry) adds no orthogonal value.",
+  "implication": "Structural exploration EXHAUSTED. Every axis closed with evidence: SOTA families (graph/item/LM/VAE/capacity/hard-neg/ensemble), GPT-5.5-Pro levers (subset-loss/temporal/candidate-marginal/hours-confidence), boundary intrinsic-Bayes ceiling, 8-seed expansion (TIED), cross-capacity blend (TIED, public-confirmed -0.0003), and now hyperbolic geometry (redundant). emb128 4-seed (public 0.77745) remains the final #1.",
+  "no_submission": true
+}
