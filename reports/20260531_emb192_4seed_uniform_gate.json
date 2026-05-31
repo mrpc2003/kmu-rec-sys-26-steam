@@ -1,0 +1,25 @@
+{
+  "note": "emb192 L4 reg1e-3 4-seed ensemble uniform gate vs emb128 ensemble. No submission.",
+  "split": "val_random_uniform_seed42",
+  "seeds_present": [
+    42,
+    123,
+    2024,
+    7
+  ],
+  "seeds_missing": [],
+  "rows": 19996,
+  "per_seed_uniform": {
+    "42": 0.76665,
+    "123": 0.76425,
+    "2024": 0.76365,
+    "7": 0.76325
+  },
+  "emb192_ens_uniform": 0.76615,
+  "emb128_ens_ref": 0.76505,
+  "emb128_single": 0.76205,
+  "vs_emb128_ens": 0.0011,
+  "noise": 0.0007,
+  "tier": "UPGRADE_MATERIALIZE",
+  "verdict": "emb192 4-seed ensemble 0.76615 beats emb128 ensemble 0.76505 by +0.00110 > noise 0.0007 -> GENUINE backbone upgrade. Materialize the emb192 4-seed full-test candidate and gate it to 우현 for submission approval."
+}
