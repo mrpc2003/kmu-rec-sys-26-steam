@@ -1,0 +1,16 @@
+{
+  "runs": [
+    {
+      "name": "gate-minilm-semantic-axis",
+      "id": "s1mzv0n1",
+      "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/s1mzv0n1",
+      "tier": "REJECT_WEAK"
+    },
+    {
+      "name": "gate-emb128-8seed-expansion",
+      "id": "mvybfxft",
+      "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/mvybfxft",
+      "tier": "TIED"
+    }
+  ]
+}
