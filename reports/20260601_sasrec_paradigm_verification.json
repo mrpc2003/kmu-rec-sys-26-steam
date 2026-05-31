@@ -1,0 +1,66 @@
+{
+  "note": "Independent verification of SASRec paradigm sweep (recomputed from CSVs).",
+  "split": "val_random_uniform_seed42",
+  "floor": 0.684,
+  "emb128_ref": 0.76505,
+  "emb128_solo_recomputed": 0.76505,
+  "noise": 0.0007,
+  "runs": [
+    {
+      "run": "base_d64_L50",
+      "status": "DONE",
+      "validity": {
+        "nan_frac": 0.0,
+        "cold_sentinel_frac": 0.7984,
+        "unique_finite": 4030
+      },
+      "solo_acc": 0.53331,
+      "corr_z": 0.3218,
+      "eq_blend": 0.76425,
+      "eq_blend_minus_ref": -0.0008,
+      "tier": "REJECT_FLOOR"
+    },
+    {
+      "run": "d128_L50",
+      "status": "DONE",
+      "validity": {
+        "nan_frac": 0.0,
+        "cold_sentinel_frac": 0.7984,
+        "unique_finite": 4032
+      },
+      "solo_acc": 0.52971,
+      "corr_z": 0.3085,
+      "eq_blend": 0.76415,
+      "eq_blend_minus_ref": -0.0009,
+      "tier": "REJECT_FLOOR"
+    },
+    {
+      "run": "d64_L100",
+      "status": "DONE",
+      "validity": {
+        "nan_frac": 0.0,
+        "cold_sentinel_frac": 0.9501,
+        "unique_finite": 998
+      },
+      "solo_acc": 0.5075,
+      "corr_z": 0.1661,
+      "eq_blend": 0.76535,
+      "eq_blend_minus_ref": 0.0003,
+      "tier": "REJECT_FLOOR"
+    },
+    {
+      "run": "d64_L20",
+      "status": "DONE",
+      "validity": {
+        "nan_frac": 0.0,
+        "cold_sentinel_frac": 0.3585,
+        "unique_finite": 12827
+      },
+      "solo_acc": 0.61922,
+      "corr_z": 0.5326,
+      "eq_blend": 0.75085,
+      "eq_blend_minus_ref": -0.0142,
+      "tier": "REJECT_FLOOR"
+    }
+  ]
+}
