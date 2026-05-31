@@ -79,7 +79,9 @@ def main():
     base["z128"] = wz(base, "s128")
     base["z64"] = wz(base, "s64")
 
-    print(f"refs: emb64_ens={EMB64_ENS}  emb128_ens={EMB128_ENS}  noise=±{NOISE}\n")
+    print(f"refs: emb64_ens={EMB64_ENS}  emb128_ens={EMB128_ENS}  noise=±{NOISE}")
+    print("NOTE: parameter-free 50/50 z-blend is the TRUSTWORTHY number (no validation-label")
+    print("      tuning); grid-max is only a diagnostic UPPER BOUND (stacker-risk if trusted).\n")
     rows = []
     for g in GAMMAS:
         p = ROOT / f"artifacts/directau_uniform/g{g}" / SPLIT / "lightgcn_scores.csv"
@@ -91,25 +93,32 @@ def main():
         m["zda"] = wz(m, "sda")
         a_solo = acc(m.rename(columns={"sda": "s"}))
         corr = float(m["zda"].corr(m["z128"]))
-        # best blend weight
+        # PARAMETER-FREE equal-weight z-blend (the safe, trustworthy number)
+        m["zeq"] = 0.5 * m["z128"] + 0.5 * m["zda"]
+        a_eq = acc(m.rename(columns={"zeq": "s"}))
+        # grid-search max — DIAGNOSTIC ONLY (validation-label tuned => stacker-risk)
         best_w, best_blend = None, -1.0
         for w in np.linspace(0, 1, 21):
             m["zb"] = w * m["z128"] + (1 - w) * m["zda"]
             ab = acc(m.rename(columns={"zb": "s"}))
             if ab > best_blend:
                 best_blend, best_w = ab, float(w)
+        # verdict uses SOLO or PARAMETER-FREE blend only — never the grid max
         verdict = ("STRONG_SOLO" if a_solo > EMB128_ENS + NOISE else
-                   "NEW_AXIS" if best_blend > EMB128_ENS + NOISE else
+                   "NEW_AXIS" if a_eq > EMB128_ENS + NOISE else
                    "REDUNDANT")
-        rows.append((g, a_solo, corr, best_w, best_blend, verdict))
+        rows.append((g, a_solo, corr, a_eq, best_w, best_blend, verdict))
         print(f"[gamma {g}] solo={a_solo:.5f} (vs128 {a_solo-EMB128_ENS:+.5f}) | "
-              f"corr_z={corr:.3f} | best_blend={best_blend:.5f} @w128={best_w:.2f} "
-              f"(vs128 {best_blend-EMB128_ENS:+.5f}) | {verdict}")
+              f"corr_z={corr:.3f} | eq-blend(50/50)={a_eq:.5f} (vs128 {a_eq-EMB128_ENS:+.5f}) "
+              f"=> {verdict}  [grid-max {best_blend:.5f}@w128={best_w:.2f} diag-only]")
 
     if rows:
-        print("\nsummary (sorted by best_blend):")
-        for g, asolo, corr, bw, bb, v in sorted(rows, key=lambda r: -r[4]):
-            print(f"  g={g}: solo={asolo:.5f} corr={corr:.3f} blend={bb:.5f} -> {v}")
+        print("\nsummary (sorted by parameter-free eq-blend):")
+        for g, asolo, corr, aeq, bw, bb, v in sorted(rows, key=lambda r: -r[3]):
+            print(f"  g={g}: solo={asolo:.5f} corr={corr:.3f} eq-blend={aeq:.5f} -> {v}")
+        print("\nReminder: only SOLO>emb128 or eq-blend>emb128 justifies a candidate. A win that")
+        print("exists ONLY at a grid-tuned weight is the stacker trap (ALS showed +0.0017 only at")
+        print("w=0.95) — do not submit on that basis.")
 
 
 if __name__ == "__main__":
