@@ -53,3 +53,4 @@ reports/deep_eda/*.csv
 *.bak
 reports/crashed_sweep_*/
 reports/*.log
+logs/
