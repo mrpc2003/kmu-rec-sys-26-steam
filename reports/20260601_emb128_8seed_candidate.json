@@ -1,0 +1,14 @@
+{
+  "candidate": "emb128_L4_reg1e-3 8-seed ensemble (raw-mean, per-user top-half)",
+  "file": "/opt/data/kaggle/kmu-rec-sys-26-steam/artifacts/lightgcn_emb128L4r3_fulltest/test_candidate_8seed/candidate_lightgcn_emb128L4r3_8seed_ens.csv",
+  "sha256": "782473e099703b672ce28a5002ebb31406d0f1fc21f62abacd3672057a97a0cc",
+  "rows": 19998,
+  "label_1": 9999,
+  "label_0": 9999,
+  "bad_users": 0,
+  "rowdiff_vs_emb128_4seed": 222,
+  "rowdiff_frac": 0.0111,
+  "uniform_gate": "TIED (8seed 0.76465 vs 4seed 0.76505, Δ=-0.0004, within noise 0.0007)",
+  "ref_emb128_4seed_public": 0.77745,
+  "note": "Daily-quota public READ candidate. Pure variance reduction, no validation-label learning. Slightly LOWER uniform than 4-seed. No final-2 consumption. Submission gated on user approval."
+}
