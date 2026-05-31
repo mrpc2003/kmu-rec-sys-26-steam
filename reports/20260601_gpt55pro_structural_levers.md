@@ -103,11 +103,45 @@ boundary_swap에서 T가 경계에 반대할 때 **71%가 틀린다**(precision 
 
 ---
 
-## 트랙 3·4 처리
+## 트랙 3: Candidate-marginal residual / quota — **CLOSED (가장 결정적 negative)**
 
-- **#4 hours confidence-weighted LightGCN**: 4×V100 병렬 실측 진행 중 (별도 기록).
-- **#3 candidate-marginal quota assignment**: GPT-5.5 Pro 본인이 규정 리스크(negative generator
-  역추정 → hidden label 복원 해석 여지) + hard-sampler trap 경고. 단독 진행하지 않고 사용자 결정점으로 보류.
+### 아이디어 (validation-first로 규정 리스크 해소)
+GPT-5.5 Pro가 "가장 구조 exploit적"이라 평가했으나 규정 리스크(negative generator 역추정 →
+hidden label 복원 해석 여지)를 경고. **해법: 제출 적법성 질문 이전에, uniform surrogate에서
+신호가 존재하는지부터 측정.** Δ<0.001이면 규정 질문 자체가 무의미해진다.
+
+uniform split은 negative sampler를 정확히 알므로(uniform) 기대 negative 수를 정밀 계산 가능:
+```
+mu_neg(i) = Σ_{u: i∉seen_u} K_u / (n_items − |seen_u|)
+z_i = (n_cand(i) − mu_neg(i)) / sqrt(mu_neg(i) + ε)   # count-shrunk
+s'_ui = zscore_u(score_base) + λ · zscore_Cu(z_i)
+```
+실제 test 파일 미사용, CPU-only, validation-only → 규정 안전.
+
+### 결과
+| λ | uniform acc | Δ vs base | McNemar p | 판정 |
+|---|---|---|---|---|
+| 0.25 | 0.76365 | −0.00140 | 0.267 | REGRESS |
+| 0.5 | 0.76125 | −0.00380 | 0.019 | REGRESS |
+| **1.0 (게이트)** | 0.74555 | **−0.01950** | 0.0 | REGRESS |
+| 2.0 | 0.72394 | −0.04111 | 0.0 | REGRESS |
+
+**핵심 역설:** residual 추정기는 거의 완벽 작동 — `corr(z_residual, true_pos_count) = 0.9568`,
+raw popularity baseline(0.9395)까지 이긴다. 즉 "어느 item에 hidden positive가 몰리는지" 정확 식별.
+**그런데도 더하면 단조 악화.**
+
+### 결론 (이번 라운드 가장 깊은 통찰)
+residual z_i는 **item-level marginal** 신호("item i는 전역적으로 hidden positive 많음")인데,
+대회 결정은 **user-내부**(각 후보셋에서 K_u개)다. item-level bias는 **모든 user에 동일 적용**되어,
+그 item이 negative인 user에게까지 점수를 올린다. test가 user별 정확히 50/50이라 전역 item prior는
+도움이 안 되고 **popularity bias 재주입**일 뿐 — 메모리에 기록된 logreg stacker public 퇴보
+(0.76245→0.75355)와 **동일한 hard-sampler trap**.
+→ **validation-first가 규정 리스크를 깔끔히 해소**: uniform 게이트 실패(−0.0195)이므로 제출 적법성
+질문은 발생하지 않는다. 작동하지 않는 것의 적법성은 물을 필요가 없다.
+
+## 트랙 4: hours confidence-weighted LightGCN
+
+- 4×V100 병렬 실측 진행 중 (user_quantile / item_quantile / balanced / binary_control). 별도 갱신.
 
 ---
 
