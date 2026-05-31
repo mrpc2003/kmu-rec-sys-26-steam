@@ -1,0 +1,20 @@
+{
+  "track": "GBDT (LightGBM) ranker over symmetric features — cross-split (train seed123+seed7, eval seed42)",
+  "status": "REDUNDANT (LightGCN-only feature set)",
+  "gbdt_solo_acc": 0.76555,
+  "lightgcn_solo_on_eval": 0.76505,
+  "gbdt_minus_lightgcn": 0.0005,
+  "corr_z_gbdt_vs_lightgcn": 0.9734,
+  "eq_blend_acc": 0.76565,
+  "eq_blend_minus_ref": 0.0006,
+  "noise_band": 0.0007,
+  "mde": 0.00355,
+  "feature_importance_gain": {
+    "lgcn_zwu": 94241, "lgcn_rank": 19731, "lgcn_x_pop": 12740,
+    "lightgcn": 11212, "item_pop": 7550, "pop_zwu": 6109
+  },
+  "diagnosis": "GBDT essentially RECONSTRUCTED LightGCN (corr_z 0.97). Given LightGCN + popularity + interaction features, the non-linear tree leaned overwhelmingly on lgcn_zwu (gain 94241, ~5x the next feature) and the popularity features (item_pop 7550, pop_zwu 6109) contributed little. This reproduces the boundary-analysis finding that item popularity residualized against LightGCN is chance. Both deltas (+0.0005 solo, +0.0006 blend) are within noise (0.0007) and far below MDE (0.00355) -> statistically tied, NOT a signal.",
+  "anti_trap_design_held": "Trained AND gated on UNIFORM splits (public surrogate); CROSS-SPLIT (eval split's sampler never seen in training, unlike the failed logreg stacker); symmetric within-user-varying features only (no candidate-marginal review-side trap).",
+  "not_submitted": true,
+  "remaining_subvariant": "TRUE multi-model collaboration (user explicitly requested): GBDT over {lightgcn, itemknn, ease, als} scores cross-split. Prior strongly negative (Stage2 alone public 0.74594; logreg stacker 0.75355) but worth completing the explicit request. Requires materializing Stage2 scores on seed123/seed7 folds."
+}
