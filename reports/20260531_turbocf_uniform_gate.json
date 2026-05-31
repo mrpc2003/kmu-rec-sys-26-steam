@@ -1,0 +1,53 @@
+{
+  "note": "Turbo-CF/GF graph-filtering CF probe. CPU. No submission.",
+  "split": "val_random_uniform_seed42",
+  "emb128_ens_ref": 0.76505,
+  "pop_floor": 0.684,
+  "noise": 0.0007,
+  "results": [
+    {
+      "config": "power1_poly2a0.3",
+      "solo_uniform": 0.74155,
+      "corr_withinuser_z": 0.8472,
+      "blend50_uniform": 0.75825,
+      "blend_vs_ref": -0.0068
+    },
+    {
+      "config": "power1_linear",
+      "solo_uniform": 0.74105,
+      "corr_withinuser_z": 0.8454,
+      "blend50_uniform": 0.75775,
+      "blend_vs_ref": -0.0073
+    },
+    {
+      "config": "power2_linear",
+      "solo_uniform": 0.73005,
+      "corr_withinuser_z": 0.7839,
+      "blend50_uniform": 0.75765,
+      "blend_vs_ref": -0.0074
+    },
+    {
+      "config": "power2_poly2a0.3",
+      "solo_uniform": 0.73005,
+      "corr_withinuser_z": 0.7842,
+      "blend50_uniform": 0.75795,
+      "blend_vs_ref": -0.0071
+    }
+  ],
+  "best_solo": {
+    "config": "power1_poly2a0.3",
+    "solo_uniform": 0.74155,
+    "corr_withinuser_z": 0.8472,
+    "blend50_uniform": 0.75825,
+    "blend_vs_ref": -0.0068
+  },
+  "best_blend": {
+    "config": "power1_poly2a0.3",
+    "solo_uniform": 0.74155,
+    "corr_withinuser_z": 0.8472,
+    "blend50_uniform": 0.75825,
+    "blend_vs_ref": -0.0068
+  },
+  "tier": "REDUNDANT",
+  "verdict": "strong-ish (best solo 0.74155) but corr_z 0.8472 high and blend 0.75825 vs ref -0.00680 -> same family as EASE/ItemKNN, redundant. No new axis."
+}
