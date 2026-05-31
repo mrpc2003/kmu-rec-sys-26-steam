@@ -54,3 +54,6 @@ reports/deep_eda/*.csv
 reports/crashed_sweep_*/
 reports/*.log
 logs/
+
+# eCampus build-output bundle (duplicates artifacts/ + raw data; rebuild from scripts)
+ecampus_bundle/

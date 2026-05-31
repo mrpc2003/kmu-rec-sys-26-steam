@@ -25,13 +25,16 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
 
 import pandas as pd
 
-ROOT = Path("/opt/data/kaggle/kmu-rec-sys-26-steam")
+# Portable root: works in the original repo AND when this bundle is extracted
+# anywhere by a third party (eCampus grader). Override with KMU_ROOT if needed.
+ROOT = Path(os.environ.get("KMU_ROOT", str(Path(__file__).resolve().parent.parent)))
 sys.path.insert(0, str(ROOT / "scripts"))
 from recsys_played_utils import predict_tophalf, ensure_dir  # noqa: E402
 
@@ -46,6 +49,12 @@ DATA = ROOT / "data/raw/public/data"
 
 def sha256_file(p: Path) -> str:
     return hashlib.sha256(p.read_bytes()).hexdigest()
+
+
+def _sha_opt(p: Path) -> str:
+    """SHA of a file if present, else a marker. Lets --verify-existing run
+    standalone without the 99MB train.json (only needed for --from-scratch)."""
+    return sha256_file(p) if p.exists() else "not-present-in-verify-bundle"
 
 
 def train_one_seed(seed: int, device: str) -> None:
@@ -148,7 +157,7 @@ def main() -> None:
     match = (sha == EXPECTED_SHA)
 
     data_fp = {
-        "train.json": sha256_file(DATA / "train.json"),
+        "train.json": _sha_opt(DATA / "train.json"),
         "pairs.csv": sha256_file(DATA / "pairs.csv"),
     }
     provenance = {
