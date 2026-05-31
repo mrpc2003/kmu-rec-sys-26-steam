@@ -1,0 +1,20 @@
+{
+  "submission": "cross_capacity_emb128_emb192_blend (raw-mean)",
+  "public_score": 0.77715,
+  "ref_emb128_public": 0.77745,
+  "ref_emb192_public": 0.77715,
+  "delta_vs_emb128": -0.0003,
+  "delta_vs_emb192": 0.0,
+  "rows": 19998,
+  "score_scale": {
+    "e128_global_std": 1.5686,
+    "e192_global_std": 1.5342,
+    "e128_within_user_std_mean": 1.4665,
+    "e192_within_user_std_mean": 1.4345
+  },
+  "blend_label_diff_vs_emb128": 354,
+  "blend_label_diff_vs_emb192": 336,
+  "emb128_vs_emb192_label_diff": 680,
+  "blend_closer_to": "emb192",
+  "verdict": "Blend public 0.77715 == emb192 exactly, -0.00030 vs emb128. Blend labels differ from emb192 in 336 rows vs from emb128 in 354 rows. score scale: emb192 within-user std 1.4345 vs emb128 1.4665. If emb192 scale dominates, raw-mean blend ~ emb192 ranking -> no orthogonal gain. Cross-capacity blend track CLOSED: saturated, emb128 4-seed (0.77745) stays #1. Also confirms uniform within-noise deltas (+0.0005) do NOT predict public sign (-0.00030)."
+}
