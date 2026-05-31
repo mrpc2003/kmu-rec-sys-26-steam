@@ -40,8 +40,24 @@ GeoCF(2410.03064; item-metadata geometry 의존 → 익명 gameID에 N/A).
 emb192 4-seed 앙상블 = **0.76615** vs emb128 앙상블 0.76505 = **+0.0011**(noise 1.6배). 그러나
 seed42(+0.0046)는 high outlier였고 신규 3개 seed는 개별로 emb128 앙상블보다 약간 아래.
 **paired McNemar**(불일치 660행, emb192 341승 vs emb128 319승, net +22): **p=0.4137 → 통계적
-동전던지기.** 진짜 개선이라 단정 불가. emb192 후보는 materialize·검증 완료(SHA `1b3a6056…`,
-9999:9999, emb128과 3.40% 상이)했고 gated 상태 — 승인 시 제출 가능.
+동전던지기.**
+
+**실측 확정 (우현 승인 제출):** emb192 후보(SHA `1b3a6056…`)를 실제 public LB에 제출 → **0.77715**,
+emb128 0.77745 대비 **−0.0003로 더 낮음.** paired McNemar 판정이 실측으로 정확히 확증됨 — surrogate
+의 +0.0011은 noise였고 capacity frontier가 **실제 LB에서도 종결.** emb128이 backbone capacity
+sweet spot.
+
+## 3-b. 사후분석 파생: surrogate 신뢰 해상도 + cross-capacity 블렌드 종결
+
+**surrogate 신뢰 해상도 ≈ Δuniform 0.003.** 전이 관계: emb64→128 Δuni +0.0036 → Δpub +0.0062
+(부호 일치), 그러나 emb128→192 Δuni +0.0011 → Δpub −0.0003 (**부호 역전**). 즉 uniform Δ가 0.003
+미만이면 surrogate만으로 제출 결정 불가 → 반드시 paired 검정으로 게이트.
+
+**cross-capacity 블렌드(emb128⊕emb192) 종결.** emb128(0.77745)·emb192(0.77715)가 실측 동급이고
+3.40% 행에서 다르길래 다양성 블렌드를 마지막 미검증 레버로 검증 → **corr_z(128,192)=0.9864**(거의
+동일), 50/50 z-blend uniform 0.76545 = +0.0004(noise 미만), paired McNemar p=0.69(동전던지기) →
+**NO_GAIN.** emb64↔128 corr 0.9747와 합쳐, BPR-LightGCN 패밀리는 차원을 바꿔도 거의 동일한 ranking을
+내는 **완전 포화**가 직접 증명됨.
 
 ## 4. 근본 원인: 왜 SOTA가 안 먹히는가
 
