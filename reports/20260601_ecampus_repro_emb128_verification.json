@@ -1,0 +1,49 @@
+{
+  "submission": "emb128_L4_reg1e-3 LightGCN 4-seed ensemble (raw-mean, per-user top-half)",
+  "public_score": 0.77745,
+  "uniform_surrogate": 0.76505,
+  "candidate_file": "/opt/data/kaggle/kmu-rec-sys-26-steam/artifacts/lightgcn_emb128L4r3_fulltest/test_candidate/candidate_lightgcn_emb128L4r3_seed_ens.csv",
+  "candidate_sha256": "7e3191dead2d85637dbf01f7ad50aeb61394c6b709959f2c2850bc53c430c195",
+  "expected_sha256": "7e3191dead2d85637dbf01f7ad50aeb61394c6b709959f2c2850bc53c430c195",
+  "sha_match": true,
+  "config": {
+    "emb_dim": 128,
+    "n_layers": 4,
+    "reg": 0.001,
+    "lr": 0.001,
+    "epochs": 200,
+    "batch_size": 4096,
+    "seeds": [
+      42,
+      123,
+      2024,
+      7
+    ]
+  },
+  "generation_command": "for s in 42 123 2024 7: python3 scripts/lightgcn_fulltest_param.py --emb-dim 128 --n-layers 4 --lr 1e-3 --reg 1e-3 --epochs 200 --batch-size 4096 --seed $s --device cuda:0 --out-dir artifacts/lightgcn_emb128L4r3_fulltest/seed$s ; then aggregate (raw-mean -> per-user top-half) -> candidate_lightgcn_emb128L4r3_seed_ens.csv",
+  "verify_command": "uv run --with numpy --with pandas --with scipy python3 scripts/reproduce_submission_emb128.py --verify-existing",
+  "data_fingerprint_sha256": {
+    "train.json": "2258fa550ae4835fe041d54bcbae4337c3bed8774396dee9ceafbe6a3041daa2",
+    "pairs.csv": "58678f4a851709bc130a5c3f2a0a3a622ae8b41d74d255c7c517537a426c2bae"
+  },
+  "environment": {
+    "python": "3.13.5",
+    "torch": "not-imported-in-verify-mode",
+    "pandas": "3.0.3"
+  },
+  "git_state": {
+    "commit": "6c3b98476ccccbcd6bb117e79b20da1f3196b3b7",
+    "branch": "main",
+    "dirty": true
+  },
+  "preflight": {
+    "rows": 19998,
+    "label_1": 9999,
+    "label_0": 9999,
+    "users": 4737,
+    "bad_users_p_ne_half": 0,
+    "id_unique": true,
+    "id_matches_pairs": true
+  },
+  "mode": "verify-existing"
+}
