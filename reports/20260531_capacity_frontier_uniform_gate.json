@@ -1,0 +1,42 @@
+{
+  "note": "LightGCN capacity-frontier uniform gate (vs emb128). No submission.",
+  "split": "val_random_uniform_seed42",
+  "emb128_single_seed": 0.76205,
+  "emb128_ens": 0.76505,
+  "noise": 0.0007,
+  "missing": [],
+  "results": [
+    {
+      "config": "emb192_L4_r3",
+      "uniform_acc": 0.76665,
+      "train_s": 1823.7,
+      "self_tier": "CAPACITY_GAIN_CHECK_ENSEMBLE"
+    },
+    {
+      "config": "emb256_L4_r3",
+      "uniform_acc": 0.76215,
+      "train_s": 1917.5,
+      "self_tier": "CAPACITY_PLATEAU"
+    },
+    {
+      "config": "emb320_L4_r3",
+      "uniform_acc": 0.76145,
+      "train_s": 1899.5,
+      "self_tier": "CAPACITY_PLATEAU"
+    },
+    {
+      "config": "emb256_L4_r2",
+      "uniform_acc": 0.73625,
+      "train_s": 1844.2,
+      "self_tier": "CAPACITY_REGRESS_OVERFIT"
+    }
+  ],
+  "best": {
+    "config": "emb192_L4_r3",
+    "uniform_acc": 0.76665,
+    "vs_single_seed": 0.0046,
+    "vs_ens": 0.0016
+  },
+  "tier": "ESCALATE_SEED_ENSEMBLE",
+  "verdict": "best emb192_L4_r3 single 0.76665 beats emb128 single-seed 0.76205 by +0.00460 > noise 0.0007 -> capacity frontier still rising. Worth a 4-seed ensemble of emb192_L4_r3; its ensemble would likely exceed the emb128 ensemble 0.76505. Then gate the candidate to 우현."
+}
