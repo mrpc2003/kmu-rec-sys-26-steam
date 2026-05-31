@@ -1,0 +1,37 @@
+{
+  "note": "XSimGCL lambda-sweep uniform gate (emb128 L4 reg1e-3 backbone). No submission.",
+  "split": "val_random_uniform_seed42",
+  "emb128_ens_ref": 0.76505,
+  "pop_floor": 0.684,
+  "noise": 0.0007,
+  "results": [
+    {
+      "config": "lam0.02_eps0.1",
+      "uniform_acc": 0.74145,
+      "train_s": 1936.5
+    },
+    {
+      "config": "lam0.05_eps0.1",
+      "uniform_acc": 0.70614,
+      "train_s": 1931.1
+    },
+    {
+      "config": "lam0.1_eps0.1",
+      "uniform_acc": 0.66743,
+      "train_s": 1932.5
+    },
+    {
+      "config": "lam0.2_eps0.2",
+      "uniform_acc": 0.62382,
+      "train_s": 1943.2
+    }
+  ],
+  "best": {
+    "config": "lam0.02_eps0.1",
+    "uniform_acc": 0.74145,
+    "vs_ref": -0.0236
+  },
+  "missing": [],
+  "tier": "TIED_OR_WEAK",
+  "verdict": "best XSimGCL (lam0.02_eps0.1=0.74145) >= floor but vs emb128 ref = -0.02360, within/under noise 0.0007 -> not a parameter-free upgrade; contrastive term gives no clear gain over the strong backbone."
+}
