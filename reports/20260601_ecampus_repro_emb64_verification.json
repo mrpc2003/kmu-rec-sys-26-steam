@@ -1,0 +1,50 @@
+{
+  "submission": "emb64_L3_reg1e-4 LightGCN 4-seed ensemble (raw-mean, per-user top-half)",
+  "rank": "final #2",
+  "public_score": 0.77125,
+  "candidate_file": "/opt/data/kaggle/kmu-rec-sys-26-steam/artifacts/lightgcn_seed_ensemble/test_candidate/candidate_lightgcn_seed_ens.csv",
+  "candidate_sha256": "dcc578de495f98133d1cbccfcb53a156f7d1f46973f571164b6ec90605d937f7",
+  "expected_sha256": "dcc578de495f98133d1cbccfcb53a156f7d1f46973f571164b6ec90605d937f7",
+  "sha_match": true,
+  "config": {
+    "emb_dim": 64,
+    "n_layers": 3,
+    "reg": 0.0001,
+    "lr": 0.001,
+    "epochs": 200,
+    "batch_size": 4096,
+    "seeds": [
+      42,
+      123,
+      2024,
+      7
+    ]
+  },
+  "input_paths": {
+    "seed42": "/opt/data/kaggle/kmu-rec-sys-26-steam/artifacts/lightgcn_20260530/test_full_train/lightgcn_test_raw_scores_emb64_L3_reg1e-04.csv",
+    "seed123/2024/7": "artifacts/lightgcn_seed_ensemble/seed{S}/test.csv"
+  },
+  "verify_command": "uv run --with numpy --with pandas --with scipy python3 scripts/reproduce_submission_emb64.py --verify-existing",
+  "data_fingerprint_sha256": {
+    "train.json": "2258fa550ae4835fe041d54bcbae4337c3bed8774396dee9ceafbe6a3041daa2",
+    "pairs.csv": "58678f4a851709bc130a5c3f2a0a3a622ae8b41d74d255c7c517537a426c2bae"
+  },
+  "environment": {
+    "python": "3.13.5",
+    "pandas": "3.0.3"
+  },
+  "git_state": {
+    "commit": "7d719137260285f1fcb36c5d618b975a8ca72a56",
+    "branch": "main",
+    "dirty": true
+  },
+  "preflight": {
+    "rows": 19998,
+    "label_1": 9999,
+    "label_0": 9999,
+    "users": 4737,
+    "bad_users_p_ne_half": 0,
+    "id_unique": true,
+    "id_matches_pairs": true
+  }
+}
