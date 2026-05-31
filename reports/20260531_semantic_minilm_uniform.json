@@ -1,0 +1,23 @@
+{
+  "note": "MiniLM semantic axis uniform gate. CPU. No submission.",
+  "split": "val_random_uniform_seed42",
+  "rows": 19996,
+  "text_known_rate": 0.999499899979996,
+  "text_solo_uniform": 0.63853,
+  "cf_solo_uniform": 0.76205,
+  "corr_raw": 0.2616,
+  "corr_withinuser_z": 0.4606,
+  "blend50_uniform": 0.73085,
+  "emb128_ens_ref": 0.76505,
+  "blend50_vs_ref": -0.0342,
+  "pop_floor": 0.684,
+  "noise": 0.0007,
+  "diagnostic_grid_w_text": {
+    "0.05": 0.76465,
+    "0.1": 0.76375,
+    "0.2": 0.76165,
+    "0.3": 0.75705
+  },
+  "tier": "REJECT_WEAK",
+  "verdict": "text solo 0.63853 < popularity floor 0.684 -> too weak. corr_z=0.461. 50/50 z-blend 0.73085 vs emb128 ref 0.76505 (-0.03420). REJECT as axis (orthogonal but too weak, same as TF-IDF/DirectAU)."
+}
