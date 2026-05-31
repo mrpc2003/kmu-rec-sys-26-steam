@@ -1,0 +1,39 @@
+{
+  "runs": [
+    {
+      "name": "lever-exactk-subset-loss",
+      "tier": "SUBSET_NO_GAIN_NOISE",
+      "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/3mmtgai8"
+    },
+    {
+      "name": "lever-temporal-compat",
+      "tier": "REGRESS",
+      "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/wr3fxmwj"
+    },
+    {
+      "name": "lever-candidate-marginal",
+      "tier": "REGRESS",
+      "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/clcax6x1"
+    },
+    {
+      "name": "lever-hours-user_quantile",
+      "tier": "CONF_PLATEAU_NO_GAIN",
+      "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/5puupfpl"
+    },
+    {
+      "name": "lever-hours-item_quantile",
+      "tier": "CONF_PLATEAU_NO_GAIN",
+      "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/7rj3mhoj"
+    },
+    {
+      "name": "lever-hours-balanced",
+      "tier": "CONF_PLATEAU_NO_GAIN",
+      "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/vj46l7l4"
+    },
+    {
+      "name": "lever-hours-binary_control",
+      "tier": "CONF_PLATEAU_NO_GAIN",
+      "url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/zoq0240l"
+    }
+  ]
+}
