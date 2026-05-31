@@ -1,0 +1,21 @@
+{
+  "track": "capacity frontier — emb256 (above the emb128 peak)",
+  "status": "CLOSED — CAPACITY_PLATEAU",
+  "probe": "lightgcn_capacity_uniform_probe.py emb256 L4 reg1e-3 seed42, uniform split, 200ep",
+  "emb256_single_seed_uniform": 0.76215,
+  "emb128_single_seed_ref": 0.76205,
+  "emb128_4seed_ens_ref": 0.76505,
+  "vs_emb128_single": 0.0001,
+  "vs_emb128_ens": -0.0029,
+  "capacity_curve_uniform": {
+    "emb64_single": 0.76205,
+    "emb128_single": 0.76205,
+    "emb256_single": 0.76215,
+    "emb128_4seed_ens": 0.76505,
+    "emb192_4seed_ens": 0.76615,
+    "note": "single-seed uniform is flat from emb64->emb256 (~0.762); all capacity gain comes from seed ENSEMBLING, not dimensionality. emb256 single +0.0001 vs emb128 single = plateaued."
+  },
+  "public_confirmation": "emb192 (public 0.77715) already < emb128 (0.77745) despite higher uniform ens, and 8-seed (0.77625) < emb128 too. So scaling capacity/seeds beyond emb128 4-seed does NOT help public. emb256 would be even lower-value; NOT submitted (no quota waste on a known-lower candidate).",
+  "verdict": "Capacity axis peaks at emb128. emb256 plateaus. emb128 4-seed ensemble (public 0.77745) remains the final #1. Capacity track CLOSED.",
+  "no_submission": true
+}
