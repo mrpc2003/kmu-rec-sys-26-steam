@@ -1,0 +1,19 @@
+{
+  "submission": "emb128 4-seed (+) emb64 4-seed within-user z-blend, per-user top-half",
+  "public_score": 0.77815,
+  "uniform_surrogate": 0.76295,
+  "uniform_delta_vs_emb128": -0.0021,
+  "uniform_delta_vs_emb64": 0.0015,
+  "role": "final-2 #2 hedge candidate (dominates emb64; public top-rank is noise vs emb128)",
+  "candidate_sha256": "99adb88a90dd99c01ea7f50c56b49cef034a24ebbf0fa0b485d0209da2bafb01",
+  "expected_sha256": "99adb88a90dd99c01ea7f50c56b49cef034a24ebbf0fa0b485d0209da2bafb01",
+  "sha_match": true,
+  "preflight": {
+    "rows": 19998,
+    "pos": 9999,
+    "neg": 9999,
+    "balanced": true,
+    "bad_users": 0,
+    "n_ok": true
+  }
+}
