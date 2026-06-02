@@ -1,0 +1,50 @@
+{
+  "kind": "aggressive_quota_autorun_submission_result",
+  "timestamp_kst": "20260602T205225KST",
+  "variant": "rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.1",
+  "candidate_file": "/opt/data/kaggle/kmu-rec-sys-26-steam/submissions/candidate_autorun_rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.1.csv",
+  "fileName": "candidate_autorun_rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.1.csv",
+  "sha256": "85c5c2ddd73f7bbe78e20d0ee682a41650518957fa6d5e0fb8c0942932129a77",
+  "status": "SubmissionStatus.COMPLETE",
+  "date_utc": "2026-06-02 11:52:32.443000",
+  "publicScore": 0.77805,
+  "previous_public_best": 0.77825,
+  "delta_vs_previous_best": -0.00019999999999997797,
+  "beat_previous_best": false,
+  "validation_evidence": {
+    "mean_delta_vs_rankblend": 0.001300260052010412,
+    "positive_splits": 3,
+    "fixes": 422,
+    "breaks": 344,
+    "pooled_p_exact": 0.005366483698129509,
+    "fisher_p": 0.04074410048783248
+  },
+  "preflight": {
+    "file": "/opt/data/kaggle/kmu-rec-sys-26-steam/submissions/candidate_autorun_rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.1.csv",
+    "sha256": "85c5c2ddd73f7bbe78e20d0ee682a41650518957fa6d5e0fb8c0942932129a77",
+    "columns": [
+      "ID",
+      "Played"
+    ],
+    "rows": 19998,
+    "expected_rows": 19998,
+    "id_unique": true,
+    "id_order_matches_pairs": true,
+    "labels_binary": true,
+    "label_1": 9999,
+    "label_0": 9999,
+    "bad_users_tophalf": 0
+  },
+  "submit_meta": {
+    "submit_stdout": "/opt/data/kaggle/kmu-rec-sys-26-steam/reports/20260602T205225KST_autorun_submit_stdout.txt",
+    "submit_stderr": "/opt/data/kaggle/kmu-rec-sys-26-steam/reports/20260602T205225KST_autorun_submit_stderr.txt",
+    "message": "AUTO aggressive quota: rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.1. 3split Δvs rankblend +0.001300, pos 3/3, fixes/breaks 422/344, p=0.005366, SHA 85c5c2dd."
+  },
+  "post_submissions_csv": "/opt/data/kaggle/kmu-rec-sys-26-steam/reports/20260602T205225KST_autorun_post_submissions.csv",
+  "safety": {
+    "hidden_label_access": false,
+    "external_steam_scraping": false,
+    "standing_user_approval": true
+  },
+  "wandb_url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/wytrcpy9"
+}
