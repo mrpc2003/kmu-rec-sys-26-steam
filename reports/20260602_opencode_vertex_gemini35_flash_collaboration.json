@@ -14,5 +14,7 @@
     "Use explicit --model google-vertex/gemini-3.5-flash for fast OpenCode advisory passes.",
     "Keep Hephaestus/GPT as default executor; use Gemini Flash as distinct fast collaborator, retrieval/visual/quick fallback, and candidate-idea reviewer.",
     "Require Hermes validation/preflight before Kaggle submissions."
-  ]
+  ],
+  "wandb_run_url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/ntwnepqx",
+  "github_commit_initial_report": "fe5001d"
 }

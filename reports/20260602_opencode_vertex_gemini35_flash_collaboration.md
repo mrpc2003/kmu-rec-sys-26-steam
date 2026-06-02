@@ -6,6 +6,7 @@
 - Runtime smoke: explicit sentinel response verified before this advisory.
 - Advisory raw log: `reports/20260602_opencode_vertex_gemini35_flash_recsys_advisory.jsonl`
 - Raw log sha256: `4011750aec8fc8843e66865e5ad6d9d4566814eec9ab25f606b557db995df51d`
+- W&B run: `https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/ntwnepqx`
 
 ## Gemini 3.5 Flash read-only advisory output
 
