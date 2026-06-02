@@ -1,0 +1,128 @@
+{
+  "variant": {
+    "variant": "rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.05",
+    "axis": "score_als_htr_f32_it30_alpha20_popa4",
+    "weight": 0.05,
+    "mode": "z",
+    "mean_delta_vs_rankblend": 0.001300260052010412,
+    "min_delta": 0.0011002200440087817,
+    "max_delta": 0.0017003400680136727,
+    "positive_splits": 3,
+    "fixes": 419,
+    "breaks": 341,
+    "discordant": 760,
+    "changed": 760,
+    "pooled_p_exact": 0.005187178092306226,
+    "fisher_p": 0.03979121831049374,
+    "split_rows": [
+      {
+        "split": "val_random_uniform_seed42",
+        "variant": "rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.05",
+        "axis": "score_als_htr_f32_it30_alpha20_popa4",
+        "weight": 0.05,
+        "mode": "z",
+        "accuracy": 0.7657531506301261,
+        "delta": 0.0011002200440087817,
+        "fixes": 150,
+        "breaks": 128,
+        "discordant": 278,
+        "changed": 278,
+        "p_exact": 0.20777166923247437
+      },
+      {
+        "split": "val_random_uniform_seed7",
+        "variant": "rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.05",
+        "axis": "score_als_htr_f32_it30_alpha20_popa4",
+        "weight": 0.05,
+        "mode": "z",
+        "accuracy": 0.762252450490098,
+        "delta": 0.0011002200440087817,
+        "fixes": 120,
+        "breaks": 98,
+        "discordant": 218,
+        "changed": 218,
+        "p_exact": 0.15477832681349596
+      },
+      {
+        "split": "val_random_uniform_seed123",
+        "variant": "rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.05",
+        "axis": "score_als_htr_f32_it30_alpha20_popa4",
+        "weight": 0.05,
+        "mode": "z",
+        "accuracy": 0.760752150430086,
+        "delta": 0.0017003400680136727,
+        "fixes": 149,
+        "breaks": 115,
+        "discordant": 264,
+        "changed": 264,
+        "p_exact": 0.04205029032386555
+      }
+    ],
+    "manual_risk_signal": true
+  },
+  "materialized": {
+    "file": "/opt/data/kaggle/kmu-rec-sys-26-steam/submissions/candidate_autorun_rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.05.csv",
+    "sha256": "85c5c2ddd73f7bbe78e20d0ee682a41650518957fa6d5e0fb8c0942932129a77",
+    "preflight": {
+      "rows": 19998,
+      "expected_rows": 19998,
+      "columns": [
+        "ID",
+        "Played"
+      ],
+      "id_unique": true,
+      "id_contiguous": true,
+      "labels_binary": true,
+      "label_1": 9999,
+      "label_0": 9999,
+      "bad_users_tophalf": 0
+    },
+    "comparisons": {
+      "rankblend_public_best": {
+        "path": "/opt/data/kaggle/kmu-rec-sys-26-steam/submissions/candidate_rank_blend_emb128_emb192.csv",
+        "row_diff": 278,
+        "row_diff_frac": 0.0139013901390139
+      },
+      "emb128_anchor": {
+        "path": "/opt/data/kaggle/kmu-rec-sys-26-steam/artifacts/lightgcn_emb128L4r3_fulltest/test_candidate/candidate_lightgcn_emb128L4r3_seed_ens.csv",
+        "row_diff": 424,
+        "row_diff_frac": 0.0212021202120212
+      },
+      "zblend_public_2": {
+        "path": "/opt/data/kaggle/kmu-rec-sys-26-steam/submissions/candidate_emb128_emb64_zblend.csv",
+        "row_diff": 600,
+        "row_diff_frac": 0.030003000300030003
+      }
+    }
+  },
+  "preflight": {
+    "file": "/opt/data/kaggle/kmu-rec-sys-26-steam/submissions/candidate_autorun_rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.05.csv",
+    "sha256": "85c5c2ddd73f7bbe78e20d0ee682a41650518957fa6d5e0fb8c0942932129a77",
+    "columns": [
+      "ID",
+      "Played"
+    ],
+    "rows": 19998,
+    "expected_rows": 19998,
+    "id_unique": true,
+    "id_order_matches_pairs": true,
+    "labels_binary": true,
+    "label_1": 9999,
+    "label_0": 9999,
+    "bad_users_tophalf": 0
+  },
+  "quota": {
+    "used_today_utc": 3,
+    "remaining": 2,
+    "best_score": 0.77825,
+    "best_row": {
+      "fileName": "candidate_rank_blend_emb128_emb192.csv",
+      "date": "2026-06-01 23:17:05.897000",
+      "description": "FORCED manual-risk last-slot: rank(emb128 4seed + emb192 4seed), per-user top-half. 3-split acc all positive mean +0.00083 but McNemar rejected; user explicitly requested one final meaningful burn. SHA 835b8b90.",
+      "status": "SubmissionStatus.COMPLETE",
+      "publicScore": "0.77825",
+      "privateScore": ""
+    }
+  },
+  "pre_submissions_csv": "/opt/data/kaggle/kmu-rec-sys-26-steam/reports/20260602T205124KST_autorun_submissions.csv"
+}
