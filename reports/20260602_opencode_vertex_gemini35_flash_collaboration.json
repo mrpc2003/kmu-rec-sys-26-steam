@@ -1,0 +1,18 @@
+{
+  "timestamp_kst": "2026-06-02T21:36:00+09:00",
+  "opencode_model": "google-vertex/gemini-3.5-flash",
+  "provider": "google-vertex",
+  "runtime_smoke": {
+    "home": true,
+    "root_home": true
+  },
+  "advisory_sentinel_found": true,
+  "raw_log_path": "reports/20260602_opencode_vertex_gemini35_flash_recsys_advisory.jsonl",
+  "raw_log_sha256": "4011750aec8fc8843e66865e5ad6d9d4566814eec9ab25f606b557db995df51d",
+  "credential_values_recorded": false,
+  "recommended_usage": [
+    "Use explicit --model google-vertex/gemini-3.5-flash for fast OpenCode advisory passes.",
+    "Keep Hephaestus/GPT as default executor; use Gemini Flash as distinct fast collaborator, retrieval/visual/quick fallback, and candidate-idea reviewer.",
+    "Require Hermes validation/preflight before Kaggle submissions."
+  ]
+}
