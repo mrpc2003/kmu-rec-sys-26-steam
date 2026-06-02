@@ -1,0 +1,37 @@
+{
+  "created_at_kst": "2026-06-02T20:42:00+09:00",
+  "competition": "kmu-rec-sys-26-steam",
+  "deadline_kst": "2026-06-15T23:59:59+09:00",
+  "daily_quota_target": 5,
+  "submitted_variants": [
+    "rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.2",
+    "rankblend_z_plus_score_als_f32_it30_alpha20_popa4_w0.2"
+  ],
+  "submission_results": [
+    {
+      "variant": "rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.2",
+      "fileName": "candidate_autorun_rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.2.csv",
+      "publicScore": 0.77785,
+      "previous_public_best": 0.77825,
+      "delta_vs_previous_best": -0.0004,
+      "timestamp_kst": "20260602T203801KST",
+      "sha256": "23f01b4e8354e0b4ee49f2cd266f10b558e1da9f85c1d6b7d357c0488a9cdd22"
+    },
+    {
+      "variant": "rankblend_z_plus_score_als_f32_it30_alpha20_popa4_w0.2",
+      "fileName": "candidate_autorun_rankblend_z_plus_score_als_f32_it30_alpha20_popa4_w0.2.csv",
+      "publicScore": 0.77795,
+      "previous_public_best": 0.77825,
+      "delta_vs_previous_best": -0.00029999999999996696,
+      "timestamp_kst": "20260602T204313KST",
+      "sha256": "1a2e52854e1771f525e1fcc0f80cb939f82488bcce65866459668d7d8f257c42",
+      "wandb_url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/ywdnycyv"
+    }
+  ],
+  "last_wandb_url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/wuj4pp3c",
+  "notes": [
+    "Standing user approval: submit any validation-positive candidate after preflight until 2026-06-15 deadline, consuming available quota. First README-rankblend residual did not beat public best but is registered for calibration."
+  ],
+  "last_run_kst": "2026-06-02T20:46:31.318852+09:00",
+  "last_public_best_seen": 0.77825
+}
