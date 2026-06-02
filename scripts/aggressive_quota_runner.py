@@ -119,8 +119,24 @@ def safe_variant_filename(variant: str) -> str:
     return f"candidate_autorun_{safe}.csv"
 
 
+def load_validation_cache() -> dict[str, Any]:
+    """Load cached validation variants; recompute only if the cache is unavailable.
+
+    The full validation grid is deterministic and already persisted by
+    materialize_readme_rankblend_residual.py. Reusing it prevents the long-lived runner from
+    spending minutes in repeated pandas groupby work between quota submissions.
+    """
+    p = ROOT / "reports/20260602_readme_rankblend_residual_materialization.json"
+    if p.exists():
+        data = json.loads(p.read_text(encoding="utf-8"))
+        validation = data.get("validation")
+        if isinstance(validation, dict) and validation.get("all_variants"):
+            return validation
+    return mat.validate_variants()
+
+
 def choose_next_variant(state: dict[str, Any], submitted_names: set[str]) -> dict[str, Any] | None:
-    validation = mat.validate_variants()
+    validation = load_validation_cache()
     tried = set(state.get("submitted_variants", []))
     for v in validation["all_variants"]:
         if not v.get("manual_risk_signal"):
