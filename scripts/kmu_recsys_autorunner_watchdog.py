@@ -32,7 +32,7 @@ def runner_pids() -> list[int]:
             cmd = (p / 'cmdline').read_bytes().replace(b'\x00', b' ').decode('utf-8', 'ignore')
         except Exception:
             continue
-        if 'scripts/aggressive_quota_runner.py' in cmd and 'uv run' in cmd or str(SCRIPT) in cmd:
+        if ('scripts/aggressive_quota_runner.py' in cmd and 'uv run' in cmd) or str(SCRIPT) in cmd:
             pids.append(pid)
     return sorted(set(pids))
 
@@ -57,7 +57,8 @@ def main() -> None:
     env.pop('VIRTUAL_ENV', None)
     cmd = [
         'uv', 'run', '--with', 'pandas', '--with', 'numpy', '--with', 'scipy', '--with', 'wandb',
-        'python', str(SCRIPT), '--sleep-no-quota', '300', '--sleep-no-candidate', '600'
+        'python', str(SCRIPT), '--sleep-no-quota', '300', '--sleep-no-candidate', '600',
+        '--sleep-after-submit', '21600'
     ]
     with log_path.open('ab') as f:
         subprocess.Popen(cmd, cwd=str(ROOT), env=env, stdout=f, stderr=subprocess.STDOUT, start_new_session=True)

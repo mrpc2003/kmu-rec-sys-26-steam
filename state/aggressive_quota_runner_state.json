@@ -63,8 +63,102 @@
   ],
   "last_wandb_url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/wuj4pp3c",
   "notes": [
-    "Standing user approval: submit any validation-positive candidate after preflight until 2026-06-15 deadline, consuming available quota. First README-rankblend residual did not beat public best but is registered for calibration."
+    "Standing user approval: submit any validation-positive candidate after preflight until 2026-06-15 deadline, consuming available quota. First README-rankblend residual did not beat public best but is registered for calibration.",
+    "20260602T210931KST: user correction applied — no rapid five-submit batches; block exact/near-duplicate CSVs and quarantine failed families after post-analysis.",
+    "20260602T211027KST: user correction applied — no rapid five-submit batches; block exact/near-duplicate CSVs and quarantine failed families after post-analysis."
   ],
   "last_run_kst": "2026-06-02T20:53:05.351792+09:00",
-  "last_public_best_seen": 0.77825
+  "last_public_best_seen": 0.77825,
+  "quarantined_families": {
+    "rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4": {
+      "time_kst": "2026-06-02T21:09:33.492903+09:00",
+      "reason": "retrospective_negative_or_non_improving_public_transfer",
+      "source_variant": "rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.1",
+      "public_delta_vs_previous_best": -0.00019999999999997797,
+      "validation_mean_delta_vs_rankblend": 0.001300260052010412,
+      "transfer_ratio": -0.1538153846153665,
+      "sha256": "85c5c2ddd73f7bbe78e20d0ee682a41650518957fa6d5e0fb8c0942932129a77"
+    },
+    "rankblend_z_plus_score_als_f32_it30_alpha20_popa4": {
+      "time_kst": "2026-06-02T21:09:32.852976+09:00",
+      "reason": "retrospective_negative_or_non_improving_public_transfer",
+      "source_variant": "rankblend_z_plus_score_als_f32_it30_alpha20_popa4_w0.2",
+      "public_delta_vs_previous_best": -0.00029999999999996696,
+      "validation_mean_delta_vs_rankblend": 0.00140028005601119,
+      "transfer_ratio": -0.2142428571428354,
+      "sha256": "1a2e52854e1771f525e1fcc0f80cb939f82488bcce65866459668d7d8f257c42"
+    },
+    "rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa*": {
+      "time_kst": "2026-06-02T21:10:29.735723+09:00",
+      "reason": "retrospective_negative_or_non_improving_public_transfer",
+      "source_variant": "rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.1",
+      "public_delta_vs_previous_best": -0.00019999999999997797,
+      "validation_mean_delta_vs_rankblend": 0.001300260052010412,
+      "transfer_ratio": -0.1538153846153665,
+      "sha256": "85c5c2ddd73f7bbe78e20d0ee682a41650518957fa6d5e0fb8c0942932129a77"
+    },
+    "rankblend_z_plus_score_als_f32_it30_alpha20_popa*": {
+      "time_kst": "2026-06-02T21:10:29.095478+09:00",
+      "reason": "retrospective_negative_or_non_improving_public_transfer",
+      "source_variant": "rankblend_z_plus_score_als_f32_it30_alpha20_popa4_w0.2",
+      "public_delta_vs_previous_best": -0.00029999999999996696,
+      "validation_mean_delta_vs_rankblend": 0.00140028005601119,
+      "transfer_ratio": -0.2142428571428354,
+      "sha256": "1a2e52854e1771f525e1fcc0f80cb939f82488bcce65866459668d7d8f257c42"
+    }
+  },
+  "last_similarity_postmortem_json": "reports/20260602T211027KST_autorun_batch_similarity_postmortem.json",
+  "operating_policy_revision": {
+    "rapid_batch_quota_burn_allowed": false,
+    "exact_sha_duplicate_allowed": false,
+    "near_duplicate_under_500_row_diff_allowed": false,
+    "same_family_after_non_improving_public_transfer_allowed": false,
+    "sleep_after_submit_seconds": 21600
+  },
+  "skipped_variants": [
+    "rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa8_w0.025",
+    "rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa8_w0.05",
+    "rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa8_w0.1",
+    "rankblend_z_plus_score_als_f32_it30_alpha20_popa4_w0.025",
+    "rankblend_z_plus_score_als_f32_it30_alpha20_popa4_w0.05",
+    "rankblend_z_plus_score_als_f32_it30_alpha20_popa4_w0.1",
+    "rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa8_w0.2",
+    "rankblend_z_plus_score_bpr_f32_it100_popa4_w0.1",
+    "rankblend_z_plus_score_bpr_f32_it100_popa4_w0.2",
+    "rankblend_z_plus_score_bpr_f32_it100_popa4_w0.025",
+    "rankblend_z_plus_score_bpr_f32_it100_popa4_w0.05",
+    "rankblend_z_plus_score_bpr_f32_it100_popa8_w0.1",
+    "rankblend_z_plus_score_bpr_f32_it100_popa8_w0.2",
+    "rankblend_z_plus_score_bpr_f32_it100_popa8_w0.025",
+    "rankblend_z_plus_score_bpr_f32_it100_popa8_w0.05",
+    "rankblend_z_plus_score_als_f32_it30_alpha20_popa8_w0.2",
+    "rankblend_rank_plus_score_bpr_f32_it100_popa8_w0.1",
+    "rankblend_rank_plus_score_bpr_f32_it100_popa4_w0.1",
+    "rankblend_z_plus_score_als_f32_it30_alpha20_popa8_w0.025",
+    "rankblend_z_plus_score_als_f32_it30_alpha20_popa8_w0.05",
+    "rankblend_z_plus_score_als_f32_it30_alpha20_popa8_w0.1",
+    "rankblend_rank_plus_score_als_htr_f32_it30_alpha20_popa8_w0.1",
+    "rankblend_rank_plus_score_als_f32_it30_alpha20_popa8_w0.1",
+    "rankblend_rank_plus_score_als_htr_f32_it30_alpha20_popa8_w0.2",
+    "rankblend_rank_plus_score_als_htr_f32_it30_alpha20_popa4_w0.1",
+    "rankblend_rank_plus_score_bpr_f32_it100_popa4_w0.05",
+    "rankblend_rank_plus_score_als_htr_f32_it30_alpha20_popa8_w0.025",
+    "rankblend_rank_plus_score_als_htr_f32_it30_alpha20_popa8_w0.05",
+    "rankblend_rank_plus_score_als_htr_f32_it30_alpha20_popa4_w0.025",
+    "rankblend_rank_plus_score_als_htr_f32_it30_alpha20_popa4_w0.05",
+    "rankblend_rank_plus_score_als_f32_it30_alpha20_popa4_w0.025",
+    "rankblend_rank_plus_score_als_f32_it30_alpha20_popa4_w0.05",
+    "rankblend_rank_plus_score_als_f32_it30_alpha20_popa8_w0.025",
+    "rankblend_rank_plus_score_als_f32_it30_alpha20_popa8_w0.05",
+    "rankblend_rank_plus_score_bpr_f32_it100_popa4_w0.025",
+    "rankblend_rank_plus_score_bpr_f32_it100_popa8_w0.025",
+    "rankblend_rank_plus_score_bpr_f32_it100_popa8_w0.05",
+    "rankblend_rank_plus_score_als_f32_it30_alpha20_popa4_w0.1",
+    "rankblend_rank_plus_score_als_f32_it30_alpha20_popa8_w0.2",
+    "rankblend_rank_plus_score_als_htr_f32_it30_alpha20_popa4_w0.2",
+    "rankblend_rank_plus_score_als_f32_it30_alpha20_popa4_w0.2",
+    "rankblend_rank_plus_score_bpr_f32_it100_popa4_w0.2",
+    "rankblend_rank_plus_score_bpr_f32_it100_popa8_w0.2"
+  ],
+  "last_guard_sweep_json": "reports/20260602T211148KST_autorun_candidate_guard_sweep.json"
 }

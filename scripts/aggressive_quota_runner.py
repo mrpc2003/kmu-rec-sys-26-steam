@@ -2,10 +2,12 @@
 """Continuous aggressive quota runner for KMURecSys26 Steam.
 
 This runner is enabled only because the user explicitly granted standing approval to
-submit any candidate with even a slight validation-positive signal through the 2026-06-15
-deadline and to consume the daily Kaggle quota. It still enforces hard safety gates:
-preflight schema/order/top-half checks, no duplicate variant, no hidden-label access, no
-external scraping, no credential printing, and GitHub/W&B logging for each submission.
+submit validation-positive candidates through the 2026-06-15 deadline. A later user
+correction tightened the operating mode: never burn the daily quota in one rapid batch,
+never submit exact/near-identical tuned CSVs, and always run post-submission calibration
+before the next submission cycle. Hard safety gates remain mandatory: schema/order/top-half
+preflight, duplicate/similarity guards, no hidden-label access, no external scraping, no
+credential printing, and GitHub/W&B logging for each submission.
 """
 from __future__ import annotations
 
@@ -36,6 +38,10 @@ KST = ZoneInfo("Asia/Seoul")
 UTC = dt.timezone.utc
 WANDB_ENTITY = "mrpc2003-kookmin-university"
 WANDB_PROJECT = "kmu-rec-sys-26-steam"
+MIN_AUTONOMOUS_ROW_DIFF = 500
+HARD_DUPLICATE_ROW_DIFF = 200
+DEFAULT_SLEEP_AFTER_SUBMIT = 6 * 60 * 60
+CURRENT_PUBLIC_BEST_FALLBACK = ROOT / "submissions/candidate_rank_blend_emb128_emb192.csv"
 
 
 def now_kst() -> dt.datetime:
@@ -137,11 +143,17 @@ def load_validation_cache() -> dict[str, Any]:
 
 def choose_next_variant(state: dict[str, Any], submitted_names: set[str]) -> dict[str, Any] | None:
     validation = load_validation_cache()
-    tried = set(state.get("submitted_variants", []))
+    skipped = state.setdefault("skipped_variants", [])
+    tried = set(state.get("submitted_variants", [])) | set(skipped)
+    quarantined = state.get("quarantined_families", {})
     for v in validation["all_variants"]:
         if not v.get("manual_risk_signal"):
             continue
         if v["variant"] in tried:
+            continue
+        if variant_family(v["variant"]) in quarantined:
+            if v["variant"] not in skipped:
+                skipped.append(v["variant"])
             continue
         if safe_variant_filename(v["variant"]) in submitted_names:
             state.setdefault("submitted_variants", []).append(v["variant"])
@@ -152,6 +164,10 @@ def choose_next_variant(state: dict[str, Any], submitted_names: set[str]) -> dic
         if v["variant"] in tried:
             continue
         if v.get("mean_delta_vs_rankblend", 0.0) <= 0:
+            continue
+        if variant_family(v["variant"]) in quarantined:
+            if v["variant"] not in skipped:
+                skipped.append(v["variant"])
             continue
         if safe_variant_filename(v["variant"]) in submitted_names:
             state.setdefault("submitted_variants", []).append(v["variant"])
@@ -190,6 +206,202 @@ def preflight_ok(pf: dict[str, Any]) -> bool:
         and pf["label_1"] == pf["label_0"] == 9999
         and pf["bad_users_tophalf"] == 0
     )
+
+
+def variant_family(variant: str) -> str:
+    """Group nearby weight/popularity-only tunes so one failed probe blocks siblings.
+
+    Example:
+    rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.025
+      -> rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa*
+    """
+    base = re.sub(r"_w\d+(?:\.\d+)?$", "", variant)
+    return re.sub(r"_popa\d+$", "_popa*", base)
+
+
+def read_submission_labels(path: Path) -> pd.DataFrame:
+    df = pd.read_csv(path)
+    label_col = "Played" if "Played" in df.columns else "Label" if "Label" in df.columns else None
+    if label_col is None:
+        raise ValueError(f"No Played/Label column in {path}")
+    out = df[["ID", label_col]].copy()
+    out.columns = ["ID", "Played"]
+    out["Played"] = out["Played"].astype(int)
+    return out
+
+
+def row_diff_count(a: Path, b: Path) -> int:
+    left = read_submission_labels(a)
+    right = read_submission_labels(b)
+    merged = left.merge(right, on="ID", suffixes=("_a", "_b"), validate="one_to_one")
+    if len(merged) != len(left):
+        raise ValueError(f"Row mismatch while comparing {a} and {b}")
+    return int((merged["Played_a"] != merged["Played_b"]).sum())
+
+
+def local_submission_path(file_name: str | None) -> Path | None:
+    if not file_name:
+        return None
+    p = ROOT / "submissions" / file_name
+    return p if p.exists() else None
+
+
+def reference_paths(state: dict[str, Any], q: dict[str, Any], *, exclude_sha: str | None = None) -> list[dict[str, Any]]:
+    refs: list[dict[str, Any]] = []
+    seen_paths: set[str] = set()
+
+    def add(label: str, path: Path | None, meta: dict[str, Any] | None = None) -> None:
+        if path is None or not path.exists():
+            return
+        key = str(path.resolve())
+        if key in seen_paths:
+            return
+        try:
+            sha = sha256_file(path)
+        except Exception:
+            sha = None
+        if exclude_sha and sha == exclude_sha:
+            return
+        seen_paths.add(key)
+        refs.append({"label": label, "path": path, "sha256": sha, "meta": meta or {}})
+
+    best = q.get("best_row") or {}
+    add("live_public_best", local_submission_path(best.get("fileName")), best)
+    add("fallback_public_best", CURRENT_PUBLIC_BEST_FALLBACK, {"fileName": CURRENT_PUBLIC_BEST_FALLBACK.name})
+    for r in state.get("submission_results", []):
+        p = Path(r["candidate_file"]) if r.get("candidate_file") else local_submission_path(r.get("fileName"))
+        add(f"prior_submit:{r.get('variant') or r.get('fileName')}", p, r)
+    return refs
+
+
+def similarity_guard(path: Path, pf: dict[str, Any], variant: dict[str, Any], state: dict[str, Any], q: dict[str, Any]) -> dict[str, Any]:
+    family = variant_family(variant["variant"])
+    quarantined = state.get("quarantined_families", {})
+    report: dict[str, Any] = {
+        "variant": variant["variant"],
+        "family": family,
+        "sha256": pf["sha256"],
+        "min_required_row_diff": MIN_AUTONOMOUS_ROW_DIFF,
+        "hard_duplicate_row_diff": HARD_DUPLICATE_ROW_DIFF,
+        "blocked": False,
+        "block_reasons": [],
+        "row_diffs": [],
+    }
+    if family in quarantined:
+        report["blocked"] = True
+        report["block_reasons"].append("family_quarantined_after_negative_transfer")
+        report["quarantine"] = quarantined[family]
+
+    seen_hashes = {r.get("sha256") for r in state.get("submission_results", []) if r.get("sha256")}
+    if pf["sha256"] in seen_hashes:
+        report["blocked"] = True
+        report["block_reasons"].append("exact_sha_duplicate_of_prior_submission")
+
+    for ref in reference_paths(state, q, exclude_sha=pf["sha256"]):
+        try:
+            diff = row_diff_count(path, ref["path"])
+        except Exception as exc:
+            report["row_diffs"].append({"label": ref["label"], "file": str(ref["path"]), "error": repr(exc)})
+            continue
+        item = {"label": ref["label"], "file": str(ref["path"]), "sha256": ref.get("sha256"), "row_diff": diff}
+        report["row_diffs"].append(item)
+        if diff < HARD_DUPLICATE_ROW_DIFF:
+            report["blocked"] = True
+            report["block_reasons"].append(f"hard_near_duplicate_{diff}_rows_vs_{ref['label']}")
+        elif diff < MIN_AUTONOMOUS_ROW_DIFF:
+            report["blocked"] = True
+            report["block_reasons"].append(f"near_duplicate_{diff}_rows_vs_{ref['label']}")
+    return report
+
+
+def write_post_submission_analysis(
+    *,
+    ts: str,
+    result: dict[str, Any],
+    variant: dict[str, Any],
+    state: dict[str, Any],
+    q: dict[str, Any],
+    candidate_path: Path,
+) -> tuple[Path, Path, dict[str, Any]]:
+    family = variant_family(variant["variant"])
+    validation_delta = float(variant.get("mean_delta_vs_rankblend") or 0.0)
+    public_delta = result.get("delta_vs_previous_best")
+    transfer_ratio = None
+    if public_delta is not None and validation_delta:
+        transfer_ratio = float(public_delta) / validation_delta
+    row_diffs = []
+    for ref in reference_paths(state, q, exclude_sha=result.get("sha256")):
+        try:
+            diff = row_diff_count(candidate_path, ref["path"])
+            row_diffs.append({"label": ref["label"], "file": str(ref["path"]), "sha256": ref.get("sha256"), "row_diff": diff})
+        except Exception as exc:
+            row_diffs.append({"label": ref["label"], "file": str(ref["path"]), "error": repr(exc)})
+
+    quarantine = False
+    quarantine_reason = None
+    if result.get("publicScore") is not None and public_delta is not None and public_delta <= 0:
+        quarantine = True
+        quarantine_reason = "non_improving_public_transfer"
+    if transfer_ratio is not None and transfer_ratio <= 0:
+        quarantine = True
+        quarantine_reason = "negative_transfer_ratio"
+
+    analysis = {
+        "kind": "autorun_post_submission_calibration",
+        "timestamp_kst": ts,
+        "variant": variant["variant"],
+        "family": family,
+        "candidate_file": str(candidate_path),
+        "sha256": result.get("sha256"),
+        "publicScore": result.get("publicScore"),
+        "previous_public_best": result.get("previous_public_best"),
+        "public_delta_vs_previous_best": public_delta,
+        "validation_mean_delta_vs_rankblend": validation_delta,
+        "transfer_ratio_public_delta_over_validation_delta": transfer_ratio,
+        "beat_previous_best": result.get("beat_previous_best"),
+        "row_diffs_vs_references": row_diffs,
+        "quarantine_family": quarantine,
+        "quarantine_reason": quarantine_reason,
+        "next_submission_policy": {
+            "same_family_allowed": False if quarantine else "only_after_fresh_analysis",
+            "minimum_row_diff_vs_any_prior_csv": MIN_AUTONOMOUS_ROW_DIFF,
+            "rapid_batch_quota_burn_allowed": False,
+        },
+    }
+    if quarantine:
+        state.setdefault("quarantined_families", {})[family] = {
+            "time_kst": now_kst().isoformat(),
+            "reason": quarantine_reason,
+            "source_variant": variant["variant"],
+            "public_delta_vs_previous_best": public_delta,
+            "validation_mean_delta_vs_rankblend": validation_delta,
+            "transfer_ratio": transfer_ratio,
+            "sha256": result.get("sha256"),
+        }
+
+    js = ROOT / f"reports/{ts}_autorun_post_submission_calibration.json"
+    md = ROOT / f"reports/{ts}_autorun_post_submission_calibration.md"
+    js.write_text(json.dumps(analysis, indent=2, ensure_ascii=False), encoding="utf-8")
+    lines = [
+        "# Autorun post-submission calibration",
+        "",
+        f"- variant: `{variant['variant']}`",
+        f"- family: `{family}`",
+        f"- publicScore: `{result.get('publicScore')}`",
+        f"- previous best: `{result.get('previous_public_best')}`",
+        f"- public Δ vs previous best: `{public_delta}`",
+        f"- validation mean Δ: `{validation_delta:+.6f}`",
+        f"- transfer ratio: `{transfer_ratio}`",
+        f"- quarantine family: `{quarantine}`",
+        f"- quarantine reason: `{quarantine_reason}`",
+        f"- rapid batch quota burn allowed: `False`",
+        "",
+        "## Row diffs vs references",
+    ]
+    for item in row_diffs:
+        lines.append(f"- `{item.get('label')}`: row_diff=`{item.get('row_diff')}`, file=`{item.get('file')}`")
+    md.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return js, md, analysis
 
 
 def submit_candidate(path: Path, variant: dict[str, Any], q: dict[str, Any], ts: str) -> dict[str, Any]:
@@ -265,6 +477,11 @@ def log_wandb(result: dict[str, Any], report_files: list[Path]) -> str | None:
             "validation/pooled_p_exact": ev.get("pooled_p_exact"),
             "preflight/rows": pf.get("rows"),
             "preflight/bad_users_tophalf": pf.get("bad_users_tophalf"),
+            "post_analysis/transfer_ratio": (result.get("post_analysis") or {}).get("transfer_ratio_public_delta_over_validation_delta"),
+            "similarity/min_row_diff": min(
+                [x.get("row_diff") for x in (result.get("similarity_guard") or {}).get("row_diffs", []) if isinstance(x.get("row_diff"), int)],
+                default=None,
+            ),
         }
         wandb.log({k: v for k, v in metrics.items() if isinstance(v, (int, float, bool)) and v == v})
         art = wandb.Artifact(f"autorun_submission_{result['timestamp_kst']}", type="submission-report", metadata={"sha256": result.get("sha256"), "publicScore": result.get("publicScore")})
@@ -317,13 +534,32 @@ def run_one_submission(state: dict[str, Any]) -> bool:
     out_path = ROOT / "submissions" / filename
     mat_info = mat.materialize(variant["variant"], out_path)
     pf = preflight_file(out_path)
+    sim = similarity_guard(out_path, pf, variant, state, q)
     pre_path = ROOT / f"reports/{ts}_autorun_preflight.json"
-    pre_payload = {"variant": variant, "materialized": mat_info, "preflight": pf, "quota": q, "pre_submissions_csv": str(subs_path)}
+    sim_path = ROOT / f"reports/{ts}_autorun_similarity_guard.json"
+    pre_payload = {
+        "variant": variant,
+        "materialized": mat_info,
+        "preflight": pf,
+        "similarity_guard": sim,
+        "quota": q,
+        "pre_submissions_csv": str(subs_path),
+    }
     pre_path.write_text(json.dumps(pre_payload, indent=2, ensure_ascii=False), encoding="utf-8")
+    sim_path.write_text(json.dumps(sim, indent=2, ensure_ascii=False), encoding="utf-8")
     if not preflight_ok(pf):
         state.setdefault("notes", []).append(f"preflight failed {variant['variant']} at {ts}")
         save_state(state)
         log(f"preflight failed for {filename}: {pf}")
+        return False
+    if sim.get("blocked"):
+        state.setdefault("skipped_variants", []).append(variant["variant"])
+        state.setdefault("notes", []).append(
+            f"similarity guard blocked {variant['variant']} at {ts}: {sim.get('block_reasons')}"
+        )
+        save_state(state)
+        git_commit([pre_path, sim_path, STATE_PATH], f"chore: block near-duplicate autorun candidate {ts}")
+        log(f"similarity guard blocked {filename}: {sim.get('block_reasons')}")
         return False
     submit_meta = submit_candidate(out_path, variant, q, ts)
     post_path, row = poll_result(filename, ts)
@@ -340,6 +576,7 @@ def run_one_submission(state: dict[str, Any]) -> bool:
         "kind": "aggressive_quota_autorun_submission_result",
         "timestamp_kst": ts,
         "variant": variant["variant"],
+        "family": variant_family(variant["variant"]),
         "candidate_file": str(out_path),
         "fileName": filename,
         "sha256": pf["sha256"],
@@ -358,10 +595,20 @@ def run_one_submission(state: dict[str, Any]) -> bool:
             "fisher_p": variant.get("fisher_p"),
         },
         "preflight": pf,
+        "similarity_guard": sim,
         "submit_meta": submit_meta,
         "post_submissions_csv": str(post_path),
         "safety": {"hidden_label_access": False, "external_steam_scraping": False, "standing_user_approval": True},
     }
+    analysis_json, analysis_md, analysis = write_post_submission_analysis(
+        ts=ts,
+        result=result,
+        variant=variant,
+        state=state,
+        q=q,
+        candidate_path=out_path,
+    )
+    result["post_analysis"] = analysis
     res_json = ROOT / f"reports/{ts}_autorun_submission_result.json"
     res_md = ROOT / f"reports/{ts}_autorun_submission_result.md"
     res_json.write_text(json.dumps(result, indent=2, ensure_ascii=False), encoding="utf-8")
@@ -381,20 +628,24 @@ def run_one_submission(state: dict[str, Any]) -> bool:
         ]) + "\n",
         encoding="utf-8",
     )
-    wandb_url = log_wandb(result, [pre_path, res_json, res_md, subs_path, post_path])
+    wandb_url = log_wandb(result, [pre_path, sim_path, analysis_json, analysis_md, res_json, res_md, subs_path, post_path])
     if wandb_url:
         result["wandb_url"] = wandb_url
         res_json.write_text(json.dumps(result, indent=2, ensure_ascii=False), encoding="utf-8")
     state.setdefault("submitted_variants", []).append(variant["variant"])
     state.setdefault("submission_results", []).append({
-        "variant": variant["variant"], "fileName": filename, "publicScore": public_score,
+        "variant": variant["variant"], "family": variant_family(variant["variant"]), "fileName": filename,
+        "candidate_file": str(out_path), "publicScore": public_score,
         "previous_public_best": prev, "delta_vs_previous_best": result["delta_vs_previous_best"],
+        "validation_mean_delta_vs_rankblend": variant.get("mean_delta_vs_rankblend"),
+        "transfer_ratio": analysis.get("transfer_ratio_public_delta_over_validation_delta"),
+        "post_analysis_json": str(analysis_json), "post_analysis_md": str(analysis_md),
         "timestamp_kst": ts, "sha256": pf["sha256"], "wandb_url": wandb_url,
     })
     state["last_run_kst"] = now_kst().isoformat()
     state["last_public_best_seen"] = max([x for x in [prev, public_score] if x is not None], default=prev)
     save_state(state)
-    git_commit([pre_path, res_json, res_md, subs_path, post_path, STATE_PATH], f"chore: log autorun submission {ts}")
+    git_commit([pre_path, sim_path, analysis_json, analysis_md, res_json, res_md, subs_path, post_path, STATE_PATH], f"chore: log autorun submission {ts}")
     if beat:
         print(f"NEW_PUBLIC_BEST {public_score} {filename}", flush=True)
     return True
@@ -405,6 +656,8 @@ def main() -> None:
     ap.add_argument("--deadline-kst", default="2026-06-15T23:59:59+09:00")
     ap.add_argument("--sleep-no-quota", type=int, default=300)
     ap.add_argument("--sleep-no-candidate", type=int, default=600)
+    ap.add_argument("--sleep-after-submit", type=int, default=DEFAULT_SLEEP_AFTER_SUBMIT,
+                    help="Cooldown after any completed submission; prevents rapid multi-submit batches.")
     ap.add_argument("--max-submissions", type=int, default=None, help="Optional cap for this process; omit for continuous until deadline.")
     args = ap.parse_args()
     if not POLICY_PATH.exists():
@@ -423,8 +676,11 @@ def main() -> None:
                 if args.max_submissions is not None and submissions_done >= args.max_submissions:
                     log("max submissions reached; exiting")
                     return
-                # Immediately re-check quota and continue; user asked for quota burn, not hourly cadence.
-                time.sleep(5)
+                # User correction on 2026-06-02: do not burn multiple similar quota slots in
+                # one rapid batch. Post-analysis is written inside run_one_submission(); now
+                # cool down before any further candidate search/submission cycle.
+                log(f"post-submission cooldown sleep={args.sleep_after_submit}s")
+                time.sleep(args.sleep_after_submit)
             else:
                 # Determine whether quota is exhausted or no candidate; do not spin hot.
                 ts = stamp()
