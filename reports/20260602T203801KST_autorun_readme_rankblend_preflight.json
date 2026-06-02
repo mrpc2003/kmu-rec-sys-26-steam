@@ -1,0 +1,32 @@
+{
+  "candidate": "submissions/candidate_autorun_rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.2.csv",
+  "sha256": "23f01b4e8354e0b4ee49f2cd266f10b558e1da9f85c1d6b7d357c0488a9cdd22",
+  "pre_submissions_csv": "reports/20260602T203801KST_autorun_readme_rankblend_pre_submissions.csv",
+  "quota_used_today_utc": 0,
+  "quota_remaining_before_submit": 5,
+  "filename_already_submitted": false,
+  "columns": [
+    "ID",
+    "Played"
+  ],
+  "rows": 19998,
+  "expected_rows": 19998,
+  "id_unique": true,
+  "id_order_matches_pairs": true,
+  "labels_binary": true,
+  "label_1": 9999,
+  "label_0": 9999,
+  "bad_users_tophalf": 0,
+  "validation_evidence": {
+    "variant": "rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.2",
+    "base": "current public-best style rank_blend_emb128_emb192",
+    "mean_delta_vs_rankblend": 0.00143362005734482,
+    "positive_splits": "3/3",
+    "fixes": 457,
+    "breaks": 371,
+    "pooled_p_exact": 0.003113947978799427,
+    "fisher_p": 0.027300151694203557,
+    "risk_tier": "aggressive_manual_risk_user_standing_approval"
+  },
+  "preflight_ok": true
+}
