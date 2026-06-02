@@ -18,7 +18,8 @@ Seed paths (uniform eval, col=score_lightgcn):
 Full-test paths (col=score_lightgcn):
   all seeds: artifacts/lightgcn_emb128L4r3_fulltest/seed{S}/test.csv
 
-No Kaggle submission. Report + candidate-file only (submission stays gated on user approval).
+No Kaggle submission inside this script. It produces report + candidate-file only; the
+autonomous runner handles any Kaggle submission after safety gates.
 """
 from __future__ import annotations
 

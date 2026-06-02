@@ -205,7 +205,7 @@ def main():
     print(f"  row_diff vs submitted LightGCN: {row_diff} ({100*row_diff/len(cmp):.2f}%)")
     print(f"\n[forecast] pooled OOF gain {mean_stack-mean_lgcn:+.5f}; "
           f"LightGCN public was 0.76245 (transfer ratio ~1.24 → est +0.012~0.015).")
-    print(f"[STOP] Submission requires explicit user approval.")
+    print(f"[STOP] Candidate materialized only; autonomous runner handles any Kaggle submission after safety gates.")
 
 
 if __name__ == "__main__":

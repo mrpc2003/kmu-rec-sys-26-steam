@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """Continuous aggressive quota runner for KMURecSys26 Steam.
 
-This runner is enabled only because the user explicitly granted standing approval to
-submit validation-positive candidates through the 2026-06-15 deadline. A later user
-correction tightened the operating mode: never burn the daily quota in one rapid batch,
-never submit exact/near-identical tuned CSVs, and always run post-submission calibration
-before the next submission cycle. Hard safety gates remain mandatory: schema/order/top-half
-preflight, duplicate/similarity guards, no hidden-label access, no external scraping, no
-credential printing, and GitHub/W&B logging for each submission.
+This runner is an autonomous submission worker for the 2026-06-15 deadline. Kaggle submit
+runs automatically when candidate, quota, and safety gates pass. It still never burns the
+daily quota in one rapid batch, never submits exact/near-identical tuned CSVs, and always
+runs post-submission calibration before the next submission cycle. Hard safety gates remain
+mandatory: schema/order/top-half preflight, duplicate/similarity guards, no hidden-label
+access, no external scraping, no credential printing, and GitHub/W&B logging for each
+submission.
 """
 from __future__ import annotations
 
@@ -33,7 +33,7 @@ import materialize_readme_rankblend_residual as mat  # noqa: E402
 
 COMP = "kmu-rec-sys-26-steam"
 STATE_PATH = ROOT / "state/aggressive_quota_runner_state.json"
-POLICY_PATH = ROOT / "state/standing_approval_policy.json"
+POLICY_PATH = ROOT / "state/autonomous_submission_policy.json"
 KST = ZoneInfo("Asia/Seoul")
 UTC = dt.timezone.utc
 WANDB_ENTITY = "mrpc2003-kookmin-university"
@@ -456,7 +456,7 @@ def log_wandb(result: dict[str, Any], report_files: list[Path]) -> str | None:
             name=f"autorun-submit-{result['timestamp_kst']}",
             group="aggressive-quota-autorun",
             job_type="kaggle-submission",
-            tags=["kaggle", "steam", "submission", "autorun", "manual-risk", "standing-approval"],
+            tags=["kaggle", "steam", "submission", "autorun", "manual-risk", "autonomous-submit"],
             notes="Aggressive quota autorun submission result. No secrets logged.",
             config={
                 "variant": result.get("variant"),
@@ -598,7 +598,12 @@ def run_one_submission(state: dict[str, Any]) -> bool:
         "similarity_guard": sim,
         "submit_meta": submit_meta,
         "post_submissions_csv": str(post_path),
-        "safety": {"hidden_label_access": False, "external_steam_scraping": False, "standing_user_approval": True},
+        "safety": {
+            "hidden_label_access": False,
+            "external_steam_scraping": False,
+            "autonomous_submission_enabled": True,
+            "manual_gate_required": False,
+        },
     }
     analysis_json, analysis_md, analysis = write_post_submission_analysis(
         ts=ts,
@@ -661,7 +666,7 @@ def main() -> None:
     ap.add_argument("--max-submissions", type=int, default=None, help="Optional cap for this process; omit for continuous until deadline.")
     args = ap.parse_args()
     if not POLICY_PATH.exists():
-        raise SystemExit(f"Missing standing approval policy: {POLICY_PATH}")
+        raise SystemExit(f"Missing autonomous submission policy: {POLICY_PATH}")
     deadline = dt.datetime.fromisoformat(args.deadline_kst)
     if deadline.tzinfo is None:
         deadline = deadline.replace(tzinfo=KST)

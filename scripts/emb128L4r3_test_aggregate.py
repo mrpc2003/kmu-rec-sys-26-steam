@@ -11,8 +11,8 @@ ensemble (0.76145), > the single-seed noise band (0.0007) -> genuine upgrade on 
 public surrogate. Projected public via transfer ratio ~1.26: ~0.776 (extrapolated, since
 the ratio was fit on emb64; treat magnitude as indicative, direction as solid).
 
-No Kaggle submission. Produces the candidate + preflight only; submission needs explicit
-user approval.
+No Kaggle submission inside this script. Produces the candidate + preflight only; the
+autonomous runner handles any Kaggle submission after safety gates.
 """
 from __future__ import annotations
 

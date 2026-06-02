@@ -117,7 +117,7 @@ def main():
         "delta3_vs_ref": d3, "tier": tier,
         "rowdiff_vs_emb128_4seed": rd128, "rowdiff_frac_vs_emb128": round(rd128 / len(sub), 4),
         "rowdiff_vs_2way_blend": rd2, "rowdiff_frac_vs_2way": round(rd2 / len(sub), 4),
-        "note": "Daily-quota public READ candidate (3-capacity diversity). No final-2 consumption. Submission gated on user approval.",
+        "note": "Daily-quota public READ candidate (3-capacity diversity). No final-2 consumption. Candidate-only script; autonomous runner handles any Kaggle submission after safety gates.",
     }
     (ROOT / "reports/20260601_cross_capacity_3way_candidate.json").write_text(json.dumps(out, indent=2, ensure_ascii=False))
     print(json.dumps(out, indent=2, ensure_ascii=False))

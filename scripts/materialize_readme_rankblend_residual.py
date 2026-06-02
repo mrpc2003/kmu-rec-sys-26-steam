@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Materialize README-derived residual candidates on top of the current rank-blend public best.
 
-This is an aggressive/manual-risk end-game script for KMURecSys26 Steam after the user
-explicitly approved submitting even slight validation improvements. It combines the
+This is an aggressive/manual-risk end-game script for KMURecSys26 Steam under the
+autonomous submission policy. It combines the
 current public-best style rank blend (emb128 4-seed + emb192 4-seed) with README-style
 BPR/ALS/hour/pop axes, validates the fixed variants on the calibrated 3-split uniform
 panel, and materializes exactly one top-half CSV when requested.

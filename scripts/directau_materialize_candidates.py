@@ -9,7 +9,8 @@ Only run this AFTER directau_gate.py returns STRONG_SOLO or NEW_AXIS for the cho
 Requires DirectAU full-train test scores at artifacts/directau_fulltest/g{GAMMA}/seed{S}/test.csv
 (produce with: lightgcn_directau.py --mode test --gamma G --seed S --out-dir ...).
 
-Emits candidate CSVs + SHA + preflight. NO Kaggle submission (needs explicit approval).
+Emits candidate CSVs + SHA + preflight. NO Kaggle submission inside this script; the
+autonomous runner handles any Kaggle submission after safety gates.
 """
 from __future__ import annotations
 import argparse

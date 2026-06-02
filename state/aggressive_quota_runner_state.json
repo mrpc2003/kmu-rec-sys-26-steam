@@ -63,9 +63,10 @@
   ],
   "last_wandb_url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/wuj4pp3c",
   "notes": [
-    "Standing user approval: submit any validation-positive candidate after preflight until 2026-06-15 deadline, consuming available quota. First README-rankblend residual did not beat public best but is registered for calibration.",
+    "Autonomous submission policy: submit validation-positive, distinct candidates after preflight until 2026-06-15 deadline automatically. First README-rankblend residual did not beat public best but is registered for calibration.",
     "20260602T210931KST: user correction applied — no rapid five-submit batches; block exact/near-duplicate CSVs and quarantine failed families after post-analysis.",
-    "20260602T211027KST: user correction applied — no rapid five-submit batches; block exact/near-duplicate CSVs and quarantine failed families after post-analysis."
+    "20260602T211027KST: user correction applied — no rapid five-submit batches; block exact/near-duplicate CSVs and quarantine failed families after post-analysis.",
+    "20260602T212500KST: user correction applied — Kaggle submit is fully automated; removed manual-approval gating language while keeping preflight, duplicate/similarity, quota, post-analysis, no-hidden-label, and no-secret gates."
   ],
   "last_run_kst": "2026-06-02T20:53:05.351792+09:00",
   "last_public_best_seen": 0.77825,
@@ -160,5 +161,8 @@
     "rankblend_rank_plus_score_bpr_f32_it100_popa4_w0.2",
     "rankblend_rank_plus_score_bpr_f32_it100_popa8_w0.2"
   ],
-  "last_guard_sweep_json": "reports/20260602T211148KST_autorun_candidate_guard_sweep.json"
+  "last_guard_sweep_json": "reports/20260602T211148KST_autorun_candidate_guard_sweep.json",
+  "autonomous_submission_enabled": true,
+  "policy_path": "state/autonomous_submission_policy.json",
+  "manual_gate_required": false
 }

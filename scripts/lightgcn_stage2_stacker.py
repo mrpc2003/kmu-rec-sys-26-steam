@@ -223,7 +223,7 @@ def main():
     honest_gain = best[1] - summary["mean_lightgcn"]
     if best[0].startswith("mean_stack") and honest_gain > 0:
         md.append(f"- Honest (GroupKFold) stacking beats LightGCN by {honest_gain:+.5f} "
-                  f"→ a full-data stacker is worth materializing as a submission candidate (pending approval).")
+                  f"→ a full-data stacker is worth materializing for autonomous-runner safety checks.")
     else:
         md.append("- On honest user-level GroupKFold, stacking does NOT beat LightGCN alone "
                   "→ the StratifiedKFold gain was leakage from within-user features. "

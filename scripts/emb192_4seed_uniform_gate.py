@@ -13,7 +13,8 @@ Seed paths (uniform eval, col=score_lightgcn, all from lightgcn_capacity_uniform
   2024: artifacts/capacity_uniform/emb192_L4_r3_seed2024/...
   7   : artifacts/capacity_uniform/emb192_L4_r3_seed7/...
 
-No Kaggle submission. Report-only (submission stays gated on 우현's one-file approval).
+No Kaggle submission inside this script. Report-only; the autonomous runner handles any
+Kaggle submission after safety gates.
 """
 from __future__ import annotations
 
@@ -78,7 +79,7 @@ def main() -> None:
         tier = "UPGRADE_MATERIALIZE"
         verdict = (f"emb192 4-seed ensemble {ens_acc} beats emb128 ensemble {EMB128_ENS_REF} by "
                    f"{vs_ref:+.5f} > noise {NOISE} -> GENUINE backbone upgrade. Materialize the "
-                   f"emb192 4-seed full-test candidate and gate it to 우현 for submission approval.")
+                   f"emb192 4-seed full-test candidate for autonomous-runner safety checks.")
     elif vs_ref >= -NOISE:
         tier = "TIED"
         verdict = (f"emb192 4-seed ensemble {ens_acc} vs emb128 ensemble {EMB128_ENS_REF} = "

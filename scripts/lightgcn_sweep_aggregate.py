@@ -230,7 +230,7 @@ def main():
         print(f"  file: {csv_path}")
         print(f"  sha256: {sha}")
         print(f"  rows: {meta['rows']} label1={meta['label_1_count']} label0={meta['label_0_count']}")
-        print(f"\n[STOP] Submission requires explicit user approval.")
+        print(f"\n[STOP] Candidate materialized only; autonomous runner handles any Kaggle submission after safety gates.")
 
 
 if __name__ == "__main__":

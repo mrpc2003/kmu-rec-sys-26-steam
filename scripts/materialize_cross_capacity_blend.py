@@ -64,7 +64,7 @@ def main():
         "rowdiff_frac": round(rowdiff / len(cmp), 4),
         "uniform_gate": "TIED (+0.0005 vs emb128 ref, within noise 0.0007)",
         "ref_emb128_4seed_public": 0.77745,
-        "note": "Daily-quota public READ candidate. Different prediction vector via capacity diversity. No final-2 consumption. Submission gated on user approval.",
+        "note": "Daily-quota public READ candidate. Different prediction vector via capacity diversity. No final-2 consumption. Candidate-only script; autonomous runner handles any Kaggle submission after safety gates.",
     }
     (ROOT / "reports/20260601_cross_capacity_blend_candidate.json").write_text(json.dumps(out, indent=2, ensure_ascii=False))
     print(json.dumps(out, indent=2, ensure_ascii=False))

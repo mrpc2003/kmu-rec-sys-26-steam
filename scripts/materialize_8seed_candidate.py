@@ -57,7 +57,7 @@ def main():
         "rowdiff_vs_emb128_4seed": rd, "rowdiff_frac": round(rd / len(cmp), 4),
         "uniform_gate": "TIED (8seed 0.76465 vs 4seed 0.76505, Δ=-0.0004, within noise 0.0007)",
         "ref_emb128_4seed_public": 0.77745,
-        "note": "Daily-quota public READ candidate. Pure variance reduction, no validation-label learning. Slightly LOWER uniform than 4-seed. No final-2 consumption. Submission gated on user approval.",
+        "note": "Daily-quota public READ candidate. Pure variance reduction, no validation-label learning. Slightly LOWER uniform than 4-seed. No final-2 consumption. Candidate-only script; autonomous runner handles any Kaggle submission after safety gates.",
     }
     (ROOT / "reports/20260601_emb128_8seed_candidate.json").write_text(json.dumps(out, indent=2, ensure_ascii=False))
     print(json.dumps(out, indent=2, ensure_ascii=False))

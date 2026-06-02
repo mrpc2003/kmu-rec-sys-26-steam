@@ -1,36 +1,38 @@
 {
-  "policy_name": "standing_aggressive_quota_approval_until_2026-06-15",
+  "policy_name": "autonomous_aggressive_submission_until_2026-06-15",
   "created_at_kst": "2026-06-02T20:22:29+09:00",
-  "user_directive_summary": "User explicitly changed policy: if even a slight validation improvement is visible, materialize, preflight, submit, and continue consuming available Kaggle quota through the 2026-06-15 deadline while logging GitHub and W&B progress. Later correction: do not burn five quota slots in one rapid batch; each submission must be followed by calibration/post-analysis, exact/near-duplicate CSVs must be blocked, and nearby same-family tuning must not be submitted immediately.",
-  "standing_approval": true,
+  "updated_at_kst": "2026-06-02T21:25:00+09:00",
+  "user_directive_summary": "User enabled autonomous Kaggle submissions through the 2026-06-15 deadline. the runner may submit automatically when its evidence, distinctness, quota, and safety gates pass.",
+  "autonomous_submission_enabled": true,
   "deadline_kst_inclusive": "2026-06-15T23:59:59+09:00",
   "competition_slug": "kmu-rec-sys-26-steam",
   "daily_quota_target": "up_to_5_only_when_distinct_and_post_analysis_approved_not_batch",
   "submission_threshold": {
-    "mode": "aggressive_manual_risk",
+    "mode": "autonomous_aggressive_manual_risk",
     "minimum_validation_signal": "mean_delta_vs_current_public_best_validation_anchor > 0 OR predeclared split-level positive signal with bounded preflight; strict MDE is no longer required under this user override",
     "still_required": [
       "no hidden/test labels",
       "no external answer acquisition or reverse engineering",
       "public package only unless competition rules clearly allow otherwise",
       "candidate file passes schema/order/binary/per-user top-half preflight",
-      "avoid exact duplicate filename/hash submissions",
-      "record validation evidence and risk tier in report",
-      "log W&B summary and GitHub commit after each materialized/submitted candidate",
-      "post-submission calibration before the next submission cycle",
+      "block exact duplicate filename/hash submissions",
       "block exact SHA duplicates and near-duplicate row-label files",
+      "post-submission calibration before the next submission cycle",
       "quarantine nearby same-family variants after non-improving or negative-transfer public result",
-      "minimum autonomous row-diff >= 500 versus prior submitted/current-best CSVs unless manually re-approved"
+      "minimum autonomous row-diff >= 500 versus prior submitted/current-best CSVs unless manually re-enabled for a specific probe",
+      "record validation evidence, similarity guard, and risk tier in report",
+      "log W&B summary and GitHub commit after each materialized/submitted candidate"
     ]
   },
   "safety_flags": {
     "hidden_label_access_allowed": false,
     "external_steam_scraping_allowed": false,
     "duplicate_submission_allowed": false,
-    "submission_without_preflight_allowed": false,
-    "secrets_may_be_printed": false,
-    "rapid_batch_quota_burn_allowed": false,
     "near_duplicate_submission_allowed": false,
-    "same_family_after_negative_transfer_allowed": false
-  }
+    "submission_without_preflight_allowed": false,
+    "rapid_batch_quota_burn_allowed": false,
+    "same_family_after_negative_transfer_allowed": false,
+    "secrets_may_be_printed": false
+  },
+  "manual_gate_required": false
 }

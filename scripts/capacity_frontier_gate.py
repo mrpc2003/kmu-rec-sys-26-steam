@@ -3,8 +3,8 @@
 
 Reads each capacity config's summary.json (uniform row_accuracy) and compares against the
 emb128 single-seed (0.76205) and 4-seed ensemble (0.76505) references. Decides whether any
-capacity point warrants escalation to a full seed ensemble + full-test candidate (which would
-still be gated on 우현's explicit one-file approval before any Kaggle submission).
+capacity point warrants escalation to a full seed ensemble + full-test candidate for the
+autonomous submission runner.
 
 No Kaggle submission. Report-only.
 """

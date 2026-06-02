@@ -6,8 +6,9 @@ backbone that beat emb128 on the uniform public surrogate. Averages raw test-pai
 across seeds {42,123,2024,7} and writes a submission CSV + preflight + SHA.
 
 ONLY run this after the emb192 4-seed uniform gate confirms UPGRADE (emb192 ensemble beats
-emb128 ensemble 0.76505 by > noise 0.0007). No Kaggle submission -- candidate + preflight
-only; submission needs 우현's explicit one-file approval.
+emb128 ensemble 0.76505 by > noise 0.0007). No Kaggle submission inside this script --
+candidate + preflight only; the autonomous runner handles any Kaggle submission after
+safety gates.
 """
 from __future__ import annotations
 
