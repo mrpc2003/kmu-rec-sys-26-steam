@@ -1,0 +1,59 @@
+{
+  "kind": "autorun_post_submission_calibration",
+  "timestamp_kst": "20260603T160806KST",
+  "variant": "boundary_scoreblend_z128_z192_z64_w-0.75",
+  "family": "boundary_scoreblend_z128_z192_z64_w-0.75",
+  "candidate_file": "/opt/data/kaggle/kmu-rec-sys-26-steam/submissions/candidate_autorun_boundary_scoreblend_z128_z192_z64_w-0.75.csv",
+  "sha256": "8966b80f4a5c807f5747d9766e9b004624c9671a8adb2e03e30f38d7733a9822",
+  "publicScore": 0.77755,
+  "previous_public_best": 0.77825,
+  "public_delta_vs_previous_best": -0.0007000000000000339,
+  "validation_mean_delta_vs_rankblend": 0.0006334600253383726,
+  "transfer_ratio_public_delta_over_validation_delta": -1.1050421052632609,
+  "beat_previous_best": false,
+  "row_diffs_vs_references": [
+    {
+      "label": "live_public_best",
+      "file": "/opt/data/kaggle/kmu-rec-sys-26-steam/submissions/candidate_rank_blend_emb128_emb192.csv",
+      "sha256": "835b8b90ce30116a3df7a7575e6ccdaec268af9c1acb01ca0c15c733b3152b2e",
+      "row_diff": 582
+    },
+    {
+      "label": "prior_submit:rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.2",
+      "file": "/opt/data/kaggle/kmu-rec-sys-26-steam/submissions/candidate_autorun_rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.2.csv",
+      "sha256": "23f01b4e8354e0b4ee49f2cd266f10b558e1da9f85c1d6b7d357c0488a9cdd22",
+      "row_diff": 626
+    },
+    {
+      "label": "prior_submit:rankblend_z_plus_score_als_f32_it30_alpha20_popa4_w0.2",
+      "file": "/opt/data/kaggle/kmu-rec-sys-26-steam/submissions/candidate_autorun_rankblend_z_plus_score_als_f32_it30_alpha20_popa4_w0.2.csv",
+      "sha256": "1a2e52854e1771f525e1fcc0f80cb939f82488bcce65866459668d7d8f257c42",
+      "row_diff": 618
+    },
+    {
+      "label": "prior_submit:rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.025",
+      "file": "/opt/data/kaggle/kmu-rec-sys-26-steam/submissions/candidate_autorun_rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.025.csv",
+      "sha256": "85c5c2ddd73f7bbe78e20d0ee682a41650518957fa6d5e0fb8c0942932129a77",
+      "row_diff": 608
+    },
+    {
+      "label": "prior_submit:rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.05",
+      "file": "/opt/data/kaggle/kmu-rec-sys-26-steam/submissions/candidate_autorun_rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.05.csv",
+      "sha256": "85c5c2ddd73f7bbe78e20d0ee682a41650518957fa6d5e0fb8c0942932129a77",
+      "row_diff": 608
+    },
+    {
+      "label": "prior_submit:rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.1",
+      "file": "/opt/data/kaggle/kmu-rec-sys-26-steam/submissions/candidate_autorun_rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.1.csv",
+      "sha256": "85c5c2ddd73f7bbe78e20d0ee682a41650518957fa6d5e0fb8c0942932129a77",
+      "row_diff": 608
+    }
+  ],
+  "quarantine_family": true,
+  "quarantine_reason": "negative_transfer_ratio",
+  "next_submission_policy": {
+    "same_family_allowed": false,
+    "minimum_row_diff_vs_any_prior_csv": 500,
+    "rapid_batch_quota_burn_allowed": false
+  }
+}
