@@ -10,7 +10,8 @@
     "rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.05",
     "rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.1",
     "boundary_scoreblend_z128_z192_z64_w-0.75",
-    "boundary_scoreblend_z128_z192_z64_w2"
+    "boundary_scoreblend_z128_z192_z64_w2",
+    "frontier_z_w1920_w64-0.25"
   ],
   "submission_results": [
     {
@@ -93,6 +94,22 @@
       "timestamp_kst": "20260603T162517KST",
       "sha256": "74b19a3c32559aef6a53b1f68b022f279a48bc7b6983a438dec68cda2b18137e",
       "wandb_url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/9f9w7t5n"
+    },
+    {
+      "variant": "frontier_z_w1920_w64-0.25",
+      "family": "frontier_z_w1920_w64-0.25",
+      "fileName": "candidate_autorun_frontier_z_w1920_w64-0.25.csv",
+      "candidate_file": "/opt/data/kaggle/kmu-rec-sys-26-steam/submissions/candidate_autorun_frontier_z_w1920_w64-0.25.csv",
+      "publicScore": 0.77715,
+      "previous_public_best": 0.77825,
+      "delta_vs_previous_best": -0.0010999999999999899,
+      "validation_mean_delta_vs_rankblend": 0.00026672001066881573,
+      "transfer_ratio": -4.124174999999726,
+      "post_analysis_json": "/opt/data/kaggle/kmu-rec-sys-26-steam/reports/20260603T165352KST_autorun_post_submission_calibration.json",
+      "post_analysis_md": "/opt/data/kaggle/kmu-rec-sys-26-steam/reports/20260603T165352KST_autorun_post_submission_calibration.md",
+      "timestamp_kst": "20260603T165352KST",
+      "sha256": "e2872806738cb511d6c45cd828508cdb2f31f9040a463a8091235271adc26b1d",
+      "wandb_url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/qxh3g4l8"
     }
   ],
   "last_wandb_url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/wuj4pp3c",
@@ -102,7 +119,7 @@
     "20260602T211027KST: user correction applied — no rapid five-submit batches; block exact/near-duplicate CSVs and quarantine failed families after post-analysis.",
     "20260602T212500KST: user correction applied — Kaggle submit is fully automated; removed manual-approval gating language while keeping preflight, duplicate/similarity, quota, post-analysis, no-hidden-label, and no-secret gates."
   ],
-  "last_run_kst": "2026-06-03T16:25:59.617746+09:00",
+  "last_run_kst": "2026-06-03T16:54:34.472533+09:00",
   "last_public_best_seen": 0.77825,
   "quarantined_families": {
     "rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4": {
@@ -158,6 +175,15 @@
       "validation_mean_delta_vs_rankblend": 0.00043342001733681634,
       "transfer_ratio": -5.768076923076592,
       "sha256": "74b19a3c32559aef6a53b1f68b022f279a48bc7b6983a438dec68cda2b18137e"
+    },
+    "frontier_z_w1920_w64-0.25": {
+      "time_kst": "2026-06-03T16:54:25.590698+09:00",
+      "reason": "negative_transfer_ratio",
+      "source_variant": "frontier_z_w1920_w64-0.25",
+      "public_delta_vs_previous_best": -0.0010999999999999899,
+      "validation_mean_delta_vs_rankblend": 0.00026672001066881573,
+      "transfer_ratio": -4.124174999999726,
+      "sha256": "e2872806738cb511d6c45cd828508cdb2f31f9040a463a8091235271adc26b1d"
     }
   },
   "last_similarity_postmortem_json": "reports/20260602T211027KST_autorun_batch_similarity_postmortem.json",
@@ -216,5 +242,15 @@
   "last_guard_sweep_json": "reports/20260602T211148KST_autorun_candidate_guard_sweep.json",
   "autonomous_submission_enabled": true,
   "policy_path": "state/autonomous_submission_policy.json",
-  "manual_gate_required": false
+  "manual_gate_required": false,
+  "errors": [
+    {
+      "time_kst": "2026-06-03T16:50:14.613424+09:00",
+      "error": "ValueError('Cannot parse boundary factory variant: frontier_z_w1920_w64-0.25')"
+    },
+    {
+      "time_kst": "2026-06-03T16:52:15.526892+09:00",
+      "error": "ValueError('Cannot parse boundary factory variant: frontier_z_w1920_w64-0.25')"
+    }
+  ]
 }
