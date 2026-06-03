@@ -9,7 +9,8 @@
     "rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.025",
     "rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.05",
     "rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.1",
-    "boundary_scoreblend_z128_z192_z64_w-0.75"
+    "boundary_scoreblend_z128_z192_z64_w-0.75",
+    "boundary_scoreblend_z128_z192_z64_w2"
   ],
   "submission_results": [
     {
@@ -76,6 +77,22 @@
       "timestamp_kst": "20260603T160806KST",
       "sha256": "8966b80f4a5c807f5747d9766e9b004624c9671a8adb2e03e30f38d7733a9822",
       "wandb_url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/r2f8ywnf"
+    },
+    {
+      "variant": "boundary_scoreblend_z128_z192_z64_w2",
+      "family": "boundary_scoreblend_z128_z192_z64",
+      "fileName": "candidate_autorun_boundary_scoreblend_z128_z192_z64_w2.csv",
+      "candidate_file": "/opt/data/kaggle/kmu-rec-sys-26-steam/submissions/candidate_autorun_boundary_scoreblend_z128_z192_z64_w2.csv",
+      "publicScore": 0.77575,
+      "previous_public_best": 0.77825,
+      "delta_vs_previous_best": -0.0024999999999999467,
+      "validation_mean_delta_vs_rankblend": 0.00043342001733681634,
+      "transfer_ratio": -5.768076923076592,
+      "post_analysis_json": "/opt/data/kaggle/kmu-rec-sys-26-steam/reports/20260603T162517KST_autorun_post_submission_calibration.json",
+      "post_analysis_md": "/opt/data/kaggle/kmu-rec-sys-26-steam/reports/20260603T162517KST_autorun_post_submission_calibration.md",
+      "timestamp_kst": "20260603T162517KST",
+      "sha256": "74b19a3c32559aef6a53b1f68b022f279a48bc7b6983a438dec68cda2b18137e",
+      "wandb_url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/9f9w7t5n"
     }
   ],
   "last_wandb_url": "https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam/runs/wuj4pp3c",
@@ -85,7 +102,7 @@
     "20260602T211027KST: user correction applied — no rapid five-submit batches; block exact/near-duplicate CSVs and quarantine failed families after post-analysis.",
     "20260602T212500KST: user correction applied — Kaggle submit is fully automated; removed manual-approval gating language while keeping preflight, duplicate/similarity, quota, post-analysis, no-hidden-label, and no-secret gates."
   ],
-  "last_run_kst": "2026-06-03T16:08:39.085013+09:00",
+  "last_run_kst": "2026-06-03T16:25:59.617746+09:00",
   "last_public_best_seen": 0.77825,
   "quarantined_families": {
     "rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4": {
@@ -132,6 +149,15 @@
       "validation_mean_delta_vs_rankblend": 0.0006334600253383726,
       "transfer_ratio": -1.1050421052632609,
       "sha256": "8966b80f4a5c807f5747d9766e9b004624c9671a8adb2e03e30f38d7733a9822"
+    },
+    "boundary_scoreblend_z128_z192_z64": {
+      "time_kst": "2026-06-03T16:25:50.717036+09:00",
+      "reason": "negative_transfer_ratio",
+      "source_variant": "boundary_scoreblend_z128_z192_z64_w2",
+      "public_delta_vs_previous_best": -0.0024999999999999467,
+      "validation_mean_delta_vs_rankblend": 0.00043342001733681634,
+      "transfer_ratio": -5.768076923076592,
+      "sha256": "74b19a3c32559aef6a53b1f68b022f279a48bc7b6983a438dec68cda2b18137e"
     }
   },
   "last_similarity_postmortem_json": "reports/20260602T211027KST_autorun_batch_similarity_postmortem.json",
