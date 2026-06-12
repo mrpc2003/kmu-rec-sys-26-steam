@@ -1,0 +1,20 @@
+{
+  "submitted_at_kst": "2026-06-12 23:08 KST",
+  "competition": "kmu-rec-sys-26-steam",
+  "submitted_file": "artifacts/final_ecampus_package_20260612T2257KST/csv/final_slot1_rank_blend_emb128_emb192_LABEL.csv",
+  "candidate": "final_slot1_rank_blend_emb128_emb192_LABEL",
+  "sha256": "1d38c3edf7afae2bbcde9f3d548aa92276323379af2c0c143b66844f25cef052",
+  "status": "SubmissionStatus.COMPLETE",
+  "public_score": 0.77825,
+  "leaderboard_rank_after_submission": 4,
+  "team_name": "mrpc2003",
+  "message": "FINAL slot1 normalized rank-blend emb128+emb192; same predictions as public-best candidate_rank_blend_emb128_emb192, header ID/Label for eCampus; SHA 1d38c3ed; no external metadata/hidden labels.",
+  "preflight_report": "reports/20260612T2308KST_final_slot1_kaggle_submission_preflight.json",
+  "safety": {
+    "user_approval_message": "[우현] kaggle에 제출을 해야돼",
+    "external_metadata_used": false,
+    "hidden_labels_used": false,
+    "kaggle_submit_executed": true
+  },
+  "note": "This submission is the ID,Label-normalized package copy of the existing public-best rank-blend predictions; score matched 0.77825."
+}

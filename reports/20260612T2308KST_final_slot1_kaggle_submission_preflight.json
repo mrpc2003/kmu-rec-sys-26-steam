@@ -1,0 +1,21 @@
+{
+  "candidate": "final_slot1_rank_blend_emb128_emb192_LABEL",
+  "file": "artifacts/final_ecampus_package_20260612T2257KST/csv/final_slot1_rank_blend_emb128_emb192_LABEL.csv",
+  "sha256": "1d38c3edf7afae2bbcde9f3d548aa92276323379af2c0c143b66844f25cef052",
+  "header": [
+    "ID",
+    "Label"
+  ],
+  "rows": 19998,
+  "id_contiguous": true,
+  "id_unique": true,
+  "labels_binary": true,
+  "label_1": 9999,
+  "label_0": 9999,
+  "kaggle_submit_approved_by_user_message": "[우현] kaggle에 제출을 해야돼",
+  "created_at_kst": "2026-06-12 23:08 KST",
+  "safety": {
+    "external_metadata_used": false,
+    "hidden_labels_used": false
+  }
+}
