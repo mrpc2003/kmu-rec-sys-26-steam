@@ -1,0 +1,134 @@
+{
+  "package_id": "20260612T2257KST",
+  "created_at_kst": "2026-06-12 22:57 KST",
+  "purpose": "Final-2 eCampus reproducibility package checkpoint; no Kaggle submission executed.",
+  "git_state": {
+    "branch": "main",
+    "commit": "1e1b05e470f115ac2f5c5ed71c91161a95d344f0",
+    "dirty_status_line_count": 2026
+  },
+  "competition_rules_reference": "docs/competition_brief_and_rules.md",
+  "source_data_fingerprints": {
+    "train.json": "2258fa550ae4835fe041d54bcbae4337c3bed8774396dee9ceafbe6a3041daa2",
+    "pairs.csv": "58678f4a851709bc130a5c3f2a0a3a622ae8b41d74d255c7c517537a426c2bae"
+  },
+  "safety": {
+    "kaggle_submit_executed": false,
+    "hidden_labels_used": false,
+    "external_steam_metadata_used": false,
+    "new_submissions_directory_csv_created": false
+  },
+  "final_slots": [
+    {
+      "slot": 1,
+      "name": "rank_blend_emb128_emb192",
+      "role": "public-best / manual-risk slot",
+      "public_score": 0.77825,
+      "source_submitted_file": "submissions/candidate_rank_blend_emb128_emb192.csv",
+      "source_submitted_sha256": "835b8b90ce30116a3df7a7575e6ccdaec268af9c1acb01ca0c15c733b3152b2e",
+      "package_original_played_csv": {
+        "path": "artifacts/final_ecampus_package_20260612T2257KST/csv/candidate_rank_blend_emb128_emb192_played.csv",
+        "sha256": "835b8b90ce30116a3df7a7575e6ccdaec268af9c1acb01ca0c15c733b3152b2e",
+        "header": [
+          "ID",
+          "Played"
+        ],
+        "rows": 19998,
+        "id_min": 0,
+        "id_max": 19997,
+        "id_unique": true,
+        "id_contiguous_0_to_n_minus_1": true,
+        "labels_binary": true,
+        "label_1": 9999,
+        "label_0": 9999
+      },
+      "package_official_label_csv": {
+        "path": "artifacts/final_ecampus_package_20260612T2257KST/csv/final_slot1_rank_blend_emb128_emb192_LABEL.csv",
+        "sha256": "1d38c3edf7afae2bbcde9f3d548aa92276323379af2c0c143b66844f25cef052",
+        "header": [
+          "ID",
+          "Label"
+        ],
+        "rows": 19998,
+        "id_min": 0,
+        "id_max": 19997,
+        "id_unique": true,
+        "id_contiguous_0_to_n_minus_1": true,
+        "labels_binary": true,
+        "label_1": 9999,
+        "label_0": 9999
+      },
+      "normalization": "Only second column header changed from Played to Label; IDs and prediction values unchanged.",
+      "validation_evidence": {
+        "uniform_3split_mean_delta_vs_emb128": 0.00083,
+        "split_deltas": [
+          0.0017,
+          0.0003,
+          0.0005
+        ],
+        "mcnemar_p_by_split": [
+          0.0727,
+          0.7785,
+          0.5972
+        ],
+        "fisher_combined_p": 0.3421,
+        "strict_gate": false
+      },
+      "strict_gate": false
+    },
+    {
+      "slot": 2,
+      "name": "lightgcn_emb128L4r3_4seed",
+      "role": "stable reproducibility slot",
+      "public_score": 0.77745,
+      "uniform_surrogate": 0.76505,
+      "source_file": "artifacts/lightgcn_emb128L4r3_fulltest/test_candidate/candidate_lightgcn_emb128L4r3_seed_ens.csv",
+      "source_sha256": "7e3191dead2d85637dbf01f7ad50aeb61394c6b709959f2c2850bc53c430c195",
+      "package_official_label_csv": {
+        "path": "artifacts/final_ecampus_package_20260612T2257KST/csv/final_slot2_lightgcn_emb128L4r3_4seed_LABEL.csv",
+        "sha256": "7e3191dead2d85637dbf01f7ad50aeb61394c6b709959f2c2850bc53c430c195",
+        "header": [
+          "ID",
+          "Label"
+        ],
+        "rows": 19998,
+        "id_min": 0,
+        "id_max": 19997,
+        "id_unique": true,
+        "id_contiguous_0_to_n_minus_1": true,
+        "labels_binary": true,
+        "label_1": 9999,
+        "label_0": 9999
+      },
+      "config": {
+        "emb_dim": 128,
+        "n_layers": 4,
+        "reg": 0.001,
+        "lr": 0.001,
+        "epochs": 200,
+        "batch_size": 4096,
+        "seeds": [
+          42,
+          123,
+          2024,
+          7
+        ]
+      },
+      "verify_command": "uv run --with numpy --with pandas --with scipy python3 scripts/reproduce_submission_emb128.py --verify-existing",
+      "sha_match": true
+    }
+  ],
+  "slot_comparison": {
+    "row_diff_slot1_vs_slot2": 368,
+    "row_diff_frac": 0.0184018401840184
+  },
+  "package_files": {
+    "manifest": "artifacts/final_ecampus_package_20260612T2257KST/MANIFEST.json",
+    "readme": "artifacts/final_ecampus_package_20260612T2257KST/README.md",
+    "report": "reports/20260612T2257KST_final_ecampus_repro_package.md",
+    "normalize_script": "artifacts/final_ecampus_package_20260612T2257KST/scripts/normalize_rank_blend_header.py",
+    "rank_blend_preflight": "artifacts/final_ecampus_package_20260612T2257KST/reports/rank_blend_emb128_emb192_preflight.json",
+    "archive_tar_gz": "artifacts/final_ecampus_package_20260612T2257KST.tar.gz"
+  },
+  "tracked_copy_note": "Metadata-only manifest copy for GitHub. Prediction CSVs and archive remain under ignored artifacts/ and are not committed."
+}
