@@ -1,182 +1,197 @@
 [English](README.md) | 한국어
 
-# KMU RecSys 26 Steam
+<div align="center">
 
-Kaggle [`kmu-rec-sys-26-steam`](https://www.kaggle.com/competitions/kmu-rec-sys-26-steam) 추천시스템 대회 작업 저장소입니다.
+# 🎮 KMU RecSys 26 Steam
 
-이 저장소는 **재현 가능한 코드, 검증 리포트, 실험 추적 설정, 공개 가능한 요약 산출물**만 보관합니다. 원본 Kaggle 데이터, 대용량 score/artifact, W&B local run blob, 제출 후보 CSV, credential은 커밋하지 않습니다.
+### LightGCN, 검증 리포트, 재현 패키지로 정리한 Kaggle Steam 플레이 예측 파이프라인
 
-## 대회 요약
+*원본 Kaggle 데이터와 제출 CSV는 로컬에만 두고, 공개 가능한 코드·리포트·검증 기록만 남긴 추천시스템 대회 작업 저장소입니다.*
 
-자세한 대회 설명·제출/윤리 규칙·재현성 기준은 [`docs/competition_brief_and_rules.md`](docs/competition_brief_and_rules.md)에 정리합니다.
+<p>
+  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
+  <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white" alt="PyTorch" />
+  <img src="https://img.shields.io/badge/Kaggle-20BEFF?style=for-the-badge&logo=kaggle&logoColor=white" alt="Kaggle" />
+  <img src="https://img.shields.io/badge/Weights_&_Biases-FFBE00?style=for-the-badge&logo=weightsandbiases&logoColor=black" alt="W&B" />
+  <img src="https://img.shields.io/badge/uv-DE5FE9?style=for-the-badge&logo=astral&logoColor=white" alt="uv" />
+</p>
 
-- Task: Steam 리뷰 데이터 기반 `userID, gameID` pair의 `played` 여부를 예측하는 이진 추천 문제
-- Train data: `data/train.json`에 약 **175,000건**의 리뷰가 있으며, 각 인스턴스는 `userID`, `gameID`, `text`, `date`, `hours`, `hours_transformed=log2(1+hours)` 필드를 포함합니다.
-- Test pairs: 대회 설명상 `pairs_Played.csv`, 현재 로컬 파일명은 `data/pairs.csv`입니다. 각 row의 `userID, gameID`에 대해 played 예측값을 제출합니다.
-- 제출 형식: `ID,Label`, `Label ∈ {0,1}`
-- 평가 지표: Accuracy. 테스트셋은 played/non-played가 **정확히 1:1**이며, Public LB는 테스트셋 절반만 반영하고 전체 점수는 대회 종료 후 공개됩니다.
-- Baseline: `baseline.py`는 user 무관 popularity baseline, `baseline_bpr.py`는 popularity + BPR baseline입니다.
-- 현재 로컬 관찰: `pairs.csv`의 각 user 후보 수가 짝수이고, 후보별 상위 절반을 `Label=1`로 내는 top-half ranking 제출이 자연스럽습니다.
-- 주요 검증 전략: 실제 test 구조를 반영하기 위해 user 단위 후보군을 유지하고, unseen negative sampling은 uniform보다 `sqrt(popularity)`/pop-bin이 더 현실적인 surrogate로 취급합니다.
+<p>
+  <img src="https://img.shields.io/badge/Status-Public_Archive-2E7D32?style=flat-square" alt="Status" />
+  <img src="https://img.shields.io/badge/Course-KMU_AI-1F4E79?style=flat-square" alt="Course" />
+  <img src="https://img.shields.io/badge/Problem-Binary_RecSys-365F91?style=flat-square" alt="Problem" />
+  <img src="https://img.shields.io/badge/Best_Public-0.77825-B79A57?style=flat-square" alt="Best public score" />
+  <img src="https://img.shields.io/badge/Raw_Data-Excluded-555555?style=flat-square" alt="Raw data excluded" />
+  <img src="https://img.shields.io/badge/License-Not_specified-lightgrey?style=flat-square" alt="License not specified" />
+</p>
 
-## 현재 작업 원칙
+</div>
 
-- Kaggle 제출은 사용자 명시 승인 후 **한 파일씩만** 수행합니다.
-- Steam 리뷰 직접 수집, 리버스엔지니어링, hidden label 외부 획득, private test 역추적 등은 금지합니다.
-- 공개되어 누구나 사용할 수 있는 pretrained 모델은 사용할 수 있으나, 사용 근거와 재현 조건을 기록합니다.
-- 최종 선택 가능한 제출은 2개이며, 선택한 제출은 eCampus에 동일 결과 재현 코드/조건/실행 절차를 제출해야 하므로 후보 CSV SHA256, 생성 명령, seed, 데이터 fingerprint, 환경, Git 상태를 기록합니다.
-- validation 우선으로 실험하고, W&B에는 `no-submit` tag를 유지합니다.
-- 기본 W&B artifact mode는 `summary`입니다. 큰 CSV 업로드가 필요할 때만 `full`을 명시합니다.
-- raw data와 생성 캐시는 `.gitignore`로 제외합니다.
-- GitHub에는 코드/리포트 중심으로 올리고, `data/`, `artifacts/`, `submissions/`, `wandb_runs/`는 로컬 전용으로 유지합니다.
+---
 
-## 주요 디렉터리
+## 📑 목차
 
-| 경로 | 내용 | Git |
-|---|---|---|
-| `docs/` | 대회 설명, 운영/윤리/재현성 규칙 | tracked |
-| `scripts/` | validation split, scoring, blending, W&B logging, EDA 스크립트 | tracked |
-| `reports/` | EDA/validation/W&B/OpenCode/제출 preflight 리포트 | tracked, 단 대용량 CSV preview 일부 제외 |
-| `data/` | 로컬 Kaggle 원본 데이터 | ignored |
-| `artifacts/` | 로컬 score/artifact 산출물 | ignored |
-| `submissions/` | 수동 제출용 CSV 보관 위치 | ignored |
-| `wandb_runs/` | W&B local cache/run blobs | ignored |
+- [🧭 소개](#-소개)
+- [🎯 핵심 결과](#-핵심-결과)
+- [🏗 아키텍처](#-아키텍처)
+- [🛠 기술 스택](#-기술-스택)
+- [🗂 프로젝트 구조](#-프로젝트-구조)
+- [🚀 빠른 시작](#-빠른-시작)
+- [📝 재현 방법](#-재현-방법)
+- [🔒 공개 안전성](#-공개-안전성)
+- [👤 작성자](#-작성자)
 
-## 현재 검증 결과 요약
+## 🧭 소개
 
-Stage2 기준으로 ItemKNN BM25, EASE, ALS CF score를 만들고, user별 후보군 안에서 score ranking을 top-half `Label=1`로 변환했습니다. 현재 첫 제출 후보는 validation surrogate에서 가장 안정적으로 높은 `score_blend_mean_z`입니다.
+이 저장소는 Kaggle [`kmu-rec-sys-26-steam`](https://www.kaggle.com/competitions/kmu-rec-sys-26-steam) 대회 작업을 정리한 공간입니다. 주어진 `userID, gameID` 쌍에 대해 해당 사용자가 그 게임을 플레이했는지 예측하는 이진 추천 문제를 다룹니다.
 
-| 검증 split / family | best score column | row accuracy | per-user mean accuracy |
-|---|---:|---:|---:|
-| Random sqrt-pop / Stage2 blend | `score_blend_mean_z` | 0.659732 | 0.675421 |
-| Random sqrt-pop / ItemKNN+EASE | `score_itemknn_bm25_top3` | 0.650130 | 0.667937 |
-| Random sqrt-pop / ALS CF | `score_als_f32_it30_alpha20_popa2` | 0.650930 | 0.670208 |
-| Recent holdout / Stage2 blend | `score_blend_mean_z` | 0.626025 | 0.629962 |
-| Random pop-bin / Stage2 blend | `score_blend_mean_z` | 0.590818 | 0.606171 |
-| Random uniform / Proto | `score_itemknn_sum` | 0.740648 | 0.764331 |
+> TL;DR — Public 최고 점수는 emb128·emb192 LightGCN 계열 rank blend가 냈고, 재현 안정성은 emb128 LightGCN 4-seed 앙상블이 가장 좋았습니다.
 
-Uniform split은 **실제 public LB의 직접 surrogate**임이 OOD 게이트와 메커니즘 테스트로 확인됐습니다(상세: `reports/20260530_ood_public_surrogate_finding.md`, `reports/20260530_popcorr_mechanism.md`). seed 앙상블의 uniform Δ +0.00700이 실제 public Δ +0.00880으로 전이비 1.26으로 전이됐고, 이는 단일 LightGCN의 1.24와 일치합니다. 따라서 후보 게이트는 sqrt-pop/recent보다 **uniform split을 1차 surrogate**로 사용하고, hard 샘플러는 robustness floor로만 활용합니다.
+Git에는 공개해도 되는 자료만 남겼습니다. 소스 코드, 검증 스크립트, 실험 리포트, 일부 그림, 재현성 기록은 추적하지만, 원본 Kaggle 파일, score matrix, W&B local run, 최종 제출 CSV, credential은 올리지 않습니다.
 
-## 첫 제출 후보
+## 🎯 핵심 결과
 
-- 후보 파일: `artifacts/scores/test_pairs_full_train_stage2_blend/prediction_csv/candidate_score_blend_mean_z.csv`
-- SHA256: `5f93cf1be4066c1bb28dac846a0ba3849807b01e367dd9ca810a73146d458d34`
-- 행 수: `19,998`
-- 컬럼: `ID,Label`
-- Label 분포: `0=9,999`, `1=9,999`
-- ID: `0..19997` 연속
-- User별 top-half 제약 위반: `0` users
-- 공식 `played_bpr.csv` 대비 다른 행: `3,566`
-- 공식 popularity baseline 대비 다른 행: `4,876`
+| 슬롯 / 역할 | 후보 | Public score | Rows | SHA256 | 근거 |
+|---|---|---:|---:|---|---|
+| **Final slot 1 / public-best 보존** | **Rank blend: emb128 + emb192** | **0.77825** | **19,998** | `1d38c3ed…` | [`final_slot1` 리포트](reports/20260612T2308KST_final_slot1_kaggle_submission_result.md) |
+| Final slot 2 / 안정형 backbone | LightGCN emb128 L4 reg1e-3, 4 seeds | 0.77745 | 19,998 | `7e3191de…` | [`emb128` 재현 리포트](reports/20260530_ecampus_repro_emb128L4r3_077745.md) |
+| 이전 anchor | LightGCN emb64 L3 reg1e-4, 4 seeds | 0.77125 | 19,998 | `dcc578de…` | [`seed ensemble` 리포트](reports/20260530_ecampus_repro_seed_ens_077125.md) |
+| 첫 제출 baseline blend | BM25 + EASE + ALS mean-z blend | 0.74594 | 19,998 | `5f93cf1b…` | [`submission` 리포트](reports/20260530T124312KST_submission_analysis.md) |
 
-## 제출 기록
+Rank blend가 Public 점수는 가장 높았지만, 내부 validation margin은 강하지 않았습니다. 그래서 최종 정리에서는 public-best 보존 후보와 byte-identical 재현성이 좋은 emb128 backbone을 나눠 기록했습니다.
 
-| KST timestamp | submitted file | public score | status | report |
-|---|---|---:|---|---|
-| `20260530T124312KST` | `candidate_score_blend_mean_z.csv` | **0.74594** | `SubmissionStatus.COMPLETE` | `reports/20260530T124312KST_submission_analysis.md` |
+## 🏗 아키텍처
 
-첫 제출 결과는 random sqrt-pop validation surrogate `0.659732`보다 높게 나왔습니다. 따라서 다음 단계는 단순 popularity/BPR 재제출보다, 현재 public anchor를 기준으로 같은 top-half ranking 제약을 유지하면서 blend/sequence/graph 계열을 재검증하는 방향이 좋습니다.
+```mermaid
+flowchart LR
+  subgraph DATA["📥 Data (local only)"]
+    KAGGLE["Kaggle train.json / pairs.csv"]
+    LOCAL["data/ ignored by Git"]
+  end
 
-## 최신 연구 기반 탐색
+  subgraph VAL["🧪 Validation"]
+    SPLITS["user-level heldout splits"]
+    NEG["uniform / sqrt-pop / pop-bin negatives"]
+    TOPHALF["per-user top-half decode"]
+  end
 
-- Paper-guided synthesis: `reports/20260530_paper_guided_recsys_exploration.md`
-- ArXiv search raw results: `reports/20260530_arxiv_paper_search_results.json`
-- Feature feasibility probe: `reports/20260530_paper_guided_feature_probe.md`
-- Review TF-IDF probe: `reports/20260530_review_tfidf_probe.md`
-- AI-Q deep research (next-step): `reports/20260530_aiq_deep_next_curated.md` (raw: `reports/20260530_aiq_deep_next_raw.json`)
-- Paper-guided next-step run: `reports/20260530_paper_guided_next_steps.md`, 해석: `reports/20260530_paper_guided_next_steps_summary.md`
+  subgraph MODELS["🤖 Models"]
+    LGCN["LightGCN"]
+    CF["ItemKNN / EASE / ALS / GF-CF"]
+    PROBES["boundary, semantic, pseudo-label probes"]
+  end
 
-현재 결론은 대형 LLM/graph 모델을 바로 구현하기보다, **PURL/CW loss류의 implicit-feedback 보정**, **ICPNS류의 community-aware negative sampling/validation**, **TFPS류의 time-decay confidence**를 먼저 탐색하는 것입니다. 첫 번째 next-step 라운드에서는 time-decay ItemKNN이 가장 안정적인 단일 axis로, review pseudo-category는 community/popularity가 통제된 stress split의 보완축으로 확인되었고, CW-lite 구현은 디버깅이 필요한 상태입니다.
+  subgraph AUDIT["📊 Evidence"]
+    REPORTS["reports/*.md / *.json / figures"]
+    PREFLIGHT["schema, SHA, label-balance checks"]
+    PUBLIC["Kaggle public-score records"]
+  end
 
-## W&B
+  subgraph OUTPUT["📦 Local outputs"]
+    SUBMIT["submissions/ ignored"]
+    FINAL["final_package/ ignored"]
+  end
 
-- Entity: `mrpc2003-kookmin-university`
-- Project: `kmu-rec-sys-26-steam`
-- Project URL: https://wandb.ai/mrpc2003-kookmin-university/kmu-rec-sys-26-steam
-
-기존 산출물 후처리 기록 예시:
-
-```bash
-cd /opt/data/kaggle/kmu-rec-sys-26-steam
-export HOME=/opt/data/home
-export WANDB_DIR=/opt/data/kaggle/kmu-rec-sys-26-steam/wandb_runs
-
-env -u VIRTUAL_ENV UV_NO_ACTIVE_VENV=1 HOME=/opt/data/home WANDB_DIR="$WANDB_DIR" \
-  uv run --with wandb python scripts/log_wandb_results.py \
-    --score-dir artifacts/scores/val_random_sqrtpop_seed42_stage2_blend \
-    --run-name-prefix 20260530-example- \
-    --group 20260530-existing-results \
-    --tags validation-harness,stage2,no-submit \
-    --artifact-mode summary
+  KAGGLE --> LOCAL --> SPLITS --> NEG --> TOPHALF
+  TOPHALF --> LGCN
+  TOPHALF --> CF
+  LGCN --> PROBES
+  CF --> PROBES
+  LGCN --> PREFLIGHT
+  PROBES --> REPORTS
+  PREFLIGHT --> SUBMIT --> FINAL
+  PUBLIC --> REPORTS
 ```
 
-## 로컬 실행 예시
+이 저장소는 원본 데이터를 보관하는 곳이 아니라 의사결정 기록을 남기는 곳입니다. 로컬 데이터로 validation과 후보 생성을 수행하고, Git에는 어떤 축을 시도했는지, 어떤 gate에서 닫혔는지, Kaggle Public 결과와 재현성 검증이 어땠는지를 남겼습니다.
 
-```bash
-cd /opt/data/kaggle/kmu-rec-sys-26-steam
+## 🛠 기술 스택
 
-env -u VIRTUAL_ENV UV_NO_ACTIVE_VENV=1 \
-  uv run --with numpy --with pandas --with scipy --with wandb \
-  python scripts/score_popularity_itemknn_ease.py \
-    --split-dir artifacts/validation/val_random_sqrtpop_seed42 \
-    --out-dir artifacts/scores/example_run \
-    --methods popularity,itemknn_bm25,ease,ease_htr \
-    --ease-lambdas 300,1000 \
-    --wandb \
-    --wandb-tags validation,stage2,no-submit \
-    --wandb-artifact-mode summary
+| 역할 | 사용 도구 |
+|---|---|
+| 모델링 | PyTorch, LightGCN, ItemKNN, EASE, ALS/WMF, GF-CF 계열 probe |
+| 검증 | NumPy, pandas, SciPy, user-level candidate split, per-user top-half decoding |
+| 실험 추적 | W&B summary logging, JSON/Markdown audit report |
+| 에이전트 리뷰 | OpenCode / Hephaestus, AI-Q research note, 수동 safety gate |
+| 패키징 | SHA256 preflight, final-slot report, eCampus 재현 manifest |
+
+## 🗂 프로젝트 구조
+
+```text
+kmu-rec-sys-26-steam/
+├── README.md / README.ko.md          # 공개용 이중 언어 개요
+├── docs/                             # 대회 규칙과 운영 메모
+├── scripts/                          # ★ 모델링, 검증, materialization, audit 코드
+├── reports/                          # ★ 결과, preflight, 그림, 의사결정 근거
+├── state/                            # 자동화 판단을 설명하는 작은 상태 파일
+├── data/                             # ignored: 원본 Kaggle 파일
+├── artifacts/                        # ignored: score matrix, 모델 출력, seed별 test score
+├── submissions/                      # ignored: 생성된 Kaggle CSV
+├── final_package/                    # ignored: 외부 제출용 최종 label CSV
+├── wandb_runs/                       # ignored: W&B local cache
+└── .gitignore                        # 공개 안전장치
 ```
 
-## 제출 preflight 예시
+## 🚀 빠른 시작
+
+먼저 공개 저장소를 clone합니다.
 
 ```bash
-cd /opt/data/kaggle/kmu-rec-sys-26-steam
-export HOME=/opt/data/home
-
-python3 - <<'PY'
-import csv
-from pathlib import Path
-p = Path('artifacts/scores/test_pairs_full_train_stage2_blend/prediction_csv/candidate_score_blend_mean_z.csv')
-with p.open(newline='') as f:
-    rows = list(csv.DictReader(f))
-assert rows and list(rows[0].keys()) == ['ID', 'Label']
-assert len(rows) == 19998
-assert [int(r['ID']) for r in rows] == list(range(len(rows)))
-assert {int(r['Label']) for r in rows} <= {0, 1}
-print('ok')
-PY
+git clone https://github.com/mrpc2003/kmu-rec-sys-26-steam.git
+cd kmu-rec-sys-26-steam
 ```
 
-## 보안/업로드 제외
+대회 데이터는 Kaggle에서 직접 받은 뒤, 스크립트가 기대하는 로컬 ignored 경로에 둡니다. 원본 데이터는 이 저장소에서 재배포하지 않습니다.
 
-커밋 전 다음을 확인합니다.
+```text
+data/raw/public/data/train.json
+data/raw/public/data/pairs.csv
+```
+
+제출 없이 스크립트 CLI만 확인하려면 아래 명령을 실행합니다.
 
 ```bash
-git status --short
-git diff --cached --stat
+uv run --with numpy --with pandas --with scipy \
+  python scripts/build_validation_splits.py --help
 ```
 
-업로드 제외 대상:
+## 📝 재현 방법
 
-- `data/`
-- `artifacts/`
-- `submissions/`
-- `wandb_runs/`
-- `.sisyphus/`
-- `.env`, `.netrc`, token/key/credential 파일
+최종 안정형 backbone은 `scripts/reproduce_submission_emb128.py`로 검증합니다. 기본 `--verify-existing` 모드는 로컬 `artifacts/` 아래 seed별 score 파일을 기대합니다. 이 파일들은 생성 산출물이므로 Git에는 포함하지 않았습니다.
 
-## 제출 결과
+```bash
+uv run --with numpy --with pandas --with scipy \
+  python scripts/reproduce_submission_emb128.py --verify-existing
+```
 
-| 일자(KST) | 후보 | Public | Δ vs 이전 best | 비고 |
-|---|---|---:|---:|---|
-| 2026-05-30 12:44 | Stage2 mean-z blend (BM25 + EASE + ALS) | 0.74594 | — | 첫 제출 |
-| 2026-05-30 18:48 | LightGCN full-train (BPR 200ep, emb64 L3 reg1e-4, seed42) | 0.76245 | +0.01651 | anchor, 재현 SHA `a3dbe04…`, transfer ratio 1.24 |
-| 2026-05-30 21:03 | logreg stacker (LightGCN+Stage2, within-user z/rank) | 0.75355 | −0.00890 | ❌ 회귀, 검증 negative 샘플러 과적합 (`reports/20260530_stacker_submission_post_analysis.md`) |
-| 2026-05-31 01:01 | 4-seed LightGCN 앙상블 (emb64 L3 reg1e-4, seeds 42/123/2024/7) | 0.77125 | +0.00880 | uniform 게이트 +0.00700 → public +0.00880(전이비 1.26), 재현 SHA `dcc578de…` (`reports/20260530_ecampus_repro_seed_ens_077125.md`) |
-| 2026-05-31 02:?? | **4-seed LightGCN 앙상블 (emb128 L4 reg1e-3, seeds 42/123/2024/7)** | **0.77745** | **+0.00620** | 🏆 최종 best, uniform 게이트 +0.0036 vs emb64 → public +0.0062(전이비 1.72), 투영 ~0.776 적중, 재현 SHA `7e3191de…` (`reports/20260530_ecampus_repro_emb128L4r3_077745.md`) |
+원본 Kaggle 데이터에서 GPU로 다시 학습하려면 같은 스크립트에 `--from-scratch`를 붙입니다. 네 개 seed를 학습한 뒤 후보 CSV를 다시 만들고, 기대 SHA와 일치하는지 확인합니다.
 
-상세: `reports/20260530T184752KST_lightgcn_full_train_post_analysis.md`,
-`reports/20260530_stacker_submission_post_analysis.md`,
-`reports/20260530_seed_ensemble_uniform_gate.md`,
-`reports/20260530_research_to_application_synthesis.md`
+```bash
+uv run --python 3.13 \
+  --with torch==2.10.0 --with numpy --with pandas --with scipy \
+  python scripts/reproduce_submission_emb128.py --from-scratch --device cuda:0
+```
 
+재현 스크립트는 Kaggle 제출을 실행하지 않습니다. 실제 제출은 별도 승인 뒤 진행했고, 결과는 리포트에 기록했습니다.
+
+## 🔒 공개 안전성
+
+이 저장소는 별도 public-readiness audit 뒤 공개했습니다.
+
+- current forbidden prefixes: `0`
+- history forbidden prefixes after cleanup: `0`
+- credential findings: `0`
+- blobs over 100 MB: `0`
+- fresh public clone verification: passed
+
+감사 기록은 [`reports/20260616T2352KST_public_readiness_audit.md`](reports/20260616T2352KST_public_readiness_audit.md)에 남겼습니다. 아직 top-level code license는 고르지 않았기 때문에, 공개 열람은 가능하지만 재사용 조건은 명시되어 있지 않습니다.
+
+## 👤 작성자
+
+[@mrpc2003](https://github.com/mrpc2003) — 김우현, 국민대학교 인공지능전공.
+
+<div align="center">
+
+<sub>PyTorch, Kaggle validation discipline, no-submit safety check로 정리한 추천시스템 대회 기록입니다.</sub>
+
+</div>
