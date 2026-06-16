@@ -1,0 +1,180 @@
+{
+  "timestamp_kst": "2026-06-16 23:52:03 KST",
+  "repo_view_before_visibility_change": {
+    "defaultBranch": "main",
+    "isPrivate": true,
+    "nameWithOwner": "mrpc2003/kmu-rec-sys-26-steam",
+    "url": "https://github.com/mrpc2003/kmu-rec-sys-26-steam",
+    "visibility": "PRIVATE"
+  },
+  "head_after_history_cleanup": "8bdfa8e99afb71eba52303fe66d2e5874ad857f5",
+  "tracked_count": 798,
+  "tracked_total_mb": 9.992,
+  "current_forbidden_prefix_count": 0,
+  "history_forbidden_prefix_count": 0,
+  "current_secret_hit_count": 0,
+  "history_secret_hit_count": 0,
+  "current_secret_hits": [],
+  "history_secret_hits": [],
+  "local_absolute_path_file_count": 234,
+  "local_absolute_path_examples": [
+    "README.ko.md",
+    "README.md",
+    "reports/20260530_ecampus_repro_emb128L4r3_077745.md",
+    "reports/20260530_ecampus_repro_lightgcn_076245.md",
+    "reports/20260530_ecampus_repro_seed_ens_077125.md",
+    "reports/20260530_emb128L4r3_test_candidate.json",
+    "reports/20260530_emb128L4r3_test_candidate.md",
+    "reports/20260530_opencode_cw_timeknn_run.log",
+    "reports/20260530_opencode_cw_timeknn_task.md",
+    "reports/20260530_seed_ensemble.json",
+    "reports/20260530_wandb_tracking_guide.md",
+    "reports/20260531_emb192L4r3_test_candidate.json",
+    "reports/20260531_emb192L4r3_test_candidate.md",
+    "reports/20260601_boundary_feature_factory_opencode_review_prompt.md",
+    "reports/20260601_bsvd_opencode_review_prompt.md",
+    "reports/20260601_cross_capacity_blend_candidate.json",
+    "reports/20260601_deep_data_signature_eda.md",
+    "reports/20260601_ecampus_repro_emb128_verification.json",
+    "reports/20260601_ecampus_repro_emb64_verification.json",
+    "reports/20260601_emb128_8seed_candidate.json",
+    "reports/20260602T081244KST_rank_blend_submission_result.json",
+    "reports/20260602T081244KST_rank_blend_submission_result.md",
+    "reports/20260602T204313KST_autorun_preflight.json",
+    "reports/20260602T204313KST_autorun_submission_result.json",
+    "reports/20260602T204712KST_autorun_preflight.json",
+    "reports/20260602T204712KST_autorun_submission_result.json",
+    "reports/20260602T205124KST_autorun_preflight.json",
+    "reports/20260602T205124KST_autorun_submission_result.json",
+    "reports/20260602T205225KST_autorun_preflight.json",
+    "reports/20260602T205225KST_autorun_submission_result.json",
+    "reports/20260602_aggressive_boundary_pairwise.json",
+    "reports/20260602_aggressive_rank_frontier_panel.json",
+    "reports/20260602_aggressive_rank_frontier_seed42.json",
+    "reports/20260602_aggressive_user_gated_zblend.json",
+    "reports/20260602_autorunner_similarity_guard_opencode_prompt.md",
+    "reports/20260602_autorunner_watchdog_setup.json",
+    "reports/20260602_autorunner_watchdog_setup.md",
+    "reports/20260602_rank_blend_emb128_emb192_preflight.json",
+    "reports/20260602_readme_rankblend_residual_materialization.json",
+    "reports/20260602_readme_rankblend_residual_materialization.md"
+  ],
+  "largest_history_blobs_top20": [
+    {
+      "path": "reports/20260607T125601KST_current_best_residual_atlas.json",
+      "size_mb": 0.71,
+      "hash": "9c9059056da4"
+    },
+    {
+      "path": "reports/20260603_boundary_pairwise_factory.json",
+      "size_mb": 0.353,
+      "hash": "f1f4118116a9"
+    },
+    {
+      "path": "reports/20260603T164750KST_boundary_factory_frontier.json",
+      "size_mb": 0.344,
+      "hash": "f99b6bef59d5"
+    },
+    {
+      "path": "reports/20260603T162223KST_boundary_factory_prioraware.json",
+      "size_mb": 0.31,
+      "hash": "ec364aa5dd4e"
+    },
+    {
+      "path": "reports/deep_eda/candidate_pop_vs_history_similarity.png",
+      "size_mb": 0.293,
+      "hash": "3724374c2ff3"
+    },
+    {
+      "path": "reports/manual_qa_boundary_pairwise_factory.json",
+      "size_mb": 0.279,
+      "hash": "6dfb7e3574c0"
+    },
+    {
+      "path": "reports/media/20260601_bffa_fixed_gate_top8.png",
+      "size_mb": 0.248,
+      "hash": "0fcf94a8adb4"
+    },
+    {
+      "path": "reports/20260530_opencode_cw_timeknn_run.log",
+      "size_mb": 0.231,
+      "hash": "5d1a0c6a28d4"
+    },
+    {
+      "path": "reports/20260603T161851KST_boundary_factory_fine.json",
+      "size_mb": 0.21,
+      "hash": "8a7a10dcdaee"
+    },
+    {
+      "path": "reports/20260603T161501KST_boundary_factory_fine.json",
+      "size_mb": 0.202,
+      "hash": "88aa6049a204"
+    },
+    {
+      "path": "reports/20260603T174950KST_userknn_residual_probe.json",
+      "size_mb": 0.193,
+      "hash": "f955228ca1ac"
+    },
+    {
+      "path": "reports/20260603T160513KST_boundary_factory_plus_blend.json",
+      "size_mb": 0.191,
+      "hash": "22b51104f4d0"
+    },
+    {
+      "path": "reports/20260530_arxiv_paper_search_results.json",
+      "size_mb": 0.162,
+      "hash": "a53049786012"
+    },
+    {
+      "path": "reports/20260603T154555KST_boundary_pairwise_factory_e64.json",
+      "size_mb": 0.156,
+      "hash": "2b9e93d30165"
+    },
+    {
+      "path": "reports/20260602_readme_rankblend_residual_materialization.json",
+      "size_mb": 0.151,
+      "hash": "5c500e5ed9eb"
+    },
+    {
+      "path": "reports/media/20260602_aggressive_rank_frontier_top5.png",
+      "size_mb": 0.149,
+      "hash": "d49b015386a5"
+    },
+    {
+      "path": "reports/20260613T0106KST_checkpoint_avg_aggregate_table.png",
+      "size_mb": 0.108,
+      "hash": "d6f5adfead77"
+    },
+    {
+      "path": "reports/20260604T115818KST_last_slot_sparse_agreement_probe.json",
+      "size_mb": 0.096,
+      "hash": "9d4d972e06b5"
+    },
+    {
+      "path": "reports/media/20260601_slk_lite_panel_table.png",
+      "size_mb": 0.091,
+      "hash": "3c5d374d27d8"
+    },
+    {
+      "path": "reports/20260601_web_arxiv_search_raw.json",
+      "size_mb": 0.089,
+      "hash": "9c7acab89d97"
+    }
+  ],
+  "license_file_present": false,
+  "readme_present": true,
+  "verdict": "PASS_WITH_CAUTIONS",
+  "cautions": [
+    "No top-level LICENSE file is present; public visibility is safe, but third-party reuse rights are unspecified until the user chooses a code license.",
+    "234 tracked text files contain local absolute paths used in reproducibility reports; no credentials were found, but these paths are container-specific.",
+    "Raw Kaggle data, generated submissions, final_package CSVs, W&B local runs, and large artifacts remain ignored/local only."
+  ],
+  "history_cleanup": {
+    "method": "git-filter-repo --invert-paths",
+    "removed_paths": [
+      "artifacts/lightgcn_20260530/test_full_train/raw_save_meta_emb64_L3_reg1e-04.json",
+      "artifacts/stacker_20260530/test_candidate/meta_emb64_L3_reg1e-04.json"
+    ],
+    "backup_bundle_local": "/opt/data/cache/kmu-rec-sys-26-steam_pre_public_55381cc.bundle"
+  }
+}
