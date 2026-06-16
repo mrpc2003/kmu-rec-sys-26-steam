@@ -1,0 +1,77 @@
+{
+  "kind": "tagcf_fulltest_candidate",
+  "safety": {
+    "hidden_label_access": false,
+    "external_steam_scraping": false,
+    "kaggle_submit_executed": false
+  },
+  "variant": "tagcf_fulltest_seed7_sym_a0.1_raw_zblend_bw0.5",
+  "output": "submissions/candidate_tagcf_fulltest_seed7_sym_a0p1_zblend.csv",
+  "score_path": "/opt/data/kaggle/kmu-rec-sys-26-steam/artifacts/tagcf_fulltest_candidate/tagcf_fulltest_scores.csv",
+  "train_meta": {
+    "emb_dim": 128,
+    "n_layers": 4,
+    "lr": 0.001,
+    "reg": 0.001,
+    "epochs": 200,
+    "batch_size": 4096,
+    "n_users": 6710,
+    "n_items": 2437,
+    "n_interactions": 175000,
+    "final_loss": 0.31863393173331306,
+    "train_seconds": 1921.3,
+    "device": "cuda:0"
+  },
+  "args": {
+    "data_dir": "data/raw/public/data",
+    "out_dir": "/opt/data/kaggle/kmu-rec-sys-26-steam/artifacts/tagcf_fulltest_candidate",
+    "out": "submissions/candidate_tagcf_fulltest_seed7_sym_a0p1_zblend.csv",
+    "json": "reports/20260603T170257KST_tagcf_fulltest_seed7_sym_a0p1_zblend.json",
+    "md": "reports/20260603T170257KST_tagcf_fulltest_seed7_sym_a0p1_zblend.md",
+    "emb_dim": 128,
+    "n_layers": 4,
+    "lr": 0.001,
+    "reg": 0.001,
+    "epochs": 200,
+    "batch_size": 4096,
+    "device": "cuda:0",
+    "seed": 7,
+    "alpha": 0.1,
+    "mode": "sym",
+    "normalize": false,
+    "blend_z": true,
+    "blend_weight": 0.5
+  },
+  "preflight": {
+    "rows": 19998,
+    "expected_rows": 19998,
+    "columns": [
+      "ID",
+      "Played"
+    ],
+    "id_unique": true,
+    "labels_binary": true,
+    "label_1": 9999,
+    "label_0": 9999,
+    "bad_users_tophalf": 0
+  },
+  "comparisons": {
+    "rankblend_public_best": {
+      "path": "/opt/data/kaggle/kmu-rec-sys-26-steam/submissions/candidate_rank_blend_emb128_emb192.csv",
+      "row_diff": 596
+    },
+    "boundary_w_minus_0p75": {
+      "path": "/opt/data/kaggle/kmu-rec-sys-26-steam/submissions/candidate_autorun_boundary_scoreblend_z128_z192_z64_w-0.75.csv",
+      "row_diff": 722
+    },
+    "boundary_w2": {
+      "path": "/opt/data/kaggle/kmu-rec-sys-26-steam/submissions/candidate_autorun_boundary_scoreblend_z128_z192_z64_w2.csv",
+      "row_diff": 722
+    },
+    "frontier_z_w1920_w64_minus_0p25": {
+      "path": "/opt/data/kaggle/kmu-rec-sys-26-steam/submissions/candidate_autorun_frontier_z_w1920_w64-0.25.csv",
+      "row_diff": 510
+    }
+  },
+  "elapsed_seconds": 1939.2
+}

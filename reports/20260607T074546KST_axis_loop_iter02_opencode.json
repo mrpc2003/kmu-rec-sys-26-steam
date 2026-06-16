@@ -1,0 +1,137 @@
+{
+  "safety_flags": {
+    "validation_only": true,
+    "candidate_csv_written": false,
+    "full_test_candidate_or_submission_csv_created": false,
+    "kaggle_submit_executed": false,
+    "hidden_labels_used": false,
+    "private_answers_used": false,
+    "external_steam_scraping_used": false,
+    "credentials_or_tokens_printed": false,
+    "quarantine_or_guard_logic_weakened": false,
+    "git_stage_commit_push_executed": false,
+    "recursive_cron_scheduled": false
+  },
+  "axis_decision": "no safe axis",
+  "new_probe": {
+    "launched": false,
+    "status": "not_launched",
+    "command": null,
+    "pid_file": null,
+    "log": null,
+    "report_json": null,
+    "report_md": null,
+    "artifact_dir": "artifacts/opencode_hermes_axis_loop_20260607T074546KST",
+    "reason": "No fresh independent bounded validation-only axis survived the closed-family, quarantine, and strict-gate review; launching would repeat prior weak/stalled/prohibited families."
+  },
+  "best_or_top_metrics": {
+    "variant": null,
+    "mean_delta_vs_base": null,
+    "min_delta_vs_base": null,
+    "positive_splits": null,
+    "fixes": null,
+    "breaks": null,
+    "pooled_p_exact": null,
+    "quarantine_conflict": false
+  },
+  "strict_gate": {
+    "mean_delta_threshold": 0.0015,
+    "min_delta_nonnegative": true,
+    "required_positive_splits": "3/3",
+    "requires_fixes_gt_breaks": true,
+    "pooled_exact_or_mcnemar_p_lt": 0.05,
+    "requires_validation_only": true,
+    "requires_candidate_csv_written_false": true,
+    "requires_full_test_candidate_or_submission_csv_created_false": true,
+    "requires_kaggle_submit_executed_false": true,
+    "requires_no_quarantine_or_near_duplicate_conflict": true
+  },
+  "inspected_evidence": {
+    "reports": [
+      "reports/20260607T074528KST_opencode_hermes_axis_rejection_loop_summary.json",
+      "reports/20260607T074546KST_axis_loop_iter01_opencode.json",
+      "reports/20260607T063604KST_opencode_improvement_axis_loop.json",
+      "reports/20260607T052646KST_opencode_improvement_axis_loop.json",
+      "reports/20260606T125011KST_multi_interest_svd_smoke.json",
+      "reports/20260601_slk_lite_panel_aggregate.json",
+      "reports/20260601_slk_lite_advisory_prompt.md"
+    ],
+    "artifact_summaries": [
+      "artifacts/layermix_probe/emb128_L4_r3_seed42/summary.json",
+      "artifacts/layermix_probe/emb128_L4_r3_seed7/summary.json",
+      "artifacts/layermix_probe/emb128_L4_r3_seed123/summary.json"
+    ],
+    "state_files": [
+      "state/aggressive_quota_runner_state.json",
+      "state/autonomous_submission_policy.json"
+    ],
+    "scripts": [
+      "scripts/lightgcn_layer_mixture_probe.py",
+      "scripts/aggressive_rank_frontier_panel.py",
+      "scripts/aggressive_user_gated_zblend_probe.py",
+      "scripts/userknn_gated_residual_probe.py",
+      "scripts/jackknife_uncertainty_boundary_probe.py",
+      "scripts/opencode_hermes_axis_rejection_loop.py"
+    ],
+    "direct_searches": [
+      "rg over reports/scripts/state for strict verdicts, quarantine, probe, delta, McNemar, layermix, multi-interest, UserKNN, jackknife, and submission safety terms",
+      "ast-grep search for Python subprocess.run call sites in scripts",
+      "directory listing of artifacts/layermix_probe and artifacts/opencode_hermes_axis_loop_20260607T074546KST"
+    ]
+  },
+  "closed_or_rejected_axes_checked": [
+    {
+      "axis": "UserKNN gated residual fine-grid",
+      "status": "stalled_incomplete_closed_for_repeat",
+      "evidence": "Expected reports reports/20260606T132450KST_userknn_gated_residual_fine.{json,md} absent; supplied state/log tail shows repeated invalid-divide warnings; previous smoke mean delta +0.000900, p=0.05415 below strict gates."
+    },
+    {
+      "axis": "Jackknife uncertainty boundary",
+      "status": "weak_or_failed_incomplete",
+      "evidence": "Smoke top mean delta +0.0003667, min delta -0.0012002, 2/3 positive, fixes/breaks 252/230, p=0.3388; expanded probe expected reports absent and log stops mid split."
+    },
+    {
+      "axis": "DNS/capacity/frontier/emb192 and boundary/rankblend/TAG-CF residuals",
+      "status": "closed_or_quarantined_public_negative",
+      "evidence": "state/aggressive_quota_runner_state.json records public-negative/non-improving transfer for rankblend ALS residuals, boundary scoreblend/frontier, and TAG-CF full-test family."
+    },
+    {
+      "axis": "LightGCN++ layer mixture",
+      "status": "already_completed_weak_split_inconsistent",
+      "evidence": "Existing layermix summaries show seed42 best +0.001700 but p=0.1065; seed7 best +0.000400; seed123 best +0.000300, with no strict/significant 3-split candidate."
+    },
+    {
+      "axis": "SL@K-lite boundary objective",
+      "status": "completed_reject",
+      "evidence": "reports/20260601_slk_lite_panel_aggregate.json has epoch-1 mean delta -0.009035 and epoch-2 mean delta -0.021671 versus control, 0/3 direction gate."
+    },
+    {
+      "axis": "Multi-interest SVD smoke",
+      "status": "completed_reject",
+      "evidence": "reports/20260606T125011KST_multi_interest_svd_smoke.json rejects all tested multi-interest scores; best blend50 delta -0.071414 versus emb128 reference."
+    },
+    {
+      "axis": "Raw semantic/text/README/LM, temporal compatibility, hours-confidence, exact-K, last-slot sparse agreement",
+      "status": "closed_by_recent_reports_or_prompt",
+      "evidence": "Recent loop reports and prompt rejection list classify these as weak, redundant, split-negative, or public-noise risk."
+    }
+  ],
+  "ranked_next_axis_hypotheses": [
+    {
+      "rank": 1,
+      "axis": "UserKNN finite-value/complexity diagnostic only",
+      "why_not_launched_now": "It is not a fresh improvement axis and the broad UserKNN family is explicitly stalled/closed; a tiny diagnostic could repair warnings later but would not satisfy Hermes improvement evidence."
+    },
+    {
+      "rank": 2,
+      "axis": "Out-of-fold residual calibration with a genuinely new base family",
+      "why_not_launched_now": "No unquarantined, validation-positive base family remains; residual/boundary/rankblend variants are near-duplicate or public-negative."
+    },
+    {
+      "rank": 3,
+      "axis": "New graph/backbone/loss family beyond LightGCN",
+      "why_not_launched_now": "SGL, DirectAU/xSimGCL, TAG-CF, SASRec/DIN, SL@K-lite, layer mixture, AlphaRec/MultiVAE, and capacity variants are already weak, negative, or too large for a bounded safe iteration."
+    }
+  ],
+  "verdict": "NO_SAFE_AXIS"
+}

@@ -1,0 +1,55 @@
+{
+  "candidate": "rank_blend_emb128_emb192",
+  "role": "forced/manual-risk last-slot candidate; strongest unsubmitted surrogate signal but McNemar-rejected",
+  "file": "submissions/candidate_rank_blend_emb128_emb192.csv",
+  "sha256": "835b8b90ce30116a3df7a7575e6ccdaec268af9c1acb01ca0c15c733b3152b2e",
+  "validation_evidence": {
+    "uniform_3split_mean_delta_vs_emb128": 0.00083,
+    "split_deltas": [
+      0.0017,
+      0.0003,
+      0.0005
+    ],
+    "mcnemar_p_by_split": [
+      0.0727,
+      0.7785,
+      0.5972
+    ],
+    "fisher_combined_p": 0.3421,
+    "strict_gate": false
+  },
+  "preflight": {
+    "rows": 19998,
+    "expected_rows": 19998,
+    "id_unique": true,
+    "id_contiguous": true,
+    "columns": [
+      "ID",
+      "Played"
+    ],
+    "labels_binary": true,
+    "label_1": 9999,
+    "label_0": 9999,
+    "bad_users_tophalf": 0
+  },
+  "comparisons": {
+    "emb128": {
+      "path": "/opt/data/kaggle/kmu-rec-sys-26-steam/artifacts/lightgcn_emb128L4r3_fulltest/test_candidate/candidate_lightgcn_emb128L4r3_seed_ens.csv",
+      "exists": true,
+      "row_diff": 368,
+      "row_diff_frac": 0.0184018401840184
+    },
+    "emb192": {
+      "path": "/opt/data/kaggle/kmu-rec-sys-26-steam/artifacts/lightgcn_emb192L4r3_fulltest/test_candidate/candidate_lightgcn_emb192L4r3_seed_ens.csv",
+      "exists": true,
+      "row_diff": 326,
+      "row_diff_frac": 0.016301630163016303
+    },
+    "zblend_public_best": {
+      "path": "/opt/data/kaggle/kmu-rec-sys-26-steam/submissions/candidate_emb128_emb64_zblend.csv",
+      "exists": true,
+      "row_diff": 596,
+      "row_diff_frac": 0.029802980298029802
+    }
+  }
+}

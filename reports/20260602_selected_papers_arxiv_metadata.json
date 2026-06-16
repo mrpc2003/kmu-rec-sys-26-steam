@@ -1,0 +1,237 @@
+[
+  {
+    "arxiv_id": "2605.25330v1",
+    "title": "How Reliable Are Semantic-ID Tokenizer Comparisons in Generative Recommendation?",
+    "published": "2026-05-25",
+    "updated": "2026-05-25",
+    "authors": [
+      "Qian Zhang",
+      "Lech Szymanski",
+      "Haibo Zhang",
+      "Jeremiah D. Deng"
+    ],
+    "summary": "In Semantic-ID (SID) based generative recommendation, each item is represented as a sequence of discrete codes, and an autoregressive model is trained to generate the SID sequence of the next item; top-K performance is then measured by checking whether the SID sequence of the target item appears among the generated sequences. This evaluation protocol equates SID-level matching with item-level recommendation, an equivalence that holds only when every SID sequence maps to a single item. We show this assumption breaks down in practice: because tokenizers compress item features into a code space, semantically similar but collaboratively distinct items are frequently assigned the same SID sequence. Across four datasets and five representative tokenizers, the fraction of items involved in such collisions reaches 30.5%, so matching a shared SID sequence identifies only a collision group rather than the target item. Consequently, SID-level metrics overestimate item-level performance (Hit@10 is inflated by up to 103.36%), and the inflation grows with the collision rate. To support faithful comparison, we develop collision-aware item-level metrics computed directly from generated SID sequences, together with a post-tokenizer procedure that reassigns last-level SIDs at minimum cost to obtain a collision-free assignment for any existing tokenizer. Our results indicate that SID-level rankings in prior work should be interpreted with caution, and that reliable tokenizer evaluation requires either item-level correction or collision-free SID assignments.",
+    "categories": [
+      "cs.IR"
+    ],
+    "abs_url": "https://arxiv.org/abs/2605.25330v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.25330v1"
+  },
+  {
+    "arxiv_id": "2601.04720v2",
+    "title": "Qwen3-VL-Embedding and Qwen3-VL-Reranker: A Unified Framework for State-of-the-Art Multimodal Retrieval and Ranking",
+    "published": "2026-01-08",
+    "updated": "2026-01-19",
+    "authors": [
+      "Mingxin Li",
+      "Yanzhao Zhang",
+      "Dingkun Long",
+      "Keqin Chen",
+      "Sibo Song",
+      "Shuai Bai",
+      "Zhibo Yang",
+      "Pengjun Xie",
+      "An Yang",
+      "Dayiheng Liu",
+      "Jingren Zhou",
+      "Junyang Lin"
+    ],
+    "summary": "In this report, we introduce the Qwen3-VL-Embedding and Qwen3-VL-Reranker model series, the latest extensions of the Qwen family built on the Qwen3-VL foundation model. Together, they provide an end-to-end pipeline for high-precision multimodal search by mapping diverse modalities, including text, images, document images, and video, into a unified representation space. The Qwen3-VL-Embedding model employs a multi-stage training paradigm, progressing from large-scale contrastive pre-training to reranking model distillation, to generate semantically rich high-dimensional vectors. It supports Matryoshka Representation Learning, enabling flexible embedding dimensions, and handles inputs up to 32k tokens. Complementing this, Qwen3-VL-Reranker performs fine-grained relevance estimation for query-document pairs using a cross-encoder architecture with cross-attention mechanisms. Both model series inherit the multilingual capabilities of Qwen3-VL, supporting more than 30 languages, and are released in $\\textbf{2B}$ and $\\textbf{8B}$ parameter sizes to accommodate diverse deployment requirements. Empirical evaluations demonstrate that the Qwen3-VL-Embedding series achieves state-of-the-art results across diverse multimodal embedding evaluation benchmarks. Specifically, Qwen3-VL-Embedding-8B attains an overall score of $\\textbf{77.8}$ on MMEB-V2, ranking first among all models (as of January 8, 2025). This report presents the architecture, training methodology, and practical capabilities of the series, demonstrating their effectiveness on various multimodal retrieval tasks, including image-text retrieval, visual question answering, and video-text matching.",
+    "categories": [
+      "cs.CL"
+    ],
+    "abs_url": "https://arxiv.org/abs/2601.04720v2",
+    "pdf_url": "https://arxiv.org/pdf/2601.04720v2"
+  },
+  {
+    "arxiv_id": "2605.00327v1",
+    "title": "DynamicPO: Dynamic Preference Optimization for Recommendation",
+    "published": "2026-05-01",
+    "updated": "2026-05-01",
+    "authors": [
+      "Xingyu Hu",
+      "Kai Zhang",
+      "Jiancan Wu",
+      "Shuli Wang",
+      "Chi Wang",
+      "Wenshuai Chen",
+      "Yinhua Zhu",
+      "Haitao Wang",
+      "Xingxing Wang",
+      "Xiang Wang"
+    ],
+    "summary": "In large language model (LLM)-based recommendation systems, direct preference optimization (DPO) effectively aligns recommendations with user preferences, requiring multi-negative objective functions to leverage abundant implicit-feedback negatives and sharpen preference boundaries. However, our empirical analyses reveal a counterintuitive phenomenon, preference optimization collapse, where increasing the number of negative samples can lead to performance degradation despite a continuously decreasing training loss. We further theoretically demonstrate that this collapse arises from gradient suppression, caused by the dominance of easily discriminable negatives over boundary-critical negatives that truly define user preference boundaries. As a result, boundary-relevant signals are under-optimized, weakening the model's decision boundary. Motivated by these observations, we propose DynamicPO (Dynamic Preference Optimization), a lightweight and plug-and-play framework comprising two adaptive mechanisms: Dynamic Boundary Negative Selection, which identifies and prioritizes informative negatives near the model's decision boundary, and Dual-Margin Dynamic beta Adjustment, which calibrates optimization strength per sample according to boundary ambiguity. Extensive experiments on three public datasets show that DynamicPO effectively prevents optimization collapse and improves recommendation accuracy on multi-negative preference optimization methods, with negligible computational overhead. Our code and datasets are available at https://github.com/xingyuHuxingyu/DynamicPO.",
+    "categories": [
+      "cs.IR",
+      "cs.AI"
+    ],
+    "abs_url": "https://arxiv.org/abs/2605.00327v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.00327v1"
+  },
+  {
+    "arxiv_id": "2601.19276v1",
+    "title": "Talos: Optimizing Top-$K$ Accuracy in Recommender Systems",
+    "published": "2026-01-27",
+    "updated": "2026-01-27",
+    "authors": [
+      "Shengjia Zhang",
+      "Weiqin Yang",
+      "Jiawei Chen",
+      "Peng Wu",
+      "Yuegang Sun",
+      "Gang Wang",
+      "Qihao Shi",
+      "Can Wang"
+    ],
+    "summary": "Recommender systems (RS) aim to retrieve a small set of items that best match individual user preferences. Naturally, RS place primary emphasis on the quality of the Top-$K$ results rather than performance across the entire item set. However, estimating Top-$K$ accuracy (e.g., Precision@$K$, Recall@$K$) requires determining the ranking positions of items, which imposes substantial computational overhead and poses significant challenges for optimization. In addition, RS often suffer from distribution shifts due to evolving user preferences or data biases, further complicating the task. To address these issues, we propose Talos, a loss function that is specifically designed to optimize the Talos recommendation accuracy. Talos leverages a quantile technique that replaces the complex ranking-dependent operations into simpler comparisons between predicted scores and learned score thresholds. We further develop a sampling-based regression algorithm for efficient and accurate threshold estimation, and introduce a constraint term to maintain optimization stability by preventing score inflation. Additionally, we incorporate a tailored surrogate function to address discontinuity and enhance robustness against distribution shifts. Comprehensive theoretical analyzes and empirical experiments are conducted to demonstrate the effectiveness, efficiency, convergence, and distributional robustness of Talos. The code is available at https://github.com/cynthia-shengjia/WWW-2026-Talos.",
+    "categories": [
+      "cs.IR",
+      "cs.AI",
+      "cs.LG"
+    ],
+    "abs_url": "https://arxiv.org/abs/2601.19276v1",
+    "pdf_url": "https://arxiv.org/pdf/2601.19276v1"
+  },
+  {
+    "arxiv_id": "2605.17267v1",
+    "title": "RAGR: Review-Augmented Generative Recommendation",
+    "published": "2026-05-17",
+    "updated": "2026-05-17",
+    "authors": [
+      "Yingyi Zhang",
+      "Junyi Li",
+      "Yejing Wang",
+      "Wenlin Zhang",
+      "Xiaowei Qian",
+      "Sheng Zhang",
+      "Yue Feng",
+      "Yichao Wang",
+      "Yong Liu",
+      "Xiangyu Zhao",
+      "Xianneng Li"
+    ],
+    "summary": "Sequential recommendation (SR) is traditionally formulated as next-item prediction over a chronological sequence of interacted items. Although recent generative recommendation (GR) methods introduce new machinery, such as semantic IDs, autoregressive decoding, and unified token spaces, they largely inherit the same item-only modeling assumption. We argue that this design constitutes a structural bottleneck, because user decision-making is not purely behavioral: while item interactions reveal what users choose, review feedback often explain why they choose it by exposing latent evaluative factors. Motivated by this observation, we propose Review-Augmented Generative Recommendation (RAGR), a novel GR framework that incorporates review feedback directly into the generative user sequence rather than treating reviews as auxiliary side information. Specifically, RAGR introduces a Review-Augmented User Sequence Modeling mechanism that interleaves item semantic IDs and review semantic IDs in chronological order to construct a mixed behavioral-semantic sequence, enabling review signals to participate directly in autoregressive next-token generation. To preserve the recommendation objective, we further introduce an Item-Centric Task Generation Alignment strategy based on direct preference optimization (DPO), which encourages the model to favor item tokens over review tokens at prediction positions. Experiments on three real-world datasets show that RAGR yields consistent and significant gains over strong GR backbones across all metrics. Our code and data are available at \\url{https://github.com/Zhang-Yingyi/TKDE_RAGR}.",
+    "categories": [
+      "cs.IR"
+    ],
+    "abs_url": "https://arxiv.org/abs/2605.17267v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.17267v1"
+  },
+  {
+    "arxiv_id": "2605.07129v1",
+    "title": "RRCM: Ranking-Driven Retrieval over Collaborative and Meta Memories for LLM Recommendation",
+    "published": "2026-05-08",
+    "updated": "2026-05-08",
+    "authors": [
+      "Shijun Li",
+      "Wooseong Yang",
+      "Yu Wang",
+      "Tianxin Wei",
+      "Joydeep Ghosh"
+    ],
+    "summary": "Large Language Models (LLMs) have emerged as a promising paradigm for next-generation recommender systems, offering strong semantic understanding and natural-language reasoning abilities. Despite recent progress, current LLM-based recommenders still face key challenges in constructing decision-relevant contexts from heterogeneous evidence. First, existing methods often rely on fixed context construction strategies: collaborative behavioral evidence and item-side metadata are typically incorporated through predefined prompts, static retrieval pipelines, or handcrafted injection mechanisms, making it difficult to determine what information is truly beneficial for each instance. Second, heterogeneous evidence introduces a severe context-efficiency bottleneck. Rich metadata and collaborative interaction records can quickly overwhelm the context window, while aggressive compression or heuristic filtering may discard fine-grained evidence critical for accurate recommendation. To address these challenges, we propose RRCM, a ranking-driven retrieval-and-reasoning framework over collaborative and metadata memories for LLM-based agentic recommendation. RRCM starts from a lightweight user-history context and learns whether to recommend directly, retrieve collaborative evidence, retrieve item metadata, or interleave both through reasoning. Both memories are represented in natural language and accessed through a unified retrieval interface, enabling flexible evidence acquisition without handcrafted CF injection or fixed retrieval rules. We optimize this memory-reading policy with an outcome-only ranking reward, instantiated using group relative policy optimization, so that retrieval decisions are directly driven by final top-k recommendation quality. Extensive experiments show that RRCM significantly outperforms traditional baselines and diverse LLM-based recommendation approaches.",
+    "categories": [
+      "cs.IR",
+      "cs.AI",
+      "cs.LG"
+    ],
+    "abs_url": "https://arxiv.org/abs/2605.07129v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.07129v1"
+  },
+  {
+    "arxiv_id": "2508.05673v1",
+    "title": "Breaking the Top-$K$ Barrier: Advancing Top-$K$ Ranking Metrics Optimization in Recommender Systems",
+    "published": "2025-08-04",
+    "updated": "2025-08-04",
+    "authors": [
+      "Weiqin Yang",
+      "Jiawei Chen",
+      "Shengjia Zhang",
+      "Peng Wu",
+      "Yuegang Sun",
+      "Yan Feng",
+      "Chun Chen",
+      "Can Wang"
+    ],
+    "summary": "In the realm of recommender systems (RS), Top-$K$ ranking metrics such as NDCG@$K$ are the gold standard for evaluating recommendation performance. However, during the training of recommendation models, optimizing NDCG@$K$ poses significant challenges due to its inherent discontinuous nature and the intricate Top-$K$ truncation. Recent efforts to optimize NDCG@$K$ have either overlooked the Top-$K$ truncation or suffered from high computational costs and training instability. To overcome these limitations, we propose SoftmaxLoss@$K$ (SL@$K$), a novel recommendation loss tailored for NDCG@$K$ optimization. Specifically, we integrate the quantile technique to handle Top-$K$ truncation and derive a smooth upper bound for optimizing NDCG@$K$ to address discontinuity. The resulting SL@$K$ loss has several desirable properties, including theoretical guarantees, ease of implementation, computational efficiency, gradient stability, and noise robustness. Extensive experiments on four real-world datasets and three recommendation backbones demonstrate that SL@$K$ outperforms existing losses with a notable average improvement of 6.03%. The code is available at https://github.com/Tiny-Snow/IR-Benchmark.",
+    "categories": [
+      "cs.IR",
+      "cs.AI",
+      "cs.LG"
+    ],
+    "abs_url": "https://arxiv.org/abs/2508.05673v1",
+    "pdf_url": "https://arxiv.org/pdf/2508.05673v1"
+  },
+  {
+    "arxiv_id": "2605.10784v1",
+    "title": "MASS-DPO: Multi-negative Active Sample Selection for Direct Policy Optimization",
+    "published": "2026-05-11",
+    "updated": "2026-05-11",
+    "authors": [
+      "Rohan Surana",
+      "Xintong Li",
+      "Sheldon Yu",
+      "Yiran Jenny Shen",
+      "Chuhan Wang",
+      "Tong Yu",
+      "Prithviraj Ammanabrolu",
+      "Jingbo Shang",
+      "Julian McAuley",
+      "Junda Wu"
+    ],
+    "summary": "Multi-negative preference optimization under the Plackett--Luce (PL) model extends Direct Preference Optimization (DPO) by leveraging comparative signals across one preferred and multiple rejected responses. However, optimizing over large negative pools is costly, and many candidates contribute redundant gradients due to their similar effects on policy updates. We introduce MASS-DPO, a multi-negative active sample selection method that derives a PL-specific Fisher-information objective for selecting compact, informative negative subsets within each prompt. The resulting log-determinant objective selects negatives that contribute complementary information for policy updates, yielding compact subsets that retain the full pool's information while reducing redundancy. In practice, this favors negatives whose gradients cover different update directions, reducing redundant signal from near-duplicate candidates while preserving the most useful training information. Across four benchmarks spanning recommendation and multiple-choice QA and three model families, MASS-DPO consistently exceeds or matches existing methods in accuracy, improves Recall/NDCG and margin-based optimization dynamics, and delivers stronger alignment with substantially fewer negatives.",
+    "categories": [
+      "cs.LG"
+    ],
+    "abs_url": "https://arxiv.org/abs/2605.10784v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.10784v1"
+  },
+  {
+    "arxiv_id": "2506.18902v3",
+    "title": "jina-embeddings-v4: Universal Embeddings for Multimodal Multilingual Retrieval",
+    "published": "2025-06-23",
+    "updated": "2025-07-07",
+    "authors": [
+      "Michael Günther",
+      "Saba Sturua",
+      "Mohammad Kalim Akram",
+      "Isabelle Mohr",
+      "Andrei Ungureanu",
+      "Bo Wang",
+      "Sedigheh Eslami",
+      "Scott Martens",
+      "Maximilian Werk",
+      "Nan Wang",
+      "Han Xiao"
+    ],
+    "summary": "We introduce jina-embeddings-v4, a 3.8 billion parameter multimodal embedding model that unifies text and image representations through a novel architecture supporting both single-vector and multi-vector embeddings in the late interaction style. The model incorporates task-specific Low-Rank Adaptation (LoRA) adapters to optimize performance across diverse retrieval scenarios, including query-document retrieval, semantic text similarity, and code search. Comprehensive evaluations demonstrate that jina-embeddings-v4 achieves state-of-the-art performance on both single-modal and cross-modal retrieval tasks, with particular strength in processing visually rich content such as tables, charts, diagrams, and mixed-media formats. To facilitate evaluation of this capability, we also introduce Jina-VDR, a novel benchmark specifically designed for visually rich image retrieval.",
+    "categories": [
+      "cs.AI",
+      "cs.CL",
+      "cs.IR"
+    ],
+    "abs_url": "https://arxiv.org/abs/2506.18902v3",
+    "pdf_url": "https://arxiv.org/pdf/2506.18902v3"
+  },
+  {
+    "arxiv_id": "2601.18432v1",
+    "title": "TopKGAT: A Top-K Objective-Driven Architecture for Recommendation",
+    "published": "2026-01-26",
+    "updated": "2026-01-26",
+    "authors": [
+      "Sirui Chen",
+      "Jiawei Chen",
+      "Canghong Jin",
+      "Sheng Zhou",
+      "Jingbang Chen",
+      "Wujie Sun",
+      "Can Wang"
+    ],
+    "summary": "Recommendation systems (RS) aim to retrieve the top-K items most relevant to users, with metrics such as Precision@K and Recall@K commonly used to assess effectiveness. The architecture of an RS model acts as an inductive bias, shaping the patterns the model is inclined to learn. In recent years, numerous recommendation architectures have emerged, spanning traditional matrix factorization, deep neural networks, and graph neural networks. However, their designs are often not explicitly aligned with the top-K objective, thereby limiting their effectiveness. To address this limitation, we propose TopKGAT, a novel recommendation architecture directly derived from a differentiable approximation of top-K metrics. The forward computation of a single TopKGAT layer is intrinsically aligned with the gradient ascent dynamics of the Precision@K metric, enabling the model to naturally improve top-K recommendation accuracy. Structurally, TopKGAT resembles a graph attention network and can be implemented efficiently. Extensive experiments on four benchmark datasets demonstrate that TopKGAT consistently outperforms state-of-the-art baselines. The code is available at https://github.com/StupidThree/TopKGAT.",
+    "categories": [
+      "cs.IR"
+    ],
+    "abs_url": "https://arxiv.org/abs/2601.18432v1",
+    "pdf_url": "https://arxiv.org/pdf/2601.18432v1"
+  }
+]

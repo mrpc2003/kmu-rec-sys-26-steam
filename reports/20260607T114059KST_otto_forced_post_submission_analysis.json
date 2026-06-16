@@ -1,0 +1,213 @@
+{
+  "timestamp_kst": "20260607T114059KST",
+  "submitted_file": "submissions/candidate_otto_coplay_top5_reverse_recent_w0090_w0040_forced_20260607T114059KST.csv",
+  "sha256": "d70af0f1e325c5c59985ed0df6dbc4232950edf6971f0ad26c72f7da8205985e",
+  "kaggle_status": "SubmissionStatus.COMPLETE",
+  "public_score": 0.77815,
+  "private_score": null,
+  "current_live_best_before_submit": 0.77825,
+  "current_live_best_file": "submissions/candidate_rank_blend_emb128_emb192.csv",
+  "delta_vs_current_live_best": -9.999999999998899e-05,
+  "delta_vs_emb128_public077745": 0.0007000000000000339,
+  "independent_local_mean_delta_vs_emb128": 0.0006668000266719654,
+  "transfer_ratio_vs_emb128": 1.049790000000107,
+  "judgment_verdict": "CONFIRMED_NO_ESCALATION: public improved vs emb128 but lost to current best and independent strict gate failed",
+  "diff_vs_current_best": {
+    "reference_name": "current_live_best_rank_blend_emb128_emb192",
+    "reference_public": 0.77825,
+    "overall_flip_count": 508,
+    "overall_flip_frac": 0.025402540254025403,
+    "promoted_old0_new1": 254,
+    "demoted_old1_new0": 254,
+    "by_user_candidate_bucket": [
+      {
+        "bucket": "5-6",
+        "rows": 3990,
+        "flips": 122,
+        "flip_frac": 0.030576441102756893
+      },
+      {
+        "bucket": "11+",
+        "rows": 2550,
+        "flips": 56,
+        "flip_frac": 0.02196078431372549
+      },
+      {
+        "bucket": "2",
+        "rows": 4282,
+        "flips": 68,
+        "flip_frac": 0.015880429705744978
+      },
+      {
+        "bucket": "7-10",
+        "rows": 3948,
+        "flips": 124,
+        "flip_frac": 0.031408308004052685
+      },
+      {
+        "bucket": "3-4",
+        "rows": 5228,
+        "flips": 138,
+        "flip_frac": 0.026396327467482786
+      }
+    ],
+    "by_item_popularity_quintile": [
+      {
+        "quintile": "Q4",
+        "rows": 3999,
+        "flips": 108,
+        "flip_frac": 0.02700675168792198,
+        "mean_item_pop": 138.46486621655413
+      },
+      {
+        "quintile": "Q1_low",
+        "rows": 4000,
+        "flips": 84,
+        "flip_frac": 0.021,
+        "mean_item_pop": 18.78175
+      },
+      {
+        "quintile": "Q3",
+        "rows": 4000,
+        "flips": 168,
+        "flip_frac": 0.042,
+        "mean_item_pop": 64.21375
+      },
+      {
+        "quintile": "Q5_high",
+        "rows": 4000,
+        "flips": 32,
+        "flip_frac": 0.008,
+        "mean_item_pop": 392.412
+      },
+      {
+        "quintile": "Q2",
+        "rows": 3999,
+        "flips": 116,
+        "flip_frac": 0.029007251812953237,
+        "mean_item_pop": 33.3858464616154
+      }
+    ],
+    "item_pop_stats": {
+      "promoted": {
+        "count": 254,
+        "mean": 90.15354330708661,
+        "median": 64.0
+      },
+      "demoted": {
+        "count": 254,
+        "mean": 66.65354330708661,
+        "median": 48.0
+      },
+      "flipped": {
+        "count": 508,
+        "mean": 78.40354330708661,
+        "median": 52.5
+      },
+      "all": {
+        "count": 19998,
+        "mean": 129.45599559955997,
+        "median": 62.0
+      }
+    }
+  },
+  "diff_vs_emb128_base": {
+    "reference_name": "emb128_L4_reg1e-3_4seed",
+    "reference_public": 0.77745,
+    "overall_flip_count": 294,
+    "overall_flip_frac": 0.014701470147014702,
+    "promoted_old0_new1": 147,
+    "demoted_old1_new0": 147,
+    "by_user_candidate_bucket": [
+      {
+        "bucket": "5-6",
+        "rows": 3990,
+        "flips": 78,
+        "flip_frac": 0.019548872180451128
+      },
+      {
+        "bucket": "11+",
+        "rows": 2550,
+        "flips": 50,
+        "flip_frac": 0.0196078431372549
+      },
+      {
+        "bucket": "2",
+        "rows": 4282,
+        "flips": 0,
+        "flip_frac": 0.0
+      },
+      {
+        "bucket": "7-10",
+        "rows": 3948,
+        "flips": 74,
+        "flip_frac": 0.018743667679837893
+      },
+      {
+        "bucket": "3-4",
+        "rows": 5228,
+        "flips": 92,
+        "flip_frac": 0.017597551644988524
+      }
+    ],
+    "by_item_popularity_quintile": [
+      {
+        "quintile": "Q4",
+        "rows": 3999,
+        "flips": 64,
+        "flip_frac": 0.016004001000250064,
+        "mean_item_pop": 138.46486621655413
+      },
+      {
+        "quintile": "Q1_low",
+        "rows": 4000,
+        "flips": 52,
+        "flip_frac": 0.013,
+        "mean_item_pop": 18.78175
+      },
+      {
+        "quintile": "Q3",
+        "rows": 4000,
+        "flips": 89,
+        "flip_frac": 0.02225,
+        "mean_item_pop": 64.21375
+      },
+      {
+        "quintile": "Q5_high",
+        "rows": 4000,
+        "flips": 31,
+        "flip_frac": 0.00775,
+        "mean_item_pop": 392.412
+      },
+      {
+        "quintile": "Q2",
+        "rows": 3999,
+        "flips": 58,
+        "flip_frac": 0.014503625906476619,
+        "mean_item_pop": 33.3858464616154
+      }
+    ],
+    "item_pop_stats": {
+      "promoted": {
+        "count": 147,
+        "mean": 115.73469387755102,
+        "median": 83.0
+      },
+      "demoted": {
+        "count": 147,
+        "mean": 61.204081632653065,
+        "median": 47.0
+      },
+      "flipped": {
+        "count": 294,
+        "mean": 88.46938775510205,
+        "median": 58.0
+      },
+      "all": {
+        "count": 19998,
+        "mean": 129.45599559955997,
+        "median": 62.0
+      }
+    }
+  }
+}

@@ -1,0 +1,157 @@
+{
+  "safety_flags": {
+    "validation_only": true,
+    "candidate_csv_written": false,
+    "kaggle_submit_executed": false,
+    "hidden_labels_used": false,
+    "external_steam_scraping_used": false,
+    "git_stage_commit_push_executed": false
+  },
+  "stalled_or_completed_probe_classification": {
+    "userknn_gated_residual_fine": {
+      "classification": "STALLED_INCOMPLETE",
+      "expected_report_json": "reports/20260606T132450KST_userknn_gated_residual_fine.json",
+      "expected_report_md": "reports/20260606T132450KST_userknn_gated_residual_fine.md",
+      "reports_exist": false,
+      "log": "logs/userknn_gated_residual_fine_20260606T132450KST.log",
+      "log_lines_observed": 40121,
+      "log_size_bytes_observed": 3711020,
+      "reason": "Prior tick reports Hermes terminated process group 18483 after about 14h51m; current inspection still finds no JSON/MD reports and a tail of repeated RuntimeWarning lines from userknn_residual_probe.py with no split completion artifact. Broad fine-grid must not be relaunched as-is."
+    },
+    "jackknife_uncertainty_boundary_expanded": {
+      "classification": "FAILED_INCOMPLETE_NO_METRIC_REPORT",
+      "pid_file": "logs/20260606T220406KST_jackknife_uncertainty_boundary_expanded.pid",
+      "pid_file_value_previously_observed": 28646,
+      "expected_report_json": "reports/20260606T220406KST_jackknife_uncertainty_boundary_expanded.json",
+      "expected_report_md": "reports/20260606T220406KST_jackknife_uncertainty_boundary_expanded.md",
+      "reports_exist": false,
+      "log": "logs/20260606T220406KST_jackknife_uncertainty_boundary_expanded.log",
+      "reason": "Dead process, missing JSON/MD, and only a short partial log stopping mid val_random_uniform_seed123; no metric report exists for escalation."
+    },
+    "jackknife_uncertainty_boundary_smoke": {
+      "classification": "WEAK_SIGNAL_STRICT_GATE_FAIL",
+      "report_json": "reports/20260606T220406KST_jackknife_uncertainty_boundary_probe.json",
+      "top_variant": "vote_consensus__high_capacity_gap__B1__w0.1",
+      "mean_delta_vs_base": 0.0003667400146696309,
+      "min_delta_vs_base": -0.0012002400480095599,
+      "positive_splits": "2/3",
+      "fixes": 252,
+      "breaks": 230,
+      "pooled_p_exact": 0.33881500709211204,
+      "strict_gate_failures": [
+        "mean_delta below +0.0015",
+        "min_delta is negative",
+        "positive splits are 2/3, not 3/3",
+        "pooled exact p >= 0.05"
+      ]
+    },
+    "dns_pool1_panel": {
+      "classification": "CLOSED_NO_CANDIDATE",
+      "report_json": "reports/20260606T125011KST_dns_pool1_panel_aggregate.json",
+      "best_observed_delta_vs_emb128_ref": 0.0010002000400080036,
+      "pooled_p_exact": 0.2509927551833466,
+      "reason": "Single-split/panel evidence remains below strict gate and was already rejected as split-specific/public-noise risk."
+    },
+    "userknn_gated_residual_smoke": {
+      "classification": "WEAK_SIGNAL_STRICT_GATE_FAIL",
+      "report_json": "reports/20260603T180707KST_userknn_gated_residual_probe.json",
+      "top_mean_delta_vs_base": 0.0009001800360071884,
+      "top_min_delta_vs_base": 0.0002000400080015563,
+      "top_positive_splits": "3/3",
+      "top_fixes": 406,
+      "top_breaks": 352,
+      "top_pooled_p_exact": 0.05415183075028983,
+      "reason": "Best mean delta is below +0.0015 and p is not <0.05; narrower p<0.05 variants have mean delta about +0.0008, still below strict gate."
+    }
+  },
+  "new_axis_decision": "NO_SAFE_AXIS: after inspecting current reports, logs, process state, quarantine, and trusted validation scripts, I did not find a fresh independent validation-only axis that is credible, bounded, materially different from closed axes, and capable of satisfying the strict gate in this run. Launching a probe now would either repeat UserKNN/jackknife/boundary/rankblend/capacity families already stalled, weak, quarantined, or public-negative, or would be an underpowered one-split blip explicitly disallowed by the objective.",
+  "new_probe": {
+    "launched": false,
+    "status": "not_launched_no_safe_axis",
+    "command": null,
+    "pid_file": null,
+    "log": null,
+    "report_json": null,
+    "report_md": null,
+    "artifact_dir": null
+  },
+  "ranked_next_axis_hypotheses": [
+    {
+      "rank": 1,
+      "axis": "Bounded UserKNN diagnostic after fixing NaN standardization only if the implementation bug is isolated first",
+      "why_not_launched_now": "The broad fine-grid just stalled for ~15h with repeated invalid-divide warnings and no reports; relaunching it violates the prompt. A materially different future probe would need a tiny deterministic diagnostic proving finite features and a hard per-split row/sample cap before any 3-split run.",
+      "blockers": [
+        "stalled broad grid",
+        "implementation warning source unresolved",
+        "prior smoke mean delta below +0.0015"
+      ]
+    },
+    {
+      "rank": 2,
+      "axis": "Out-of-fold residual calibration constrained to already available validation artifacts only",
+      "why_not_launched_now": "Closest historical boundary/rankblend residual variants produced public-negative transfer or quarantine despite positive validation deltas, so a new residual scan lacks a safe independence argument without a new non-leaky validation design.",
+      "blockers": [
+        "rankblend and boundary residual families quarantined/public-negative",
+        "near-duplicate risk",
+        "strict gate/public transfer mismatch"
+      ]
+    },
+    {
+      "rank": 3,
+      "axis": "New backbone/loss family beyond LightGCN capacity frontier",
+      "why_not_launched_now": "SASRec, TagCF, SGL/XSimGCL, Hyperbolic, MultiVAE, AlphaRec/text/semantic families were already weak/redundant/negative; a genuinely new model would exceed the bounded 20-minute validation-only budget and lacks a current credible clue.",
+      "blockers": [
+        "closed structural families",
+        "bounded runtime",
+        "no fresh evidence exceeding strict gate"
+      ]
+    },
+    {
+      "rank": 4,
+      "axis": "DNS/capacity micro-ensemble refinement",
+      "why_not_launched_now": "DNS pool=1 and capacity/frontier refinements are closed as marginal or public-noise, with observed deltas around +0.0010 or less and non-significant paired tests; below strict threshold.",
+      "blockers": [
+        "mean delta below +0.0015",
+        "non-significant p-values",
+        "capacity frontier/public-tested variants failed to beat current best"
+      ]
+    }
+  ],
+  "strict_gate": {
+    "mean_delta_threshold": 0.0015,
+    "min_delta_nonnegative": true,
+    "required_positive_splits": 3,
+    "requires_fixes_gt_breaks": true,
+    "pooled_p_lt": 0.05
+  },
+  "inspected_evidence": {
+    "reports": [
+      "reports/20260607T041626KST_opencode_axis_loop_prompt.md",
+      "reports/20260607T031100KST_improvement_axis_cron_status.json",
+      "reports/20260606T220406KST_opencode_improvement_axis_loop.json",
+      "reports/20260606T220406KST_jackknife_uncertainty_boundary_probe.json",
+      "reports/20260603T180707KST_userknn_gated_residual_probe.json",
+      "reports/20260606T125011KST_dns_pool1_panel_aggregate.json"
+    ],
+    "state_files": [
+      "state/aggressive_quota_runner_state.json"
+    ],
+    "trusted_script_surfaces_seen": [
+      "scripts/jackknife_uncertainty_boundary_probe.py",
+      "scripts/userknn_gated_residual_probe.py",
+      "scripts/aggressive_quota_runner.py",
+      "scripts/rank_blend_mcnemar.py"
+    ],
+    "active_process_note": "Pre-existing aggressive_quota_runner processes were observed but not invoked or modified by this run; no kaggle competitions submit command was run."
+  },
+  "artifacts_reports_produced": {
+    "reports": [
+      "reports/20260607T041626KST_opencode_improvement_axis_loop.md",
+      "reports/20260607T041626KST_opencode_improvement_axis_loop.json"
+    ],
+    "logs": [],
+    "validation_artifacts": [],
+    "candidate_or_submission_csv": []
+  },
+  "verdict": "NO_SAFE_AXIS"
+}

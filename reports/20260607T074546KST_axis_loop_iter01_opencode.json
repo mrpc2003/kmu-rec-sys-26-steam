@@ -1,0 +1,120 @@
+{
+  "safety_flags": {
+    "validation_only": true,
+    "candidate_csv_written": false,
+    "full_test_candidate_or_submission_csv_created": false,
+    "kaggle_submit_executed": false,
+    "hidden_labels_used": false,
+    "private_answers_used": false,
+    "external_steam_scraping_used": false,
+    "credentials_or_tokens_printed": false,
+    "quarantine_or_guard_logic_weakened": false,
+    "git_stage_commit_push_executed": false,
+    "recursive_cron_scheduled": false
+  },
+  "axis_decision": "no safe axis",
+  "new_probe": {
+    "launched": false,
+    "status": "not_launched",
+    "command": null,
+    "pid_file": null,
+    "log": null,
+    "report_json": null,
+    "report_md": null,
+    "artifact_dir": "artifacts/opencode_hermes_axis_loop_20260607T074546KST"
+  },
+  "best_or_top_metrics": {
+    "variant": null,
+    "mean_delta_vs_base": null,
+    "min_delta_vs_base": null,
+    "positive_splits": null,
+    "fixes": null,
+    "breaks": null,
+    "pooled_p_exact": null,
+    "quarantine_conflict": false
+  },
+  "ranked_next_axis_hypotheses": [
+    {
+      "rank": 1,
+      "axis": "Finite-value/complexity diagnostic for UserKNN residual z-normalization",
+      "why_not_launched_now": "Diagnostic only, not a fresh improvement axis; the broad UserKNN gated fine-grid already stalled without a metric report and repeated invalid-divide warnings.",
+      "evidence": [
+        "known incomplete: userknn_gated_residual_fine expected reports absent",
+        "previous UserKNN smoke mean delta about +0.000900, p=0.05415, below strict mean and p gates"
+      ]
+    },
+    {
+      "rank": 2,
+      "axis": "New residual calibration or boundary rerank using existing scores",
+      "why_not_launched_now": "Near-duplicate/quarantine risk: rankblend ALS/BPR residuals, boundary scoreblend/pairwise, and covariate residual families have public-negative or weak transfer evidence.",
+      "evidence": [
+        "state/aggressive_quota_runner_state.json quarantines rankblend_z_plus_score_* and boundary_scoreblend_z128_z192_z64 families",
+        "boundary/frontier public deltas were negative despite small validation positives"
+      ]
+    },
+    {
+      "rank": 3,
+      "axis": "LightGCN inference/loss/capacity variant",
+      "why_not_launched_now": "Closed or too close to closed families: capacity/frontier/emb192, layer mix, exact-K, SL@K-lite, DNS, hours-confidence, and temporal compatibility are already weak/negative/stalled.",
+      "evidence": [
+        "reports/20260602_aggressive_gate_advisory_prompt.md lists layer mix among closed axes",
+        "repeat-until-candidate reports close exact-K, temporal, boundary covariate, hours-confidence, DNS"
+      ]
+    },
+    {
+      "rank": 4,
+      "axis": "New model backbone or side-information signal",
+      "why_not_launched_now": "SASRec/DIN/TAG-CF/SGL/DirectAU/xSimGCL/MultiVAE/AlphaRec/raw semantic/text/README/LM probes are already weak, public-negative, or too large for a bounded safe single iteration.",
+      "evidence": [
+        "din_set_encoder_closure_report.md closes sequence/set encoder and graph SSL families",
+        "semantic residual and text probes are below strict gate or explicitly redundant"
+      ]
+    }
+  ],
+  "verdict": "NO_SAFE_AXIS",
+  "strict_gate": {
+    "mean_delta_threshold": 0.0015,
+    "min_delta_nonnegative": true,
+    "required_positive_splits": "3/3",
+    "requires_fixes_gt_breaks": true,
+    "pooled_exact_or_mcnemar_p_lt": 0.05,
+    "requires_no_quarantine_or_near_duplicate_conflict": true
+  },
+  "inspected_evidence": {
+    "reports": [
+      "reports/20260607T074528KST_opencode_hermes_axis_rejection_loop_summary.json",
+      "reports/20260607T063604KST_opencode_improvement_axis_loop.json",
+      "reports/20260607T052646KST_opencode_improvement_axis_loop.md",
+      "reports/20260607T053207KST_improvement_axis_cron_status.md",
+      "reports/20260606T224445KST_repeat_until_candidate_status.md",
+      "reports/20260606T202326KST_repeat_until_candidate_status.md",
+      "reports/20260606T125011KST_dns_pool1_panel_aggregate.md",
+      "reports/20260602_aggressive_gate_advisory_prompt.md",
+      "reports/din_set_encoder_closure_report.md"
+    ],
+    "scripts": [
+      "scripts/aggressive_user_gated_zblend_probe.py",
+      "scripts/aggressive_rank_frontier_panel.py",
+      "scripts/lightgcn_layer_mixture_probe.py",
+      "scripts/userknn_residual_probe.py",
+      "scripts/jackknife_uncertainty_boundary_probe.py",
+      "scripts/opencode_hermes_axis_rejection_loop.py"
+    ],
+    "state_files": [
+      "state/aggressive_quota_runner_state.json",
+      "state/autonomous_submission_policy.json"
+    ],
+    "direct_searches": [
+      "rg over reports/scripts/state for axis, probe, delta, McNemar, quarantine, emb128/emb192, strict verdict terms",
+      "rg over scripts for validation CLI/report entry points and output safety surfaces",
+      "rg for aggressive_user_gated_zblend/user_gated_zblend/zblend/emb192/rank_blend/DNS/SLK/SASRec/DirectAU/TurboCF/exactk/multisampler",
+      "rg for layer_mixture/layermix prior evidence and report closures",
+      "rg for candidate/submission/kaggle submit/to_csv/write_text safety patterns"
+    ],
+    "active_process_context_from_prompt": [
+      "Hermes/OpenCode rejection loop wrapper active",
+      "no Kaggle submit process reported in supplied state"
+    ]
+  },
+  "reasoning_summary": "Every plausible bounded validation-only surface found in this pass either repeats an explicitly closed/stalled family, conflicts with quarantine/public-negative transfer, or would be an underpowered single-split diagnostic rather than a fresh independent axis capable of Hermes strict gate. Therefore no probe was launched."
+}

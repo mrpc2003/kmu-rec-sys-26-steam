@@ -1,0 +1,103 @@
+{
+  "safety_flags": {
+    "validation_only": true,
+    "candidate_csv_written": false,
+    "full_test_candidate_or_submission_csv_created": false,
+    "kaggle_submit_executed": false,
+    "hidden_labels_used": false,
+    "private_answers_used": false,
+    "external_steam_scraping_used": false,
+    "credentials_or_tokens_printed": false,
+    "quarantine_or_guard_logic_weakened": false,
+    "git_stage_commit_push_executed": false,
+    "recursive_cron_scheduled": false
+  },
+  "axis_decision": "no safe axis",
+  "new_probe": {
+    "launched": false,
+    "status": "not_launched",
+    "command": null,
+    "pid_file": null,
+    "log": null,
+    "report_json": null,
+    "report_md": null,
+    "artifact_dir": "artifacts/opencode_hermes_axis_loop_20260607T144515KST"
+  },
+  "best_or_top_metrics": {
+    "variant": "diagnostic_atlas_als_f32_popa4_w0.20_band1_from_20260607T130533KST_current_best_als_independent_confirmation",
+    "mean_delta_vs_base": 0.0011335600453423744,
+    "min_delta_vs_base": 0.0004000800160031126,
+    "positive_splits": "3/3",
+    "fixes": 462,
+    "breaks": 394,
+    "pooled_p_exact": 0.021965674090633346,
+    "quarantine_conflict": true,
+    "strict_gate_pass": false,
+    "failed_gates": [
+      "mean_delta_lt_0.0015",
+      "quarantine_or_same_family_conflict"
+    ],
+    "why_not_candidate": "The strongest apparent row is the same ALS/rankblend residual diagnostic already rejected by Hermes: below the strict mean-delta threshold and same-family/quarantine conflicted. The pre-registered ALS row failed mean, min, positive-split, and p gates."
+  },
+  "ranked_next_axis_hypotheses": [
+    {
+      "rank": 1,
+      "axis": "Hyperbolic LightGCN / non-Euclidean decision geometry",
+      "status": "closed_not_launched",
+      "evidence": "scripts/lightgcn_hyperbolic.py exists, but reports/din_set_encoder_closure_report.md records geometry as redundant and prior search found advisory text closing hyperbolic/sequence/residual-popularity/multi-sampler priors. Launching it would repeat a closed family, not add fresh independent information."
+    },
+    {
+      "rank": 2,
+      "axis": "DIN-style target-conditioned set encoder / higher-order set prediction",
+      "status": "closed_not_launched",
+      "evidence": "reports/din_set_encoder_closure_report.md reports DIN d64/d128 as redundant: solo below emb128 and equal-blend negative vs the 4-seed reference; set-prediction paradigm marked closed."
+    },
+    {
+      "rank": 3,
+      "axis": "TurboCF / MultiVAE / shallow latent generative or item-item linear variants",
+      "status": "closed_not_launched",
+      "evidence": "Earlier iteration report and closure summaries classify EASE/ALS/MultiVAE/TurboCF/itemKNN as redundant with high correlation to LightGCN or public-negative families."
+    },
+    {
+      "rank": 4,
+      "axis": "UserKNN finite-value cleanup or jackknife boundary expansion",
+      "status": "stalled_not_launched",
+      "evidence": "Both are specifically listed as stalled/incomplete with invalid-divide warning dominated logs or no metric report; rerunning would not be a fresh independent design."
+    },
+    {
+      "rank": 5,
+      "axis": "Boundary/frontier/ALS/BPR/TAG-CF/OTTO residual retunes",
+      "status": "quarantined_not_launched",
+      "evidence": "state/aggressive_quota_runner_state.json and recent failure reports record public-negative transfer or independent strict failure; Hermes rejected the remaining ALS diagnostic row for mean_delta and quarantine."
+    }
+  ],
+  "verdict": "NO_SAFE_AXIS",
+  "evidence_reviewed": {
+    "direct_tools": [
+      "read README, iteration-01 report, current-best ALS independent confirmation, quota runner state, DIN closure report, prior no-safe-axis report",
+      "rg over scripts/reports/artifacts/state for validation/probe/quarantine/family/safety terms",
+      "ast-grep inventory of Python main entrypoints in scripts",
+      "ps inspection for active controller/probe/submit processes"
+    ],
+    "key_files": [
+      "reports/20260607T144515KST_axis_loop_iter01_opencode.json",
+      "reports/20260607T130533KST_current_best_als_independent_confirmation.json",
+      "reports/din_set_encoder_closure_report.md",
+      "reports/20260607T074546KST_axis_loop_iter05_opencode.md",
+      "state/aggressive_quota_runner_state.json",
+      "scripts/lightgcn_hyperbolic.py",
+      "scripts/directau_gate.py"
+    ],
+    "active_process_summary": "Only the expected OpenCode-Hermes axis-loop controller/monitor and this OpenCode run were observed; no kaggle competitions submit process was observed."
+  },
+  "manual_qa": {
+    "surface": "required report artifacts and safety state",
+    "checks_planned": [
+      "JSON parses with python json.load/json.tool",
+      "Markdown report exists at the required path",
+      "No new probe launched by this worker",
+      "No writes under submissions/ and no candidate/full-test CSV created by this worker",
+      "No git stage/commit/push executed"
+    ]
+  }
+}

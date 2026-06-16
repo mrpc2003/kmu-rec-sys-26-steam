@@ -1,0 +1,213 @@
+{
+  "verdict": "NO_SAFE_AXIS",
+  "safety_flags": {
+    "validation_only": true,
+    "candidate_csv_written": false,
+    "full_test_candidate_or_submission_csv_created": false,
+    "kaggle_submit_executed": false,
+    "hidden_labels_used": false,
+    "private_answers_used": false,
+    "external_steam_scraping_used": false,
+    "credentials_or_tokens_printed": false,
+    "quarantine_or_guard_logic_weakened": false,
+    "git_stage_commit_push_executed": false,
+    "recursive_cron_scheduled": false
+  },
+  "active_processes_observed": {
+    "process_scan_command": "ps -eo pid,ppid,pgid,stat,etime,cmd | rg 'aggressive_quota_runner|userknn_gated_residual_fine|jackknife_uncertainty_boundary|kaggle competitions submit|opencode_improvement_axis_loop'",
+    "aggressive_quota_runner": {
+      "status": "RUNNING_PREEXISTING_NOT_STARTED_BY_THIS_RUN",
+      "pids": [208, 226],
+      "command_contains": "scripts/aggressive_quota_runner.py --sleep-no-quota 300 --sleep-no-candidate 600 --sleep-after-submit 21600",
+      "latest_watchdog": "logs/aggressive_quota_runner_watchdog_20260607T052059KST.log",
+      "latest_watchdog_summary": "quota remaining 5; no validation-positive unsubmitted variant available; idle/waiting"
+    },
+    "userknn_gated_residual_fine": {
+      "status": "NOT_RUNNING_STALLED_INCOMPLETE",
+      "expected_report_json": "reports/20260606T132450KST_userknn_gated_residual_fine.json",
+      "expected_report_md": "reports/20260606T132450KST_userknn_gated_residual_fine.md",
+      "expected_reports_exist": false,
+      "log": "logs/userknn_gated_residual_fine_20260606T132450KST.log"
+    },
+    "jackknife_uncertainty_boundary_expanded": {
+      "status": "NOT_RUNNING_FAILED_INCOMPLETE_NO_METRIC_REPORT",
+      "pid_file": "logs/20260606T220406KST_jackknife_uncertainty_boundary_expanded.pid",
+      "pid_file_value_previously_observed": 28646,
+      "pid_file_pid_live": false,
+      "expected_report_json": "reports/20260606T220406KST_jackknife_uncertainty_boundary_expanded.json",
+      "expected_report_md": "reports/20260606T220406KST_jackknife_uncertainty_boundary_expanded.md",
+      "expected_reports_exist": false,
+      "log": "logs/20260606T220406KST_jackknife_uncertainty_boundary_expanded.log",
+      "log_lines_observed": 12
+    },
+    "kaggle_submit": {
+      "status": "NOT_OBSERVED",
+      "process_count_excluding_search_command": 0
+    },
+    "current_opencode_run": {
+      "status": "OBSERVED_SELF_OR_HERMES_WRAPPER_DURING_THIS_RUN",
+      "note": "The process scan naturally matched the current OpenCode loop command; this was not a background probe or Kaggle submit process."
+    },
+    "gpu_snapshot": [
+      {"index": 0, "memory_used_mib": 0, "memory_total_mib": 32768, "utilization_percent": 0},
+      {"index": 1, "memory_used_mib": 0, "memory_total_mib": 32768, "utilization_percent": 1},
+      {"index": 2, "memory_used_mib": 0, "memory_total_mib": 32768, "utilization_percent": 0},
+      {"index": 3, "memory_used_mib": 4320, "memory_total_mib": 32768, "utilization_percent": 1}
+    ]
+  },
+  "completed_probe_classification": {
+    "userknn_gated_residual_fine": {
+      "classification": "STALLED_INCOMPLETE",
+      "expected_report_json": "reports/20260606T132450KST_userknn_gated_residual_fine.json",
+      "expected_report_md": "reports/20260606T132450KST_userknn_gated_residual_fine.md",
+      "reports_exist": false,
+      "log": "logs/userknn_gated_residual_fine_20260606T132450KST.log",
+      "reason": "Only the log exists; it begins with validation-only safety text and then repeats RuntimeWarning invalid value encountered in divide from userknn_residual_probe.py:114 with no metric report. Previous cron classified the broad fine-grid as stalled after about 14h51m; relaunching the same grid is disallowed."
+    },
+    "jackknife_uncertainty_boundary_expanded": {
+      "classification": "FAILED_INCOMPLETE_NO_METRIC_REPORT",
+      "expected_report_json": "reports/20260606T220406KST_jackknife_uncertainty_boundary_expanded.json",
+      "expected_report_md": "reports/20260606T220406KST_jackknife_uncertainty_boundary_expanded.md",
+      "reports_exist": false,
+      "pid_file": "logs/20260606T220406KST_jackknife_uncertainty_boundary_expanded.pid",
+      "pid_file_value_previously_observed": 28646,
+      "pid_file_pid_live": false,
+      "log": "logs/20260606T220406KST_jackknife_uncertainty_boundary_expanded.log",
+      "log_lines_observed": 12,
+      "reason": "The log stops mid val_random_uniform_seed123 and no JSON/MD metric report exists; this is not a result."
+    },
+    "jackknife_uncertainty_boundary_smoke": {
+      "classification": "WEAK_SIGNAL_STRICT_GATE_FAIL",
+      "report_json": "reports/20260606T220406KST_jackknife_uncertainty_boundary_probe.json",
+      "top_variant": "vote_consensus__high_capacity_gap__B1__w0.1",
+      "mean_delta_vs_base": 0.0003667400146696309,
+      "min_delta_vs_base": -0.0012002400480095599,
+      "positive_splits": "2/3",
+      "fixes": 252,
+      "breaks": 230,
+      "pooled_p_exact": 0.33881500709211204,
+      "strict_gate_failures": [
+        "mean_delta below +0.0015",
+        "min_delta is negative",
+        "positive_splits is 2/3, not 3/3",
+        "pooled_p_exact >= 0.05"
+      ]
+    },
+    "userknn_gated_residual_smoke_previous": {
+      "classification": "WEAK_SIGNAL_STRICT_GATE_FAIL",
+      "report_json": "reports/20260603T180707KST_userknn_gated_residual_probe.json",
+      "top_mean_delta_vs_base": 0.0009001800360071884,
+      "top_min_delta_vs_base": 0.0002000400080015563,
+      "top_positive_splits": "3/3",
+      "top_fixes": 406,
+      "top_breaks": 352,
+      "top_pooled_p_exact": 0.05415183075028983,
+      "note": "Some lower-mean variants have p < 0.05, but their mean deltas are about +0.0008, still below the strict +0.0015 threshold."
+    },
+    "dns_pool1_panel": {
+      "classification": "CLOSED_NO_CANDIDATE",
+      "report_json": "reports/20260606T125011KST_dns_pool1_panel_aggregate.json",
+      "reason": "Previously rejected as split-specific/public-noise risk; below strict gate and not a fresh independent axis."
+    },
+    "last_slot_sparse_agreement": {
+      "classification": "REJECT",
+      "report_json": "reports/20260604T115818KST_last_slot_sparse_agreement_probe.json",
+      "reason": "Top rows searched are negative or non-significant; not a strict improvement candidate."
+    },
+    "quarantined_public_negative_families": {
+      "classification": "CLOSED_OR_BLOCKED_BY_QUARANTINE",
+      "state_json": "state/aggressive_quota_runner_state.json",
+      "families_seen": [
+        "rankblend ALS/BPR residuals",
+        "boundary scoreblend",
+        "frontier/capacity",
+        "TAG-CF full-test"
+      ],
+      "reason": "Runner state records public-negative/non-improving transfer and quarantine or skipped variants for nearby families."
+    }
+  },
+  "new_probe": {
+    "launched": false,
+    "status": "not_launched_no_safe_axis",
+    "command": null,
+    "pid_file": null,
+    "log": null,
+    "report_json": null,
+    "report_md": null,
+    "artifact_dir": null,
+    "reason": "No materially fresh bounded validation-only axis was credible; launching now would repeat UserKNN/jackknife/boundary/rankblend/capacity families or create a weak one-split blip."
+  },
+  "ranked_next_axis_hypotheses": [
+    {
+      "rank": 1,
+      "axis": "Tiny UserKNN finite-value/complexity diagnostic after isolating z_within_user invalid-divide behavior",
+      "why_not_launched_now": "This would be implementation diagnostics rather than a fresh improvement axis, and the broad UserKNN fine-grid just stalled with no metric report; repeating it is disallowed.",
+      "blockers": ["stalled broad grid", "runtime/complexity unresolved", "previous smoke below strict mean delta"]
+    },
+    {
+      "rank": 2,
+      "axis": "New non-leaky out-of-fold residual calibration design using only existing validation artifacts",
+      "why_not_launched_now": "Closest rankblend/boundary residual families are quarantined or public-negative, so current evidence lacks a safe independence argument.",
+      "blockers": ["quarantine conflict", "public-negative transfer", "near-duplicate risk"]
+    },
+    {
+      "rank": 3,
+      "axis": "New backbone/loss family beyond LightGCN capacity frontier",
+      "why_not_launched_now": "SASRec, TAG-CF, SGL/XSimGCL, Hyperbolic, MultiVAE, AlphaRec, semantic/text, temporal, exact-K, and hours-confidence directions are already weak/negative/closed or too large for a tiny bounded run.",
+      "blockers": ["closed structural families", "bounded runtime", "no fresh strict-gate clue"]
+    },
+    {
+      "rank": 4,
+      "axis": "DNS/capacity micro-ensemble refinement",
+      "why_not_launched_now": "Existing DNS/capacity/frontier evidence is marginal, split-specific or public-noise, and below the strict gate.",
+      "blockers": ["mean delta below +0.0015", "non-significant or negative split behavior", "public-tested variants failed to beat current best"]
+    }
+  ],
+  "strict_gate": {
+    "mean_delta_threshold": 0.0015,
+    "min_delta_nonnegative": true,
+    "required_positive_splits": 3,
+    "requires_fixes_gt_breaks": true,
+    "pooled_exact_or_mcnemar_p_lt": 0.05,
+    "requires_validation_only": true,
+    "requires_candidate_csv_written_false": true,
+    "requires_kaggle_submit_executed_false": true,
+    "requires_no_near_duplicate_or_quarantine_conflict": true
+  },
+  "inspected_evidence": {
+    "reports": [
+      "reports/20260606T220406KST_jackknife_uncertainty_boundary_probe.json",
+      "reports/20260607T041626KST_opencode_improvement_axis_loop.json",
+      "reports/20260607T042202KST_improvement_axis_cron_status.json",
+      "reports/20260603T180707KST_userknn_gated_residual_probe.json",
+      "reports/20260606T125011KST_dns_pool1_panel_aggregate.json",
+      "reports/20260604T115818KST_last_slot_sparse_agreement_probe.json"
+    ],
+    "logs": [
+      "logs/aggressive_quota_runner_watchdog_20260607T052059KST.log",
+      "logs/userknn_gated_residual_fine_20260606T132450KST.log",
+      "logs/20260606T220406KST_jackknife_uncertainty_boundary_expanded.log"
+    ],
+    "state_files": [
+      "state/aggressive_quota_runner_state.json",
+      "state/autonomous_submission_policy.json"
+    ],
+    "trusted_script_surfaces_seen": [
+      "scripts/userknn_gated_residual_probe.py",
+      "scripts/userknn_residual_probe.py",
+      "scripts/jackknife_uncertainty_boundary_probe.py",
+      "scripts/aggressive_quota_runner.py"
+    ]
+  },
+  "artifacts_reports_produced": {
+    "reports": [
+      "reports/20260607T052646KST_opencode_improvement_axis_loop.md",
+      "reports/20260607T052646KST_opencode_improvement_axis_loop.json"
+    ],
+    "logs": [],
+    "validation_artifacts": [],
+    "candidate_or_submission_csv": [],
+    "kaggle_submission_artifacts": [],
+    "git_artifacts": []
+  }
+}

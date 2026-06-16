@@ -1,0 +1,886 @@
+[
+  {
+    "query": "all:\"collaborative filtering\" AND all:\"implicit feedback\" AND all:\"2025\"",
+    "id": "2510.10440v1",
+    "title": "Does Weighting Improve Matrix Factorization for Recommender Systems?",
+    "published": "2025-10-12",
+    "authors": [
+      "Alex Ayoub",
+      "Samuel Robertson",
+      "Dawen Liang",
+      "Harald Steck",
+      "Nathan Kallus"
+    ],
+    "categories": [
+      "cs.IR",
+      "cs.LG",
+      "stat.ML"
+    ],
+    "summary": "Matrix factorization is a widely used approach for top-N recommendation and collaborative filtering. When implemented on implicit feedback data (such as clicks), a common heuristic is to upweight the observed interactions. This strategy has been shown to improve performance for certain algorithms. In this paper, we conduct a systematic study of various weighting schemes and matrix factorization algorithms. Somewhat surprisingly, we find that training with unweighted data can perform comparably to, and sometimes outperform, training with weighted data, especially for large models. This observation challenges the conventional wisdom. Nevertheless, we identify cases where weighting can be beneficial, particularly for models with lower capacity and specific regularization schemes. We also derive efficient algorithms for exactly minimizing several weighted objectives that were previously considered computationally intractable. Our work provides a comprehensive analysis of the interplay between weighting, regularization, and model capacity in matrix factorization for recommender systems.",
+    "abs_url": "https://arxiv.org/abs/2510.10440v1",
+    "pdf_url": "https://arxiv.org/pdf/2510.10440v1"
+  },
+  {
+    "query": "all:\"collaborative filtering\" AND all:\"implicit feedback\" AND all:\"2025\"",
+    "id": "2502.07303v2",
+    "title": "Flow Matching for Collaborative Filtering",
+    "published": "2025-02-11",
+    "authors": [
+      "Chengkai Liu",
+      "Yangtian Zhang",
+      "Jianling Wang",
+      "Rex Ying",
+      "James Caverlee"
+    ],
+    "categories": [
+      "cs.IR"
+    ],
+    "summary": "Generative models have shown great promise in collaborative filtering by capturing the underlying distribution of user interests and preferences. However, existing approaches struggle with inaccurate posterior approximations and misalignment with the discrete nature of recommendation data, limiting their expressiveness and real-world performance. To address these limitations, we propose FlowCF, a novel flow-based recommendation system leveraging flow matching for collaborative filtering. We tailor flow matching to the unique challenges in recommendation through two key innovations: (1) a behavior-guided prior that aligns with user behavior patterns to handle the sparse and heterogeneous user-item interactions, and (2) a discrete flow framework to preserve the binary nature of implicit feedback while maintaining the benefits of flow matching, such as stable training and efficient inference. Extensive experiments demonstrate that FlowCF achieves state-of-the-art recommendation accuracy across various datasets with the fastest inference speed, making it a compelling approach for real-world recommender systems. The code is available at https://github.com/chengkai-liu/FlowCF.",
+    "abs_url": "https://arxiv.org/abs/2502.07303v2",
+    "pdf_url": "https://arxiv.org/pdf/2502.07303v2"
+  },
+  {
+    "query": "all:\"test-time aggregation\" AND all:\"collaborative filtering\"",
+    "id": "2404.08660v2",
+    "title": "How Does Message Passing Improve Collaborative Filtering?",
+    "published": "2024-03-27",
+    "authors": [
+      "Mingxuan Ju",
+      "William Shiao",
+      "Zhichun Guo",
+      "Yanfang Ye",
+      "Yozen Liu",
+      "Neil Shah"
+    ],
+    "categories": [
+      "cs.IR",
+      "cs.LG"
+    ],
+    "summary": "Collaborative filtering (CF) has exhibited prominent results for recommender systems and been broadly utilized for real-world applications. A branch of research enhances CF methods by message passing used in graph neural networks, due to its strong capabilities of extracting knowledge from graph-structured data, like user-item bipartite graphs that naturally exist in CF. They assume that message passing helps CF methods in a manner akin to its benefits for graph-based learning tasks in general. However, even though message passing empirically improves CF, whether or not this assumption is correct still needs verification. To address this gap, we formally investigate why message passing helps CF from multiple perspectives and show that many assumptions made by previous works are not entirely accurate. With our curated ablation studies and theoretical analyses, we discover that (1) message passing improves the CF performance primarily by additional representations passed from neighbors during the forward pass instead of additional gradient updates to neighbor representations during the model back-propagation and (ii) message passing usually helps low-degree nodes more than high-degree nodes. Utilizing these novel findings, we present Test-time Aggregation for CF, namely TAG-CF, a test-time augmentation framework that only conducts message passing once at inference time. The key novelty of TAG-CF is that it effectively utilizes graph knowledge while circumventing most of notorious computational overheads of message passing. Besides, TAG-CF is extremely versatile can be used as a plug-and-play module to enhance representations trained by different CF supervision signals. Evaluated on six datasets, TAG-CF consistently improves the recommendation performance of CF methods without graph by up to 39.2% on cold users and 31.7% on all users, with little to no extra computational overheads.",
+    "abs_url": "https://arxiv.org/abs/2404.08660v2",
+    "pdf_url": "https://arxiv.org/pdf/2404.08660v2"
+  },
+  {
+    "query": "all:\"Rankformer\" AND all:\"recommendation\"",
+    "id": "2503.16927v1",
+    "title": "Rankformer: A Graph Transformer for Recommendation based on Ranking Objective",
+    "published": "2025-03-21",
+    "authors": [
+      "Sirui Chen",
+      "Shen Han",
+      "Jiawei Chen",
+      "Binbin Hu",
+      "Sheng Zhou",
+      "Gang Wang"
+    ],
+    "categories": [
+      "cs.IR"
+    ],
+    "summary": "Recommender Systems (RS) aim to generate personalized ranked lists for each user and are evaluated using ranking metrics. Although personalized ranking is a fundamental aspect of RS, this critical property is often overlooked in the design of model architectures. To address this issue, we propose Rankformer, a ranking-inspired recommendation model. The architecture of Rankformer is inspired by the gradient of the ranking objective, embodying a unique (graph) transformer architecture -- it leverages global information from all users and items to produce more informative representations and employs specific attention weights to guide the evolution of embeddings towards improved ranking performance. We further develop an acceleration algorithm for Rankformer, reducing its complexity to a linear level with respect to the number of positive instances. Extensive experimental results demonstrate that Rankformer outperforms state-of-the-art methods. The code is available at https://github.com/StupidThree/Rankformer.",
+    "abs_url": "https://arxiv.org/abs/2503.16927v1",
+    "pdf_url": "https://arxiv.org/pdf/2503.16927v1"
+  },
+  {
+    "query": "all:\"negative sampling\" AND all:\"implicit feedback\" AND all:\"recommendation\"",
+    "id": "2605.19651v1",
+    "title": "Divergence Meets Consensus: A Multi-Source Negative Sampling Framework for Sequential Recommendation",
+    "published": "2026-05-19",
+    "authors": [
+      "Yuanzi Li",
+      "Lingjie Wang",
+      "Jingyu Zhao",
+      "Zihang Tian",
+      "Yuhan Wang",
+      "Lei Wang"
+    ],
+    "categories": [
+      "cs.IR"
+    ],
+    "summary": "Negative sampling is significant for training sequential recommendation models under implicit feedback. The predominant strategy, self-guided hard negative sampling, selects negatives based on the model's current state but suffers from three limitations: (1) the coupling between sampling and model updates triggers a vicious cycle that drives the model into local optima; (2) relying on current model parameters narrows sampling to a small region of the item space, reducing diversity and harming generalization; (3) identifying a hard negative requires scoring the entire candidate pool, causing substantial computational overhead with minimal information gain. To address these challenges, we propose MDCNS (Multi-source Divergence-Consensus for Negative Sampling), a novel \"Teacher-Peer-Self\" framework inspired by Vygotsky's Zone of Proximal Development (ZPD) theory. The proposed method comprises three components, including multi-source scoring, divergence re-ranking, and consensus distillation. Firstly, multi-source scoring incorporates peer and ensemble teacher models to inject external negative signals and break the self-reinforcement loop. Then, divergence re-ranking exploits prediction discrepancy between self and peer models to enhance sampling diversity. Finally, consensus distillation aligns the self model with the teacher via KL divergence, simultaneously improving computational cost utilization. Extensive experiments on six real-world datasets and five backbone models show that MDCNS consistently outperforms state-of-the-art negative sampling methods, demonstrating strong effectiveness and generalization.",
+    "abs_url": "https://arxiv.org/abs/2605.19651v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.19651v1"
+  },
+  {
+    "query": "all:\"negative sampling\" AND all:\"implicit feedback\" AND all:\"recommendation\"",
+    "id": "2605.00327v1",
+    "title": "DynamicPO: Dynamic Preference Optimization for Recommendation",
+    "published": "2026-05-01",
+    "authors": [
+      "Xingyu Hu",
+      "Kai Zhang",
+      "Jiancan Wu",
+      "Shuli Wang",
+      "Chi Wang",
+      "Wenshuai Chen"
+    ],
+    "categories": [
+      "cs.IR",
+      "cs.AI"
+    ],
+    "summary": "In large language model (LLM)-based recommendation systems, direct preference optimization (DPO) effectively aligns recommendations with user preferences, requiring multi-negative objective functions to leverage abundant implicit-feedback negatives and sharpen preference boundaries. However, our empirical analyses reveal a counterintuitive phenomenon, preference optimization collapse, where increasing the number of negative samples can lead to performance degradation despite a continuously decreasing training loss. We further theoretically demonstrate that this collapse arises from gradient suppression, caused by the dominance of easily discriminable negatives over boundary-critical negatives that truly define user preference boundaries. As a result, boundary-relevant signals are under-optimized, weakening the model's decision boundary. Motivated by these observations, we propose DynamicPO (Dynamic Preference Optimization), a lightweight and plug-and-play framework comprising two adaptive mechanisms: Dynamic Boundary Negative Selection, which identifies and prioritizes informative negatives near the model's decision boundary, and Dual-Margin Dynamic beta Adjustment, which calibrates optimization strength per sample according to boundary ambiguity. Extensive experiments on three public datasets show that DynamicPO effectively prevents optimization collapse and improves recommendation accuracy on multi-negative preference optimization methods, with negligible computational overhead. Our code and datasets are available at https://github.com/xingyuHuxingyu/DynamicPO.",
+    "abs_url": "https://arxiv.org/abs/2605.00327v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.00327v1"
+  },
+  {
+    "query": "all:\"negative sampling\" AND all:\"implicit feedback\" AND all:\"recommendation\"",
+    "id": "2602.22521v1",
+    "title": "TFPS: A Temporal Filtration-enhanced Positive Sample Set Construction Method for Implicit Collaborative Filtering",
+    "published": "2026-02-26",
+    "authors": [
+      "Jiayi Wu",
+      "Zhengyu Wu",
+      "Xunkai Li",
+      "Rong-Hua Li",
+      "Guoren Wang"
+    ],
+    "categories": [
+      "cs.IR",
+      "cs.LG"
+    ],
+    "summary": "The negative sampling strategy can effectively train collaborative filtering (CF) recommendation models based on implicit feedback by constructing positive and negative samples. However, existing methods primarily optimize the negative sampling process while neglecting the exploration of positive samples. Some denoising recommendation methods can be applied to denoise positive samples within negative sampling strategies, but they ignore temporal information. Existing work integrates sequential information during model aggregation but neglects time interval information, hindering accurate capture of users' current preferences. To address this problem, from a data perspective, we propose a novel temporal filtration-enhanced approach to construct a high-quality positive sample set. First, we design a time decay model based on interaction time intervals, transforming the original graph into a weighted user-item bipartite graph. Then, based on predefined filtering operations, the weighted user-item bipartite graph is layered. Finally, we design a layer-enhancement strategy to construct a high-quality positive sample set for the layered subgraphs. We provide theoretical insights into why TFPS can improve Recall@k and NDCG@k, and extensive experiments on three real-world datasets demonstrate the effectiveness of the proposed method. Additionally, TFPS can be integrated with various implicit CF recommenders or negative sampling methods to enhance its performance.",
+    "abs_url": "https://arxiv.org/abs/2602.22521v1",
+    "pdf_url": "https://arxiv.org/pdf/2602.22521v1"
+  },
+  {
+    "query": "all:\"negative sampling\" AND all:\"implicit feedback\" AND all:\"recommendation\"",
+    "id": "2602.18759v1",
+    "title": "Towards Reliable Negative Sampling for Recommendation with Implicit Feedback via In-Community Popularity",
+    "published": "2026-02-21",
+    "authors": [
+      "Chen Chen",
+      "Haobo Lin",
+      "Yuanbo Xu"
+    ],
+    "categories": [
+      "cs.IR",
+      "cs.AI"
+    ],
+    "summary": "Learning from implicit feedback is a fundamental problem in modern recommender systems, where only positive interactions are observed and explicit negative signals are unavailable. In such settings, negative sampling plays a critical role in model training by constructing negative items that enable effective preference learning and ranking optimization. However, designing reliable negative sampling strategies remains challenging, as they must simultaneously ensure realness, hardness, and interpretability. To this end, we propose \\textbf{ICPNS (In-Community Popularity Negative Sampling)}, a novel framework that leverages user community structure to identify reliable and informative negative samples. Our approach is grounded in the insight that item exposure is driven by latent user communities. By identifying these communities and utilizing in-community popularity, ICPNS effectively approximates the probability of item exposure. Consequently, items that are popular within a user's community but remain unclicked are identified as more reliable true negatives. Extensive experiments on four benchmark datasets demonstrate that ICPNS yields consistent improvements on graph-based recommenders and competitive performance on MF-based models, outperforming representative negative sampling strategies under a unified evaluation protocol.",
+    "abs_url": "https://arxiv.org/abs/2602.18759v1",
+    "pdf_url": "https://arxiv.org/pdf/2602.18759v1"
+  },
+  {
+    "query": "all:\"negative sampling\" AND all:\"implicit feedback\" AND all:\"recommendation\"",
+    "id": "2601.04291v1",
+    "title": "Correct and Weight: A Simple Yet Effective Loss for Implicit Feedback Recommendation",
+    "published": "2026-01-07",
+    "authors": [
+      "Minglei Yin",
+      "Chuanbo Hu",
+      "Bin Liu",
+      "Neil Zhenqiang Gong",
+      " Yanfang",
+      " Ye"
+    ],
+    "categories": [
+      "cs.IR",
+      "cs.LG"
+    ],
+    "summary": "Learning from implicit feedback has become the standard paradigm for modern recommender systems. However, this setting is fraught with the persistent challenge of false negatives, where unobserved user-item interactions are not necessarily indicative of negative preference. To address this issue, this paper introduces a novel and principled loss function, named Corrected and Weighted (CW) loss, that systematically corrects for the impact of false negatives within the training objective. Our approach integrates two key techniques. First, inspired by Positive-Unlabeled learning, we debias the negative sampling process by re-calibrating the assumed negative distribution. By theoretically approximating the true negative distribution (p-) using the observable general data distribution (p) and the positive interaction distribution (p^+), our method provides a more accurate estimate of the likelihood that a sampled unlabeled item is truly negative. Second, we introduce a dynamic re-weighting mechanism that modulates the importance of each negative instance based on the model's current prediction. This scheme encourages the model to enforce a larger ranking margin between positive items and confidently predicted (i.e., easy) negative items, while simultaneously down-weighting the penalty on uncertain negatives that have a higher probability of being false negatives. A key advantage of our approach is its elegance and efficiency; it requires no complex modifications to the data sampling process or significant computational overhead, making it readily applicable to a wide array of existing recommendation models. Extensive experiments conducted on four large-scale, sparse benchmark datasets demonstrate the superiority of our proposed loss. The results show that our method consistently and significantly outperforms a suite of state-of-the-art loss functions across multiple ranking-oriented metrics.",
+    "abs_url": "https://arxiv.org/abs/2601.04291v1",
+    "pdf_url": "https://arxiv.org/pdf/2601.04291v1"
+  },
+  {
+    "query": "all:\"negative sampling\" AND all:\"implicit feedback\" AND all:\"recommendation\"",
+    "id": "2601.01448v1",
+    "title": "Adaptive Diffusion-based Augmentation for Recommendation",
+    "published": "2026-01-04",
+    "authors": [
+      "Na Li",
+      "Fanghui Sun",
+      "Yan Zou",
+      "Yangfu Zhu",
+      "Xiatian Zhu",
+      "Ying Ma"
+    ],
+    "categories": [
+      "cs.IR"
+    ],
+    "summary": "Recommendation systems often rely on implicit feedback, where only positive user-item interactions can be observed. Negative sampling is therefore crucial to provide proper negative training signals. However, existing methods tend to mislabel potentially positive but unobserved items as negatives and lack precise control over negative sample selection. We aim to address these by generating controllable negative samples, rather than sampling from the existing item pool. In this context, we propose Adaptive Diffusion-based Augmentation for Recommendation (ADAR), a novel and model-agnostic module that leverages diffusion to synthesize informative negatives. Inspired by the progressive corruption process in diffusion, ADAR simulates a continuous transition from positive to negative, allowing for fine-grained control over sample hardness. To mine suitable negative samples, we theoretically identify the transition point at which a positive sample turns negative and derive a score-aware function to adaptively determine the optimal sampling timestep. By identifying this transition point, ADAR generates challenging negative samples that effectively refine the model's decision boundary. Experiments confirm that ADAR is broadly compatible and boosts the performance of existing recommendation models substantially, including collaborative filtering and sequential recommendation, without architectural modifications.",
+    "abs_url": "https://arxiv.org/abs/2601.01448v1",
+    "pdf_url": "https://arxiv.org/pdf/2601.01448v1"
+  },
+  {
+    "query": "all:\"negative sampling\" AND all:\"implicit feedback\" AND all:\"recommendation\"",
+    "id": "2511.07295v2",
+    "title": "Hard vs. Noise: Resolving Hard-Noisy Sample Confusion in Recommender Systems via Large Language Models",
+    "published": "2025-11-10",
+    "authors": [
+      "Tianrui Song",
+      "Wen-Shuo Chao",
+      "Hao Liu"
+    ],
+    "categories": [
+      "cs.IR",
+      "cs.AI"
+    ],
+    "summary": "Implicit feedback, employed in training recommender systems, unavoidably confronts noise due to factors such as misclicks and position bias. Previous studies have attempted to identify noisy samples through their diverged data patterns, such as higher loss values, and mitigate their influence through sample dropping or reweighting. However, we observed that noisy samples and hard samples display similar patterns, leading to hard-noisy confusion issue. Such confusion is problematic as hard samples are vital for modeling user preferences. To solve this problem, we propose LLMHNI framework, leveraging two auxiliary user-item relevance signals generated by Large Language Models (LLMs) to differentiate hard and noisy samples. LLMHNI obtains user-item semantic relevance from LLM-encoded embeddings, which is used in negative sampling to select hard negatives while filtering out noisy false negatives. An objective alignment strategy is proposed to project LLM-encoded embeddings, originally for general language tasks, into a representation space optimized for user-item relevance modeling. LLMHNI also exploits LLM-inferred logical relevance within user-item interactions to identify hard and noisy samples. These LLM-inferred interactions are integrated into the interaction graph and guide denoising with cross-graph contrastive alignment. To eliminate the impact of unreliable interactions induced by LLM hallucination, we propose a graph contrastive learning strategy that aligns representations from randomly edge-dropped views to suppress unreliable edges. Empirical results demonstrate that LLMHNI significantly improves denoising and recommendation performance.",
+    "abs_url": "https://arxiv.org/abs/2511.07295v2",
+    "pdf_url": "https://arxiv.org/pdf/2511.07295v2"
+  },
+  {
+    "query": "all:\"negative sampling\" AND all:\"implicit feedback\" AND all:\"recommendation\"",
+    "id": "2403.03993v2",
+    "title": "Personalized Negative Reservoir for Incremental Learning in Recommender Systems",
+    "published": "2024-03-06",
+    "authors": [
+      "Antonios Valkanas",
+      "Yuening Wang",
+      "Yingxue Zhang",
+      "Mark Coates"
+    ],
+    "categories": [
+      "cs.IR",
+      "cs.AI"
+    ],
+    "summary": "Recommender systems have become an integral part of online platforms. Every day the volume of training data is expanding and the number of user interactions is constantly increasing. The exploration of larger and more expressive models has become a necessary pursuit to improve user experience. However, this progression carries with it an increased computational burden. In commercial settings, once a recommendation system model has been trained and deployed it typically needs to be updated frequently as new client data arrive. Cumulatively, the mounting volume of data is guaranteed to eventually make full batch retraining of the model from scratch computationally infeasible. Naively fine-tuning solely on the new data runs into the well-documented problem of catastrophic forgetting. Despite the fact that negative sampling is a crucial part of training with implicit feedback, no specialized technique exists that is tailored to the incremental learning framework. In this work, we propose a personalized negative reservoir strategy, which is used to obtain negative samples for the standard triplet loss of graph-based recommendation systems. Our technique balances alleviation of forgetting with plasticity by encouraging the model to remember stable user preferences and selectively forget when user interests change. We derive the mathematical formulation of a negative sampler to populate and update the reservoir. We integrate our design in three SOTA and commonly used incremental recommendation models. We show that these concrete realizations of our negative reservoir framework achieve state-of-the-art results for standard benchmarks using multiple top-k evaluation metrics.",
+    "abs_url": "https://arxiv.org/abs/2403.03993v2",
+    "pdf_url": "https://arxiv.org/pdf/2403.03993v2"
+  },
+  {
+    "query": "all:\"diffusion\" AND all:\"collaborative filtering\" AND all:\"implicit feedback\"",
+    "id": "2311.08744v3",
+    "title": "Graph Signal Diffusion Model for Collaborative Filtering",
+    "published": "2023-11-15",
+    "authors": [
+      "Yunqin Zhu",
+      "Chao Wang",
+      "Qi Zhang",
+      "Hui Xiong"
+    ],
+    "categories": [
+      "cs.IR",
+      "cs.LG"
+    ],
+    "summary": "Collaborative filtering is a critical technique in recommender systems. It has been increasingly viewed as a conditional generative task for user feedback data, where newly developed diffusion model shows great potential. However, existing studies on diffusion model lack effective solutions for modeling implicit feedback. Particularly, the standard isotropic diffusion process overlooks correlation between items, misaligned with the graphical structure of the interaction space. Meanwhile, Gaussian noise destroys personalized information in a user's interaction vector, causing difficulty in its reconstruction. In this paper, we adapt standard diffusion model and propose a novel Graph Signal Diffusion Model for Collaborative Filtering (named GiffCF). To better represent the correlated distribution of user-item interactions, we define a generalized diffusion process using heat equation on the item-item similarity graph. Our forward process smooths interaction signals with an advanced family of graph filters, introducing the graph adjacency as beneficial prior knowledge for recommendation. Our reverse process iteratively refines and sharpens latent signals in a noise-free manner, where the updates are conditioned on the user's history and computed from a carefully designed two-stage denoiser, leading to high-quality reconstruction. Finally, through extensive experiments, we show that GiffCF effectively leverages the advantages of both diffusion model and graph signal processing, and achieves state-of-the-art performance on three benchmark datasets.",
+    "abs_url": "https://arxiv.org/abs/2311.08744v3",
+    "pdf_url": "https://arxiv.org/pdf/2311.08744v3"
+  },
+  {
+    "query": "all:\"DPO\" AND all:\"recommender\"",
+    "id": "2605.28810v1",
+    "title": "Affective Music Recommendation: A Rollout-Based World Model for Offline Preference Optimization",
+    "published": "2026-05-27",
+    "authors": [
+      "Audrey Chan",
+      "Aaron Labbé",
+      "Jacob Lavoie",
+      "Jordan Bannister",
+      "Arsène Fansi Tchango",
+      "Guillaume Lajoie"
+    ],
+    "categories": [
+      "cs.LG",
+      "cs.IR",
+      "cs.SD"
+    ],
+    "summary": "Functional music applications, from consumer focus and sleep aids to clinical interventions, share a distinctive recommendation problem: success is defined by the listener's affective state, but online experimentation on emotion is ethically constrained, particularly for clinical populations who cannot reliably skip a song or report distress. We describe AMRS, the Affective Music Recommendation System deployed on LUCID's health-and-wellness platforms, which serve clinical users (primarily older adults with neurocognitive conditions) and consumer-wellness users across energize, focus, calm, and sleep modes. AMRS is built around a rollout-based world model: a causal transformer trained on logged listening data to jointly predict engagement, binary rating, and self-reported valence and arousal. The world model serves both as an in-silico simulator for offline policy training and as a stress-testing tool before deployment. A recommender policy initialized by behaviour cloning is fine-tuned offline with Direct Preference Optimization (DPO) against a configurable multi-objective utility function. Under a strict cold-start protocol, the world model predicts both behavioural and affective signals with usable fidelity; DPO improves predicted valence and arousal over the cloned baseline while maintaining a similar diversity profile and avoiding the distributional collapse produced by greedy optimization. We position the work as an early deployed validation of a methodology for affective recommendation when online experimentation is ethically untenable.",
+    "abs_url": "https://arxiv.org/abs/2605.28810v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.28810v1"
+  },
+  {
+    "query": "all:\"DPO\" AND all:\"recommender\"",
+    "id": "2605.28888v1",
+    "title": "Generative Spatiotemporal Intent Sequence Recommendation via Implicit Reasoning in Amap",
+    "published": "2026-05-27",
+    "authors": [
+      "Sicong Wang",
+      "Ruiting Dong",
+      "Yue Liu",
+      "Bowen Zheng",
+      "Jun Meng",
+      "Jie Li"
+    ],
+    "categories": [
+      "cs.IR",
+      "cs.LG"
+    ],
+    "summary": "Real-world user behavior rarely consists of isolated actions; instead, it often forms intent flows governed by spatiotemporal dependencies. To provide integrated service recommendations, we focus on the task of Generative Spatiotemporal Intent Sequence Recommendation (GSISR), which aims to generate intent sequences that are logically coherent and physically executable within complex spatiotemporal contexts. While LLMs offer strong reasoning potential for GSISR, direct industrial deployment is limited by high inference latency and context-mismatched or physically infeasible plans. To address these challenges, we propose a generative framework, GPlan, that internalizes LLM reasoning into lightweight models through two components. First, to enable reasoning under strict latency constraints, we introduce Progressive Implicit CoT Distillation, which compresses explicit reasoning processes into reserved latent tokens, allowing small models to inherit complex planning logic without generating long reasoning text. Second, to address the disconnect between general knowledge and real-world constraints, we design Spatiotemporal Counterfactual DPO. By aligning the model with counterfactual context-plan pairs, we improve sensitivity to spatiotemporal context and reduce context-mismatched plans. Offline experiments and online A/B testing demonstrate that our approach improves sequence coherence and context responsiveness. Our implementation and the anonymized GSISR dataset are available at https://github.com/alibaba/GPlan.",
+    "abs_url": "https://arxiv.org/abs/2605.28888v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.28888v1"
+  },
+  {
+    "query": "all:\"DPO\" AND all:\"recommender\"",
+    "id": "2605.17267v1",
+    "title": "RAGR: Review-Augmented Generative Recommendation",
+    "published": "2026-05-17",
+    "authors": [
+      "Yingyi Zhang",
+      "Junyi Li",
+      "Yejing Wang",
+      "Wenlin Zhang",
+      "Xiaowei Qian",
+      "Sheng Zhang"
+    ],
+    "categories": [
+      "cs.IR"
+    ],
+    "summary": "Sequential recommendation (SR) is traditionally formulated as next-item prediction over a chronological sequence of interacted items. Although recent generative recommendation (GR) methods introduce new machinery, such as semantic IDs, autoregressive decoding, and unified token spaces, they largely inherit the same item-only modeling assumption. We argue that this design constitutes a structural bottleneck, because user decision-making is not purely behavioral: while item interactions reveal what users choose, review feedback often explain why they choose it by exposing latent evaluative factors. Motivated by this observation, we propose Review-Augmented Generative Recommendation (RAGR), a novel GR framework that incorporates review feedback directly into the generative user sequence rather than treating reviews as auxiliary side information. Specifically, RAGR introduces a Review-Augmented User Sequence Modeling mechanism that interleaves item semantic IDs and review semantic IDs in chronological order to construct a mixed behavioral-semantic sequence, enabling review signals to participate directly in autoregressive next-token generation. To preserve the recommendation objective, we further introduce an Item-Centric Task Generation Alignment strategy based on direct preference optimization (DPO), which encourages the model to favor item tokens over review tokens at prediction positions. Experiments on three real-world datasets show that RAGR yields consistent and significant gains over strong GR backbones across all metrics. Our code and data are available at \\url{https://github.com/Zhang-Yingyi/TKDE_RAGR}.",
+    "abs_url": "https://arxiv.org/abs/2605.17267v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.17267v1"
+  },
+  {
+    "query": "all:\"DPO\" AND all:\"recommender\"",
+    "id": "2605.10784v1",
+    "title": "MASS-DPO: Multi-negative Active Sample Selection for Direct Policy Optimization",
+    "published": "2026-05-11",
+    "authors": [
+      "Rohan Surana",
+      "Xintong Li",
+      "Sheldon Yu",
+      "Yiran Jenny Shen",
+      "Chuhan Wang",
+      "Tong Yu"
+    ],
+    "categories": [
+      "cs.LG"
+    ],
+    "summary": "Multi-negative preference optimization under the Plackett--Luce (PL) model extends Direct Preference Optimization (DPO) by leveraging comparative signals across one preferred and multiple rejected responses. However, optimizing over large negative pools is costly, and many candidates contribute redundant gradients due to their similar effects on policy updates. We introduce MASS-DPO, a multi-negative active sample selection method that derives a PL-specific Fisher-information objective for selecting compact, informative negative subsets within each prompt. The resulting log-determinant objective selects negatives that contribute complementary information for policy updates, yielding compact subsets that retain the full pool's information while reducing redundancy. In practice, this favors negatives whose gradients cover different update directions, reducing redundant signal from near-duplicate candidates while preserving the most useful training information. Across four benchmarks spanning recommendation and multiple-choice QA and three model families, MASS-DPO consistently exceeds or matches existing methods in accuracy, improves Recall/NDCG and margin-based optimization dynamics, and delivers stronger alignment with substantially fewer negatives.",
+    "abs_url": "https://arxiv.org/abs/2605.10784v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.10784v1"
+  },
+  {
+    "query": "all:\"DPO\" AND all:\"recommender\"",
+    "id": "2605.16345v1",
+    "title": "Goal-Conditioned Supervised Learning for LLM Fine-Tuning",
+    "published": "2026-05-08",
+    "authors": [
+      "Shijun Li",
+      "Kaiwen Dong",
+      "Xiang Gao",
+      "Joydeep Ghosh"
+    ],
+    "categories": [
+      "cs.LG",
+      "cs.AI"
+    ],
+    "summary": "Large language models often require fine-tuning to better align their behavior with user intent at deployment. Existing approaches are commonly divided into online and offline paradigms. Online methods, such as RL-based alignment, can directly optimize outcome quality but typically rely on external reward models and iterative rollouts, making them costly and difficult to deploy in many cases. Offline methods are more efficient, but prevailing approaches such as supervised fine-tuning (SFT) and direct preference optimization (DPO) remain limited: SFT typically collapses graded feedback into binary supervision, while DPO depends on paired preference data that is often unavailable or expensive to construct. In this paper, we propose goal-conditioned supervised learning (GCSL) as an offline fine-tuning framework for LLMs. Our core idea is to treat feedback signals directly as an explicit goal and train the model, purely through supervised learning, to generate responses that achieve that goal. To better exploit graded feedback, we further introduce a novel goal formulation that defines learning as consistently pursuing outcomes above a target quality threshold, rather than imitating samples from a selected high-quality subset. This design mitigates the bounded-learning effect of SFT and classic GCSL by explicitly guiding the model to learn the directional progression of quality. We also propose natural-language goal representations to better leverage the semantic understanding and reasoning capabilities of LLMs. We evaluate our method on three tasks: non-toxic generation, code generation, and LLM for recommendation. Results show that our approach consistently outperforms standard offline fine-tuning baselines while retaining the efficiency, scalability, and simple data requirements of supervised learning.",
+    "abs_url": "https://arxiv.org/abs/2605.16345v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.16345v1"
+  },
+  {
+    "query": "all:\"DPO\" AND all:\"recommender\"",
+    "id": "2604.12234v4",
+    "title": "UniRec: Bridging the Expressive Gap between Generative and Discriminative Recommendation via Chain-of-Attribute",
+    "published": "2026-04-14",
+    "authors": [
+      "Ziliang Wang",
+      "Gaoyun Lin",
+      "Xuesi Wang",
+      "Shaoqiang Liang",
+      "Yili Huang",
+      "Weijie Bian"
+    ],
+    "categories": [
+      "cs.IR"
+    ],
+    "summary": "Generative Recommendation (GR) reframes retrieval and ranking as autoregressive decoding over Semantic IDs (SIDs), unifying the multi-stage pipeline into a single model. Yet a fundamental expressive gap persists: discriminative models score items with direct feature access enabling explicit user-item crossing, whereas GR decodes over compact SID tokens without item-side signal. We formalize this via Bayes' theorem: ranking by p(y|f,u) is equivalent to ranking by p(f|y,u), which factorizes autoregressively over item features, showing that a generative model with full feature access matches its discriminative counterpart, with any practical gap stemming solely from incomplete feature coverage. We propose UniRec with Chain-of-Attribute (CoA) as its core mechanism. CoA prefixes each SID sequence with structured attribute tokens:category, seller, brand, before decoding the SID, recovering the item-side feature crossing that discriminative models exploit. Since items sharing identical attributes cluster in adjacent SID regions, attribute conditioning yields a measurable per-step entropy reduction H(s_k|s<k,a) < H(s_k|s<k), narrowing the search space and stabilizing beam search. We further address two deployment challenges: Capacity-constrained SID introduces exposure-weighted capacity penalties into residual quantization to suppress token collapse and the Matthew effect; Conditional Decoding Context (CDC) combines Task-Conditioned BOS with hash-based Content Summaries to inject scenario signals at each decoding step. A joint RFT and DPO framework aligns the model with business objectives beyond distribution matching. Experiments show UniRec outperforms the strongest baseline by +22.6% HR@50 overall and +15.5% on high-value orders. Deployed on Shopee's e-commerce platform, online A/B tests confirm significant gains in PVCTR (+5.37%), orders (+4.76%), and GMV (+5.60%).",
+    "abs_url": "https://arxiv.org/abs/2604.12234v4",
+    "pdf_url": "https://arxiv.org/pdf/2604.12234v4"
+  },
+  {
+    "query": "all:\"DPO\" AND all:\"recommender\"",
+    "id": "2603.29259v1",
+    "title": "Aligning Multimodal Sequential Recommendations via Robust Direct Preference Optimization with Sparse MoE",
+    "published": "2026-03-31",
+    "authors": [
+      "Hejin Huang",
+      "Jusheng Zhang",
+      "Kaitong Cai",
+      "Jian Wang",
+      "Rong Pan"
+    ],
+    "categories": [
+      "cs.IR",
+      "cs.CL"
+    ],
+    "summary": "Preference-based alignment objectives have been widely adopted, from RLHF-style pairwise learning in large language models to emerging applications in recommender systems. Yet, existing work rarely examines how Direct Preference Optimization (DPO) behaves under implicit feedback, where unobserved items are not reliable negatives. We conduct systematic experiments on multimodal sequential recommendation to compare common negative-selection strategies and their interaction with DPO training. Our central finding is that a simple modification, replacing deterministic hard negatives with stochastic sampling from a dynamic top-K candidate pool, consistently improves ranking performance. We attribute its effectiveness to two factors: (1) reducing erroneous suppressive gradients caused by false negatives, and (2) retaining informative hard signals while smoothing optimization via controlled stochasticity. With an optional sparse Mixture-of-Experts encoder for efficient capacity scaling, RoDPO achieves up to 5.25% NDCG@5 on three Amazon benchmarks, with nearly unchanged inference cost.",
+    "abs_url": "https://arxiv.org/abs/2603.29259v1",
+    "pdf_url": "https://arxiv.org/pdf/2603.29259v1"
+  },
+  {
+    "query": "all:\"causal\" AND all:\"implicit feedback\" AND all:\"collaborative filtering\"",
+    "id": "2405.09042v1",
+    "title": "Exploring the Individuality and Collectivity of Intents behind Interactions for Graph Collaborative Filtering",
+    "published": "2024-05-15",
+    "authors": [
+      "Yi Zhang",
+      "Lei Sang",
+      "Yiwen Zhang"
+    ],
+    "categories": [
+      "cs.IR"
+    ],
+    "summary": "Intent modeling has attracted widespread attention in recommender systems. As the core motivation behind user selection of items, intent is crucial for elucidating recommendation results. The current mainstream modeling method is to abstract the intent into unknowable but learnable shared or non-shared parameters. Despite considerable progress, we argue that it still confronts the following challenges: firstly, these methods only capture the coarse-grained aspects of intent, ignoring the fact that user-item interactions will be affected by collective and individual factors (e.g., a user may choose a movie because of its high box office or because of his own unique preferences); secondly, modeling believable intent is severely hampered by implicit feedback, which is incredibly sparse and devoid of true semantics. To address these challenges, we propose a novel recommendation framework designated as Bilateral Intent-guided Graph Collaborative Filtering (BIGCF). Specifically, we take a closer look at user-item interactions from a causal perspective and put forth the concepts of individual intent-which signifies private preferences-and collective intent-which denotes overall awareness. To counter the sparsity of implicit feedback, the feature distributions of users and items are encoded via a Gaussian-based graph generation strategy, and we implement the recommendation process through bilateral intent-guided graph reconstruction re-sampling. Finally, we propose graph contrastive regularization for both interaction and intent spaces to uniformize users, items, intents, and interactions in a self-supervised and non-augmented paradigm. Experimental results on three real-world datasets demonstrate the effectiveness of BIGCF compared with existing solutions.",
+    "abs_url": "https://arxiv.org/abs/2405.09042v1",
+    "pdf_url": "https://arxiv.org/pdf/2405.09042v1"
+  },
+  {
+    "query": "all:\"causal\" AND all:\"implicit feedback\" AND all:\"collaborative filtering\"",
+    "id": "1510.07025v2",
+    "title": "Modeling User Exposure in Recommendation",
+    "published": "2015-10-23",
+    "authors": [
+      "Dawen Liang",
+      "Laurent Charlin",
+      "James McInerney",
+      "David M. Blei"
+    ],
+    "categories": [
+      "stat.ML",
+      "cs.IR",
+      "cs.LG"
+    ],
+    "summary": "Collaborative filtering analyzes user preferences for items (e.g., books, movies, restaurants, academic papers) by exploiting the similarity patterns across users. In implicit feedback settings, all the items, including the ones that a user did not consume, are taken into consideration. But this assumption does not accord with the common sense understanding that users have a limited scope and awareness of items. For example, a user might not have heard of a certain paper, or might live too far away from a restaurant to experience it. In the language of causal analysis, the assignment mechanism (i.e., the items that a user is exposed to) is a latent variable that may change for various user/item combinations. In this paper, we propose a new probabilistic approach that directly incorporates user exposure to items into collaborative filtering. The exposure is modeled as a latent variable and the model infers its value from data. In doing so, we recover one of the most successful state-of-the-art approaches as a special case of our model, and provide a plug-in method for conditioning exposure on various forms of exposure covariates (e.g., topics in text, venue locations). We show that our scalable inference algorithm outperforms existing benchmarks in four different domains both with and without exposure covariates.",
+    "abs_url": "https://arxiv.org/abs/1510.07025v2",
+    "pdf_url": "https://arxiv.org/pdf/1510.07025v2"
+  },
+  {
+    "query": "all:\"popularity bias\" AND all:\"collaborative filtering\" AND all:\"graph\"",
+    "id": "2605.11145v1",
+    "title": "Debiasing Message Passing to Mitigate Popularity Bias in GNN-based Collaborative Filtering",
+    "published": "2026-05-11",
+    "authors": [
+      "Md Aminul Islam",
+      "Ahmed Sayeed Faruk",
+      "Sourav Medya",
+      "Elena Zheleva"
+    ],
+    "categories": [
+      "cs.IR",
+      "cs.LG"
+    ],
+    "summary": "Collaborative filtering (CF) models based on graph neural networks (GNNs) achieve strong performance in recommender systems by propagating user-item signals over interaction graphs. However, they are highly susceptible to popularity bias, since skewed interaction distributions and repeated message passing across high-order neighborhoods amplify the influence of popular items while suppressing long-tail ones. Existing debiasing approaches, including re-weighting objectives, regularization, causal methods, and post-processing, are less effective in GNN-based settings because they do not directly counteract bias propagated through the aggregation process, and recent in-aggregation weighting methods often rely on static heuristics or unstable embedding estimates. We propose Debiasing Popularity Amplification in Aggregation (DPAA), a popularity debiasing framework for GNN-based CF that integrates adaptive, embedding-aware interaction weighting and layer-wise weighting directly into message passing. DPAA assigns interaction-level weights from a representation-aware popularity signal, stabilized by a smooth transition from pre-trained to evolving model embeddings during training. It further introduces a layer-wise weighting that amplifies higher-order neighborhoods, surfacing long-range interactions with diverse and underexposed items. Experiments on real-world and semi-synthetic datasets show that DPAA outperforms state-of-the-art popularity-bias correction methods for GNN-based CF.",
+    "abs_url": "https://arxiv.org/abs/2605.11145v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.11145v1"
+  },
+  {
+    "query": "all:\"popularity bias\" AND all:\"collaborative filtering\" AND all:\"graph\"",
+    "id": "2510.12959v2",
+    "title": "Post-hoc Popularity Bias Correction in GNN-based Collaborative Filtering",
+    "published": "2025-10-14",
+    "authors": [
+      "Md Aminul Islam",
+      "Elena Zheleva",
+      "Ren Wang"
+    ],
+    "categories": [
+      "cs.IR"
+    ],
+    "summary": "User historical interaction data is the primary signal for learning user preferences in collaborative filtering (CF). However, the training data often exhibits a long-tailed distribution, where only a few items have the majority of interactions. CF models trained directly on such imbalanced data are prone to learning popularity bias, which reduces personalization and leads to suboptimal recommendation quality. Graph Neural Networks (GNNs), while effective for CF due to their message passing mechanism, can further propagate and amplify popularity bias through their aggregation process. Existing approaches typically address popularity bias by modifying training objectives but fail to directly counteract the bias propagated during GNN's neighborhood aggregation. Applying weights to interactions during aggregation can help alleviate this problem, yet it risks distorting model learning due to unstable node representations in the early stages of training. In this paper, we propose a Post-hoc Popularity Debiasing (PPD) method that corrects for popularity bias in GNN-based CF and operates directly on pre-trained embeddings without requiring retraining. By estimating interaction-level popularity and removing popularity components from node representations via a popularity direction vector, PPD reduces bias while preserving user preferences. Experimental results show that our method outperforms state-of-the-art approaches for popularity bias correction in GNN-based CF.",
+    "abs_url": "https://arxiv.org/abs/2510.12959v2",
+    "pdf_url": "https://arxiv.org/pdf/2510.12959v2"
+  },
+  {
+    "query": "all:\"popularity bias\" AND all:\"collaborative filtering\" AND all:\"graph\"",
+    "id": "2504.13772v1",
+    "title": "Bake Two Cakes with One Oven: RL for Defusing Popularity Bias and Cold-start in Third-Party Library Recommendations",
+    "published": "2025-04-18",
+    "authors": [
+      "Minh Hoang Vuong",
+      "Anh M. T. Bui",
+      "Phuong T. Nguyen",
+      "Davide Di Ruscio"
+    ],
+    "categories": [
+      "cs.SE"
+    ],
+    "summary": "Third-party libraries (TPLs) have become an integral part of modern software development, enhancing developer productivity and accelerating time-to-market. However, identifying suitable candidates from a rapidly growing and continuously evolving collection of TPLs remains a challenging task. TPL recommender systems have been studied, offering a promising solution to address this issue. They typically rely on collaborative filtering (CF) that exploits a two-dimensional project-library matrix (user-item in general context of recommendation) when making recommendations. We have noticed that CF-based approaches often encounter two challenges: (i) a tendency to recommend popular items more frequently, making them even more dominant, a phenomenon known as popularity bias, and (ii) difficulty in generating recommendations for new users or items due to limited user-item interactions, commonly referred to as the cold-start problem. In this paper, we propose a reinforcement learning (RL)-based approach to address popularity bias and the cold-start problem in TPL recommendation. Our method comprises three key components. First, we utilize a graph convolution network (GCN)-based embedding model to learn user preferences and user-item interactions, allowing us to capture complex relationships within interaction subgraphs and effectively represent new user/item embeddings. Second, we introduce an aggregation operator to generate a representative embedding from user and item embeddings, which is then used to model cold-start users. Finally, we adopt a model-based RL framework for TPL recommendation, where popularity bias is mitigated through a carefully designed reward function and a rarity-based replay buffer partitioning strategy. The results demonstrated that our proposed approach outperforms state-of-the-art models in cold-start scenarios while effectively mitigating the impact of popularity bias.",
+    "abs_url": "https://arxiv.org/abs/2504.13772v1",
+    "pdf_url": "https://arxiv.org/pdf/2504.13772v1"
+  },
+  {
+    "query": "all:\"popularity bias\" AND all:\"collaborative filtering\" AND all:\"graph\"",
+    "id": "2409.19169v1",
+    "title": "TwinCL: A Twin Graph Contrastive Learning Model for Collaborative Filtering",
+    "published": "2024-09-27",
+    "authors": [
+      "Chengkai Liu",
+      "Jianling Wang",
+      "James Caverlee"
+    ],
+    "categories": [
+      "cs.IR"
+    ],
+    "summary": "In the domain of recommendation and collaborative filtering, Graph Contrastive Learning (GCL) has become an influential approach. Nevertheless, the reasons for the effectiveness of contrastive learning are still not well understood. In this paper, we challenge the conventional use of random augmentations on graph structure or embedding space in GCL, which may disrupt the structural and semantic information inherent in Graph Neural Networks. Moreover, fixed-rate data augmentation proves to be less effective compared to augmentation with an adaptive rate. In the initial training phases, significant perturbations are more suitable, while as the training approaches convergence, milder perturbations yield better results. We introduce a twin encoder in place of random augmentations, demonstrating the redundancy of traditional augmentation techniques. The twin encoder updating mechanism ensures the generation of more diverse contrastive views in the early stages, transitioning to views with greater similarity as training progresses. In addition, we investigate the learned representations from the perspective of alignment and uniformity on a hypersphere to optimize more efficiently. Our proposed Twin Graph Contrastive Learning model -- TwinCL -- aligns positive pairs of user and item embeddings and the representations from the twin encoder while maintaining the uniformity of the embeddings on the hypersphere. Our theoretical analysis and experimental results show that the proposed model optimizing alignment and uniformity with the twin encoder contributes to better recommendation accuracy and training efficiency performance. In comprehensive experiments on three public datasets, our proposed TwinCL achieves an average improvement of 5.6% (NDCG@10) in recommendation accuracy with faster training speed, while effectively mitigating popularity bias.",
+    "abs_url": "https://arxiv.org/abs/2409.19169v1",
+    "pdf_url": "https://arxiv.org/pdf/2409.19169v1"
+  },
+  {
+    "query": "all:\"popularity bias\" AND all:\"collaborative filtering\" AND all:\"graph\"",
+    "id": "2204.12326v2",
+    "title": "Investigating Accuracy-Novelty Performance for Graph-based Collaborative Filtering",
+    "published": "2022-04-26",
+    "authors": [
+      "Minghao Zhao",
+      "Le Wu",
+      "Yile Liang",
+      "Lei Chen",
+      "Jian Zhang",
+      "Qilin Deng"
+    ],
+    "categories": [
+      "cs.IR"
+    ],
+    "summary": "Recent years have witnessed the great accuracy performance of graph-based Collaborative Filtering (CF) models for recommender systems. By taking the user-item interaction behavior as a graph, these graph-based CF models borrow the success of Graph Neural Networks (GNN), and iteratively perform neighborhood aggregation to propagate the collaborative signals. While conventional CF models are known for facing the challenges of the popularity bias that favors popular items, one may wonder \"Whether the existing graph-based CF models alleviate or exacerbate popularity bias of recommender systems?\" To answer this question, we first investigate the two-fold performances w.r.t. accuracy and novelty for existing graph-based CF methods. The empirical results show that symmetric neighborhood aggregation adopted by most existing graph-based CF models exacerbate the popularity bias and this phenomenon becomes more serious as the depth of graph propagation increases. Further, we theoretically analyze the cause of popularity bias for graph-based CF. Then, we propose a simple yet effective plugin, namely r-AdjNorm, to achieve an accuracy-novelty trade-off by controlling the normalization strength in the neighborhood aggregation process. Meanwhile, r-AdjNorm can be smoothly applied to the existing graph-based CF backbones without additional computation. Finally, experimental results on three benchmark datasets show that our proposed method can improve novelty without sacrificing accuracy under various graph-based CF backbones.",
+    "abs_url": "https://arxiv.org/abs/2204.12326v2",
+    "pdf_url": "https://arxiv.org/pdf/2204.12326v2"
+  },
+  {
+    "query": "all:\"graph transformer\" AND all:\"collaborative filtering\"",
+    "id": "2605.05238v1",
+    "title": "Dynamic Graph with Similarity-Aware Attention Graph Neural Network for Recommender Systems",
+    "published": "2026-05-02",
+    "authors": [
+      "Aadarsh Senapati",
+      "Neha Kujur",
+      "Vivek Yelleti"
+    ],
+    "categories": [
+      "cs.IR",
+      "cs.LG",
+      "cs.SI"
+    ],
+    "summary": "Recommender systems are essential components of modern online platforms which presents personalized content in various domain. The traditional collaborative filtering methods depends on static user-item interaction graphs and a limited subset of similarity measures which fail to capture the changing nature of preferences of an individual. Recent graph neural network (GNN) based approaches focus on user-item bipartite graphs which do not use explicit user-user relational modelling and dynamic graph evolution during training. To address these limitations, this paper proposes a Dynamic Graph SimilarityAware Attention Graph Neural Network (DG-SA-GNN) framework that integrates dynamic user similarity graph construction with multi-similarity propagation and attention-based aggregation. The proposed architecture constructs four parallel user similarity graphs using Cosine, Jaccard, Discounted Pearson Correlation Coefficient (Discount PCC), and IPIJ similarity functions, each processed by a dedicated UserGNN module. A Graph Transformer fuses the four graph views, and a CrossAttention module refines user embeddings through interaction with item embeddings. Crucially, the graphs are reconstructed at scheduled epochs during training, enabling the model to adapt to the learned embedding space constituting the dynamic graph component. Mini-batch training with hard negative sampling improves scalability and convergence. Experiments on the MovieLens100K benchmark demonstrate that DG-SA-GNN achieves a Recall@20 of 0.162 and NDCG@20 of 0.065 which is better than the LightGCN baseline in recall. The results validate that dynamic multi-similarity graph construction coupled with attention-based fusion which produce recommendation performance",
+    "abs_url": "https://arxiv.org/abs/2605.05238v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.05238v1"
+  },
+  {
+    "query": "all:\"graph transformer\" AND all:\"collaborative filtering\"",
+    "id": "2504.02598v2",
+    "title": "Graphs are everywhere -- Psst! In Music Recommendation too",
+    "published": "2025-04-03",
+    "authors": [
+      "Bharani Jayakumar",
+      "Orkun Özoğlu"
+    ],
+    "categories": [
+      "cs.IR"
+    ],
+    "summary": "In recent years, graphs have gained prominence across various domains, especially in recommendation systems. Within the realm of music recommendation, graphs play a crucial role in enhancing genre-based recommendations by integrating Mel-Frequency Cepstral Coefficients (MFCC) with advanced graph embeddings. This study explores the efficacy of Graph Convolutional Networks (GCN), GraphSAGE, and Graph Transformer (GT) models in learning embeddings that effectively capture intricate relationships between music items and genres represented within graph structures. Through comprehensive empirical evaluations on diverse real-world music datasets, our findings consistently demonstrate that these graph-based approaches outperform traditional methods that rely solely on MFCC features or collaborative filtering techniques. Specifically, the graph-enhanced models achieve notably higher accuracy in predicting genre-specific preferences and offering relevant music suggestions to users. These results underscore the effectiveness of utilizing graph embeddings to enrich feature representations and exploit latent associations within music data, thereby illustrating their potential to advance the capabilities of personalized and context-aware music recommendation systems. Keywords: graphs, recommendation systems, neural networks, MFCC",
+    "abs_url": "https://arxiv.org/abs/2504.02598v2",
+    "pdf_url": "https://arxiv.org/pdf/2504.02598v2"
+  },
+  {
+    "query": "all:\"graph transformer\" AND all:\"collaborative filtering\"",
+    "id": "2502.15693v1",
+    "title": "Hgformer: Hyperbolic Graph Transformer for Recommendation",
+    "published": "2024-12-30",
+    "authors": [
+      "Xin Yang",
+      "Xingrun Li",
+      "Heng Chang",
+      "Jinze Yang",
+      "Xihong Yang",
+      "Shengyu Tao"
+    ],
+    "categories": [
+      "cs.IR",
+      "cs.AI",
+      "cs.LG"
+    ],
+    "summary": "The cold start problem is a challenging problem faced by most modern recommender systems. By leveraging knowledge from other domains, cross-domain recommendation can be an effective method to alleviate the cold start problem. However, the modelling distortion for long-tail data, which is widely present in recommender systems, is often overlooked in cross-domain recommendation. In this research, we propose a hyperbolic manifold based cross-domain collaborative filtering model using BiTGCF as the base model. We introduce the hyperbolic manifold and construct new propagation layer and transfer layer to address these challenges. The significant performance improvements across various datasets compared to the baseline models demonstrate the effectiveness of our proposed model.",
+    "abs_url": "https://arxiv.org/abs/2502.15693v1",
+    "pdf_url": "https://arxiv.org/pdf/2502.15693v1"
+  },
+  {
+    "query": "all:\"graph transformer\" AND all:\"collaborative filtering\"",
+    "id": "2412.18731v1",
+    "title": "Position-aware Graph Transformer for Recommendation",
+    "published": "2024-12-25",
+    "authors": [
+      "Jiajia Chen",
+      "Jiancan Wu",
+      "Jiawei Chen",
+      "Chongming Gao",
+      "Yong Li",
+      "Xiang Wang"
+    ],
+    "categories": [
+      "cs.IR"
+    ],
+    "summary": "Collaborative recommendation fundamentally involves learning high-quality user and item representations from interaction data. Recently, graph convolution networks (GCNs) have advanced the field by utilizing high-order connectivity patterns in interaction graphs, as evidenced by state-of-the-art methods like PinSage and LightGCN. However, one key limitation has not been well addressed in existing solutions: capturing long-range collaborative filtering signals, which are crucial for modeling user preference. In this work, we propose a new graph transformer (GT) framework -- \\textit{Position-aware Graph Transformer for Recommendation} (PGTR), which combines the global modeling capability of Transformer blocks with the local neighborhood feature extraction of GCNs. The key insight is to explicitly incorporate node position and structure information from the user-item interaction graph into GT architecture via several purpose-designed positional encodings. The long-range collaborative signals from the Transformer block are then combined linearly with the local neighborhood features from the GCN backbone to enhance node embeddings for final recommendations. Empirical studies demonstrate the effectiveness of the proposed PGTR method when implemented on various GCN-based backbones across four real-world datasets, and the robustness against interaction sparsity as well as noise.",
+    "abs_url": "https://arxiv.org/abs/2412.18731v1",
+    "pdf_url": "https://arxiv.org/pdf/2412.18731v1"
+  },
+  {
+    "query": "all:\"graph transformer\" AND all:\"collaborative filtering\"",
+    "id": "2306.02330v1",
+    "title": "Graph Transformer for Recommendation",
+    "published": "2023-06-04",
+    "authors": [
+      "Chaoliu Li",
+      "Lianghao Xia",
+      "Xubin Ren",
+      "Yaowen Ye",
+      "Yong Xu",
+      "Chao Huang"
+    ],
+    "categories": [
+      "cs.IR"
+    ],
+    "summary": "This paper presents a novel approach to representation learning in recommender systems by integrating generative self-supervised learning with graph transformer architecture. We highlight the importance of high-quality data augmentation with relevant self-supervised pretext tasks for improving performance. Towards this end, we propose a new approach that automates the self-supervision augmentation process through a rationale-aware generative SSL that distills informative user-item interaction patterns. The proposed recommender with Graph TransFormer (GFormer) that offers parameterized collaborative rationale discovery for selective augmentation while preserving global-aware user-item relationships. In GFormer, we allow the rationale-aware SSL to inspire graph collaborative filtering with task-adaptive invariant rationalization in graph transformer. The experimental results reveal that our GFormer has the capability to consistently improve the performance over baselines on different datasets. Several in-depth experiments further investigate the invariant rationale-aware augmentation from various aspects. The source code for this work is publicly available at: https://github.com/HKUDS/GFormer.",
+    "abs_url": "https://arxiv.org/abs/2306.02330v1",
+    "pdf_url": "https://arxiv.org/pdf/2306.02330v1"
+  },
+  {
+    "query": "all:\"denoising\" AND all:\"implicit feedback\" AND all:\"recommendation\"",
+    "id": "2605.20721v1",
+    "title": "Robust Recommendation from Noisy Implicit Feedback: A GMM-Weighted Bayes-label Transition Matrix Framework",
+    "published": "2026-05-20",
+    "authors": [
+      "Zongyu Li",
+      "Xuanyu Liu",
+      "Gongce Cao",
+      "Shirui Sun",
+      "Yaqi Fang",
+      "Yongshuai Yu"
+    ],
+    "categories": [
+      "cs.LG"
+    ],
+    "summary": "Learning from implicit feedback in recommender systems is fundamentally challenged by pervasive label noise. While conventional denoising approaches often discard noisy instances to ensure robustness, this strategy inevitably suffers from low data utilization. Alternative methods that employ a Bayes-label transition matrix (BLTM) can leverage all available data, but their estimates tend to be biased in practical recommendation scenarios. To address these limitations, this paper proposes a Robust GMM-weighted Bayes-label Transition Matrix framework (RGBT). Our solution utilizes a Gaussian Mixture Model (GMM) to derive instance-specific reliability scores, which systematically calibrate the BLTM estimation to mitigate bias. Theoretical analysis confirms that our approach, by leveraging the BLTM framework with GMM calibration, simultaneously ensures full sample utilization, delivers consistent estimation, and critically, achieves a significant reduction in estimation variance. Extensive experiments on multiple real-world and synthetically flipped datasets demonstrate that RGBT not only utilizes noisy samples more effectively than mainstream reliable sample-based denoising methods, but also achieves significantly superior calibration capability of the transition matrix compared to state-of-the-art transition matrix-based denoising approaches.",
+    "abs_url": "https://arxiv.org/abs/2605.20721v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.20721v1"
+  },
+  {
+    "query": "all:\"denoising\" AND all:\"implicit feedback\" AND all:\"recommendation\"",
+    "id": "2603.03820v1",
+    "title": "Fairness Begins with State: Purifying Latent Preferences for Hierarchical Reinforcement Learning in Interactive Recommendation",
+    "published": "2026-03-04",
+    "authors": [
+      "Yun Lu",
+      "Xiaoyu Shi",
+      "Hong Xie",
+      "Xiangyu Zhao",
+      "Mingsheng Shang"
+    ],
+    "categories": [
+      "cs.LG",
+      "cs.AI"
+    ],
+    "summary": "Interactive recommender systems (IRS) are increasingly optimized with Reinforcement Learning (RL) to capture the sequential nature of user-system dynamics. However, existing fairness-aware methods often suffer from a fundamental oversight: they assume the observed user state is a faithful representation of true preferences. In reality, implicit feedback is contaminated by popularity-driven noise and exposure bias, creating a distorted state that misleads the RL agent. We argue that the persistent conflict between accuracy and fairness is not merely a reward-shaping issue, but a state estimation failure. In this work, we propose \\textbf{DSRM-HRL}, a framework that reformulates fairness-aware recommendation as a latent state purification problem followed by decoupled hierarchical decision-making. We introduce a Denoising State Representation Module (DSRM) based on diffusion models to recover the low-entropy latent preference manifold from high-entropy, noisy interaction histories. Built upon this purified state, a Hierarchical Reinforcement Learning (HRL) agent is employed to decouple conflicting objectives: a high-level policy regulates long-term fairness trajectories, while a low-level policy optimizes short-term engagement under these dynamic constraints. Extensive experiments on high-fidelity simulators (KuaiRec, KuaiRand) demonstrate that DSRM-HRL effectively breaks the \"rich-get-richer\" feedback loop, achieving a superior Pareto frontier between recommendation utility and exposure equity.",
+    "abs_url": "https://arxiv.org/abs/2603.03820v1",
+    "pdf_url": "https://arxiv.org/pdf/2603.03820v1"
+  },
+  {
+    "query": "all:\"denoising\" AND all:\"implicit feedback\" AND all:\"recommendation\"",
+    "id": "2603.01926v1",
+    "title": "MealRec: Multi-granularity Sequential Modeling via Hierarchical Diffusion Models for Micro-Video Recommendation",
+    "published": "2026-03-02",
+    "authors": [
+      "Xinxin Dong",
+      "Haokai Ma",
+      "Yuze Zheng",
+      "Yongfu Zha",
+      "Yonghui Yang",
+      "Xiaodong Wang"
+    ],
+    "categories": [
+      "cs.IR",
+      "cs.CV"
+    ],
+    "summary": "Micro-video recommendation aims to capture user preferences from the collaborative and context information of the interacted micro-videos, thereby predicting the appropriate videos. This target is often hindered by the inherent noise within multimodal content and unreliable implicit feedback, which weakens the correspondence between behaviors and underlying interests. While conventional works have predominantly approached such scenario through behavior-augmented modeling and content-centric multimodal analysis, these paradigms can inadvertently give rise to two non-trivial challenges: preference-irrelative video representation extraction and inherent modality conflicts. To address these issues, we propose a Multi-granularity sequential modeling method via hierarchical diffusion models for micro-video Recommendation (MealRec), which simultaneously considers temporal correlations during preference modeling from intra- and inter-video perspectives. Specifically, we first propose Temporal-guided Content Diffusion (TCD) to refine video representations under intra-video temporal guidance and personalized collaborative signals to emphasize salient content while suppressing redundancy. To achieve the semantically coherent preference modeling, we further design the Noise-unconditional Preference Denoising (NPD) to recovers informative user preferences from corrupted states under the blind denoising. Extensive experiments and analyses on four micro-video datasets from two platforms demonstrate the effectiveness, universality, and robustness of our MealRec, further uncovering the effective mechanism of our proposed TCD and NPD. The source code and corresponding dataset will be available upon acceptance.",
+    "abs_url": "https://arxiv.org/abs/2603.01926v1",
+    "pdf_url": "https://arxiv.org/pdf/2603.01926v1"
+  },
+  {
+    "query": "all:\"denoising\" AND all:\"implicit feedback\" AND all:\"recommendation\"",
+    "id": "2602.15359v1",
+    "title": "Semantics-Aware Denoising: A PLM-Guided Sample Reweighting Strategy for Robust Recommendation",
+    "published": "2026-02-17",
+    "authors": [
+      "Xikai Yang",
+      "Yang Wang",
+      "Yilin Li",
+      "Sebastian Sun"
+    ],
+    "categories": [
+      "cs.IR"
+    ],
+    "summary": "Implicit feedback, such as user clicks, serves as the primary data source for modern recommender systems. However, click interactions inherently contain substantial noise, including accidental clicks, clickbait-induced interactions, and exploratory browsing behaviors that do not reflect genuine user preferences. Training recommendation models with such noisy positive samples leads to degraded prediction accuracy and unreliable recommendations. In this paper, we propose SAID (Semantics-Aware Implicit Denoising), a simple yet effective framework that leverages semantic consistency between user interests and item content to identify and downweight potentially noisy interactions. Our approach constructs textual user interest profiles from historical behaviors and computes semantic similarity with target item descriptions using pre-trained language model (PLM) based text encoders. The similarity scores are then transformed into sample weights that modulate the training loss, effectively reducing the impact of semantically inconsistent clicks. Unlike existing denoising methods that require complex auxiliary networks or multi-stage training procedures, SAID only modifies the loss function while keeping the backbone recommendation model unchanged. Extensive experiments on two real-world datasets demonstrate that SAID consistently improves recommendation performance, achieving up to 2.2% relative improvement in AUC over strong baselines, with particularly notable robustness under high noise conditions.",
+    "abs_url": "https://arxiv.org/abs/2602.15359v1",
+    "pdf_url": "https://arxiv.org/pdf/2602.15359v1"
+  },
+  {
+    "query": "all:\"denoising\" AND all:\"implicit feedback\" AND all:\"recommendation\"",
+    "id": "2601.18009v1",
+    "title": "Post-Training Denoising of User Profiles with LLMs in Collaborative Filtering Recommendation",
+    "published": "2026-01-25",
+    "authors": [
+      "Ervin Dervishaj",
+      "Maria Maistro",
+      "Tuukka Ruotsalo",
+      "Christina Lioma"
+    ],
+    "categories": [
+      "cs.IR"
+    ],
+    "summary": "Implicit feedback -- the main data source for training Recommender Systems (RSs) -- is inherently noisy and has been shown to negatively affect recommendation effectiveness. Denoising has been proposed as a method for removing noisy implicit feedback and improving recommendations. Prior work has focused on in-training denoising, however this requires additional data, changes to the model architecture and training procedure or fine-tuning, all of which can be costly and data hungry. In this work, we focus on post-training denoising. Different from in-training denoising, post-training denoising does not involve changing the architecture of the model nor its training procedure, and does not require additional data. Specifically, we present a method for post-training denoising user profiles using Large Language Models (LLMs) for Collaborative Filtering (CF) recommendations. Our approach prompts LLMs with (i) a user profile (user interactions), (ii) a candidate item, and (iii) its rank as given by the CF recommender, and asks the LLM to remove items from the user profile to improve the rank of the candidate item. Experiments with a state-of-the-art CF recommender and 4 open and closed source LLMs in 3 datasets show that our denoising yields improvements up to 13% in effectiveness over the original user profiles. Our code is available at https://github.com/edervishaj/denoising-user-profiles-LLM.",
+    "abs_url": "https://arxiv.org/abs/2601.18009v1",
+    "pdf_url": "https://arxiv.org/pdf/2601.18009v1"
+  },
+  {
+    "query": "all:\"denoising\" AND all:\"implicit feedback\" AND all:\"recommendation\"",
+    "id": "2508.10851v2",
+    "title": "From Entity Reliability to Clean Feedback: An Entity-Aware Denoising Framework Beyond Interaction-Level Signals",
+    "published": "2025-08-14",
+    "authors": [
+      "Ze Liu",
+      "Xianquan Wang",
+      "Shuochen Liu",
+      "Jie Ma",
+      "Huibo Xu",
+      "Yupeng Han"
+    ],
+    "categories": [
+      "cs.IR",
+      "cs.LG"
+    ],
+    "summary": "Implicit feedback is central to modern recommender systems but is inherently noisy, often impairing model training and degrading user experience. At scale, such noise can mislead learning processes, reducing both recommendation accuracy and platform value. Existing denoising strategies typically overlook the entity-specific nature of noise while introducing high computational costs and complex hyperparameter tuning. To address these challenges, we propose \\textbf{EARD} (\\textbf{E}ntity-\\textbf{A}ware \\textbf{R}eliability-\\textbf{D}riven Denoising), a lightweight framework that shifts the focus from interaction-level signals to entity-level reliability. Motivated by the empirical observation that training loss correlates with noise, EARD quantifies user and item reliability via their average training losses as a proxy for reputation, and integrates these entity-level factors with interaction-level confidence. The framework is \\textbf{model-agnostic}, \\textbf{computationally efficient}, and requires \\textbf{only two intuitive hyperparameters}. Extensive experiments across multiple datasets and backbone models demonstrate that EARD yields substantial improvements over state-of-the-art baselines (e.g., up to 27.01\\% gain in NDCG@50), while incurring negligible additional computational cost. Comprehensive ablation studies and mechanism analyses further confirm EARD's robustness to hyperparameter choices and its practical scalability. These results highlight the importance of entity-aware reliability modeling for denoising implicit feedback and pave the way for more robust recommendation research.",
+    "abs_url": "https://arxiv.org/abs/2508.10851v2",
+    "pdf_url": "https://arxiv.org/pdf/2508.10851v2"
+  },
+  {
+    "query": "all:\"set\" AND all:\"recommendation\" AND all:\"BPR\"",
+    "id": "2509.00333v1",
+    "title": "Counterfactual Risk Minimization with IPS-Weighted BPR and Self-Normalized Evaluation in Recommender Systems",
+    "published": "2025-08-30",
+    "authors": [
+      "Rahul Raja",
+      "Arpita Vats"
+    ],
+    "categories": [
+      "cs.LG"
+    ],
+    "summary": "Learning and evaluating recommender systems from logged implicit feedback is challenging due to exposure bias. While inverse propensity scoring (IPS) corrects this bias, it often suffers from high variance and instability. In this paper, we present a simple and effective pipeline that integrates IPS-weighted training with an IPS-weighted Bayesian Personalized Ranking (BPR) objective augmented by a Propensity Regularizer (PR). We compare Direct Method (DM), IPS, and Self-Normalized IPS (SNIPS) for offline policy evaluation, and demonstrate how IPS-weighted training improves model robustness under biased exposure. The proposed PR further mitigates variance amplification from extreme propensity weights, leading to more stable estimates. Experiments on synthetic and MovieLens 100K data show that our approach generalizes better under unbiased exposure while reducing evaluation variance compared to naive and standard IPS methods, offering practical guidance for counterfactual learning and evaluation in real-world recommendation settings.",
+    "abs_url": "https://arxiv.org/abs/2509.00333v1",
+    "pdf_url": "https://arxiv.org/pdf/2509.00333v1"
+  },
+  {
+    "query": "all:\"set\" AND all:\"recommendation\" AND all:\"BPR\"",
+    "id": "2411.07770v3",
+    "title": "A Theoretical Analysis of Recommendation Loss Functions under Negative Sampling",
+    "published": "2024-11-12",
+    "authors": [
+      "Giulia Di Teodoro",
+      "Federico Siciliano",
+      "Nicola Tonellotto",
+      "Fabrizio Silvestri"
+    ],
+    "categories": [
+      "cs.IR"
+    ],
+    "summary": "Loss functions like Categorical Cross Entropy (CCE), Binary Cross Entropy (BCE), and Bayesian Personalized Ranking (BPR) are commonly used in training Recommender Systems (RSs) to differentiate positive items - those interacted with by users - and negative items. While prior works empirically showed that CCE outperforms BCE and BPR when using the full set of negative items, we provide a theoretical explanation for this by proving that CCE offers the tightest lower bound on ranking metrics like Normalized Discounted Cumulative Gain (NDCG) and Mean Reciprocal Rank (MRR), followed by BPR and BCE. However, using the full set of negative items is computationally infeasible for large-scale RSs, prompting the use of negative sampling techniques. Under negative sampling, we reveal that BPR and CCE are equivalent when a single negative sample is drawn, and all three losses converge to the same global minimum. We further demonstrate that the sampled losses remain lower bounds for NDCG (MRR), albeit in a probabilistic sense. Our worst-case analysis shows that BCE offers the strongest bound on NDCG (MRR). Experiments on five datasets and four models empirically support these theoretical findings. Our code and supplementary material are available at https://github.com/federicosiciliano/recsys_losses.git.",
+    "abs_url": "https://arxiv.org/abs/2411.07770v3",
+    "pdf_url": "https://arxiv.org/pdf/2411.07770v3"
+  },
+  {
+    "query": "all:\"set\" AND all:\"recommendation\" AND all:\"BPR\"",
+    "id": "2410.23023v1",
+    "title": "A Universal Sets-level Optimization Framework for Next Set Recommendation",
+    "published": "2024-10-30",
+    "authors": [
+      "Yuli Liu",
+      "Min Liu",
+      "Christian Walder",
+      "Lexing Xie"
+    ],
+    "categories": [
+      "cs.IR"
+    ],
+    "summary": "Next Set Recommendation (NSRec), encompassing related tasks such as next basket recommendation and temporal sets prediction, stands as a trending research topic. Although numerous attempts have been made on this topic, there are certain drawbacks: (i) Existing studies are still confined to utilizing objective functions commonly found in Next Item Recommendation (NIRec), such as binary cross entropy and BPR, which are calculated based on individual item comparisons; (ii) They place emphasis on building sophisticated learning models to capture intricate dependency relationships across sequential sets, but frequently overlook pivotal dependency in their objective functions; (iii) Diversity factor within sequential sets is frequently overlooked. In this research, we endeavor to unveil a universal and S ets-level optimization framework for N ext Set Recommendation (SNSRec), offering a holistic fusion of diversity distribution and intricate dependency relationships within temporal sets. To realize this, the following contributions are made: (i) We directly model the temporal set in a sequence as a cohesive entity, leveraging the Structured Determinantal Point Process (SDPP), wherein the probabilistic DPP distribution prioritizes collections of structures (sequential sets) instead of individual items; (ii) We introduce a co-occurrence representation to discern and acknowledge the importance of different sets; (iii) We propose a sets-level optimization criterion, which integrates the diversity distribution and dependency relations across the entire sequence of sets, guiding the model to recommend relevant and diversified set. Extensive experiments on real-world datasets show that our approach consistently outperforms previous methods on both relevance and diversity.",
+    "abs_url": "https://arxiv.org/abs/2410.23023v1",
+    "pdf_url": "https://arxiv.org/pdf/2410.23023v1"
+  },
+  {
+    "query": "all:\"set\" AND all:\"recommendation\" AND all:\"BPR\"",
+    "id": "2409.14217v2",
+    "title": "Revisiting BPR: A Replicability Study of a Common Recommender System Baseline",
+    "published": "2024-09-21",
+    "authors": [
+      "Aleksandr Milogradskii",
+      "Oleg Lashinin",
+      "Alexander P",
+      "Marina Ananyeva",
+      "Sergey Kolesnikov"
+    ],
+    "categories": [
+      "cs.IR"
+    ],
+    "summary": "Bayesian Personalized Ranking (BPR), a collaborative filtering approach based on matrix factorization, frequently serves as a benchmark for recommender systems research. However, numerous studies often overlook the nuances of BPR implementation, claiming that it performs worse than newly proposed methods across various tasks. In this paper, we thoroughly examine the features of the BPR model, indicating their impact on its performance, and investigate open-source BPR implementations. Our analysis reveals inconsistencies between these implementations and the original BPR paper, leading to a significant decrease in performance of up to 50% for specific implementations. Furthermore, through extensive experiments on real-world datasets under modern evaluation settings, we demonstrate that with proper tuning of its hyperparameters, the BPR model can achieve performance levels close to state-of-the-art methods on the top-n recommendation tasks and even outperform them on specific datasets. Specifically, on the Million Song Dataset, the BPR model with hyperparameters tuning statistically significantly outperforms Mult-VAE by 10% in NDCG@100 with binary relevance function.",
+    "abs_url": "https://arxiv.org/abs/2409.14217v2",
+    "pdf_url": "https://arxiv.org/pdf/2409.14217v2"
+  },
+  {
+    "query": "all:\"set\" AND all:\"recommendation\" AND all:\"BPR\"",
+    "id": "2406.15983v1",
+    "title": "Learning k-Determinantal Point Processes for Personalized Ranking",
+    "published": "2024-06-23",
+    "authors": [
+      "Yuli Liu",
+      "Christian Walder",
+      "Lexing Xie"
+    ],
+    "categories": [
+      "cs.IR"
+    ],
+    "summary": "The key to personalized recommendation is to predict a personalized ranking on a catalog of items by modeling the user's preferences. There are many personalized ranking approaches for item recommendation from implicit feedback like Bayesian Personalized Ranking (BPR) and listwise ranking. Despite these methods have shown performance benefits, there are still limitations affecting recommendation performance. First, none of them directly optimize ranking of sets, causing inadequate exploitation of correlations among multiple items. Second, the diversity aspect of recommendations is insufficiently addressed compared to relevance. In this work, we present a new optimization criterion LkP based on set probability comparison for personalized ranking that moves beyond traditional ranking-based methods. It formalizes set-level relevance and diversity ranking comparisons through a Determinantal Point Process (DPP) kernel decomposition. To confer ranking interpretability to the DPP set probabilities and prioritize the practicality of LkP, we condition the standard DPP on the cardinality k of the DPP-distributed set, known as k-DPP, a less-explored extension of DPP. The generic stochastic gradient descent based technique can be directly applied to optimizing models that employ LkP. We implement LkP in the context of both Matrix Factorization (MF) and neural networks approaches, on three real-world datasets, obtaining improved relevance and diversity performances. LkP is broadly applicable, and when applied to existing recommendation models it also yields strong performance improvements, suggesting that LkP holds significant value to the field of recommender systems.",
+    "abs_url": "https://arxiv.org/abs/2406.15983v1",
+    "pdf_url": "https://arxiv.org/pdf/2406.15983v1"
+  },
+  {
+    "query": "all:\"set\" AND all:\"recommendation\" AND all:\"BPR\"",
+    "id": "2405.15328v3",
+    "title": "Multi-Modal Recommendation Unlearning for Legal, Licensing, and Modality Constraints",
+    "published": "2024-05-24",
+    "authors": [
+      "Yash Sinha",
+      "Murari Mandal",
+      "Mohan Kankanhalli"
+    ],
+    "categories": [
+      "cs.LG",
+      "cs.IR"
+    ],
+    "summary": "User data spread across multiple modalities has popularized multi-modal recommender systems (MMRS). They recommend diverse content such as products, social media posts, TikTok reels, etc., based on a user-item interaction graph. With rising data privacy demands, recent methods propose unlearning private user data from uni-modal recommender systems (RS). However, methods for unlearning item data related to outdated user preferences, revoked licenses, and legally requested removals are still largely unexplored. Previous RS unlearning methods are unsuitable for MMRS due to the incompatibility of their matrix-based representation with the multi-modal user-item interaction graph. Moreover, their data partitioning step degrades performance on each shard due to poor data heterogeneity and requires costly performance aggregation across shards. This paper introduces MMRecUn, the first approach known to us for unlearning in MMRS and unlearning item data. Given a trained RS model, MMRecUn employs a novel Reverse Bayesian Personalized Ranking (BPR) objective to enable the model to forget marked data. The reverse BPR attenuates the impact of user-item interactions within the forget set, while the forward BPR reinforces the significance of user-item interactions within the retain set. Our experiments demonstrate that MMRecUn outperforms baseline methods across various unlearning requests when evaluated on benchmark MMRS datasets. MMRecUn achieves recall performance improvements of up to 49.85% compared to baseline methods and is up to 1.3x faster than the Gold model, which is trained on retain set from scratch. MMRecUn offers significant advantages, including superiority in removing target interactions, preserving retained interactions, and zero overhead costs compared to previous methods. Code: https://github.com/MachineUnlearn/MMRecUN Extended version: arXiv:2405.15328",
+    "abs_url": "https://arxiv.org/abs/2405.15328v3",
+    "pdf_url": "https://arxiv.org/pdf/2405.15328v3"
+  },
+  {
+    "query": "all:\"set\" AND all:\"recommendation\" AND all:\"BPR\"",
+    "id": "2402.07659v2",
+    "title": "Multi-Behavior Collaborative Filtering with Partial Order Graph Convolutional Networks",
+    "published": "2024-02-12",
+    "authors": [
+      "Yijie Zhang",
+      "Yuanchen Bei",
+      "Hao Chen",
+      "Qijie Shen",
+      "Zheng Yuan",
+      "Huan Gong"
+    ],
+    "categories": [
+      "cs.IR"
+    ],
+    "summary": "Representing information of multiple behaviors in the single graph collaborative filtering (CF) vector has been a long-standing challenge. This is because different behaviors naturally form separate behavior graphs and learn separate CF embeddings. Existing models merge the separate embeddings by appointing the CF embeddings for some behaviors as the primary embedding and utilizing other auxiliaries to enhance the primary embedding. However, this approach often results in the joint embedding performing well on the main tasks but poorly on the auxiliary ones. To address the problem arising from the separate behavior graphs, we propose the concept of Partial Order Recommendation Graphs (POG). POG defines the partial order relation of multiple behaviors and models behavior combinations as weighted edges to merge separate behavior graphs into a joint POG. Theoretical proof verifies that POG can be generalized to any given set of multiple behaviors. Based on POG, we propose the tailored Partial Order Graph Convolutional Networks (POGCN) that convolute neighbors' information while considering the behavior relations between users and items. POGCN also introduces a partial-order BPR sampling strategy for efficient and effective multiple-behavior CF training. POGCN has been successfully deployed on the homepage of Alibaba for two months, providing recommendation services for over one billion users. Extensive offline experiments conducted on three public benchmark datasets demonstrate that POGCN outperforms state-of-the-art multi-behavior baselines across all types of behaviors. Furthermore, online A/B tests confirm the superiority of POGCN in billion-scale recommender systems.",
+    "abs_url": "https://arxiv.org/abs/2402.07659v2",
+    "pdf_url": "https://arxiv.org/pdf/2402.07659v2"
+  },
+  {
+    "query": "all:\"set\" AND all:\"recommendation\" AND all:\"BPR\"",
+    "id": "2312.08517v2",
+    "title": "(Debiased) Contrastive Learning Loss for Recommendation (Technical Report)",
+    "published": "2023-12-13",
+    "authors": [
+      "Ruoming Jin",
+      "Dong Li"
+    ],
+    "categories": [
+      "cs.AI"
+    ],
+    "summary": "In this paper, we perform a systemic examination of the recommendation losses, including listwise (softmax), pairwise(BPR), and pointwise (mean-squared error, MSE, and Cosine Contrastive Loss, CCL) losses through the lens of contrastive learning. We introduce and study both debiased InfoNCE and mutual information neural estimator (MINE), for the first time, under the recommendation setting. We also relate and differentiate these two losses with the BPR loss through the lower bound analysis. Furthermore, we present the debiased pointwise loss (for both MSE and CCL) and theoretically certify both iALS and EASE, two of the most popular linear models, are inherently debiased. The empirical experimental results demonstrate the effectiveness of the debiased losses and newly introduced mutual-information losses outperform the existing (biased) ones.",
+    "abs_url": "https://arxiv.org/abs/2312.08517v2",
+    "pdf_url": "https://arxiv.org/pdf/2312.08517v2"
+  }
+]

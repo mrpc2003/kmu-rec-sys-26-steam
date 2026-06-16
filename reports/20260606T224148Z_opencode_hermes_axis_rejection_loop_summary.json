@@ -1,0 +1,40 @@
+{
+  "dry_run": true,
+  "iterations": [
+    {
+      "hermes": {
+        "active_submit_processes": [],
+        "metrics": {},
+        "new_submission_csvs": [],
+        "reasons": [
+          "dry-run: OpenCode not called"
+        ],
+        "report_json": null,
+        "report_md": null,
+        "running_probe": null,
+        "safety": {
+          "dry_run": true
+        },
+        "safety_ok": true,
+        "strict_pass": false,
+        "verdict": "DRY_RUN"
+      },
+      "iteration": 1,
+      "jsonl_path": null,
+      "opencode_run": {
+        "dry_run": true
+      },
+      "opencode_sentinel": null,
+      "prompt_path": "reports/20260606T224148Z_axis_loop_iter01_prompt.md",
+      "raw_text_path": null
+    }
+  ],
+  "max_iters": 1,
+  "run_dir": "artifacts/opencode_hermes_axis_loop_20260606T224148Z",
+  "safety_status": "ok_dry_run_no_opencode_called",
+  "stopped_reason": "dry_run_complete",
+  "summary_json": "reports/20260606T224148Z_opencode_hermes_axis_rejection_loop_summary.json",
+  "summary_md": "reports/20260606T224148Z_opencode_hermes_axis_rejection_loop_summary.md",
+  "timestamp": "20260606T224148Z",
+  "workdir": "/opt/data/kaggle/kmu-rec-sys-26-steam"
+}

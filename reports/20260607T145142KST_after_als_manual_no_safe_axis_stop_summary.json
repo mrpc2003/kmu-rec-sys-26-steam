@@ -1,0 +1,52 @@
+{
+  "timestamp_kst": "20260607T145142KST",
+  "run_ts": "20260607T144515KST",
+  "manual_stop_reason": "Two consecutive OpenCode iterations wrote NO_SAFE_AXIS reports and launched no probe; controller remained waiting for OpenCode/process cleanup, so Hermes intentionally stopped the manual duplicate loop to avoid wasting tokens/time.",
+  "final_verdict": "MANUAL_STOP_AFTER_TWO_NO_SAFE_AXIS_NO_PROBE",
+  "safety_contract": {
+    "no_kaggle_submit": true,
+    "no_full_test_candidate_or_submission_csv": true,
+    "no_hidden_labels_or_private_answers": true,
+    "no_external_steam_scraping": true,
+    "no_git_stage_commit_push": true
+  },
+  "iterations": [
+    {
+      "iteration": 1,
+      "report": "reports/20260607T144515KST_axis_loop_iter01_opencode.json",
+      "axis_decision": "no safe axis",
+      "verdict": "NO_SAFE_AXIS",
+      "new_probe_launched": false,
+      "top_variant": "diagnostic_atlas_als_f32_popa4_w0.20_band1_from_20260607T130533KST_current_best_als_independent_confirmation",
+      "mean_delta_vs_base": 0.0011335600453423744,
+      "min_delta_vs_base": 0.0004000800160031126,
+      "positive_splits": "3/3",
+      "fixes": 462,
+      "breaks": 394,
+      "pooled_p_exact": 0.021965674090633346,
+      "strict_gate_pass": null,
+      "quarantine_conflict": true,
+      "failed_gates": null
+    },
+    {
+      "iteration": 2,
+      "report": "reports/20260607T144515KST_axis_loop_iter02_opencode.json",
+      "axis_decision": "no safe axis",
+      "verdict": "NO_SAFE_AXIS",
+      "new_probe_launched": false,
+      "top_variant": "diagnostic_atlas_als_f32_popa4_w0.20_band1_from_20260607T130533KST_current_best_als_independent_confirmation",
+      "mean_delta_vs_base": 0.0011335600453423744,
+      "min_delta_vs_base": 0.0004000800160031126,
+      "positive_splits": "3/3",
+      "fixes": 462,
+      "breaks": 394,
+      "pooled_p_exact": 0.021965674090633346,
+      "strict_gate_pass": false,
+      "quarantine_conflict": true,
+      "failed_gates": [
+        "mean_delta_lt_0.0015",
+        "quarantine_or_same_family_conflict"
+      ]
+    }
+  ]
+}

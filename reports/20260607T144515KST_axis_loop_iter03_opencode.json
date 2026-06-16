@@ -1,0 +1,104 @@
+{
+  "safety_flags": {
+    "validation_only": true,
+    "candidate_csv_written": false,
+    "full_test_candidate_or_submission_csv_created": false,
+    "kaggle_submit_executed": false,
+    "hidden_labels_used": false,
+    "private_answers_used": false,
+    "external_steam_scraping_used": false,
+    "credentials_or_tokens_printed": false,
+    "quarantine_or_guard_logic_weakened": false,
+    "git_stage_commit_push_executed": false,
+    "recursive_cron_scheduled": false
+  },
+  "axis_decision": "no safe axis",
+  "new_probe": {
+    "launched": false,
+    "status": "not_launched",
+    "command": null,
+    "pid_file": null,
+    "log": null,
+    "report_json": null,
+    "report_md": null,
+    "artifact_dir": "artifacts/opencode_hermes_axis_loop_20260607T144515KST"
+  },
+  "best_or_top_metrics": {
+    "variant": "diagnostic_atlas_als_f32_popa4_w0.20_band1_from_20260607T130533KST_current_best_als_independent_confirmation",
+    "mean_delta_vs_base": 0.0011335600453423744,
+    "min_delta_vs_base": 0.0004000800160031126,
+    "positive_splits": "3/3",
+    "fixes": 462,
+    "breaks": 394,
+    "pooled_p_exact": 0.021965674090633346,
+    "quarantine_conflict": true,
+    "strict_gate_pass": false,
+    "failed_gates": [
+      "mean_delta_lt_0.0015",
+      "same_family_or_quarantine_conflict",
+      "not_pre_registered_independent_axis"
+    ],
+    "why_not_candidate": "The strongest remaining metric row is the same ALS/rankblend residual diagnostic already rejected in this 20260607T144515KST loop and in the 20260607T130533KST independent confirmation. It is below the strict +0.0015 mean-delta gate, is same-family/quarantine-conflicted, and the pre-registered ALS variant failed mean/min/3-of-3/p gates."
+  },
+  "ranked_next_axis_hypotheses": [
+    {
+      "rank": 1,
+      "axis": "Exact-K/subset-loss or candidate-count-aware LightGCN variants",
+      "status": "closed_not_launched",
+      "evidence": "scripts/lightgcn_exactk_subset_loss.py exists, but exact-K is explicitly listed as closed/stalled in the iteration prompt. Running it would repeat a rejected family and risks another weak validation-only blip rather than new independent information."
+    },
+    {
+      "rank": 2,
+      "axis": "Hyperbolic, SGL/XSimGCL, DirectAU, SASRec/DIN, MultiVAE/AlphaRec/TurboCF families",
+      "status": "closed_not_launched",
+      "evidence": "Runnable scripts are present, but prior reports and iter02 classify these as redundant, weak, below floor, or closed; several would require training beyond the bounded credible <=3600s probe window to be meaningful."
+    },
+    {
+      "rank": 3,
+      "axis": "Boundary/frontier/aggressive gated residuals or pairwise factories",
+      "status": "quarantined_not_launched",
+      "evidence": "The prompt explicitly closes boundary covariate/residual, capacity/frontier, rankblend/ALS/BPR residual, and boundary scoreblend/pairwise families; state/report evidence shows public-negative or near-duplicate/quarantine risk."
+    },
+    {
+      "rank": 4,
+      "axis": "UserKNN finite-value cleanup or jackknife expansion",
+      "status": "stalled_not_launched",
+      "evidence": "Both are named stalled/incomplete with invalid-divide warning dominated logs or missing metric reports. Cleanup would not introduce a materially new independent axis."
+    },
+    {
+      "rank": 5,
+      "axis": "Raw semantic/text/README/LM residuals",
+      "status": "closed_not_launched",
+      "evidence": "Prompt and prior iterations classify these as weak or redundant; launching another text residual probe would not be a fresh axis under Hermes' closed-family constraints."
+    }
+  ],
+  "verdict": "NO_SAFE_AXIS",
+  "evidence_reviewed": {
+    "direct_tools": [
+      "Read required iter01/iter02 reports for 20260607T144515KST and manual stop summary 20260607T145142KST.",
+      "Read current-best ALS independent confirmation report 20260607T130533KST.",
+      "Inspected scripts/current_best_residual_atlas.py and scripts/opencode_hermes_axis_rejection_loop.py for safety gates and residual-family status.",
+      "Listed all scripts with rg --files and searched scripts/reports/state for validation/probe/quarantine/candidate/full-test/submit markers.",
+      "Used ast-grep to inventory Python __main__ entrypoints and to_csv write sites."
+    ],
+    "key_files": [
+      "reports/20260607T144515KST_axis_loop_iter01_opencode.json",
+      "reports/20260607T144515KST_axis_loop_iter02_opencode.json",
+      "reports/20260607T145142KST_after_als_manual_no_safe_axis_stop_summary.json",
+      "reports/20260607T130533KST_current_best_als_independent_confirmation.json",
+      "scripts/current_best_residual_atlas.py",
+      "scripts/opencode_hermes_axis_rejection_loop.py"
+    ],
+    "search_summary": "Exhaustive direct search found many runnable validation scripts, but none satisfied both freshness and bounded safety: remaining possible probes were closed families, same-family/quarantine conflicts, incomplete weak axes, or full-test/candidate materializers forbidden by this iteration."
+  },
+  "manual_qa": {
+    "surface": "required report artifacts and safety state",
+    "checks": [
+      "JSON report written at reports/20260607T144515KST_axis_loop_iter03_opencode.json and parses with json.load.",
+      "Markdown report written at reports/20260607T144515KST_axis_loop_iter03_opencode.md.",
+      "No validation probe launched by this worker.",
+      "No writes under submissions/ and no full-test candidate/submission CSV created by this worker.",
+      "No kaggle competitions submit command executed and no git stage/commit/push executed."
+    ]
+  }
+}

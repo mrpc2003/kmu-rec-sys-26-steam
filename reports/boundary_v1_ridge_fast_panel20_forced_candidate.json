@@ -1,0 +1,39 @@
+{
+  "candidate": "boundary_v1_ridge_fast_panel20_forced",
+  "created_at_utc": "2026-06-15T16:32:24.909398+00:00",
+  "role": "FORCED manual-risk boundary v1 ridge-fast candidate; scored gate failed, user explicitly requested submission attempt.",
+  "validation_gate": "FAIL__NO_SCORED_GATE_PASS",
+  "source_eval": "reports/boundary_v1_scored_split20_fast_eval.md",
+  "file": "submissions/candidate_boundary_v1_ridge_fast_panel20_forced.csv",
+  "sha256": "ebca52d0ea2c185c3dc4770dbf471553213b1fd1cf6a0a5d5a2d22668117f4a6",
+  "alpha": 10.0,
+  "band": 300,
+  "preflight": {
+    "rows": 19998,
+    "expected_rows": 19998,
+    "columns": [
+      "ID",
+      "Played"
+    ],
+    "id_unique": true,
+    "id_contiguous": true,
+    "labels_binary": true,
+    "label_1": 9999,
+    "label_0": 9999,
+    "bad_users_tophalf": 0,
+    "row_diff_vs_anchor_rankblend": 78
+  },
+  "comparisons": {
+    "current_best_rank_blend": {
+      "path": "/opt/data/kaggle/kmu-rec-sys-26-steam/submissions/candidate_rank_blend_emb128_emb192.csv",
+      "row_diff": 176,
+      "row_diff_frac": 0.0088008800880088
+    }
+  },
+  "safety": {
+    "kaggle_submit_executed_by_script": false,
+    "external_metadata_used": false,
+    "hidden_labels_used": false,
+    "public_lb_feedback_used_in_policy_gate": true
+  }
+}

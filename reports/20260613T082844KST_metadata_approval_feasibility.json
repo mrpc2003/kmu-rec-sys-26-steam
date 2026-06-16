@@ -1,0 +1,41 @@
+{
+  "timestamp_kst": "2026-06-13 08:28:44 KST",
+  "user_response": "승인",
+  "interpreted_scope": "public Steam item metadata approval only",
+  "decision": "blocked_without_gameid_to_steam_appid_mapping",
+  "data_summary": {
+    "train_rows": 175000,
+    "train_users": 6710,
+    "train_games": 2437,
+    "pairs_rows": 19998,
+    "pairs_users": 4737,
+    "pairs_games": 2429,
+    "numeric_game_ids": 0,
+    "sample_game_ids": ["g35322304", "g49368897", "g73495588", "g68047320", "g51234623", "g25723374", "g58025004", "g69033010"]
+  },
+  "steam_appdetails_probe": [
+    {"candidate_appid": "35322304", "success": false},
+    {"candidate_appid": "49368897", "success": false},
+    {"candidate_appid": "73495588", "success": false},
+    {"candidate_appid": "68047320", "success": false},
+    {"candidate_appid": "51234623", "success": false}
+  ],
+  "safety": {
+    "validation_only": true,
+    "no_kaggle_submit": true,
+    "candidate_csv_written": false,
+    "full_test_scored": false,
+    "submission_csv_written": false,
+    "hidden_labels_used": false,
+    "steam_reviews_collected": false,
+    "steam_user_profile_or_owned_games_queried": false,
+    "external_metadata_used": false
+  },
+  "not_started_without_separate_approval": [
+    "Steam user profile or owned-games lookup using provided user_id",
+    "review-text-to-web matching for game deanonymization",
+    "external Steam review collection",
+    "full app catalog semantic matching"
+  ],
+  "recommended_next_step": "ask for an official/provided gameID-to-Steam-appid mapping file, or explicit permission for deanonymization-style mapping attempts"
+}

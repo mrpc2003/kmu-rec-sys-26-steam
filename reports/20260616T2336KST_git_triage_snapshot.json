@@ -1,0 +1,94 @@
+{
+  "timestamp_kst": "2026-06-16 23:36:44 KST",
+  "repo": "/opt/data/kaggle/kmu-rec-sys-26-steam",
+  "branch": "main",
+  "origin_head": "a11129f38cf972de946dca31f481b41c9cc34c63",
+  "local_head_before_commit": "a11129f38cf972de946dca31f481b41c9cc34c63",
+  "policy": {
+    "commit": [
+      "source scripts under scripts/",
+      "curated reports under reports/",
+      "report CSV/JSON/PNG/MD evidence",
+      "gitignore protection updates",
+      "tracked state/ledger updates"
+    ],
+    "ignore": [
+      "runtime continuation state .omo/",
+      "raw artifacts/data/wandb/submissions",
+      "final_package label CSVs",
+      "autorun heartbeat CSV snapshots",
+      "submit stdout/stderr logs",
+      "status jsonl/txt/directories",
+      "aborted empty antifail scan JSON"
+    ],
+    "deletion_performed": [
+      "removed zero-byte untracked reports/20260604T113103KST_last_slot_next_axis_opencode_extracted.md after reviewer flagged it as non-useful"
+    ],
+    "kaggle_submission_performed": false,
+    "new_candidate_csv_created": false
+  },
+  "counts": {
+    "visible_untracked_after_staging": 0,
+    "ignored_untracked_after_staging": 4488,
+    "staged_files": 442,
+    "staged_by_top": {
+      "reports": 396,
+      "scripts": 44,
+      ".gitignore": 1,
+      "state": 1
+    },
+    "staged_by_ext": {
+      ".md": 243,
+      ".json": 131,
+      ".py": 44,
+      ".csv": 17,
+      ".png": 6,
+      "<noext>": 1
+    },
+    "visible_by_top": {},
+    "ignored_by_top": {
+      "reports": 1932,
+      "artifacts": 1720,
+      "wandb": 319,
+      "logs": 207,
+      "wandb_runs": 183,
+      "scripts": 52,
+      "ecampus_bundle": 24,
+      "submissions": 24,
+      "data": 14,
+      ".omo": 5,
+      ".sisyphus": 5,
+      "final_package": 2,
+      "ecampus_submission_kmurecsys26_woohyun.zip": 1
+    }
+  },
+  "ignored_final_package_count": 2,
+  "ignored_submission_count": 24,
+  "staged_examples": [
+    ".gitignore",
+    "reports/20260601_aiq_last_slot_new_axis_curated.md",
+    "reports/20260601_aiq_last_slot_new_axis_deep.json",
+    "reports/20260601_aiq_last_slot_new_axis_query.md",
+    "reports/20260601_bffa_opencode_review_extracted.md",
+    "reports/20260601_bffa_opencode_review_prompt.md",
+    "reports/20260601_boundary_feature_factory_audit.json",
+    "reports/20260601_boundary_feature_factory_audit.md",
+    "reports/20260601_boundary_feature_factory_audit_rerun.json",
+    "reports/20260601_boundary_feature_factory_audit_rerun.md",
+    "reports/20260601_boundary_feature_factory_audit_smoke.json",
+    "reports/20260601_boundary_feature_factory_audit_smoke.md",
+    "reports/20260601_boundary_feature_factory_opencode_review_extracted.md",
+    "reports/20260601_boundary_feature_factory_opencode_review_prompt.md",
+    "reports/20260601_bsvd_boundary_vote_panel_aggregate.json",
+    "reports/20260601_bsvd_boundary_vote_panel_aggregate.md",
+    "reports/20260601_bsvd_boundary_vote_panel_table.md",
+    "reports/20260601_bsvd_opencode_review_prompt.md",
+    "reports/20260601_deep_data_signature_eda.json",
+    "reports/20260601_deep_data_signature_eda.md",
+    "reports/20260601_ecampus_repro_emb128_verification.json",
+    "reports/20260601_last_slot_adviser_prompt.md",
+    "reports/20260601_last_slot_rankagg_probe.md",
+    "reports/20260601_layermix_panel_aggregate.json",
+    "reports/20260601_layermix_panel_aggregate.md"
+  ]
+}

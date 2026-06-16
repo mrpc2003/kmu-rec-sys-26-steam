@@ -1,0 +1,78 @@
+{
+  "timestamp_kst": "2026-06-06 12:50:11 KST",
+  "validation_only": true,
+  "no_kaggle_submit": true,
+  "candidate_csv_written": false,
+  "hidden_labels_or_external_scraping": false,
+  "split": "val_random_uniform_seed42",
+  "axis": "dns_pool1_four_seed_raw_score_panel",
+  "emb128_ref": {
+    "expected_row_accuracy": 0.7650530106021204,
+    "computed_row_accuracy": 0.7650530106021204,
+    "score_paths": {
+      "42": "artifacts/lightgcn_sweep_uniform_eval/emb128_L4_reg1e-03/val_random_uniform_seed42/lightgcn_scores.csv",
+      "123": "artifacts/lightgcn_emb128L4r3_ens/seed123/val_random_uniform_seed42/lightgcn_scores.csv",
+      "2024": "artifacts/lightgcn_emb128L4r3_ens/seed2024/val_random_uniform_seed42/lightgcn_scores.csv",
+      "7": "artifacts/lightgcn_emb128L4r3_ens/seed7/val_random_uniform_seed42/lightgcn_scores.csv"
+    }
+  },
+  "individual_dns": [
+    {
+      "seed": 7,
+      "row_accuracy": 0.7630526105221044,
+      "delta_vs_ref": -0.002000400080016007
+    },
+    {
+      "seed": 42,
+      "row_accuracy": 0.7656531306261253,
+      "delta_vs_ref": 0.000600120024004891
+    },
+    {
+      "seed": 123,
+      "row_accuracy": 0.7626525305061013,
+      "delta_vs_ref": -0.0024004800960191197
+    },
+    {
+      "seed": 2024,
+      "row_accuracy": 0.7639527905581116,
+      "delta_vs_ref": -0.0011002200440087817
+    }
+  ],
+  "dns_raw_mean": {
+    "row_accuracy": 0.7659531906381276,
+    "delta_vs_emb128_ref": 0.0009001800360072254,
+    "mcnemar_vs_ref": {
+      "b_variant_fixes": 139,
+      "c_variant_breaks": 121,
+      "discordant": 260,
+      "p_value_exact": 0.29173125604565164
+    }
+  },
+  "dns_z_mean": {
+    "row_accuracy": 0.7660532106421284,
+    "delta_vs_emb128_ref": 0.0010002000400080036,
+    "mcnemar_vs_ref": {
+      "b_variant_fixes": 147,
+      "c_variant_breaks": 127,
+      "discordant": 274,
+      "p_value_exact": 0.2509927551833466
+    }
+  },
+  "ref_dns_50_50_zblend": {
+    "row_accuracy": 0.7659531906381276,
+    "delta_vs_emb128_ref": 0.0009001800360072254,
+    "mcnemar_vs_ref": {
+      "b_variant_fixes": 62,
+      "c_variant_breaks": 44,
+      "discordant": 106,
+      "p_value_exact": 0.09824250442243807
+    }
+  },
+  "corr_z_dns_vs_ref": 0.9966196529394874,
+  "strict_candidate_gate": {
+    "required_delta": 0.00355,
+    "required_p_value_lt": 0.05,
+    "passed": false
+  },
+  "decision": "DNS_POOL1_CLOSED_NO_CANDIDATE"
+}

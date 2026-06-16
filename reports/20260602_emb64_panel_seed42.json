@@ -1,0 +1,67 @@
+{
+  "note": "LightGCN GPU validation-only. No Kaggle submission.",
+  "results": [
+    {
+      "split": "val_random_uniform_seed7",
+      "summary": {
+        "score_col": "score_lightgcn",
+        "rows": 19996,
+        "users": 4736,
+        "row_accuracy": 0.7543508701740348,
+        "per_user_mean_accuracy": 0.7738216256513955,
+        "per_user_min_accuracy": 0.0,
+        "per_user_p05_accuracy": 0.0,
+        "per_user_p50_accuracy": 1.0,
+        "per_user_p95_accuracy": 1.0,
+        "predicted_positive_total": 9998,
+        "true_positive_total": 9998,
+        "all_user_positive_counts_match": true
+      },
+      "train_meta": {
+        "emb_dim": 64,
+        "n_layers": 3,
+        "lr": 0.001,
+        "reg": 0.0001,
+        "epochs": 200,
+        "batch_size": 4096,
+        "n_users": 6710,
+        "n_items": 2437,
+        "n_interactions": 165002,
+        "final_loss": 0.16893388628959655,
+        "train_seconds": 1816.1,
+        "device": "cuda:0"
+      }
+    },
+    {
+      "split": "val_random_uniform_seed123",
+      "summary": {
+        "score_col": "score_lightgcn",
+        "rows": 19996,
+        "users": 4736,
+        "row_accuracy": 0.7526505301060212,
+        "per_user_mean_accuracy": 0.7745219601613516,
+        "per_user_min_accuracy": 0.0,
+        "per_user_p05_accuracy": 0.0,
+        "per_user_p50_accuracy": 1.0,
+        "per_user_p95_accuracy": 1.0,
+        "predicted_positive_total": 9998,
+        "true_positive_total": 9998,
+        "all_user_positive_counts_match": true
+      },
+      "train_meta": {
+        "emb_dim": 64,
+        "n_layers": 3,
+        "lr": 0.001,
+        "reg": 0.0001,
+        "epochs": 200,
+        "batch_size": 4096,
+        "n_users": 6710,
+        "n_items": 2437,
+        "n_interactions": 165002,
+        "final_loss": 0.1720245558768511,
+        "train_seconds": 1802.7,
+        "device": "cuda:0"
+      }
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+model,band_total_row_diff_target,splits,mean_changed_rows,mean_flip_precision,mean_net_gain_rows,mean_delta_accuracy,positive_split_ratio,worst_split_net_gain_rows,best_split_net_gain_rows,top2_gate_precision,top2_gate_pass,top1_gate_precision,top1_gate_pass
+ridge_fast,100,20,69.7,0.5453685654307969,6.3,0.00031506301260252333,0.7,-14,22,0.82,False,,False
+ridge_fast,150,20,69.7,0.5453685654307969,6.3,0.00031506301260252333,0.7,-14,22,0.72,False,,False
+ridge_fast,300,20,69.7,0.5453685654307969,6.3,0.00031506301260252333,0.7,-14,22,0.65,False,0.85,False
+ridge_fast,500,20,69.7,0.5453685654307969,6.3,0.00031506301260252333,0.7,-14,22,0.604,False,0.74,False
+ridge_fast,850,20,69.7,0.5453685654307969,6.3,0.00031506301260252333,0.7,-14,22,0.582,False,0.74,False
+ridge_fast,50,20,49.6,0.5546190476190476,5.5,0.0002750550110021899,0.75,-14,18,,False,,False

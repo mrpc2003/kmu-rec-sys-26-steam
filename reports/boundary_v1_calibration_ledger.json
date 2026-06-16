@@ -1,0 +1,52 @@
+{
+  "artifact": "boundary_v1_calibration_ledger",
+  "role": "negative-control calibration ledger for boundary_specialist_v1_rowflip_constrained",
+  "validation_only": true,
+  "no_kaggle_submit": true,
+  "public_lb_feedback_used": true,
+  "candidate_csv_written": false,
+  "new_full_test_scoring_performed": false,
+  "external_metadata_used": false,
+  "phase0_inputs": {
+    "calibration_csv": "reports/boundary_public_failure_calibration.csv",
+    "diffband_curve_csv": "reports/boundary_v1_diffband_precision_curve.csv"
+  },
+  "phase1_prep_outputs": {
+    "row_filter_audit_md": "reports/boundary_v1_row_filter_audit_19998_vs_19996.md",
+    "row_filter_audit_json": "reports/boundary_v1_row_filter_audit_19998_vs_19996.json",
+    "public_failed_overlap_matrix_csv": "reports/boundary_v1_public_failed_overlap_matrix.csv",
+    "public_failed_changed_row_summary_csv": "reports/boundary_v1_public_failed_changed_row_summary.csv",
+    "transfer_adjusted_curve_csv": "reports/boundary_v1_diffband_precision_curve_transfer_adjusted.csv",
+    "phase1_gate_policy_md": "reports/boundary_v1_phase1_gate_policy.md",
+    "scored_split20_readiness_md": "reports/boundary_v1_scored_split20_crossfit_eval.md"
+  },
+  "row_filter_interpretation": {
+    "mismatch_status": "explained_by_one_user_filtered_from_all_panel20_splits",
+    "reason_from_split_summary": "The split builder keeps at least one fold-train interaction per user. User u57101927 has train_n=1, requested_k=1, actual_k=0, so that user is skipped.",
+    "effect": "raw pairs 19998 rows / 4737 users -> panel20 19996 rows / 4736 users; 2 raw pair rows from the skipped user are absent.",
+    "phase1_risk": "Boundary scored evaluation must either keep this same panel filter or explicitly document a different policy before comparing diff-band precision."
+  },
+  "overlap_summary": {
+    "candidate_count": 11,
+    "matrix_rows": 121,
+    "max_offdiag_jaccard": 1.0
+  },
+  "gate_summary": {
+    "rows": 6,
+    "out_csv": "/opt/data/kaggle/kmu-rec-sys-26-steam/reports/boundary_v1_diffband_precision_curve_transfer_adjusted.csv",
+    "out_md": "/opt/data/kaggle/kmu-rec-sys-26-steam/reports/boundary_v1_phase1_gate_policy.md"
+  },
+  "scored_eval_readiness": {
+    "artifact": "boundary_v1_scored_split20_crossfit_eval_readiness",
+    "validation_only": true,
+    "no_kaggle_submit": true,
+    "candidate_csv_written": false,
+    "existing_metadata_panel20_available": true,
+    "score_coverage_expanded_to_30_50": false,
+    "scored_boundary_eval_ready": false,
+    "panel20_split_dirs": 20,
+    "panel20_score_files_detected_under_split_dirs": 0
+  },
+  "submission_readiness": "FAIL__scored_boundary_eval_not_ready",
+  "next_action": "Generate/connect split-panel score coverage, then run ridge/pairwise cross-fit no-submit evaluation."
+}

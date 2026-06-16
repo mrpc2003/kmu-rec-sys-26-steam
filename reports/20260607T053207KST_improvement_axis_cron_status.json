@@ -1,0 +1,136 @@
+{
+  "timestamp_kst": "2026-06-07T05:32:07+09:00",
+  "timestamp_utc": "2026-06-06T20:32:07Z",
+  "cron_role": "OpenCode-first no-submit improvement-axis discovery monitor",
+  "safety_flags": {
+    "validation_only": true,
+    "kaggle_submit_executed_by_this_tick": false,
+    "actual_kaggle_submit_process_count_excluding_self": 0,
+    "full_test_candidate_or_submission_csv_created_by_this_tick": false,
+    "hidden_labels_used": false,
+    "private_answers_used": false,
+    "external_steam_scraping_used": false,
+    "quarantine_or_guard_logic_weakened": false,
+    "git_stage_commit_push_executed": false,
+    "credentials_or_tokens_printed": false,
+    "recursive_cron_scheduled": false
+  },
+  "actions_this_tick": [
+    "Loaded OpenCode and Kaggle RecSys workflow skills plus the OpenCode no-submit improvement-axis-loop reference.",
+    "Inspected Hermes background processes, OS processes, GPU/CPU/disk state, Git status, required UserKNN and jackknife report/log paths, runner state/quarantine, latest runner watchdog, and recent reports.",
+    "Verified OpenCode CLI/auth and ran sentinel smoke OPENCODE_SMOKE_OK_20260607T0526KST.",
+    "Confirmed no credible validation-only probe is currently running: UserKNN fine-grid remains stalled/incomplete and jackknife expanded remains failed/incomplete.",
+    "Launched exactly one bounded OpenCode run using reports/20260607T052646KST_opencode_axis_loop_prompt.md with --format json and stdin closed; captured logs under logs/opencode_improvement_axis_loop_20260607T052646KST.jsonl.",
+    "Extracted OpenCode text to reports/20260607T052646KST_opencode_improvement_axis_loop_raw_text.md and verified sentinel OPENCODE_AXIS_LOOP_DONE_NO_SAFE_AXIS.",
+    "Validated OpenCode JSON report parseability/required keys, checked no new submissions/*.csv with current timestamp, checked active submit process count is 0, ran secret scan over touched reports, and ran git diff --check for touched artifacts."
+  ],
+  "active_processes_after_tick": {
+    "hermes_background_processes": [],
+    "aggressive_quota_runner": {
+      "status": "RUNNING_PREEXISTING_NOT_STARTED_OR_MODIFIED_BY_THIS_TICK",
+      "pids": [208, 226],
+      "latest_watchdog": "logs/aggressive_quota_runner_watchdog_20260607T052059KST.log",
+      "latest_watchdog_summary": "quota used 0/5, remaining 5, best 0.77825 candidate_rank_blend_emb128_emb192.csv; no validation-positive unsubmitted variant available; idle/waiting"
+    },
+    "userknn_gated_residual_fine": {
+      "status": "NOT_RUNNING_STALLED_INCOMPLETE",
+      "log": "logs/userknn_gated_residual_fine_20260606T132450KST.log",
+      "expected_report_json": "reports/20260606T132450KST_userknn_gated_residual_fine.json",
+      "expected_report_md": "reports/20260606T132450KST_userknn_gated_residual_fine.md",
+      "expected_reports_exist": false,
+      "classification": "STALLED_INCOMPLETE"
+    },
+    "jackknife_uncertainty_boundary_expanded": {
+      "status": "NOT_RUNNING_FAILED_INCOMPLETE_NO_METRIC_REPORT",
+      "pid_file": "logs/20260606T220406KST_jackknife_uncertainty_boundary_expanded.pid",
+      "pid_file_value": 28646,
+      "pid_file_pid_live": false,
+      "log": "logs/20260606T220406KST_jackknife_uncertainty_boundary_expanded.log",
+      "log_lines_observed": 12,
+      "expected_report_json": "reports/20260606T220406KST_jackknife_uncertainty_boundary_expanded.json",
+      "expected_report_md": "reports/20260606T220406KST_jackknife_uncertainty_boundary_expanded.md",
+      "expected_reports_exist": false,
+      "classification": "FAILED_INCOMPLETE_NO_METRIC_REPORT"
+    },
+    "opencode_axis_loop": {
+      "status": "COMPLETED",
+      "exit_code": 0,
+      "sentinel": "OPENCODE_AXIS_LOOP_DONE_NO_SAFE_AXIS",
+      "prompt": "reports/20260607T052646KST_opencode_axis_loop_prompt.md",
+      "jsonl_log": "logs/opencode_improvement_axis_loop_20260607T052646KST.jsonl",
+      "raw_text": "reports/20260607T052646KST_opencode_improvement_axis_loop_raw_text.md",
+      "report_md": "reports/20260607T052646KST_opencode_improvement_axis_loop.md",
+      "report_json": "reports/20260607T052646KST_opencode_improvement_axis_loop.json",
+      "new_probe_launched": false
+    }
+  },
+  "completed_probe_classification": {
+    "jackknife_uncertainty_boundary_smoke": {
+      "report_json": "reports/20260606T220406KST_jackknife_uncertainty_boundary_probe.json",
+      "classification": "WEAK_SIGNAL_STRICT_GATE_FAIL",
+      "top_variant": "vote_consensus__high_capacity_gap__B1__w0.1",
+      "mean_delta_vs_base": 0.0003667400146696309,
+      "min_delta_vs_base": -0.0012002400480095599,
+      "positive_splits": "2/3",
+      "fixes": 252,
+      "breaks": 230,
+      "pooled_p_exact": 0.33881500709211204,
+      "strict_gate_result": "FAIL"
+    },
+    "userknn_gated_residual_smoke_previous": {
+      "report_json": "reports/20260603T180707KST_userknn_gated_residual_probe.json",
+      "classification": "WEAK_SIGNAL_STRICT_GATE_FAIL",
+      "top_mean_delta_vs_base": 0.0009001800360071884,
+      "top_min_delta_vs_base": 0.0002000400080015563,
+      "top_positive_splits": "3/3",
+      "top_fixes": 406,
+      "top_breaks": 352,
+      "top_pooled_p_exact": 0.05415183075028983,
+      "strict_gate_result": "FAIL"
+    }
+  },
+  "opencode_verdict": {
+    "verdict": "NO_SAFE_AXIS",
+    "new_axis_decision": "No fresh independent bounded validation-only axis is credible under the strict gate without repeating stalled UserKNN, failed/weak jackknife, closed DNS/capacity/boundary/rankblend/TAG-CF/semantic/temporal families, or creating a disallowed one-split blip.",
+    "ranked_next_axis_hypotheses": [
+      "Tiny UserKNN finite-value/complexity diagnostic only after isolating z_within_user invalid-divide behavior; diagnostic/debug only, not a current improvement axis.",
+      "New non-leaky OOF residual calibration design using only existing validation artifacts; currently blocked by public-negative/quarantined residual families and near-duplicate risk.",
+      "New backbone/loss family beyond LightGCN capacity frontier; currently no fresh strict-gate clue and too large for a tiny bounded tick.",
+      "DNS/capacity micro-ensemble refinement; currently below threshold and public-noise/split-specific."
+    ]
+  },
+  "resource_snapshot": {
+    "loadavg": [1.3408203125, 1.609375, 1.8935546875],
+    "mem_available_kb": 186352912,
+    "gpu_snapshot_observed_pre_opencode": [
+      {"index": 0, "memory_used_mib": 0, "memory_total_mib": 32768, "utilization_percent": 0},
+      {"index": 1, "memory_used_mib": 0, "memory_total_mib": 32768, "utilization_percent": 1},
+      {"index": 2, "memory_used_mib": 0, "memory_total_mib": 32768, "utilization_percent": 0},
+      {"index": 3, "memory_used_mib": 4320, "memory_total_mib": 32768, "utilization_percent": 2}
+    ],
+    "disk_available": "231G on /opt/data"
+  },
+  "verification": {
+    "opencode_smoke": "OPENCODE_SMOKE_OK_20260607T0526KST",
+    "opencode_json_parse": "ok",
+    "opencode_json_required_keys_missing": [],
+    "open_code_sentinel_found": true,
+    "new_submissions_csv_created": false,
+    "submission_csv_count": 22,
+    "latest_submission_csv_mtime_utc": "2026-06-03T08:38:36.429734+00:00",
+    "active_kaggle_submit_processes": 0,
+    "secret_scan_touched_reports": "no_hits",
+    "git_diff_check_touched_artifacts": "ok",
+    "git_stage_commit_push_executed": false
+  },
+  "artifacts": {
+    "status_json": "reports/20260607T053207KST_improvement_axis_cron_status.json",
+    "status_md": "reports/20260607T053207KST_improvement_axis_cron_status.md",
+    "opencode_prompt": "reports/20260607T052646KST_opencode_axis_loop_prompt.md",
+    "opencode_jsonl": "logs/opencode_improvement_axis_loop_20260607T052646KST.jsonl",
+    "opencode_raw_text": "reports/20260607T052646KST_opencode_improvement_axis_loop_raw_text.md",
+    "opencode_report_md": "reports/20260607T052646KST_opencode_improvement_axis_loop.md",
+    "opencode_report_json": "reports/20260607T052646KST_opencode_improvement_axis_loop.json"
+  },
+  "next_action": "Continue monitoring only. Do not launch another broad UserKNN/jackknife/boundary/rankblend/capacity probe unless a genuinely independent axis or a tiny bounded UserKNN finite-value diagnostic becomes justified; still forbid Kaggle submit and full-test candidate CSV materialization in this cron."
+}

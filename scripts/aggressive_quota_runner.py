@@ -18,6 +18,7 @@ import hashlib
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
 import time
@@ -29,6 +30,7 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
+import materialize_boundary_pairwise_candidate as boundary_mat  # noqa: E402
 import materialize_readme_rankblend_residual as mat  # noqa: E402
 
 COMP = "kmu-rec-sys-26-steam"
@@ -141,39 +143,149 @@ def load_validation_cache() -> dict[str, Any]:
     return mat.validate_variants()
 
 
+def load_boundary_validation_cache() -> dict[str, Any]:
+    """Load cached boundary-pairwise variants; recompute only if unavailable."""
+    p = ROOT / "reports/20260603_boundary_pairwise_factory.json"
+    if p.exists():
+        data = json.loads(p.read_text(encoding="utf-8"))
+        validation = data.get("validation")
+        if isinstance(validation, dict) and validation.get("all_variants"):
+            return validation
+    return boundary_mat.validate_variants()
+
+
+def load_tagcf_fulltest_cache() -> dict[str, Any]:
+    """Expose completed full-test TAG-CF materializations to the runner.
+
+    Validation evidence comes from the fixed 3-split TAG-CF panel
+    (`score_blend_sym_a0p1_raw`: mean +0.000767, 2/3 positive, pooled p=0.00823).
+    Each entry is still gated by full-test row-diff checks before submission.
+    """
+    rows: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for p in sorted(ROOT.glob("reports/*_tagcf_fulltest_seed*_sym_a0p1_zblend.json"), key=lambda x: x.stat().st_mtime, reverse=True):
+        try:
+            data = json.loads(p.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        out = Path(data.get("output", ""))
+        variant = str(data.get("variant") or p.stem)
+        if not out.exists() or variant in seen:
+            continue
+        seen.add(variant)
+        diffs = []
+        for label, comp in (data.get("comparisons") or {}).items():
+            rd = comp.get("row_diff") if isinstance(comp, dict) else None
+            if isinstance(rd, int):
+                diffs.append({"label": str(label), "row_diff": rd})
+        min_diff = min((x["row_diff"] for x in diffs), default=None)
+        min_label = min(diffs, key=lambda x: x["row_diff"])["label"] if diffs else None
+        rows.append({
+            "provider": "tagcf_fulltest",
+            "variant": variant,
+            "candidate_file": str(out),
+            "mean_delta_vs_rankblend": 0.0007668200306728176,
+            "min_delta": -0.0002000400080015563,
+            "max_delta": 0.001300260052010412,
+            "positive_splits": 2,
+            "fixes": 168,
+            "breaks": 122,
+            "discordant": 290,
+            "changed": None,
+            "pooled_p_exact": 0.00823,
+            "fisher_p": None,
+            "manual_risk_signal": True,
+            "materializable_fulltest": True,
+            "fulltest_prior_row_diffs": diffs,
+            "fulltest_min_rowdiff_vs_prior": min_diff,
+            "fulltest_min_rowdiff_label": min_label,
+            "source_report": str(p),
+            "safety": (data.get("safety") or {}),
+        })
+    return {"all_variants": rows, "top_variants": rows[:20], "source": "completed_tagcf_fulltest_materializations"}
+
+
+def candidate_providers() -> list[dict[str, Any]]:
+    """Return all no-submit candidate factories considered by the runner."""
+    return [
+        {"provider": "readme_rankblend_residual", "validation": load_validation_cache()},
+        {"provider": "boundary_pairwise", "validation": load_boundary_validation_cache()},
+        {"provider": "tagcf_fulltest", "validation": load_tagcf_fulltest_cache()},
+    ]
+
+
 def choose_next_variant(state: dict[str, Any], submitted_names: set[str]) -> dict[str, Any] | None:
-    validation = load_validation_cache()
+    validations = candidate_providers()
     skipped = state.setdefault("skipped_variants", [])
     tried = set(state.get("submitted_variants", [])) | set(skipped)
     quarantined = state.get("quarantined_families", {})
-    for v in validation["all_variants"]:
-        if not v.get("manual_risk_signal"):
-            continue
-        if v["variant"] in tried:
-            continue
-        if variant_family(v["variant"]) in quarantined:
-            if v["variant"] not in skipped:
-                skipped.append(v["variant"])
-            continue
-        if safe_variant_filename(v["variant"]) in submitted_names:
-            state.setdefault("submitted_variants", []).append(v["variant"])
-            continue
-        return v
+    for provider in validations:
+        provider_name = str(provider["provider"])
+        for v in provider["validation"]["all_variants"]:
+            v.setdefault("provider", provider_name)
+            if not v.get("manual_risk_signal"):
+                continue
+            if v["variant"] in tried:
+                continue
+            min_prior_diff = v.get("fulltest_min_rowdiff_vs_prior")
+            if isinstance(min_prior_diff, (int, float)) and min_prior_diff < MIN_AUTONOMOUS_ROW_DIFF:
+                if v["variant"] not in skipped:
+                    skipped.append(v["variant"])
+                continue
+            if variant_family(v["variant"]) in quarantined:
+                if v["variant"] not in skipped:
+                    skipped.append(v["variant"])
+                continue
+            if safe_variant_filename(v["variant"]) in submitted_names:
+                state.setdefault("submitted_variants", []).append(v["variant"])
+                continue
+            return v
     # If all manual-risk variants are consumed, still keep only validation-positive variants.
-    for v in validation["all_variants"]:
-        if v["variant"] in tried:
-            continue
-        if v.get("mean_delta_vs_rankblend", 0.0) <= 0:
-            continue
-        if variant_family(v["variant"]) in quarantined:
-            if v["variant"] not in skipped:
-                skipped.append(v["variant"])
-            continue
-        if safe_variant_filename(v["variant"]) in submitted_names:
-            state.setdefault("submitted_variants", []).append(v["variant"])
-            continue
-        return v
+    for provider in validations:
+        provider_name = str(provider["provider"])
+        for v in provider["validation"]["all_variants"]:
+            v.setdefault("provider", provider_name)
+            if v["variant"] in tried:
+                continue
+            min_prior_diff = v.get("fulltest_min_rowdiff_vs_prior")
+            if isinstance(min_prior_diff, (int, float)) and min_prior_diff < MIN_AUTONOMOUS_ROW_DIFF:
+                if v["variant"] not in skipped:
+                    skipped.append(v["variant"])
+                continue
+            if v.get("mean_delta_vs_rankblend", 0.0) <= 0:
+                continue
+            if variant_family(v["variant"]) in quarantined:
+                if v["variant"] not in skipped:
+                    skipped.append(v["variant"])
+                continue
+            if safe_variant_filename(v["variant"]) in submitted_names:
+                state.setdefault("submitted_variants", []).append(v["variant"])
+                continue
+            return v
     return None
+
+
+def materialize_variant(variant: dict[str, Any], out_path: Path) -> dict[str, Any]:
+    provider = variant.get("provider", "readme_rankblend_residual")
+    if provider == "boundary_pairwise":
+        return boundary_mat.materialize(variant["variant"], out_path)
+    if provider == "tagcf_fulltest":
+        src = Path(str(variant.get("candidate_file", "")))
+        if not src.exists():
+            raise FileNotFoundError(f"TAG-CF candidate file not found: {src}")
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(src, out_path)
+        return {
+            "provider": "tagcf_fulltest",
+            "variant": variant["variant"],
+            "file": str(out_path),
+            "source_file": str(src),
+            "source_report": variant.get("source_report"),
+            "sha256": sha256_file(out_path),
+        }
+    if provider == "readme_rankblend_residual":
+        return mat.materialize(variant["variant"], out_path)
+    raise ValueError(f"Unknown candidate provider: {provider}")
 
 
 def preflight_file(path: Path) -> dict[str, Any]:
@@ -209,12 +321,19 @@ def preflight_ok(pf: dict[str, Any]) -> bool:
 
 
 def variant_family(variant: str) -> str:
-    """Group nearby weight/popularity-only tunes so one failed probe blocks siblings.
+    """Group nearby tunes so one failed public probe blocks unsafe siblings.
 
     Example:
     rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.025
       -> rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa*
+
+    TAG-CF full-test entries are seed materializations of the same scoring
+    recipe.  A public negative transfer on one seed is therefore treated as a
+    family-level rejection for the sibling seeds instead of burning more quota.
     """
+    tagcf = re.match(r"tagcf_fulltest_seed\d+_(.+)$", variant)
+    if tagcf:
+        return f"tagcf_fulltest_{tagcf.group(1)}"
     base = re.sub(r"_w\d+(?:\.\d+)?$", "", variant)
     return re.sub(r"_popa\d+$", "_popa*", base)
 
@@ -532,7 +651,7 @@ def run_one_submission(state: dict[str, Any]) -> bool:
         return False
     filename = safe_variant_filename(variant["variant"])
     out_path = ROOT / "submissions" / filename
-    mat_info = mat.materialize(variant["variant"], out_path)
+    mat_info = materialize_variant(variant, out_path)
     pf = preflight_file(out_path)
     sim = similarity_guard(out_path, pf, variant, state, q)
     pre_path = ROOT / f"reports/{ts}_autorun_preflight.json"

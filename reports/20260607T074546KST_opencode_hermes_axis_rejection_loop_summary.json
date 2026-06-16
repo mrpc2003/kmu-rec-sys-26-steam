@@ -1,0 +1,335 @@
+{
+  "timestamp_kst": "2026-06-07T08:05:05.090716+09:00",
+  "run_ts": "20260607T074546KST",
+  "dry_run": false,
+  "final_verdict": "MAX_ITERS_REACHED_NO_STRICT_PASS",
+  "safety_contract": {
+    "no_kaggle_submit": true,
+    "no_full_test_candidate_or_submission_csv": true,
+    "no_hidden_labels_or_private_answers": true,
+    "no_external_steam_scraping": true,
+    "no_git_stage_commit_push": true,
+    "no_recursive_cron": true
+  },
+  "iterations": [
+    {
+      "iteration": 1,
+      "timestamp_kst": "2026-06-07T07:48:21.439808+09:00",
+      "dry_run": false,
+      "prompt_path": "reports/20260607T074546KST_axis_loop_iter01_prompt.md",
+      "opencode_jsonl": "logs/20260607T074546KST_axis_loop_iter01_opencode.jsonl",
+      "raw_text_path": "reports/20260607T074546KST_axis_loop_iter01_opencode_raw_text.md",
+      "expected_report_json": "reports/20260607T074546KST_axis_loop_iter01_opencode.json",
+      "expected_report_md": "reports/20260607T074546KST_axis_loop_iter01_opencode.md",
+      "opencode_exit_code": 0,
+      "opencode_timed_out": false,
+      "sentinel": "OPENCODE_AXIS_LOOP_DONE_NO_SAFE_AXIS",
+      "hermes_verdict": "REJECTED_CONTINUE",
+      "strict_pass": false,
+      "rejection_reasons": [
+        "best_metrics_failed:mean_delta,min_delta,positive_splits,fixes_gt_breaks"
+      ],
+      "safety_issues": [],
+      "metrics_checked": [
+        {
+          "variant": null,
+          "mean_delta": null,
+          "min_delta": null,
+          "positive_splits": null,
+          "fixes": null,
+          "breaks": null,
+          "p": null,
+          "quarantine_conflict": false,
+          "strict_pass": false,
+          "failed": [
+            "mean_delta",
+            "min_delta",
+            "positive_splits",
+            "fixes_gt_breaks"
+          ]
+        }
+      ],
+      "new_probe": {
+        "launched": false,
+        "status": "not_launched",
+        "command": null,
+        "pid_file": null,
+        "log": null,
+        "report_json": null,
+        "report_md": null,
+        "artifact_dir": "artifacts/opencode_hermes_axis_loop_20260607T074546KST",
+        "hermes_wait_info": {
+          "waited": false,
+          "reason": "no_probe_launched"
+        }
+      },
+      "new_submission_csvs": []
+    },
+    {
+      "iteration": 2,
+      "timestamp_kst": "2026-06-07T07:51:44.638976+09:00",
+      "dry_run": false,
+      "prompt_path": "reports/20260607T074546KST_axis_loop_iter02_prompt.md",
+      "opencode_jsonl": "logs/20260607T074546KST_axis_loop_iter02_opencode.jsonl",
+      "raw_text_path": "reports/20260607T074546KST_axis_loop_iter02_opencode_raw_text.md",
+      "expected_report_json": "reports/20260607T074546KST_axis_loop_iter02_opencode.json",
+      "expected_report_md": "reports/20260607T074546KST_axis_loop_iter02_opencode.md",
+      "opencode_exit_code": 0,
+      "opencode_timed_out": false,
+      "sentinel": "OPENCODE_AXIS_LOOP_DONE_NO_SAFE_AXIS",
+      "hermes_verdict": "REJECTED_CONTINUE",
+      "strict_pass": false,
+      "rejection_reasons": [
+        "best_metrics_failed:mean_delta,min_delta,positive_splits,fixes_gt_breaks"
+      ],
+      "safety_issues": [],
+      "metrics_checked": [
+        {
+          "variant": null,
+          "mean_delta": null,
+          "min_delta": null,
+          "positive_splits": null,
+          "fixes": null,
+          "breaks": null,
+          "p": null,
+          "quarantine_conflict": false,
+          "strict_pass": false,
+          "failed": [
+            "mean_delta",
+            "min_delta",
+            "positive_splits",
+            "fixes_gt_breaks"
+          ]
+        }
+      ],
+      "new_probe": {
+        "launched": false,
+        "status": "not_launched",
+        "command": null,
+        "pid_file": null,
+        "log": null,
+        "report_json": null,
+        "report_md": null,
+        "artifact_dir": "artifacts/opencode_hermes_axis_loop_20260607T074546KST",
+        "reason": "No fresh independent bounded validation-only axis survived the closed-family, quarantine, and strict-gate review; launching would repeat prior weak/stalled/prohibited families.",
+        "hermes_wait_info": {
+          "waited": false,
+          "reason": "no_probe_launched"
+        }
+      },
+      "new_submission_csvs": []
+    },
+    {
+      "iteration": 3,
+      "timestamp_kst": "2026-06-07T07:54:33.230484+09:00",
+      "dry_run": false,
+      "prompt_path": "reports/20260607T074546KST_axis_loop_iter03_prompt.md",
+      "opencode_jsonl": "logs/20260607T074546KST_axis_loop_iter03_opencode.jsonl",
+      "raw_text_path": "reports/20260607T074546KST_axis_loop_iter03_opencode_raw_text.md",
+      "expected_report_json": "reports/20260607T074546KST_axis_loop_iter03_opencode.json",
+      "expected_report_md": "reports/20260607T074546KST_axis_loop_iter03_opencode.md",
+      "opencode_exit_code": 0,
+      "opencode_timed_out": false,
+      "sentinel": "OPENCODE_AXIS_LOOP_DONE_NO_SAFE_AXIS",
+      "hermes_verdict": "REJECTED_CONTINUE",
+      "strict_pass": false,
+      "rejection_reasons": [
+        "best_metrics_failed:min_delta,fixes_gt_breaks,quarantine"
+      ],
+      "safety_issues": [],
+      "metrics_checked": [
+        {
+          "variant": "boundary/frontier internal rows from reports/20260603T164750KST_boundary_factory_frontier.json (blocked)",
+          "mean_delta": 0.0017003400680135987,
+          "min_delta": null,
+          "positive_splits": 3,
+          "fixes": null,
+          "breaks": null,
+          "p": 0.0005242948680109718,
+          "quarantine_conflict": true,
+          "strict_pass": false,
+          "failed": [
+            "min_delta",
+            "fixes_gt_breaks",
+            "quarantine"
+          ]
+        }
+      ],
+      "new_probe": {
+        "launched": false,
+        "status": "not_launched",
+        "command": null,
+        "pid_file": null,
+        "log": null,
+        "report_json": null,
+        "report_md": null,
+        "artifact_dir": "artifacts/opencode_hermes_axis_loop_20260607T074546KST",
+        "reason": "No fresh independent bounded validation-only axis survived the strict-gate, closed-family, and quarantine/public-negative review; launching would repeat weak/stalled/prohibited families or rely on public-negative boundary/frontier variants.",
+        "hermes_wait_info": {
+          "waited": false,
+          "reason": "no_probe_launched"
+        }
+      },
+      "new_submission_csvs": []
+    },
+    {
+      "iteration": 4,
+      "timestamp_kst": "2026-06-07T07:57:34.809606+09:00",
+      "dry_run": false,
+      "prompt_path": "reports/20260607T074546KST_axis_loop_iter04_prompt.md",
+      "opencode_jsonl": "logs/20260607T074546KST_axis_loop_iter04_opencode.jsonl",
+      "raw_text_path": "reports/20260607T074546KST_axis_loop_iter04_opencode_raw_text.md",
+      "expected_report_json": "reports/20260607T074546KST_axis_loop_iter04_opencode.json",
+      "expected_report_md": "reports/20260607T074546KST_axis_loop_iter04_opencode.md",
+      "opencode_exit_code": 0,
+      "opencode_timed_out": false,
+      "sentinel": "OPENCODE_AXIS_LOOP_DONE_NO_SAFE_AXIS",
+      "hermes_verdict": "REJECTED_CONTINUE",
+      "strict_pass": false,
+      "rejection_reasons": [
+        "best_metrics_failed:min_delta,fixes_gt_breaks,quarantine"
+      ],
+      "safety_issues": [],
+      "metrics_checked": [
+        {
+          "variant": "boundary/frontier internal validation rows from reports/20260603T164750KST_boundary_factory_frontier.json (blocked)",
+          "mean_delta": 0.0017003400680135987,
+          "min_delta": null,
+          "positive_splits": 3,
+          "fixes": null,
+          "breaks": null,
+          "p": 0.0005242948680109718,
+          "quarantine_conflict": true,
+          "strict_pass": false,
+          "failed": [
+            "min_delta",
+            "fixes_gt_breaks",
+            "quarantine"
+          ]
+        }
+      ],
+      "new_probe": {
+        "launched": false,
+        "status": "not_launched",
+        "command": null,
+        "pid_file": null,
+        "log": null,
+        "report_json": null,
+        "report_md": null,
+        "artifact_dir": "artifacts/opencode_hermes_axis_loop_20260607T074546KST",
+        "reason": "No fresh independent bounded validation-only probe survived strict-gate, closed-family, and quarantine/public-negative review in iteration 04.",
+        "hermes_wait_info": {
+          "waited": false,
+          "reason": "no_probe_launched"
+        }
+      },
+      "new_submission_csvs": []
+    },
+    {
+      "iteration": 5,
+      "timestamp_kst": "2026-06-07T08:00:55.417460+09:00",
+      "dry_run": false,
+      "prompt_path": "reports/20260607T074546KST_axis_loop_iter05_prompt.md",
+      "opencode_jsonl": "logs/20260607T074546KST_axis_loop_iter05_opencode.jsonl",
+      "raw_text_path": "reports/20260607T074546KST_axis_loop_iter05_opencode_raw_text.md",
+      "expected_report_json": "reports/20260607T074546KST_axis_loop_iter05_opencode.json",
+      "expected_report_md": "reports/20260607T074546KST_axis_loop_iter05_opencode.md",
+      "opencode_exit_code": 0,
+      "opencode_timed_out": false,
+      "sentinel": "OPENCODE_AXIS_LOOP_DONE_NO_SAFE_AXIS",
+      "hermes_verdict": "REJECTED_CONTINUE",
+      "strict_pass": false,
+      "rejection_reasons": [
+        "best_metrics_failed:min_delta,fixes_gt_breaks,quarantine"
+      ],
+      "safety_issues": [],
+      "metrics_checked": [
+        {
+          "variant": "boundary/frontier internal validation rows from reports/20260603T164750KST_boundary_factory_frontier.json (blocked)",
+          "mean_delta": 0.0017003400680135987,
+          "min_delta": null,
+          "positive_splits": 3,
+          "fixes": null,
+          "breaks": null,
+          "p": 0.0005242948680109718,
+          "quarantine_conflict": true,
+          "strict_pass": false,
+          "failed": [
+            "min_delta",
+            "fixes_gt_breaks",
+            "quarantine"
+          ]
+        }
+      ],
+      "new_probe": {
+        "launched": false,
+        "status": "not_launched",
+        "command": null,
+        "pid_file": null,
+        "log": null,
+        "report_json": null,
+        "report_md": null,
+        "artifact_dir": "artifacts/opencode_hermes_axis_loop_20260607T074546KST",
+        "reason": "No fresh independent bounded validation-only probe survived review; every plausible local surface overlapped a closed, stalled, weak, quarantined, public-negative, or underpowered one-split family.",
+        "hermes_wait_info": {
+          "waited": false,
+          "reason": "no_probe_launched"
+        }
+      },
+      "new_submission_csvs": []
+    },
+    {
+      "iteration": 6,
+      "timestamp_kst": "2026-06-07T08:05:05.089170+09:00",
+      "dry_run": false,
+      "prompt_path": "reports/20260607T074546KST_axis_loop_iter06_prompt.md",
+      "opencode_jsonl": "logs/20260607T074546KST_axis_loop_iter06_opencode.jsonl",
+      "raw_text_path": "reports/20260607T074546KST_axis_loop_iter06_opencode_raw_text.md",
+      "expected_report_json": "reports/20260607T074546KST_axis_loop_iter06_opencode.json",
+      "expected_report_md": "reports/20260607T074546KST_axis_loop_iter06_opencode.md",
+      "opencode_exit_code": 0,
+      "opencode_timed_out": false,
+      "sentinel": "OPENCODE_AXIS_LOOP_DONE_NO_SAFE_AXIS",
+      "hermes_verdict": "REJECTED_CONTINUE",
+      "strict_pass": false,
+      "rejection_reasons": [
+        "best_metrics_failed:min_delta,fixes_gt_breaks,quarantine"
+      ],
+      "safety_issues": [],
+      "metrics_checked": [
+        {
+          "variant": "boundary/frontier internal validation rows from reports/20260603T164750KST_boundary_factory_frontier.json (blocked)",
+          "mean_delta": 0.0017003400680135987,
+          "min_delta": null,
+          "positive_splits": 3,
+          "fixes": null,
+          "breaks": null,
+          "p": 0.0005242948680109718,
+          "quarantine_conflict": true,
+          "strict_pass": false,
+          "failed": [
+            "min_delta",
+            "fixes_gt_breaks",
+            "quarantine"
+          ]
+        }
+      ],
+      "new_probe": {
+        "launched": false,
+        "status": "not_launched",
+        "command": null,
+        "pid_file": null,
+        "log": null,
+        "report_json": null,
+        "report_md": null,
+        "artifact_dir": "artifacts/opencode_hermes_axis_loop_20260607T074546KST",
+        "reason": "Iteration 06 found no fresh independent bounded validation-only probe that avoids closed, stalled, weak, quarantined, public-negative, or underpowered one-split families. No probe was launched.",
+        "hermes_wait_info": {
+          "waited": false,
+          "reason": "no_probe_launched"
+        }
+      },
+      "new_submission_csvs": []
+    }
+  ]
+}

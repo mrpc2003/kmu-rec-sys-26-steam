@@ -1,0 +1,195 @@
+{
+  "latest_submissions_csv": "/opt/data/kaggle/kmu-rec-sys-26-steam/reports/20260603T160806KST_poll_autorun_submissions.csv",
+  "quota": {
+    "used_today_utc": 1,
+    "remaining": 4,
+    "best_score": 0.77825,
+    "best_row": {
+      "fileName": "candidate_rank_blend_emb128_emb192.csv",
+      "date": "2026-06-01 23:17:05.897000",
+      "description": "FORCED manual-risk last-slot: rank(emb128 4seed + emb192 4seed), per-user top-half. 3-split acc all positive mean +0.00083 but McNemar rejected; user explicitly requested one final meaningful burn. SHA 835b8b90.",
+      "status": "SubmissionStatus.COMPLETE",
+      "publicScore": "0.77825",
+      "privateScore": ""
+    }
+  },
+  "variant": {
+    "provider": "boundary_pairwise",
+    "variant": "boundary_scoreblend_z128_z192_z64_w-0.695",
+    "kind": "scoreblend",
+    "rule": null,
+    "mode": "z128_z192_z64",
+    "weight": -0.695,
+    "band": null,
+    "tau": null,
+    "guard": null,
+    "cap": null,
+    "mean_delta_vs_rankblend": 0.0010335400413416334,
+    "min_delta": 0.0,
+    "max_delta": 0.002000400080016007,
+    "positive_splits": 2,
+    "fixes": 782,
+    "breaks": 720,
+    "discordant": 1502,
+    "changed": 1502,
+    "pooled_p_exact": 0.11546588334795277,
+    "fisher_p": 0.33709026041553136,
+    "split_rows": [
+      {
+        "split": "val_random_uniform_seed42",
+        "variant": "boundary_scoreblend_z128_z192_z64_w-0.695",
+        "kind": "scoreblend",
+        "mode": "z128_z192_z64",
+        "weight": -0.695,
+        "accuracy": 0.7666533306661333,
+        "delta": 0.002000400080016007,
+        "fixes": 297,
+        "breaks": 257,
+        "discordant": 554,
+        "changed": 554,
+        "p_exact": 0.09744134745142205
+      },
+      {
+        "split": "val_random_uniform_seed7",
+        "variant": "boundary_scoreblend_z128_z192_z64_w-0.695",
+        "kind": "scoreblend",
+        "mode": "z128_z192_z64",
+        "weight": -0.695,
+        "accuracy": 0.7611522304460893,
+        "delta": 0.0,
+        "fixes": 234,
+        "breaks": 234,
+        "discordant": 468,
+        "changed": 468,
+        "p_exact": 1.0
+      },
+      {
+        "split": "val_random_uniform_seed123",
+        "variant": "boundary_scoreblend_z128_z192_z64_w-0.695",
+        "kind": "scoreblend",
+        "mode": "z128_z192_z64",
+        "weight": -0.695,
+        "accuracy": 0.7601520304060813,
+        "delta": 0.0011002200440088927,
+        "fixes": 251,
+        "breaks": 229,
+        "discordant": 480,
+        "changed": 480,
+        "p_exact": 0.33781044406509153
+      }
+    ],
+    "manual_risk_signal": true,
+    "materializable_fulltest": true,
+    "fulltest_rowdiff_vs_rankblend_base": 548,
+    "fulltest_rowdiff_vs_live_public_best": 514
+  },
+  "materialized": {
+    "provider": "boundary_pairwise",
+    "variant": "boundary_scoreblend_z128_z192_z64_w-0.695",
+    "file": "/opt/data/kaggle/kmu-rec-sys-26-steam/submissions/candidate_autorun_preflight_boundary_factory_candidate.csv",
+    "sha256": "5df98f28490873916f373bf504b773abfdb19d5db98828b4d27c92c897bfdea3",
+    "preflight": {
+      "rows": 19998,
+      "expected_rows": 19998,
+      "columns": [
+        "ID",
+        "Played"
+      ],
+      "id_unique": true,
+      "id_contiguous": true,
+      "labels_binary": true,
+      "label_1": 9999,
+      "label_0": 9999,
+      "bad_users_tophalf": 0
+    },
+    "comparisons": {
+      "rankblend_public_best": {
+        "path": "/opt/data/kaggle/kmu-rec-sys-26-steam/submissions/candidate_rank_blend_emb128_emb192.csv",
+        "row_diff": 514,
+        "row_diff_frac": 0.025702570257025704
+      },
+      "emb128_anchor": {
+        "path": "/opt/data/kaggle/kmu-rec-sys-26-steam/artifacts/lightgcn_emb128L4r3_fulltest/test_candidate/candidate_lightgcn_emb128L4r3_seed_ens.csv",
+        "row_diff": 566,
+        "row_diff_frac": 0.028302830283028303
+      },
+      "emb192_candidate": {
+        "path": "/opt/data/kaggle/kmu-rec-sys-26-steam/artifacts/lightgcn_emb192L4r3_fulltest/test_candidate/candidate_lightgcn_emb192L4r3_seed_ens.csv",
+        "row_diff": 546,
+        "row_diff_frac": 0.027302730273027303
+      }
+    }
+  },
+  "preflight_ok": true,
+  "preflight": {
+    "file": "/opt/data/kaggle/kmu-rec-sys-26-steam/submissions/candidate_autorun_preflight_boundary_factory_candidate.csv",
+    "sha256": "5df98f28490873916f373bf504b773abfdb19d5db98828b4d27c92c897bfdea3",
+    "columns": [
+      "ID",
+      "Played"
+    ],
+    "rows": 19998,
+    "expected_rows": 19998,
+    "id_unique": true,
+    "id_order_matches_pairs": true,
+    "labels_binary": true,
+    "label_1": 9999,
+    "label_0": 9999,
+    "bad_users_tophalf": 0
+  },
+  "similarity_guard": {
+    "variant": "boundary_scoreblend_z128_z192_z64_w-0.695",
+    "family": "boundary_scoreblend_z128_z192_z64_w-0.695",
+    "sha256": "5df98f28490873916f373bf504b773abfdb19d5db98828b4d27c92c897bfdea3",
+    "min_required_row_diff": 500,
+    "hard_duplicate_row_diff": 200,
+    "blocked": true,
+    "block_reasons": [
+      "hard_near_duplicate_76_rows_vs_prior_submit:boundary_scoreblend_z128_z192_z64_w-0.75"
+    ],
+    "row_diffs": [
+      {
+        "label": "live_public_best",
+        "file": "/opt/data/kaggle/kmu-rec-sys-26-steam/submissions/candidate_rank_blend_emb128_emb192.csv",
+        "sha256": "835b8b90ce30116a3df7a7575e6ccdaec268af9c1acb01ca0c15c733b3152b2e",
+        "row_diff": 514
+      },
+      {
+        "label": "prior_submit:rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.2",
+        "file": "/opt/data/kaggle/kmu-rec-sys-26-steam/submissions/candidate_autorun_rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.2.csv",
+        "sha256": "23f01b4e8354e0b4ee49f2cd266f10b558e1da9f85c1d6b7d357c0488a9cdd22",
+        "row_diff": 558
+      },
+      {
+        "label": "prior_submit:rankblend_z_plus_score_als_f32_it30_alpha20_popa4_w0.2",
+        "file": "/opt/data/kaggle/kmu-rec-sys-26-steam/submissions/candidate_autorun_rankblend_z_plus_score_als_f32_it30_alpha20_popa4_w0.2.csv",
+        "sha256": "1a2e52854e1771f525e1fcc0f80cb939f82488bcce65866459668d7d8f257c42",
+        "row_diff": 548
+      },
+      {
+        "label": "prior_submit:rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.025",
+        "file": "/opt/data/kaggle/kmu-rec-sys-26-steam/submissions/candidate_autorun_rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.025.csv",
+        "sha256": "85c5c2ddd73f7bbe78e20d0ee682a41650518957fa6d5e0fb8c0942932129a77",
+        "row_diff": 536
+      },
+      {
+        "label": "prior_submit:rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.05",
+        "file": "/opt/data/kaggle/kmu-rec-sys-26-steam/submissions/candidate_autorun_rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.05.csv",
+        "sha256": "85c5c2ddd73f7bbe78e20d0ee682a41650518957fa6d5e0fb8c0942932129a77",
+        "row_diff": 536
+      },
+      {
+        "label": "prior_submit:rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.1",
+        "file": "/opt/data/kaggle/kmu-rec-sys-26-steam/submissions/candidate_autorun_rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.1.csv",
+        "sha256": "85c5c2ddd73f7bbe78e20d0ee682a41650518957fa6d5e0fb8c0942932129a77",
+        "row_diff": 536
+      },
+      {
+        "label": "prior_submit:boundary_scoreblend_z128_z192_z64_w-0.75",
+        "file": "/opt/data/kaggle/kmu-rec-sys-26-steam/submissions/candidate_autorun_boundary_scoreblend_z128_z192_z64_w-0.75.csv",
+        "sha256": "8966b80f4a5c807f5747d9766e9b004624c9671a8adb2e03e30f38d7733a9822",
+        "row_diff": 76
+      }
+    ]
+  }
+}

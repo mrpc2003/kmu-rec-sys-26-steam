@@ -1,0 +1,40 @@
+{
+  "timestamp_kst": "20260607T145927KST",
+  "process_session": "proc_1aa1437d7338",
+  "observed_exit_code": -13,
+  "interpretation": "SIGPIPE / wrapper-output termination after OpenCode iteration 03 artifacts were already written; not a Kaggle/probe failure and not a submission event.",
+  "driver_output_last_visible_state": "iter 3 running OpenCode timeout=900s",
+  "iter03_artifacts": {
+    "json": "reports/20260607T144515KST_axis_loop_iter03_opencode.json",
+    "md": "reports/20260607T144515KST_axis_loop_iter03_opencode.md",
+    "jsonl": "logs/20260607T144515KST_axis_loop_iter03_opencode.jsonl"
+  },
+  "iter03_result": {
+    "verdict": "NO_SAFE_AXIS",
+    "axis_decision": "no safe axis",
+    "new_probe_launched": false,
+    "strict_gate_pass": false,
+    "failed_gates": [
+      "mean_delta_lt_0.0015",
+      "same_family_or_quarantine_conflict",
+      "not_pre_registered_independent_axis"
+    ]
+  },
+  "safety_verification": {
+    "iter03_json_parse_ok": true,
+    "stop_summary_json_parse_ok": true,
+    "iter03_markdown_exists": true,
+    "active_relevant_process_count": 0,
+    "git_diff_check_ok": true,
+    "kaggle_submit_executed": false,
+    "candidate_or_submission_csv_created_by_iter03": false,
+    "hidden_or_private_labels_used": false,
+    "external_steam_scraping_used": false,
+    "git_stage_commit_push_executed": false
+  },
+  "cron_state_after_check": {
+    "no_submit_loop_4d627b59804f": "enabled/scheduled; next_run_at 2026-06-07T06:58:11.287901+00:00",
+    "submit_capable_watchdog_272808a2bcca": "paused"
+  },
+  "final_status": "SAFE_NO_ACTION_REQUIRED"
+}

@@ -1,0 +1,93 @@
+{
+  "timestamp_kst": "20260607T114059KST",
+  "candidate_name": "otto_coplay_top5_reverse_recent_w0090_w0040_forced",
+  "formula": {
+    "base": "emb128_L4_reg1e-3 full-train 4-seed raw score mean, within-user z-normalized",
+    "terms": [
+      [
+        "score_coplay_top5_mean",
+        0.09
+      ],
+      [
+        "score_reverse_recent",
+        0.04
+      ]
+    ],
+    "score": "z_score_base + 0.090*z_score_coplay_top5_mean + 0.040*z_score_reverse_recent",
+    "decoder": "per-user top-half over official pairs.csv"
+  },
+  "submission_file": "submissions/candidate_otto_coplay_top5_reverse_recent_w0090_w0040_forced_20260607T114059KST.csv",
+  "score_artifact": "artifacts/otto_coplay_top5_reverse_recent_w0090_w0040_forced_20260607T114059KST/fulltest_otto_source_scores.csv",
+  "sha256": "d70af0f1e325c5c59985ed0df6dbc4232950edf6971f0ad26c72f7da8205985e",
+  "rows": 19998,
+  "columns": [
+    "ID",
+    "Label"
+  ],
+  "label_counts": {
+    "0": 9999,
+    "1": 9999
+  },
+  "id_min": 0,
+  "id_max": 19997,
+  "id_unique": 19998,
+  "pairs_rows": 19998,
+  "tophalf_check": {
+    "users": 4737,
+    "bad_users": 0,
+    "bad_user_examples": [],
+    "all_candidate_counts_even": true,
+    "predicted_positive_total": 9999,
+    "expected_positive_total": 9999
+  },
+  "rowdiffs": [
+    {
+      "name": "emb128_L4_reg1e-3_4seed_public0.77745",
+      "path": "artifacts/lightgcn_emb128L4r3_fulltest/test_candidate/candidate_lightgcn_emb128L4r3_seed_ens.csv",
+      "exists": true,
+      "rowdiff": 294,
+      "rowdiff_frac": 0.014701470147014702,
+      "promoted_vs_other": 147,
+      "demoted_vs_other": 147,
+      "other_sha256": "7e3191dead2d85637dbf01f7ad50aeb61394c6b709959f2c2850bc53c430c195"
+    },
+    {
+      "name": "current_live_best_candidate_rank_blend_public0.77825",
+      "path": "submissions/candidate_rank_blend_emb128_emb192.csv",
+      "exists": true,
+      "rowdiff": 508,
+      "rowdiff_frac": 0.025402540254025403,
+      "promoted_vs_other": 254,
+      "demoted_vs_other": 254,
+      "other_sha256": "835b8b90ce30116a3df7a7575e6ccdaec268af9c1acb01ca0c15c733b3152b2e"
+    },
+    {
+      "name": "rankblend_als_htr_public0.77805",
+      "path": "submissions/candidate_autorun_rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.1.csv",
+      "exists": true,
+      "rowdiff": 528,
+      "rowdiff_frac": 0.026402640264026403,
+      "promoted_vs_other": 264,
+      "demoted_vs_other": 264,
+      "other_sha256": "85c5c2ddd73f7bbe78e20d0ee682a41650518957fa6d5e0fb8c0942932129a77"
+    }
+  ],
+  "duplicate_local_sha_matches": [],
+  "safety_flags": {
+    "user_explicit_submit_request": true,
+    "candidate_csv_written": true,
+    "kaggle_submit_executed_by_this_script": false,
+    "hidden_labels_used": false,
+    "private_answers_used": false,
+    "external_steam_scraping_used": false,
+    "credentials_or_tokens_printed": false,
+    "git_stage_commit_push_executed": false
+  },
+  "validation_evidence": {
+    "independent_verdict": "INDEPENDENT_DIAGNOSTIC_ONLY_POSITIVE_STRICT_FAIL",
+    "independent_mean_delta_vs_emb128": 0.0006668000266719654,
+    "independent_min_delta_vs_emb128": -0.000600120024004891,
+    "independent_positive_splits": "2/3",
+    "risk_label": "FORCED manual-risk verification probe; not strict-ready"
+  }
+}

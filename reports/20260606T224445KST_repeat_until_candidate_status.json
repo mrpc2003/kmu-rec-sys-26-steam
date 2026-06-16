@@ -1,0 +1,78 @@
+{
+  "timestamp_kst": "2026-06-06 22:44:45 KST",
+  "validation_only": true,
+  "kaggle_submit_executed_by_this_tick": false,
+  "actual_kaggle_submit_processes": 0,
+  "candidate_csv_written_by_this_tick": false,
+  "hidden_labels_used": false,
+  "external_scraping_used": false,
+  "strict_candidate_found": false,
+  "weak_candidate_axis_found": false,
+  "active_processes": [
+    {
+      "name": "aggressive_quota_runner.py",
+      "pids": [7613, 7630],
+      "status": "live_idle",
+      "note": "guard/quarantine state preserved; this tick did not edit it"
+    },
+    {
+      "name": "userknn_gated_residual_probe.py",
+      "pids": [18483, 18804, 18812],
+      "status": "live_cpu_bound",
+      "log": "logs/userknn_gated_residual_fine_20260606T132450KST.log",
+      "expected_reports": [
+        "reports/20260606T132450KST_userknn_gated_residual_fine.md",
+        "reports/20260606T132450KST_userknn_gated_residual_fine.json"
+      ]
+    },
+    {
+      "name": "opencode_improvement_axis_loop",
+      "pids": [26096, 26417],
+      "status": "live",
+      "log": "logs/opencode_improvement_axis_loop_20260606T220406KST.jsonl",
+      "status_report": "reports/20260606T220406KST_opencode_improvement_axis_loop_status.md"
+    },
+    {
+      "name": "jackknife_uncertainty_boundary_expanded",
+      "pids": [28965, 28974],
+      "status": "live_cpu_bound_orphan_timeout_wrapper",
+      "log": "logs/20260606T220406KST_jackknife_uncertainty_boundary_expanded.log",
+      "expected_reports": [
+        "reports/20260606T220406KST_jackknife_uncertainty_boundary_expanded.md",
+        "reports/20260606T220406KST_jackknife_uncertainty_boundary_expanded.json"
+      ]
+    }
+  ],
+  "gpu_snapshot": {
+    "gpu0": "0/32768 MiB, 0% util",
+    "gpu1": "0/32768 MiB, 0% util",
+    "gpu2": "0/32768 MiB, about 1% util",
+    "gpu3": "4320/32768 MiB, about 2% util, no pmon owner; avoid as stale/orphan"
+  },
+  "closed_required_axes": {
+    "exactk_subset": "SUBSET_NO_GAIN_NOISE; canonical summary closed",
+    "hours_confidence": "all three modes plateau/no-gain",
+    "temporal_compat": "large regression",
+    "boundary_covariate": "soft no-go; residualized covariates below escalation bar"
+  },
+  "new_smoke_result": {
+    "report_md": "reports/20260606T220406KST_jackknife_uncertainty_boundary_probe.md",
+    "report_json": "reports/20260606T220406KST_jackknife_uncertainty_boundary_probe.json",
+    "verdict": "WEAK_SIGNAL",
+    "strict_pass_count": 0,
+    "best_variant": "vote_consensus__high_capacity_gap__B1__w0.1",
+    "mean_delta_vs_base": 0.0003667400146696309,
+    "positive_splits": 2,
+    "min_delta_vs_base": -0.0012002400480095599,
+    "fixes": 252,
+    "breaks": 230,
+    "paired_p": 0.33881500709211204,
+    "classification": "not_candidate_below_gate_validation_only_expansion_running"
+  },
+  "status_report_md": "reports/20260606T224445KST_repeat_until_candidate_status.md",
+  "next_tick": [
+    "Parse expanded jackknife reports if present",
+    "Parse UserKNN fine-grid reports if present",
+    "Do not repeat closed hours/exact-K/temporal/boundary axes"
+  ]
+}

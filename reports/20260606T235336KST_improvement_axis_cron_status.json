@@ -1,0 +1,103 @@
+{
+  "timestamp_kst": "2026-06-06T23:53:36+09:00",
+  "timestamp_utc": "2026-06-06T14:53:36Z",
+  "cron_role": "OpenCode-first no-submit improvement-axis discovery monitor",
+  "safety_flags": {
+    "validation_only": true,
+    "kaggle_submit_executed_by_this_tick": false,
+    "actual_kaggle_submit_process_count": 0,
+    "full_test_candidate_or_submission_csv_created_by_this_tick": false,
+    "hidden_labels_used": false,
+    "private_answers_used": false,
+    "external_steam_scraping_used": false,
+    "quarantine_or_guard_logic_weakened": false,
+    "git_stage_commit_push_executed": false,
+    "credentials_or_tokens_printed": false
+  },
+  "opencode_status": {
+    "opencode_cli": "available: /opt/data/home/.local/bin/opencode 1.15.11",
+    "previous_loop_report": "reports/20260606T220406KST_opencode_improvement_axis_loop_status.md",
+    "previous_loop_exit_code": 0,
+    "previous_loop_sentinel": "OPENCODE_AXIS_LOOP_DONE_NEXT_PROBE_RUNNING",
+    "new_opencode_run_launched_this_tick": false,
+    "reason_no_new_opencode_run": "A credible validation-only probe is still active: UserKNN gated residual fine-grid PID 18812. Per loop policy, this tick monitors instead of duplicating or launching a new axis."
+  },
+  "active_processes": {
+    "userknn_gated_residual_fine": {
+      "status": "RUNNING_UNCLASSIFIED",
+      "pids": [18483, 18804, 18812],
+      "elapsed_observed": "about 10h28m at inspection",
+      "cpu_status": "PID 18812 running at about 100% CPU",
+      "log": "logs/userknn_gated_residual_fine_20260606T132450KST.log",
+      "log_lines_observed": 28289,
+      "expected_report_json": "reports/20260606T132450KST_userknn_gated_residual_fine.json",
+      "expected_report_md": "reports/20260606T132450KST_userknn_gated_residual_fine.md",
+      "expected_reports_exist": false,
+      "artifact_dir_files_observed": 0,
+      "classification": "RUNNING_UNCLASSIFIED",
+      "classification_reason": "No result report exists yet; log is still appending RuntimeWarning lines from userknn_residual_probe.py:114 and the Python worker is live. Strict/weak/reject gates cannot be applied until JSON/MD report is produced or the process exits."
+    },
+    "aggressive_quota_runner": {
+      "status": "RUNNING_PREEXISTING_NOT_STARTED_BY_THIS_TICK",
+      "pids": [7613, 7630],
+      "note": "Existing autonomous runner remains live from prior policy; this no-submit cron did not invoke Kaggle submit and observed zero active submit processes."
+    },
+    "jackknife_uncertainty_boundary_expanded": {
+      "status": "NOT_RUNNING_INCOMPLETE",
+      "prior_pids": [28965, 28974],
+      "prior_pids_live": false,
+      "log": "logs/20260606T220406KST_jackknife_uncertainty_boundary_expanded.log",
+      "expected_report_json": "reports/20260606T220406KST_jackknife_uncertainty_boundary_expanded.json",
+      "expected_report_md": "reports/20260606T220406KST_jackknife_uncertainty_boundary_expanded.md",
+      "expected_reports_exist": false,
+      "artifact_dir_files_observed": 0,
+      "classification": "FAILED_INCOMPLETE_NO_METRIC_REPORT",
+      "classification_reason": "The expanded probe process is no longer live after its 3600s timeout window, but no expanded JSON/MD report or artifact files exist. The log stops during val_random_uniform_seed123 after only 12 lines. Because there are no completed metrics, it cannot be STRICT_PASS or WEAK_SIGNAL; treat as an incomplete failed expansion and do not escalate the jackknife axis."
+    }
+  },
+  "completed_probe_classification": {
+    "jackknife_uncertainty_boundary_smoke": {
+      "report_json": "reports/20260606T220406KST_jackknife_uncertainty_boundary_probe.json",
+      "report_md": "reports/20260606T220406KST_jackknife_uncertainty_boundary_probe.md",
+      "verdict": "WEAK_SIGNAL",
+      "strict_pass_count": 0,
+      "top_variant": "vote_consensus__high_capacity_gap__B1__w0.1",
+      "mean_delta_vs_base": 0.0003667400146696309,
+      "min_delta_vs_base": -0.0012002400480095599,
+      "positive_splits": "2/3",
+      "fixes": 252,
+      "breaks": 230,
+      "pooled_p_exact": 0.33881500709211204,
+      "strict_gate_result": "FAIL",
+      "strict_gate_failures": [
+        "mean delta below +0.0015",
+        "minimum split delta is negative",
+        "not 3/3 positive splits",
+        "pooled exact p >= 0.05"
+      ],
+      "axis_decision": "closed_for_escalation_unless_reimplemented_as_a_faster_diagnostic_only; no candidate materialization"
+    }
+  },
+  "specific_required_file_checks": {
+    "reports/20260606T132450KST_userknn_gated_residual_fine.json": "missing_while_process_running",
+    "reports/20260606T132450KST_userknn_gated_residual_fine.md": "missing_while_process_running",
+    "reports/20260606T220406KST_jackknife_uncertainty_boundary_expanded.json": "missing_after_process_not_live",
+    "reports/20260606T220406KST_jackknife_uncertainty_boundary_expanded.md": "missing_after_process_not_live",
+    "logs/20260606T220406KST_jackknife_uncertainty_boundary_expanded.log": "exists_872_bytes_12_lines_stops_mid_split"
+  },
+  "gpu_snapshot": [
+    {"index": 0, "name": "Tesla V100-PCIE-32GB", "memory_used_mib": 0, "memory_total_mib": 32768, "utilization_percent": 0},
+    {"index": 1, "name": "Tesla V100-PCIE-32GB", "memory_used_mib": 0, "memory_total_mib": 32768, "utilization_percent": 0},
+    {"index": 2, "name": "Tesla V100-PCIE-32GB", "memory_used_mib": 0, "memory_total_mib": 32768, "utilization_percent": 1},
+    {"index": 3, "name": "Tesla V100-PCIE-32GB", "memory_used_mib": 4320, "memory_total_mib": 32768, "utilization_percent": 12}
+  ],
+  "actions_this_tick": [
+    "Loaded OpenCode and Kaggle RecSys workflow guidance.",
+    "Verified OpenCode CLI/auth availability without printing credentials.",
+    "Inspected Hermes background processes, OS processes, GPUs, state files, required reports, and logs.",
+    "Did not launch a new OpenCode/probe job because UserKNN gated fine-grid is still running.",
+    "Wrote this timestamped JSON status report and matching Markdown report."
+  ],
+  "commands_launched_this_tick": [],
+  "next_action": "Continue monitoring the live UserKNN gated residual fine-grid. When reports/20260606T132450KST_userknn_gated_residual_fine.json appears or PID 18812 exits, classify strictly: STRICT_PASS only if mean_delta >= +0.0015, min_delta >= 0, 3/3 splits positive, fixes > breaks, pooled exact p < 0.05, validation_only=true, candidate_csv_written=false, and kaggle_submit_executed=false. If it fails or times out, close it as weak/reject and only then run a fresh OpenCode-first no-submit axis search."
+}

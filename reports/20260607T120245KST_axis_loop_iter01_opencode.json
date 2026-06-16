@@ -1,0 +1,119 @@
+{
+  "safety_flags": {
+    "validation_only": true,
+    "candidate_csv_written": false,
+    "full_test_candidate_or_submission_csv_created": false,
+    "kaggle_submit_executed": false,
+    "hidden_labels_used": false,
+    "private_answers_used": false,
+    "external_steam_scraping_used": false,
+    "credentials_or_tokens_printed": false,
+    "quarantine_or_guard_logic_weakened": false,
+    "git_stage_commit_push_executed": false,
+    "recursive_cron_scheduled": false
+  },
+  "axis_decision": "no safe axis",
+  "new_probe": {
+    "launched": false,
+    "status": "not_launched",
+    "command": null,
+    "pid_file": null,
+    "log": null,
+    "report_json": null,
+    "report_md": null,
+    "artifact_dir": null,
+    "reason": "No fresh independent bounded validation-only axis remained after direct inspection; all runnable credible surfaces were closed, stalled, weak, quarantined/public-negative, or underpowered one-split diagnostics."
+  },
+  "best_or_top_metrics": {
+    "variant": "blocked boundary/frontier internal row from prior reports; not actionable",
+    "mean_delta_vs_base": 0.0017003400680135987,
+    "min_delta_vs_base": null,
+    "positive_splits": 3,
+    "fixes": null,
+    "breaks": null,
+    "pooled_p_exact": 0.0005242948680109718,
+    "quarantine_conflict": true,
+    "strict_gate_failures": [
+      "min_delta unavailable",
+      "fixes_gt_breaks unavailable",
+      "family has quarantine/public-negative transfer conflict versus current public best"
+    ]
+  },
+  "strict_gate": {
+    "mean_delta_threshold": 0.0015,
+    "min_delta_nonnegative": true,
+    "required_positive_splits": "3/3",
+    "requires_fixes_gt_breaks": true,
+    "pooled_exact_or_mcnemar_p_lt": 0.05,
+    "requires_no_quarantine_or_near_duplicate_conflict": true
+  },
+  "search_effort": {
+    "delegation_used": false,
+    "reason_delegation_not_used": "The iteration prompt explicitly forbids sub-agents and waiting for parallel agents, overriding search-mode delegation instructions.",
+    "direct_tools_used": [
+      "git status --short",
+      "rg over reports/scripts/state/logs for strict-gate metrics, closures, quarantine, axis, probe, and family names",
+      "direct reads of latest dry-run report, prior no-safe-axis report, failed/successful ledgers, and candidate probe scripts",
+      "audit of implemented surfaces including layer mixture, paper-guided features, SASRec, MultiVAE, and prior OTTO confirmation reports"
+    ]
+  },
+  "closed_or_rejected_axes_checked": [
+    {
+      "axis": "OTTO/source-separated co-visitation",
+      "status": "closed_after_independent_failure_and_public_negative",
+      "evidence": "Fresh independent confirmation was mean +0.0006668, min -0.0006001, 2/3 positive, p=0.1700; forced public result 0.77815 remained below current best 0.77825."
+    },
+    {
+      "axis": "UserKNN gated residual",
+      "status": "stalled_or_weak",
+      "evidence": "Fine-grid reports remain absent in supplied state, repeated invalid-divide warnings were reported, and previous smoke missed strict mean/p gates."
+    },
+    {
+      "axis": "Jackknife uncertainty boundary",
+      "status": "weak_or_incomplete",
+      "evidence": "Smoke mean +0.0003667, min -0.0012002, 2/3 positive, p=0.3388; expanded probe lacks completed metric report."
+    },
+    {
+      "axis": "Boundary/frontier/capacity/rankblend residual/TAG-CF",
+      "status": "blocked_by_quarantine_or_public_negative_transfer",
+      "evidence": "Prior rows include apparent internal positives but conflict with public-negative/quarantine evidence and current-best rankblend anchor."
+    },
+    {
+      "axis": "LightGCN layer mixture, SL@K-lite, exact-K, temporal, hours-confidence, DNS pool=1, last-slot sparse agreement",
+      "status": "closed_weak_split_specific_or_prompt_closed",
+      "evidence": "Layer mix had tiny/non-significant three-split evidence; the rest are explicitly closed or previously rejected as weak/noisy."
+    },
+    {
+      "axis": "Semantic/text/README/LM, multi-interest SVD, SASRec, Hyperbolic, SGL/XSimGCL/DirectAU, MultiVAE/AlphaRec/TurboCF",
+      "status": "weak_redundant_closed_or_not_bounded_for_this_tick",
+      "evidence": "Prior reports and direct script/report audit classify these as below floor, redundant with saturated CF, closed, or too large to launch credibly as a bounded fresh probe."
+    }
+  ],
+  "ranked_next_axis_hypotheses": [
+    {
+      "rank": 1,
+      "axis": "A genuinely new validation-label-free base model family not currently implemented",
+      "why_not_launched_now": "No local surface was both fresh and credible within a <=3600s bounded validation-only probe; implementing from scratch would likely exceed the iteration scope or yield an underpowered one-split blip."
+    },
+    {
+      "rank": 2,
+      "axis": "UserKNN finite-value/debug-only cleanup",
+      "why_not_launched_now": "This would be script hygiene for a stalled family, not a fresh independent improvement axis, and the prompt warns not to repeat UserKNN fine-grid work."
+    },
+    {
+      "rank": 3,
+      "axis": "New non-boundary disagreement diagnostic",
+      "why_not_launched_now": "Available disagreement/margin diagnostics collapse into closed jackknife, boundary, frontier, rankblend, capacity, or public-negative families."
+    }
+  ],
+  "verdict": "NO_SAFE_AXIS",
+  "artifacts_reports_produced": {
+    "reports": [
+      "reports/20260607T120245KST_axis_loop_iter01_opencode.json",
+      "reports/20260607T120245KST_axis_loop_iter01_opencode.md"
+    ],
+    "validation_artifacts": [],
+    "candidate_or_submission_csv": [],
+    "submissions_dir_writes": []
+  }
+}

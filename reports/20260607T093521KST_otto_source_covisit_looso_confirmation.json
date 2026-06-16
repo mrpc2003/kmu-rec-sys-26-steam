@@ -1,0 +1,62 @@
+{
+  "timestamp_kst": "20260607T093521KST",
+  "source_artifact_dir": "artifacts/opencode_axis_loop_20260607T090941KST/otto_source_covisit",
+  "safety_flags": {
+    "validation_only": true,
+    "candidate_csv_written": false,
+    "full_test_candidate_or_submission_csv_created": false,
+    "kaggle_submit_executed": false,
+    "hidden_labels_used": false,
+    "private_answers_used": false,
+    "external_steam_scraping_used": false,
+    "credentials_or_tokens_printed": false,
+    "git_stage_commit_push_executed": false
+  },
+  "note": "Leave-one-split-out confirmation for the top OTTO co-visitation pair family. Each heldout split uses weights selected only from the other two splits.",
+  "num_family_variants": 252,
+  "holdouts": [
+    {
+      "holdout_split": "val_random_uniform_seed42",
+      "chosen_variant": "base_plus_score_coplay_top5_mean_w0.100_plus_score_reverse_recent_w0.070",
+      "train_mean_delta": 0.0020004000800160626,
+      "train_min_delta": 0.0018003600720144508,
+      "holdout_delta": 0.0005001000200040018,
+      "holdout_acc": 0.7655531106221244,
+      "all_deltas_of_chosen": {
+        "val_random_uniform_seed42": 0.0005001000200040018,
+        "val_random_uniform_seed7": 0.0018003600720144508,
+        "val_random_uniform_seed123": 0.0022004400880176744
+      }
+    },
+    {
+      "holdout_split": "val_random_uniform_seed7",
+      "chosen_variant": "base_plus_score_coplay_top5_mean_w0.095_plus_score_reverse_recent_w0.035",
+      "train_mean_delta": 0.0017503500700140617,
+      "train_min_delta": 0.0016003200640128945,
+      "holdout_delta": 0.0015003000600120053,
+      "holdout_acc": 0.7624524904980996,
+      "all_deltas_of_chosen": {
+        "val_random_uniform_seed42": 0.0016003200640128945,
+        "val_random_uniform_seed7": 0.0015003000600120053,
+        "val_random_uniform_seed123": 0.001900380076015229
+      }
+    },
+    {
+      "holdout_split": "val_random_uniform_seed123",
+      "chosen_variant": "base_plus_score_coplay_top5_mean_w0.090_plus_score_reverse_recent_w0.040",
+      "train_mean_delta": 0.0017503500700140617,
+      "train_min_delta": 0.0016003200640128945,
+      "holdout_delta": 0.0018003600720144508,
+      "holdout_acc": 0.761752350470094,
+      "all_deltas_of_chosen": {
+        "val_random_uniform_seed42": 0.0016003200640128945,
+        "val_random_uniform_seed7": 0.001900380076015229,
+        "val_random_uniform_seed123": 0.0018003600720144508
+      }
+    }
+  ],
+  "holdout_mean_delta": 0.0012669200506768192,
+  "holdout_min_delta": 0.0005001000200040018,
+  "holdout_positive_splits": 3,
+  "verdict": "LOOSO_WEAK_POSITIVE"
+}

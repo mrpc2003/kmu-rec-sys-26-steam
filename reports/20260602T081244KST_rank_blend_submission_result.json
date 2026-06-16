@@ -1,0 +1,124 @@
+{
+  "submitted_file": "/opt/data/kaggle/kmu-rec-sys-26-steam/submissions/candidate_rank_blend_emb128_emb192.csv",
+  "sha256": "835b8b90ce30116a3df7a7575e6ccdaec268af9c1acb01ca0c15c733b3152b2e",
+  "status": "SubmissionStatus.COMPLETE",
+  "public_score": 0.77825,
+  "private_score": null,
+  "previous_public_best_file": "candidate_emb128_emb64_zblend.csv",
+  "previous_public_best_score": 0.77815,
+  "delta_public_vs_previous_best": 9.999999999998899e-05,
+  "delta_public_vs_emb128": 0.0008000000000000229,
+  "daily_quota_count_utc_2026_06_01_complete_pending": 1,
+  "validation_evidence": {
+    "uniform_3split_mean_delta_vs_emb128": 0.00083,
+    "split_deltas": [
+      0.0017,
+      0.0003,
+      0.0005
+    ],
+    "mcnemar_p_by_split": [
+      0.0727,
+      0.7785,
+      0.5972
+    ],
+    "fisher_combined_p": 0.3421,
+    "strict_gate": false
+  },
+  "diff_vs_previous_public_best": {
+    "flip_count": 596,
+    "flip_frac": 0.029802980298029802,
+    "promoted_old0_new1": 298,
+    "demoted_old1_new0": 298
+  },
+  "diff_vs_emb128": {
+    "flip_count": 368,
+    "flip_frac": 0.0184018401840184
+  },
+  "by_user_candidate_bucket": [
+    {
+      "user_candidate_bucket": "11+",
+      "rows": 2550,
+      "flips": 68,
+      "flip_frac": 0.02666666666666667
+    },
+    {
+      "user_candidate_bucket": "2",
+      "rows": 4282,
+      "flips": 122,
+      "flip_frac": 0.02849135917795423
+    },
+    {
+      "user_candidate_bucket": "3-4",
+      "rows": 5228,
+      "flips": 128,
+      "flip_frac": 0.02448355011476664
+    },
+    {
+      "user_candidate_bucket": "5-6",
+      "rows": 3990,
+      "flips": 136,
+      "flip_frac": 0.034085213032581455
+    },
+    {
+      "user_candidate_bucket": "7-10",
+      "rows": 3948,
+      "flips": 142,
+      "flip_frac": 0.03596757852077001
+    }
+  ],
+  "by_item_pop_quintile": [
+    {
+      "item_pop_quintile": "Q1 lowest",
+      "rows": 4000,
+      "flips": 96,
+      "mean_item_pop": 18.78175,
+      "flip_frac": 0.024
+    },
+    {
+      "item_pop_quintile": "Q2",
+      "rows": 3999,
+      "flips": 170,
+      "mean_item_pop": 33.3858464616154,
+      "flip_frac": 0.04251062765691423
+    },
+    {
+      "item_pop_quintile": "Q3",
+      "rows": 4000,
+      "flips": 176,
+      "mean_item_pop": 64.21375,
+      "flip_frac": 0.044
+    },
+    {
+      "item_pop_quintile": "Q4",
+      "rows": 3999,
+      "flips": 115,
+      "mean_item_pop": 138.46486621655413,
+      "flip_frac": 0.02875718929732433
+    },
+    {
+      "item_pop_quintile": "Q5 highest",
+      "rows": 4000,
+      "flips": 39,
+      "mean_item_pop": 392.412,
+      "flip_frac": 0.00975
+    }
+  ],
+  "promoted_demoted_item_pop": {
+    "promoted_old0_new1": {
+      "count": 298,
+      "mean_item_pop": 87.78187919463087,
+      "median_item_pop": 53.0
+    },
+    "demoted_old1_new0": {
+      "count": 298,
+      "mean_item_pop": 66.51677852348993,
+      "median_item_pop": 47.0
+    },
+    "all_rows": {
+      "count": 19998,
+      "mean_item_pop": 129.45599559955997,
+      "median_item_pop": 62.0
+    }
+  },
+  "interpretation": "Forced/manual-risk quota-burn candidate. Public improved slightly, but validation McNemar gate remained non-significant; treat as public-LB information/possible hedge, not proof of private superiority."
+}

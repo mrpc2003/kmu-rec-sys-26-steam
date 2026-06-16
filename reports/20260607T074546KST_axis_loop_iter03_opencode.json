@@ -1,0 +1,121 @@
+{
+  "safety_flags": {
+    "validation_only": true,
+    "candidate_csv_written": false,
+    "full_test_candidate_or_submission_csv_created": false,
+    "kaggle_submit_executed": false,
+    "hidden_labels_used": false,
+    "private_answers_used": false,
+    "external_steam_scraping_used": false,
+    "credentials_or_tokens_printed": false,
+    "quarantine_or_guard_logic_weakened": false,
+    "git_stage_commit_push_executed": false,
+    "recursive_cron_scheduled": false
+  },
+  "axis_decision": "no safe axis",
+  "new_probe": {
+    "launched": false,
+    "status": "not_launched",
+    "command": null,
+    "pid_file": null,
+    "log": null,
+    "report_json": null,
+    "report_md": null,
+    "artifact_dir": "artifacts/opencode_hermes_axis_loop_20260607T074546KST",
+    "reason": "No fresh independent bounded validation-only axis survived the strict-gate, closed-family, and quarantine/public-negative review; launching would repeat weak/stalled/prohibited families or rely on public-negative boundary/frontier variants."
+  },
+  "best_or_top_metrics": {
+    "variant": "boundary/frontier internal rows from reports/20260603T164750KST_boundary_factory_frontier.json (blocked)",
+    "mean_delta_vs_base": 0.0017003400680135987,
+    "min_delta_vs_base": null,
+    "positive_splits": 3,
+    "fixes": null,
+    "breaks": null,
+    "pooled_p_exact": 0.0005242948680109718,
+    "quarantine_conflict": true,
+    "status": "blocked_public_negative_family",
+    "note": "The apparent internal strict metric belongs to capacity/frontier/boundary scoreblend family already submitted with negative public transfer and quarantined; it is not a valid fresh axis."
+  },
+  "strict_gate": {
+    "mean_delta_threshold": 0.0015,
+    "min_delta_nonnegative": true,
+    "required_positive_splits": "3/3",
+    "requires_fixes_gt_breaks": true,
+    "pooled_exact_or_mcnemar_p_lt": 0.05,
+    "requires_validation_only": true,
+    "requires_candidate_csv_written_false": true,
+    "requires_full_test_candidate_or_submission_csv_created_false": true,
+    "requires_kaggle_submit_executed_false": true,
+    "requires_no_quarantine_or_near_duplicate_conflict": true
+  },
+  "inspected_evidence": {
+    "reports": [
+      "reports/20260607T074546KST_axis_loop_iter02_opencode.json",
+      "reports/20260607T074546KST_axis_loop_iter02_opencode.md",
+      "reports/20260607T074528KST_opencode_hermes_axis_rejection_loop_summary.json",
+      "reports/20260607T063604KST_opencode_improvement_axis_loop.json",
+      "reports/20260606T220406KST_jackknife_uncertainty_boundary_probe.json",
+      "reports/20260603T180707KST_userknn_gated_residual_probe.json",
+      "reports/20260603T164750KST_boundary_factory_frontier.json",
+      "reports/manual_qa_boundary_pairwise_factory.json"
+    ],
+    "state_files": [
+      "state/aggressive_quota_runner_state.json",
+      "state/autonomous_submission_policy.json"
+    ],
+    "direct_searches": [
+      "rg --files over AGENTS/reports/scripts/logs/state/artifacts",
+      "rg over reports/scripts/state for strict gates, deltas, p-values, quarantine, public-negative, and closed-axis terms",
+      "rg over reports/artifacts for metric verdict evidence including STRICT_PASS/WEAK_SIGNAL/REJECT/mean_delta/positive_splits/pooled_p_exact",
+      "rg over scripts for axis/probe/gate families and artifact-producing surfaces",
+      "ast-grep for Python subprocess.run call sites",
+      "ast-grep for pandas to_csv calls",
+      "ps process sweep for Kaggle submit/probe/controller activity"
+    ]
+  },
+  "closed_or_rejected_axes_checked": [
+    {
+      "axis": "UserKNN gated residual fine-grid / smoke",
+      "status": "closed_stalled_or_weak",
+      "evidence": "Fine-grid reports still absent with repeated invalid-divide warnings; prior smoke mean delta +0.000900 and p=0.05415 fail strict mean and p gates."
+    },
+    {
+      "axis": "Jackknife uncertainty boundary",
+      "status": "closed_weak_or_incomplete",
+      "evidence": "Smoke top mean delta +0.0003667, min delta -0.0012002, 2/3 positive, p=0.3388; expanded probe reports absent."
+    },
+    {
+      "axis": "Boundary/frontier/capacity scoreblend family",
+      "status": "blocked_by_public_negative_quarantine",
+      "evidence": "Some internal rows in reports/20260603T164750KST_boundary_factory_frontier.json clear mean/p gates, but state/aggressive_quota_runner_state.json records boundary_scoreblend and frontier_z public deltas -0.0007 to -0.0025 and quarantines those families."
+    },
+    {
+      "axis": "Rankblend ALS/BPR residual family",
+      "status": "blocked_by_public_negative_quarantine",
+      "evidence": "Submitted variants with validation mean deltas around +0.0013 to +0.0014 scored below public best; family and siblings are skipped/quarantined."
+    },
+    {
+      "axis": "Layer mixture, SL@K-lite, multi-interest SVD, SASRec/xSIMGCL/semantic/text/README/LM, temporal/hours/exact-K/last-slot/DNS",
+      "status": "closed_or_rejected",
+      "evidence": "Recent reports/artifact summaries mark these weak, split-inconsistent, below floor, redundant, public-noise risk, or explicitly closed in the prompt."
+    }
+  ],
+  "ranked_next_axis_hypotheses": [
+    {
+      "rank": 1,
+      "axis": "Predeclared non-boundary, non-residual diagnostic of validation-label-free model disagreement",
+      "why_not_launched_now": "All currently implemented disagreement surfaces overlap jackknife, boundary, frontier/capacity, or layer-mixture families that are closed, weak, or quarantined; a materially new implementation is not present in this repo pass."
+    },
+    {
+      "rank": 2,
+      "axis": "Repair UserKNN finite-value computation as engineering hygiene only",
+      "why_not_launched_now": "It would address warnings but not constitute a fresh independent improvement axis, and the UserKNN family is explicitly stalled/closed without metric-report evidence."
+    },
+    {
+      "rank": 3,
+      "axis": "New base model family trained from scratch",
+      "why_not_launched_now": "Existing implemented alternatives are rejected or below floor, while a new train-from-scratch family would exceed this bounded validation-only iteration and risks weak one-split evidence."
+    }
+  ],
+  "verdict": "NO_SAFE_AXIS"
+}

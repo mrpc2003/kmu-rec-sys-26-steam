@@ -1,0 +1,566 @@
+{
+  "job_id": "89c5c0c1-01b0-454e-96b2-cce8bf73b101",
+  "status": "success",
+  "agent_type": null,
+  "report": "# Validation-Only Research Memo: KMU RecSys 26 Steam Played Prediction\n\n## Executive decision\n\nThe only idea currently close enough to the competition’s last-submission constraints to deserve immediate continuation is the TAG-CF-style inference-time neighbor aggregation already under test. The seed42 result is directionally real—row accuracy 0.765253, delta +0.0032006 versus base, 582 flips, 323 candidate fixes, 259 base breaks, McNemar p=0.0090—but it does **not** by itself justify any full-test candidate. It missed the predeclared single-split MDE threshold of +0.00355, and the public gap is only about +0.00250, so the risk of a one-split public-LB overfit remains material. Treat TAG-CF as eligible only if the seed42/seed7/seed123 panel clears a paired, predeclared validation gate.\n\nThe next-best cheap probes are LightGCN++-style layer-mixture rescoring and a very small boundary/listwise top-half reranking probe. Multi-interest routing is plausible but lower priority. PU/denoising should be handled harshly: most versions collapse into popularity/exposure or hard-negative traps already shown weak; only sign-invariant, model-disagreement-based sensitivity tests are worth probing.\n\nNo Kaggle submission should be made from these ideas without validation gates and human approval.\n\n## Competition-specific frame\n\nThe test structure makes this a per-user ranking problem: candidates are known users/items and exactly 50/50 played/non-played per user, so accuracy is equivalent to putting the true positives into the user’s top half. This means global score calibration, global popularity quotas, candidate-marginal tuning, and broad debiasing heuristics are dangerous unless they improve the within-user boundary. The live baseline family—LightGCN on a binary implicit graph trained with BPR and uniform negatives—is already strong, and many ordinary recommendation axes have been closed. Recent sources support several mechanisms that are genuinely distinct from capacity sweeps and standard graph encoders: test-time aggregation, LightGCN++ propagation weighting, differentiable top-K/listwise objectives, multi-interest set representations, and PU/denoising. The useful question is not whether these papers are novel; it is whether each can be reduced to a cheap validation-only perturbation of the current LightGCN stack.\n\n## Candidate matrix\n\n| Priority | Candidate | Source URL | Mechanism | Why distinct from closed axes | Minimal validation-only probe | Cost | Expected sign / risk | Kill / escalation gate |\n|---|---|---|---|---|---|---|---|---|\n| P0 | TAG-CF-style test-time neighbor aggregation | NeurIPS 2024 “How Does Message Passing Improve Collaborative Filtering?” and GitHub implementation [1][2] | Parameter-free inference-time message passing over trained CF embeddings; no new trainable encoder. | Not ALS/MF retraining, not LightGCN capacity, not SGL/contrastive, not popularity prior. It changes inference aggregation around existing embeddings. | Finish seed42/seed7/seed123 panel for fixed variants only: raw/sym, small alpha grid fixed before seeing remaining splits. Report row accuracy, flips, fixes/breaks, McNemar, bootstrap user CI. | Very low; minutes to hours if embeddings/neighbors cached. | Positive but fragile. Seed42 is encouraging but below MDE; likely small boundary effect. Risk: tuning to one split, user-degree artifacts, hidden popularity drift. | Escalate only if average delta is positive and near/above +0.00355, pooled McNemar significant, fixes > breaks on at least 2/3 splits, no large subgroup regression. Otherwise kill. |\n| P1 | LightGCN++ layer-mixture rescoring | RecSys 2024 LightGCN++ GitHub [3] and RecSys accepted contributions [4] | Reweight layer embeddings with learned or searched gamma coefficients; LightGCN++ also discusses norm scaling alpha and neighbor weights beta. | Not embedding capacity sweep: same trained graph/depth, different contribution of h0…hK. | If per-layer embeddings exist, grid/coordinate-search convex weights over h0…hK on validation; rescore candidates. Try base + small residual blend. Do not retrain full model. | Low if per-layer embeddings saved; medium if model must re-export. | Could help if uniform layer averaging is suboptimal at the top-half boundary. Risk: another rank/z blend if weights are tuned too freely. | Escalate if a tiny predefined grid improves all or 2/3 splits and flip analysis shows boundary corrections rather than global drift. Kill if gains vanish after regularizing weights toward uniform or differ by split sign. |\n| P1/P2 | Boundary/listwise top-half reranking probe | SL@K / top-K metric optimization and differentiable top-K sources [5][6][7][8][9] | Smooth top-K/listwise losses emphasize candidates near the cutoff, unlike BPR’s all-pair objective. | Distinct from exact-K subset loss because it is soft boundary weighting, not hard subset enumeration; distinct from hard negatives because weighting depends on per-user rank boundary. | Freeze LightGCN. Train only a tiny scalar/head or two-parameter score transform on validation folds: e.g., base score plus margin/temperature term optimized by SmoothTopK/SL@K-like surrogate. Evaluate on held-out validation split, not the same fold used for fitting. | Low to medium; implementation risk higher than TAG-CF. | Mechanistically aligned with top-half accuracy. Risk is severe validation overfit, temperature sensitivity, and leakage if fitting directly on final validation labels. | Kill unless nested/3-split validation gives consistent paired gains. Escalate only if hyperparameters are fixed from one split and transfer to the other two. |\n| P2 | Non-sequential multi-interest centroid scoring | 2025 multi-interest survey and ComiRec background [10][11] | Represent each user by several centroids/capsules from their interacted item embeddings; candidate score is max or mixture over interests. | Not SASRec/DIN: no sequence order, no positional modeling. Not itemKNN residual if using embedding-space user-specific centroids rather than local co-occurrence counts. | For each user, cluster/farthest-first their positive item embeddings into K=2–4 centroids. Score candidates by max_k dot(c_uk, item), optionally blend 0.05–0.20 with base. Evaluate boundary flips. | Low for candidate-only scoring; medium if clustering every user is not cached. | Could help users with multiple Steam genres/interests. Risk: duplicates LightGCN’s existing user embedding; over-clustering can break broad-interest users. | Kill if K=2 and K=3 do not improve at least 2/3 splits or if gains concentrate only in high-history users while hurting sparse users. |\n| P3 | PU / denoising interaction-weight sensitivity | PU MNAR and denoising implicit feedback sources [12][13][14][15] | Treat implicit data as positive-unlabeled/MNAR; downweight suspected noisy positives or uncertain interactions. | Only distinct if it avoids hard-negative mining, popularity debiasing, candidate marginals, and exposure quotas. | Do **not** use popularity, candidate frequency, or global quota. Try only model-disagreement-based positive-edge downweight/dropout: downweight interactions whose positive score is unstable across seeds/samplers, then quick fine-tune or retrain one short run. | Medium; may require retraining. | Low expected value in last phase. Risk: falls into known traps or changes training distribution too much. | Kill unless one short run beats base on all 3 validation splits without popularity-sign dependence. No full-test consideration from a single PU run. |\n\n## Recommended immediate order\n\n### 1. Finish TAG-CF three-split panel before anything else\n\nTAG-CF is the best aligned with the current live signal and with the last-submission constraint. The source mechanism is exactly the kind of perturbation that can matter here: it adds inference-time neighbor aggregation around existing collaborative embeddings without full retraining or a new encoder [1][2]. That makes it materially different from closed LightGCN capacity sweeps, seed ensembles, SGL/DirectAU/xSimGCL, and hard-negative variants.\n\nThe decision rule should be strict. Seed42 alone is “interesting, not actionable.” The result has a favorable fixes/breaks ratio and McNemar p=0.0090, but it missed the single-split MDE. A full-test candidate should be considered only after the seed42/seed7/seed123 panel shows: (i) positive row-accuracy delta on at least 2/3 splits, preferably all three; (ii) pooled paired McNemar significance; (iii) average gain near or above the MDE, not merely positive; (iv) no split where base breaks dominate fixes by a material margin; and (v) subgroup sanity across user degree, item degree, and base-score margin.\n\nAdditional anti-overfit checks should be mandatory: lock the TAG-CF variant grid before reading the remaining split outcomes; report every tried alpha/normalization variant, not just the best; inspect whether flips are concentrated near the per-user cutoff; verify that gains are not explained by candidate marginal, item popularity, or user history length; bootstrap users for a confidence interval; and compare rank-only behavior rather than raw-score drift. If seed7 and seed123 do not confirm seed42, kill the candidate rather than expanding the parameter sweep.\n\n### 2. Run LightGCN++-style layer-mixture rescoring if cheap\n\nLightGCN++ is useful here not as a full new model, but as a hint that uniform layer pooling can be an avoidable constraint. Its remedy includes alpha norm scaling, beta neighbor weighting, and gamma layer-wise pooling; the cheap part is the gamma-style convex mixture of already computed layer embeddings [3][4]. In a fixed 50/50 candidate setting, a small change in how much h0, h1, h2, … contribute can move borderline candidates without changing embedding dimension or training sampler.\n\nThe minimal probe is straightforward if layer embeddings are available. For each validation split, compute candidate scores using a few fixed mixtures: uniform baseline, shallow-heavy, mid-heavy, deep-light, and a small coordinate-searched convex mixture with strong regularization toward uniform. A residual version—base score plus lambda times the alternative layer-mixture score—can also be tried with lambda fixed on one split and transferred to the others. This should be treated as a rescoring probe, not a new LightGCN++ training campaign.\n\nEscalation requires cross-split sign consistency. If the best layer weights differ wildly by split, or if the gain disappears when the mixture is constrained close to uniform, it is probably validation noise. If it improves 2/3 or 3/3 splits with a stable shallow/mid preference, it is a legitimate final-candidate component after human review.\n\n### 3. Try only a tiny boundary/listwise probe, not a full objective campaign\n\nTop-K/listwise objectives are theoretically aligned with this task because the evaluation is a per-user cutoff problem. Recent work on SL@K and top-K metric optimization emphasizes the boundary around K, while differentiable top-K libraries provide implementable smooth approximations [5][6][7][8][9]. This is genuinely different from standard BPR, which optimizes pairwise ordering over many easy pairs, and from the already tried exact-K subset loss, which appears to have been too discrete or too brittle.\n\nThe probe should be deliberately small. Freeze the LightGCN backbone and train only a tiny reranking head, scalar calibration, or margin transform using a boundary-aware surrogate on an inner validation fold. Then evaluate on the other validation splits. If the same labels are used for fitting and evaluation, this candidate is invalid. Keep the parameter grid tiny: one or two temperatures, one or two margins, and no broad neural MLP. The expected upside is a small number of corrected cutoff flips; the main risk is overfitting the validation boundary so precisely that it will not transfer.\n\nKill this quickly if the learned transform is not portable across splits. A top-K loss paper is not enough evidence; the only acceptable evidence is paired, split-stable improvement in this repo.\n\n### 4. Multi-interest centroid routing is plausible but lower priority\n\nMulti-interest recommendation is relevant because Steam users can plausibly have multiple latent tastes—e.g., strategy, indie, RPG, multiplayer—and a single LightGCN user vector can average them. Recent survey work frames multi-interest recommendation as extracting several user interest vectors, and older ComiRec-style methods show the general capsule/interest-vector mechanism [10][11]. The only version worth trying here is non-sequential and embedding-only.\n\nThe validation probe should avoid sequence order entirely. For each user, take the item embeddings of played games and form K=2–4 centroids using farthest-first, k-means, or a cheap deterministic split. Score each candidate by the maximum dot product between the candidate item embedding and any user centroid, then blend this score weakly with the base LightGCN score. This is cheap and directly targets within-user ranking. It is distinct from SASRec/DIN because it uses no order, no padding, no temporal position, and no set-order surrogate.\n\nThe risk is that LightGCN’s user embedding already encodes essentially the same information. Over-clustering can also produce noisy micro-interests and hurt sparse users. Kill unless K=2 or K=3 produces consistent improvements across the three validation splits and the improvements are not confined to a tiny high-history subgroup.\n\n### 5. Treat PU/denoising as mostly rejected for this phase\n\nPU and denoising papers correctly note that implicit feedback is positive-unlabeled and often missing-not-at-random [12][13][14][15]. In a normal production recommender, exposure correction, inverse propensity, or noisy-positive filtering might be useful. In this competition setting, however, these ideas are dangerously close to axes already shown weak or misleading: hard negatives, popularity debiasing, candidate marginal adjustment, and global quota constraints.\n\nA PU/denoising probe is only acceptable if it is sign-invariant and avoids popularity-like variables. One possible probe is to downweight positive edges whose support is unstable across independently trained seeds or samplers, then run a very short retrain/fine-tune and evaluate on the three validation splits. Do not use item popularity, candidate frequency, public-test candidate composition, or global exposure estimates. Do not use LLM/text denoising; review text and MiniLM/TF-IDF are already weak, and LLM-based denoising adds cost without a clear mechanism for top-half boundary accuracy.\n\nThis is a low-priority candidate. If one quick run does not beat the base consistently and without popularity-sign dependence, kill it.\n\n## Harsh rejection list\n\nReject full new graph encoders over the same binary graph unless they reduce to one of the cheap probes above. This includes causal graph convolution variants, new LightGCN-like encoders, and data-centric graph adaptation methods that require pseudo-label graph rewrites. IJCAI 2025 test-time graph transformation is interesting as a research direction, but it adds pseudo-labeling, graph revision, and contrastive adaptation risk—too much for a last-phase validation-only setting [16].\n\nReject LLM/text/semantic denoising. It is expensive, overlaps with the closed text-feature axis, and is unlikely to transfer to a known-user/known-item top-half boundary task. Reject popularity/exposure/global-quota methods even when presented as PU learning, because the user’s audits already indicate popularity-like priors are sign-unstable and public-surrogate-prone. Reject broad differentiable sorting campaigns if they require full retraining or large hyperparameter sweeps; only the frozen-backbone boundary probe is acceptable.\n\n## Final validation gate before any human-approved full-test candidate\n\nA candidate should be eligible for human review only if it satisfies all of the following:\n\n1. It is evaluated on the same three-split panel: seed42, seed7, seed123.\n2. Hyperparameters are fixed before reading all split outcomes, or selected on one split and transferred unchanged to the others.\n3. It improves paired row accuracy on at least 2/3 splits, with no catastrophic negative split.\n4. The pooled paired McNemar test is significant and the average delta is practically meaningful relative to the +0.00250 public gap and the +0.00355 single-split MDE.\n5. Flip accounting shows more candidate fixes than base breaks, especially near the per-user top-half cutoff.\n6. Subgroup checks by user degree, item degree, base margin, and candidate score rank show no obvious overfit pocket.\n7. The mechanism does not use candidate-marginal tuning, global quotas, public leaderboard feedback, popularity-sign assumptions, or hidden test-label leakage.\n\nUnder these gates, TAG-CF remains the only P0 candidate. LightGCN++ layer-mixture rescoring is the best P1 backup because it is cheap and mechanistically distinct. Boundary/listwise reranking is worth one tightly constrained attempt. Multi-interest and PU/denoising should be attempted only if time remains after the P0/P1 probes.\n\n## Sources\n\n[1] How Does Message Passing Improve Collaborative Filtering?: https://proceedings.neurips.cc/paper_files/paper/2024/hash/10a3b1c30b8cceb507b9e8ddcc9a1a6a-Abstract-Conference.html  \n[2] GitHub - snap-research/Test-time-Aggregation-for-CF: https://github.com/snap-research/Test-time-Aggregation-for-CF  \n[3] GitHub - geon0325/LightGCNpp: https://github.com/geon0325/LightGCNpp  \n[4] RecSys 2024 - Accepted Contributions: https://recsys.acm.org/recsys24/accepted-contributions  \n[5] A Simple Yet Effective Loss for Implicit Feedback Recommendation: https://arxiv.org/pdf/2601.04291  \n[6] Advancing Top-K Ranking Metrics Optimization: https://tiny-snow.github.io/assets/pdf/publications/KDD2025-ARXIV-2508.05673v1.pdf  \n[7] Differentiable Fast Top-K Selection for Large-Scale Recommendation: https://arxiv.org/html/2510.11472v1  \n[8] GitHub - Felix-Petersen/difftopk: https://github.com/Felix-Petersen/difftopk  \n[9] SoftSort: A Continuous Relaxation for the argsort Operator: http://proceedings.mlr.press/v119/prillo20a/prillo20a.pdf  \n[10] Multi-Interest Recommendation: A Survey: https://arxiv.org/html/2506.15284v1  \n[11] Controllable Multi-Interest Framework for Recommendation: https://arxiv.org/pdf/2005.09347  \n[12] Positive-Unlabeled Learning in Implicit Feedback from Data Missing-Not-At-Random Perspective: https://pmc.ncbi.nlm.nih.gov/articles/PMC12839574  \n[13] Unbiased Recommender Learning from Implicit Feedback via Progressive Proximal Transport: https://haoxuanli-pku.github.io/papers/ICML%2025%20-%20Unbiased%20Recommender%20Learning%20from%20Implicit%20Feedback%20via%20Progressive%20Proximal%20Transport.pdf  \n[14] Denoising Implicit Feedback for Recommendation: http://staff.ustc.edu.cn/~hexn/slides/wsdm21-ADT-slides.pdf  \n[15] Denoising Implicit Feedback for Recommendation | Semantic Scholar: https://www.semanticscholar.org/paper/Denoising-Implicit-Feedback-for-Recommendation-Wang-Feng/374f36c9081ab5dc686ab833c42a7297235cd13f  \n[16] Test-Time Adaptation on Recommender System with Data-Centric Graph Transformation: https://www.ijcai.org/proceedings/2025/0510.pdf\n",
+  "sources": {
+    "found_urls": [
+      "https://haoxuanli-pku.github.io/papers/ICML%2025%20-%20Unbiased%20Recommender%20Learning%20from%20Implicit%20Feedback%20via%20Progressive%20Proximal%20Transport.pdf",
+      "https://www.kaggle.com/c/otto-recommender-system/discussion/372976",
+      "https://vu-business-analytics.github.io/internship-office/papers/paper-zwart.pdf",
+      "https://github.com/gusye1234/LightGCN-PyTorch",
+      "https://arxiv.org/html/2504.07952v1",
+      "https://proceedings.mlr.press/v162/petersen22a/petersen22a.pdf",
+      "https://arxiv.org/abs/2507.08721",
+      "https://recsys.acm.org/recsys26/call",
+      "https://zenn.dev/exwzd/articles/20251202_lightgcn-introduction",
+      "https://recsys.acm.org/recsys26/workshops",
+      "https://www.emergentmind.com/papers/2005.09347",
+      "https://recsys.acm.org/recsys24/accepted-contributions",
+      "https://recsys.synerise.com",
+      "https://arxiv.org/pdf/2005.09347",
+      "https://arxiv.org/html/2411.09410v1",
+      "https://recsys.acm.org/recsys26/challenge",
+      "https://github.com/geon0325/LightGCNpp",
+      "https://arxiv.org/html/2510.11472v1",
+      "https://eldorado.tu-dortmund.de/server/api/core/bitstreams/7f57b3cb-a7c0-4956-a63d-beb447862eaf/content",
+      "https://www.semanticscholar.org/paper/Denoising-Implicit-Feedback-for-Recommendation-Wang-Feng/374f36c9081ab5dc686ab833c42a7297235cd13f",
+      "https://github.com/kuandeng/lightgcn",
+      "https://arxiv.org/pdf/2601.04291",
+      "https://arxiv.org/html/2506.15284v1",
+      "https://github.com/Felix-Petersen/difftopk",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12839574",
+      "https://arxiv.org/html/2503.14213v1",
+      "https://arxiv.org/html/2511.07295v2",
+      "https://arxiv.org/html/2510.27157v2",
+      "https://theses.gla.ac.uk/85783/3/2025YiPhD.pdf",
+      "http://proceedings.mlr.press/v119/prillo20a/prillo20a.pdf",
+      "https://arxiv.org/html/2501.03228v1",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9894450",
+      "https://www.mdpi.com/2076-3417/15/4/1898",
+      "https://github.com/snap-research/Test-time-Aggregation-for-CF",
+      "https://www.ijcai.org/proceedings/2025/0510.pdf",
+      "https://recsys.acm.org",
+      "https://arxiv.org/pdf/2002.02126",
+      "https://recsys.acm.org/recsys26",
+      "https://www.ijcai.org/proceedings/2025/510",
+      "http://staff.ustc.edu.cn/~hexn/slides/wsdm21-ADT-slides.pdf",
+      "https://ojs.aaai.org/index.php/AAAI/article/view/38540/42502",
+      "https://papers.lunadong.com/paper/10351",
+      "https://arxiv.org/html/2605.07125v1",
+      "https://tiny-snow.github.io/assets/pdf/publications/KDD2025-ARXIV-2508.05673v1.pdf",
+      "https://recsys.acm.org/best-papers",
+      "https://recsys.acm.org/challenges",
+      "https://www.shadecoder.com/topics/exposure-bias-in-recommendations-a-comprehensive-guide-for-2025",
+      "https://recsys.acm.org/recsys25/session-6",
+      "https://www.kaggle.com/code/rsadiq/recommender-system-for-implicit-feedback",
+      "https://proceedings.neurips.cc/paper_files/paper/2024/hash/10a3b1c30b8cceb507b9e8ddcc9a1a6a-Abstract-Conference.html"
+    ],
+    "cited_urls": [
+      "https://proceedings.neurips.cc/paper_files/paper/2024/hash/10a3b1c30b8cceb507b9e8ddcc9a1a6a-Abstract-Conference.html",
+      "https://www.semanticscholar.org/paper/Denoising-Implicit-Feedback-for-Recommendation-Wang-Feng/374f36c9081ab5dc686ab833c42a7297235cd13f",
+      "https://haoxuanli-pku.github.io/papers/ICML%2025%20-%20Unbiased%20Recommender%20Learning%20from%20Implicit%20Feedback%20via%20Progressive%20Proximal%20Transport.pdf",
+      "https://arxiv.org/pdf/2601.04291",
+      "http://staff.ustc.edu.cn/~hexn/slides/wsdm21-ADT-slides.pdf",
+      "https://arxiv.org/html/2506.15284v1",
+      "https://github.com/Felix-Petersen/difftopk",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12839574",
+      "https://recsys.acm.org/recsys24/accepted-contributions",
+      "https://tiny-snow.github.io/assets/pdf/publications/KDD2025-ARXIV-2508.05673v1.pdf",
+      "https://arxiv.org/pdf/2005.09347",
+      "https://github.com/geon0325/LightGCNpp",
+      "https://arxiv.org/html/2510.11472v1",
+      "http://proceedings.mlr.press/v119/prillo20a/prillo20a.pdf",
+      "https://github.com/snap-research/Test-time-Aggregation-for-CF",
+      "https://www.ijcai.org/proceedings/2025/0510.pdf"
+    ],
+    "report_urls": [
+      "https://proceedings.neurips.cc/paper_files/paper/2024/hash/10a3b1c30b8cceb507b9e8ddcc9a1a6a-Abstract-Conference.html",
+      "https://github.com/snap-research/Test-time-Aggregation-for-CF",
+      "https://github.com/geon0325/LightGCNpp",
+      "https://recsys.acm.org/recsys24/accepted-contributions",
+      "https://arxiv.org/pdf/2601.04291",
+      "https://tiny-snow.github.io/assets/pdf/publications/KDD2025-ARXIV-2508.05673v1.pdf",
+      "https://arxiv.org/html/2510.11472v1",
+      "https://github.com/Felix-Petersen/difftopk",
+      "http://proceedings.mlr.press/v119/prillo20a/prillo20a.pdf",
+      "https://arxiv.org/html/2506.15284v1",
+      "https://arxiv.org/pdf/2005.09347",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12839574",
+      "https://haoxuanli-pku.github.io/papers/ICML%2025%20-%20Unbiased%20Recommender%20Learning%20from%20Implicit%20Feedback%20via%20Progressive%20Proximal%20Transport.pdf",
+      "http://staff.ustc.edu.cn/~hexn/slides/wsdm21-ADT-slides.pdf",
+      "https://www.semanticscholar.org/paper/Denoising-Implicit-Feedback-for-Recommendation-Wang-Feng/374f36c9081ab5dc686ab833c42a7297235cd13f",
+      "https://www.ijcai.org/proceedings/2025/0510.pdf"
+    ],
+    "artifact_entries": [
+      {
+        "type": "citation_source",
+        "url": "https://arxiv.org/html/2506.15284v1",
+        "name": "https://arxiv.org/html/2506.15284v1",
+        "workflow": "planner-agent",
+        "timestamp": "2026-06-01T08:11:32.530948+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://eldorado.tu-dortmund.de/server/api/core/bitstreams/7f57b3cb-a7c0-4956-a63d-beb447862eaf/content",
+        "name": "https://eldorado.tu-dortmund.de/server/api/core/bitstreams/7f57b3cb-a7c0-4956-a63d-beb447862eaf/content",
+        "workflow": "planner-agent",
+        "timestamp": "2026-06-01T08:11:32.531189+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://www.kaggle.com/code/rsadiq/recommender-system-for-implicit-feedback",
+        "name": "https://www.kaggle.com/code/rsadiq/recommender-system-for-implicit-feedback",
+        "workflow": "planner-agent",
+        "timestamp": "2026-06-01T08:11:32.709572+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://www.kaggle.com/c/otto-recommender-system/discussion/372976",
+        "name": "https://www.kaggle.com/c/otto-recommender-system/discussion/372976",
+        "workflow": "planner-agent",
+        "timestamp": "2026-06-01T08:11:32.709795+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://www.ijcai.org/proceedings/2025/0510.pdf",
+        "name": "https://www.ijcai.org/proceedings/2025/0510.pdf",
+        "workflow": "planner-agent",
+        "timestamp": "2026-06-01T08:11:32.965740+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://arxiv.org/html/2503.14213v1",
+        "name": "https://arxiv.org/html/2503.14213v1",
+        "workflow": "planner-agent",
+        "timestamp": "2026-06-01T08:11:32.965968+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://arxiv.org/pdf/2601.04291",
+        "name": "https://arxiv.org/pdf/2601.04291",
+        "workflow": "planner-agent",
+        "timestamp": "2026-06-01T08:11:33.681751+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://theses.gla.ac.uk/85783/3/2025YiPhD.pdf",
+        "name": "https://theses.gla.ac.uk/85783/3/2025YiPhD.pdf",
+        "workflow": "planner-agent",
+        "timestamp": "2026-06-01T08:11:33.681983+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://github.com/snap-research/Test-time-Aggregation-for-CF",
+        "name": "https://github.com/snap-research/Test-time-Aggregation-for-CF",
+        "workflow": "planner-agent",
+        "timestamp": "2026-06-01T08:11:35.988411+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://arxiv.org/html/2504.07952v1",
+        "name": "https://arxiv.org/html/2504.07952v1",
+        "workflow": "planner-agent",
+        "timestamp": "2026-06-01T08:11:35.988645+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://arxiv.org/html/2511.07295v2",
+        "name": "https://arxiv.org/html/2511.07295v2",
+        "workflow": "planner-agent",
+        "timestamp": "2026-06-01T08:11:55.340597+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://papers.lunadong.com/paper/10351",
+        "name": "https://papers.lunadong.com/paper/10351",
+        "workflow": "planner-agent",
+        "timestamp": "2026-06-01T08:11:55.340832+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://github.com/Felix-Petersen/difftopk",
+        "name": "https://github.com/Felix-Petersen/difftopk",
+        "workflow": "planner-agent",
+        "timestamp": "2026-06-01T08:11:55.407810+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://github.com/geon0325/LightGCNpp",
+        "name": "https://github.com/geon0325/LightGCNpp",
+        "workflow": "planner-agent",
+        "timestamp": "2026-06-01T08:11:55.408038+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12839574",
+        "name": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12839574",
+        "workflow": "planner-agent",
+        "timestamp": "2026-06-01T08:11:55.431353+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://haoxuanli-pku.github.io/papers/ICML%2025%20-%20Unbiased%20Recommender%20Learning%20from%20Implicit%20Feedback%20via%20Progressive%20Proximal%20Transport.pdf",
+        "name": "https://haoxuanli-pku.github.io/papers/ICML%2025%20-%20Unbiased%20Recommender%20Learning%20from%20Implicit%20Feedback%20via%20Progressive%20Proximal%20Transport.pdf",
+        "workflow": "planner-agent",
+        "timestamp": "2026-06-01T08:11:55.435114+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://arxiv.org/html/2510.11472v1",
+        "name": "https://arxiv.org/html/2510.11472v1",
+        "workflow": "planner-agent",
+        "timestamp": "2026-06-01T08:11:55.705168+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://recsys.acm.org/recsys25/session-6",
+        "name": "https://recsys.acm.org/recsys25/session-6",
+        "workflow": "planner-agent",
+        "timestamp": "2026-06-01T08:11:55.718768+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://arxiv.org/html/2510.27157v2",
+        "name": "https://arxiv.org/html/2510.27157v2",
+        "workflow": "planner-agent",
+        "timestamp": "2026-06-01T08:11:55.718990+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://arxiv.org/pdf/2005.09347",
+        "name": "https://arxiv.org/pdf/2005.09347",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-06-01T08:15:16.392543+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://proceedings.neurips.cc/paper_files/paper/2024/hash/10a3b1c30b8cceb507b9e8ddcc9a1a6a-Abstract-Conference.html",
+        "name": "https://proceedings.neurips.cc/paper_files/paper/2024/hash/10a3b1c30b8cceb507b9e8ddcc9a1a6a-Abstract-Conference.html",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-06-01T08:15:17.275508+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://recsys.acm.org/recsys24/accepted-contributions",
+        "name": "https://recsys.acm.org/recsys24/accepted-contributions",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-06-01T08:15:18.122321+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://tiny-snow.github.io/assets/pdf/publications/KDD2025-ARXIV-2508.05673v1.pdf",
+        "name": "https://tiny-snow.github.io/assets/pdf/publications/KDD2025-ARXIV-2508.05673v1.pdf",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-06-01T08:15:19.127416+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "http://staff.ustc.edu.cn/~hexn/slides/wsdm21-ADT-slides.pdf",
+        "name": "http://staff.ustc.edu.cn/~hexn/slides/wsdm21-ADT-slides.pdf",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-06-01T08:15:22.546278+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://www.semanticscholar.org/paper/Denoising-Implicit-Feedback-for-Recommendation-Wang-Feng/374f36c9081ab5dc686ab833c42a7297235cd13f",
+        "name": "https://www.semanticscholar.org/paper/Denoising-Implicit-Feedback-for-Recommendation-Wang-Feng/374f36c9081ab5dc686ab833c42a7297235cd13f",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-06-01T08:15:22.546505+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://github.com/kuandeng/lightgcn",
+        "name": "https://github.com/kuandeng/lightgcn",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-06-01T08:15:23.597349+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://github.com/gusye1234/LightGCN-PyTorch",
+        "name": "https://github.com/gusye1234/LightGCN-PyTorch",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-06-01T08:15:23.597587+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://zenn.dev/exwzd/articles/20251202_lightgcn-introduction",
+        "name": "https://zenn.dev/exwzd/articles/20251202_lightgcn-introduction",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-06-01T08:15:23.989367+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://arxiv.org/pdf/2002.02126",
+        "name": "https://arxiv.org/pdf/2002.02126",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-06-01T08:15:23.989603+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://arxiv.org/html/2411.09410v1",
+        "name": "https://arxiv.org/html/2411.09410v1",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-06-01T08:15:25.225063+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://recsys.acm.org/recsys26/challenge",
+        "name": "https://recsys.acm.org/recsys26/challenge",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-06-01T08:15:25.332785+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://recsys.acm.org/challenges",
+        "name": "https://recsys.acm.org/challenges",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-06-01T08:15:25.332878+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://ojs.aaai.org/index.php/AAAI/article/view/38540/42502",
+        "name": "https://ojs.aaai.org/index.php/AAAI/article/view/38540/42502",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-06-01T08:15:29.828143+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://www.shadecoder.com/topics/exposure-bias-in-recommendations-a-comprehensive-guide-for-2025",
+        "name": "https://www.shadecoder.com/topics/exposure-bias-in-recommendations-a-comprehensive-guide-for-2025",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-06-01T08:15:31.736456+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://www.mdpi.com/2076-3417/15/4/1898",
+        "name": "https://www.mdpi.com/2076-3417/15/4/1898",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-06-01T08:15:33.114108+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://vu-business-analytics.github.io/internship-office/papers/paper-zwart.pdf",
+        "name": "https://vu-business-analytics.github.io/internship-office/papers/paper-zwart.pdf",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-06-01T08:15:36.299839+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://proceedings.mlr.press/v162/petersen22a/petersen22a.pdf",
+        "name": "https://proceedings.mlr.press/v162/petersen22a/petersen22a.pdf",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-06-01T08:15:36.406835+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "http://proceedings.mlr.press/v119/prillo20a/prillo20a.pdf",
+        "name": "http://proceedings.mlr.press/v119/prillo20a/prillo20a.pdf",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-06-01T08:15:36.407047+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://recsys.acm.org/recsys26/workshops",
+        "name": "https://recsys.acm.org/recsys26/workshops",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-06-01T08:15:40.812608+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://recsys.acm.org/recsys26",
+        "name": "https://recsys.acm.org/recsys26",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-06-01T08:15:40.812847+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://recsys.acm.org/recsys26/call",
+        "name": "https://recsys.acm.org/recsys26/call",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-06-01T08:15:49.485027+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://recsys.acm.org",
+        "name": "https://recsys.acm.org",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-06-01T08:15:49.485260+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://www.ijcai.org/proceedings/2025/510",
+        "name": "https://www.ijcai.org/proceedings/2025/510",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-06-01T08:15:57.118061+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://arxiv.org/abs/2507.08721",
+        "name": "https://arxiv.org/abs/2507.08721",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-06-01T08:15:57.118294+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://arxiv.org/html/2605.07125v1",
+        "name": "https://arxiv.org/html/2605.07125v1",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-06-01T08:15:58.997137+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://recsys.acm.org/best-papers",
+        "name": "https://recsys.acm.org/best-papers",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-06-01T08:16:06.751810+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://recsys.synerise.com",
+        "name": "https://recsys.synerise.com",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-06-01T08:16:11.904770+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://www.emergentmind.com/papers/2005.09347",
+        "name": "https://www.emergentmind.com/papers/2005.09347",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-06-01T08:19:18.385410+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://arxiv.org/html/2501.03228v1",
+        "name": "https://arxiv.org/html/2501.03228v1",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-06-01T08:19:24.642878+00:00"
+      },
+      {
+        "type": "citation_source",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9894450",
+        "name": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9894450",
+        "workflow": "researcher-agent",
+        "timestamp": "2026-06-01T08:19:33.470614+00:00"
+      },
+      {
+        "type": "citation_use",
+        "url": "https://proceedings.neurips.cc/paper_files/paper/2024/hash/10a3b1c30b8cceb507b9e8ddcc9a1a6a-Abstract-Conference.html",
+        "name": "https://proceedings.neurips.cc/paper_files/paper/2024/hash/10a3b1c30b8cceb507b9e8ddcc9a1a6a-Abstract-Conference.html",
+        "workflow": null,
+        "timestamp": "2026-06-01T08:24:35.624367+00:00"
+      },
+      {
+        "type": "citation_use",
+        "url": "https://github.com/snap-research/Test-time-Aggregation-for-CF",
+        "name": "https://github.com/snap-research/Test-time-Aggregation-for-CF",
+        "workflow": null,
+        "timestamp": "2026-06-01T08:24:35.624479+00:00"
+      },
+      {
+        "type": "citation_use",
+        "url": "https://github.com/geon0325/LightGCNpp",
+        "name": "https://github.com/geon0325/LightGCNpp",
+        "workflow": null,
+        "timestamp": "2026-06-01T08:24:35.624580+00:00"
+      },
+      {
+        "type": "citation_use",
+        "url": "https://recsys.acm.org/recsys24/accepted-contributions",
+        "name": "https://recsys.acm.org/recsys24/accepted-contributions",
+        "workflow": null,
+        "timestamp": "2026-06-01T08:24:35.624674+00:00"
+      },
+      {
+        "type": "citation_use",
+        "url": "https://arxiv.org/pdf/2601.04291",
+        "name": "https://arxiv.org/pdf/2601.04291",
+        "workflow": null,
+        "timestamp": "2026-06-01T08:24:35.624767+00:00"
+      },
+      {
+        "type": "citation_use",
+        "url": "https://tiny-snow.github.io/assets/pdf/publications/KDD2025-ARXIV-2508.05673v1.pdf",
+        "name": "https://tiny-snow.github.io/assets/pdf/publications/KDD2025-ARXIV-2508.05673v1.pdf",
+        "workflow": null,
+        "timestamp": "2026-06-01T08:24:35.624854+00:00"
+      },
+      {
+        "type": "citation_use",
+        "url": "https://arxiv.org/html/2510.11472v1",
+        "name": "https://arxiv.org/html/2510.11472v1",
+        "workflow": null,
+        "timestamp": "2026-06-01T08:24:35.624942+00:00"
+      },
+      {
+        "type": "citation_use",
+        "url": "https://github.com/Felix-Petersen/difftopk",
+        "name": "https://github.com/Felix-Petersen/difftopk",
+        "workflow": null,
+        "timestamp": "2026-06-01T08:24:35.625028+00:00"
+      },
+      {
+        "type": "citation_use",
+        "url": "http://proceedings.mlr.press/v119/prillo20a/prillo20a.pdf",
+        "name": "http://proceedings.mlr.press/v119/prillo20a/prillo20a.pdf",
+        "workflow": null,
+        "timestamp": "2026-06-01T08:24:35.627742+00:00"
+      },
+      {
+        "type": "citation_use",
+        "url": "https://arxiv.org/html/2506.15284v1",
+        "name": "https://arxiv.org/html/2506.15284v1",
+        "workflow": null,
+        "timestamp": "2026-06-01T08:24:35.628032+00:00"
+      },
+      {
+        "type": "citation_use",
+        "url": "https://arxiv.org/pdf/2005.09347",
+        "name": "https://arxiv.org/pdf/2005.09347",
+        "workflow": null,
+        "timestamp": "2026-06-01T08:24:35.628101+00:00"
+      },
+      {
+        "type": "citation_use",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12839574",
+        "name": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12839574",
+        "workflow": null,
+        "timestamp": "2026-06-01T08:24:35.628160+00:00"
+      },
+      {
+        "type": "citation_use",
+        "url": "https://haoxuanli-pku.github.io/papers/ICML%2025%20-%20Unbiased%20Recommender%20Learning%20from%20Implicit%20Feedback%20via%20Progressive%20Proximal%20Transport.pdf",
+        "name": "https://haoxuanli-pku.github.io/papers/ICML%2025%20-%20Unbiased%20Recommender%20Learning%20from%20Implicit%20Feedback%20via%20Progressive%20Proximal%20Transport.pdf",
+        "workflow": null,
+        "timestamp": "2026-06-01T08:24:35.628222+00:00"
+      },
+      {
+        "type": "citation_use",
+        "url": "http://staff.ustc.edu.cn/~hexn/slides/wsdm21-ADT-slides.pdf",
+        "name": "http://staff.ustc.edu.cn/~hexn/slides/wsdm21-ADT-slides.pdf",
+        "workflow": null,
+        "timestamp": "2026-06-01T08:24:35.628278+00:00"
+      },
+      {
+        "type": "citation_use",
+        "url": "https://www.semanticscholar.org/paper/Denoising-Implicit-Feedback-for-Recommendation-Wang-Feng/374f36c9081ab5dc686ab833c42a7297235cd13f",
+        "name": "https://www.semanticscholar.org/paper/Denoising-Implicit-Feedback-for-Recommendation-Wang-Feng/374f36c9081ab5dc686ab833c42a7297235cd13f",
+        "workflow": null,
+        "timestamp": "2026-06-01T08:24:35.628333+00:00"
+      },
+      {
+        "type": "citation_use",
+        "url": "https://www.ijcai.org/proceedings/2025/0510.pdf",
+        "name": "https://www.ijcai.org/proceedings/2025/0510.pdf",
+        "workflow": null,
+        "timestamp": "2026-06-01T08:24:35.628386+00:00"
+      }
+    ],
+    "counts": {
+      "found": 50,
+      "cited": 16,
+      "report": 16,
+      "artifact_entries": 66
+    }
+  }
+}

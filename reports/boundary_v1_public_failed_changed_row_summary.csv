@@ -1,0 +1,12 @@
+candidate_id,family,row_diff_vs_current_best_fulltest,public_score,public_delta_vs_current_best,validation_flip_precision
+boundary_scoreblend_z128_z192_z64_w-0.75,boundary_scoreblend,582,0.77755,-0.0007,0.5115571776155717
+boundary_scoreblend_z128_z192_z64_w2,boundary_scoreblend,596,0.77575,-0.0024999999999999,0.5077751196172249
+frontier_z_w1920_w64-0.25,frontier_z_boundary,556,0.77715,-0.0010999999999999,0.505249343832021
+otto_coplay_top5_reverse_recent_forced,otto_covisitation,508,0.77815,-9.9999999999989e-05,
+als_htr_popa4_w0.025,als_residual_rankblend,278,0.77805,-0.0001999999999999,
+als_htr_popa4_w0.05,als_residual_rankblend,278,0.77805,-0.0001999999999999,
+als_htr_popa4_w0.1,als_residual_rankblend,278,0.77805,-0.0001999999999999,
+als_popa4_w0.2,als_residual_rankblend,276,0.77795,-0.0002999999999999,
+als_htr_popa4_w0.2,als_residual_rankblend,300,0.77785,-0.0003999999999999,
+tagcf_seed2024_sym_a0.1_raw_zblend_bw0.5,tagcf_boundary,646,0.77615,-0.0020999999999999,
+emb128_emb64_zblend,capacity_blend,596,0.77815,-9.9999999999989e-05,

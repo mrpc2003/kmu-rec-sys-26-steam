@@ -1,0 +1,119 @@
+{
+  "artifact": "bivae_recvae_userrow_seed42_smoke",
+  "validation_only": true,
+  "no_kaggle_submit": true,
+  "candidate_csv_written": false,
+  "full_test_candidate_materialized": false,
+  "split": "val_random_uniform_seed42",
+  "params": {
+    "hidden": 600,
+    "latent": 200,
+    "dropout": 0.3,
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "epochs": 120,
+    "batch": 512,
+    "beta_cap": 0.15,
+    "beta_warmup_epochs": 60,
+    "latent_l2": 0.001,
+    "seed": 42,
+    "device": "cpu"
+  },
+  "train_seconds": 218.62,
+  "rows": 19996,
+  "users": 4736,
+  "items": 2437,
+  "solo_accuracy": 0.7060412082416483,
+  "base_accuracy": 0.7650530106021204,
+  "base_ref": 0.7650530106021204,
+  "base_accuracy_delta_vs_ref": 0.0,
+  "blend50_accuracy": 0.7459491898379675,
+  "blend50_delta_vs_base": -0.019103820764152846,
+  "solo_gate": 0.735,
+  "blend_gate_accuracy": 0.7657530106021204,
+  "delta_gate": 0.0007,
+  "corr_z_vs_base": 0.6981165785235693,
+  "rank_corr_vs_base": 0.6614912648585743,
+  "fixes": 1568,
+  "breaks": 2748,
+  "net_fixes": -1180,
+  "changed_rows_vs_base": 4316,
+  "head_only_lift": false,
+  "item_degree_bucket_rows": [
+    {
+      "item_degree_decile": 0,
+      "changed_rows": 202,
+      "fixes": 69,
+      "breaks": 133,
+      "net_fixes": -64
+    },
+    {
+      "item_degree_decile": 1,
+      "changed_rows": 234,
+      "fixes": 63,
+      "breaks": 171,
+      "net_fixes": -108
+    },
+    {
+      "item_degree_decile": 2,
+      "changed_rows": 278,
+      "fixes": 85,
+      "breaks": 193,
+      "net_fixes": -108
+    },
+    {
+      "item_degree_decile": 3,
+      "changed_rows": 305,
+      "fixes": 132,
+      "breaks": 173,
+      "net_fixes": -41
+    },
+    {
+      "item_degree_decile": 4,
+      "changed_rows": 382,
+      "fixes": 125,
+      "breaks": 257,
+      "net_fixes": -132
+    },
+    {
+      "item_degree_decile": 5,
+      "changed_rows": 380,
+      "fixes": 139,
+      "breaks": 241,
+      "net_fixes": -102
+    },
+    {
+      "item_degree_decile": 6,
+      "changed_rows": 507,
+      "fixes": 198,
+      "breaks": 309,
+      "net_fixes": -111
+    },
+    {
+      "item_degree_decile": 7,
+      "changed_rows": 626,
+      "fixes": 248,
+      "breaks": 378,
+      "net_fixes": -130
+    },
+    {
+      "item_degree_decile": 8,
+      "changed_rows": 726,
+      "fixes": 298,
+      "breaks": 428,
+      "net_fixes": -130
+    },
+    {
+      "item_degree_decile": 9,
+      "changed_rows": 676,
+      "fixes": 211,
+      "breaks": 465,
+      "net_fixes": -254
+    }
+  ],
+  "tier": "KILL_WEAK_SOLO",
+  "verdict": "RecVAE-style user-row solo accuracy missed the 0.735 smoke floor.",
+  "score_csv": "artifacts/bivae_recvae_userrow_seed42_smoke/val_random_uniform_seed42/recvae_userrow_validation_scores.csv",
+  "report_json": "reports/20260616T_bivae_recvae_userrow_seed42_smoke.json",
+  "report_md": "reports/20260616T_bivae_recvae_userrow_seed42_smoke.md"
+}

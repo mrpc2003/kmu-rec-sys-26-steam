@@ -1,0 +1,141 @@
+{
+  "timestamp_kst": "2026-06-07T03:11:00+09:00",
+  "timestamp_utc": "2026-06-06T18:11:00Z",
+  "cron_role": "OpenCode-first no-submit improvement-axis discovery monitor",
+  "safety_flags": {
+    "validation_only": true,
+    "kaggle_submit_executed_by_this_tick": false,
+    "actual_kaggle_submit_process_count_excluding_self": 0,
+    "full_test_candidate_or_submission_csv_created_by_this_tick": false,
+    "hidden_labels_used": false,
+    "private_answers_used": false,
+    "external_steam_scraping_used": false,
+    "quarantine_or_guard_logic_weakened": false,
+    "git_stage_commit_push_executed": false,
+    "credentials_or_tokens_printed": false
+  },
+  "opencode_status": {
+    "opencode_cli": "available: /opt/data/home/.local/bin/opencode 1.15.11",
+    "auth_check": "credentials present; provider/token values not printed",
+    "previous_loop_report": "reports/20260606T220406KST_opencode_improvement_axis_loop_status.md",
+    "previous_loop_sentinel": "OPENCODE_AXIS_LOOP_DONE_NEXT_PROBE_RUNNING",
+    "new_opencode_run_launched_this_tick": false,
+    "reason_no_new_opencode_run": "A validation-only UserKNN gated residual fine-grid probe is still live. Per this cron's anti-duplicate policy, this tick monitored it instead of launching another OpenCode/probe axis."
+  },
+  "active_processes": {
+    "hermes_background_processes": [],
+    "userknn_gated_residual_fine": {
+      "status": "RUNNING_UNCLASSIFIED_LONG_RUNNING",
+      "pids": [18483, 18803, 18804, 18812],
+      "elapsed_observed": "about 13h46m at inspection",
+      "cpu_status": "PID 18812 running at about 100% CPU",
+      "log": "logs/userknn_gated_residual_fine_20260606T132450KST.log",
+      "log_size_bytes": 3436757,
+      "log_lines_observed": 37155,
+      "log_last_mtime_kst": "2026-06-07T03:10:32+09:00",
+      "log_tail_summary": "still appending RuntimeWarning: invalid value encountered in divide from scripts/userknn_residual_probe.py:114; no result JSON/MD and no split completion tail observed in the inspected tail",
+      "expected_report_json": "reports/20260606T132450KST_userknn_gated_residual_fine.json",
+      "expected_report_md": "reports/20260606T132450KST_userknn_gated_residual_fine.md",
+      "expected_reports_exist": false,
+      "artifact_dir": "artifacts/userknn_gated_residual_fine_20260606T132450KST",
+      "classification": "RUNNING_UNCLASSIFIED",
+      "classification_reason": "The worker is live and the expected report files are absent; strict/weak/reject gates cannot be applied yet. The run is now long-running and warning-heavy, so the next tick should treat lack of report plus no split-progress as a blocker/stall signal before deciding whether to terminate and relaunch a bounded diagnostic."
+    },
+    "jackknife_uncertainty_boundary_expanded": {
+      "status": "NOT_RUNNING_INCOMPLETE_UNCHANGED",
+      "pid_file": "logs/20260606T220406KST_jackknife_uncertainty_boundary_expanded.pid",
+      "pid_file_value": 28646,
+      "pid_file_pid_live": false,
+      "log": "logs/20260606T220406KST_jackknife_uncertainty_boundary_expanded.log",
+      "log_size_bytes": 872,
+      "log_lines_observed": 12,
+      "log_last_mtime_kst": "2026-06-06T23:37:27+09:00",
+      "expected_report_json": "reports/20260606T220406KST_jackknife_uncertainty_boundary_expanded.json",
+      "expected_report_md": "reports/20260606T220406KST_jackknife_uncertainty_boundary_expanded.md",
+      "expected_reports_exist": false,
+      "artifact_dir": "artifacts/opencode_axis_loop_20260606T220406KST/jackknife_uncertainty_boundary_expanded",
+      "classification": "FAILED_INCOMPLETE_NO_METRIC_REPORT",
+      "classification_reason": "No live process, no JSON/MD report, and the 12-line log stops mid val_random_uniform_seed123. No metrics exist for escalation."
+    },
+    "aggressive_quota_runner": {
+      "status": "RUNNING_PREEXISTING_NOT_STARTED_BY_THIS_TICK",
+      "pids": [7613, 7630],
+      "note": "Existing autonomous runner remains live from prior policy; this no-submit cron did not call Kaggle submit and observed zero active submit processes after excluding the inspection command itself."
+    }
+  },
+  "completed_probe_classification": {
+    "jackknife_uncertainty_boundary_smoke": {
+      "report_json": "reports/20260606T220406KST_jackknife_uncertainty_boundary_probe.json",
+      "report_md": "reports/20260606T220406KST_jackknife_uncertainty_boundary_probe.md",
+      "verdict": "WEAK_SIGNAL",
+      "strict_pass_count": 0,
+      "top_variant": "vote_consensus__high_capacity_gap__B1__w0.1",
+      "mean_delta_vs_base": 0.0003667400146696309,
+      "min_delta_vs_base": -0.0012002400480095599,
+      "positive_splits": "2/3",
+      "fixes": 252,
+      "breaks": 230,
+      "pooled_p_exact": 0.33881500709211204,
+      "strict_gate_result": "FAIL",
+      "strict_gate_failures": [
+        "mean delta below +0.0015",
+        "minimum split delta is negative",
+        "not 3/3 positive splits",
+        "pooled exact p >= 0.05"
+      ],
+      "axis_decision": "not candidate; no materialization; do not repeat without a faster diagnostic reason"
+    }
+  },
+  "specific_required_file_checks": {
+    "reports/20260606T132450KST_userknn_gated_residual_fine.json": "missing_while_process_running",
+    "reports/20260606T132450KST_userknn_gated_residual_fine.md": "missing_while_process_running",
+    "reports/20260606T220406KST_jackknife_uncertainty_boundary_expanded.json": "missing_after_process_not_live",
+    "reports/20260606T220406KST_jackknife_uncertainty_boundary_expanded.md": "missing_after_process_not_live",
+    "logs/20260606T220406KST_jackknife_uncertainty_boundary_expanded.log": "exists_872_bytes_12_lines_stops_mid_split"
+  },
+  "runner_state_and_quarantine": {
+    "state_file": "state/aggressive_quota_runner_state.json",
+    "last_public_best_seen": 0.77825,
+    "current_public_best_file_known": "submissions/candidate_rank_blend_emb128_emb192.csv",
+    "main_internal_uniform_reference": "emb128 4-seed ref 0.76505",
+    "quarantine_present": true,
+    "guard_logic_modified_this_tick": false,
+    "representative_closed_or_quarantined_families_observed": [
+      "rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4",
+      "rankblend_z_plus_score_als_f32_it30_alpha20_popa4",
+      "boundary_scoreblend_z128_z192_z64",
+      "frontier_z_w1920_w64-0.25",
+      "tagcf_fulltest_seed2024_sym_a0.1_raw_zblend_bw0.5"
+    ]
+  },
+  "gpu_cpu_snapshot": {
+    "gpus": [
+      {"index": 0, "name": "Tesla V100-PCIE-32GB", "memory_used_mib": 0, "memory_total_mib": 32768, "utilization_percent": 0},
+      {"index": 1, "name": "Tesla V100-PCIE-32GB", "memory_used_mib": 0, "memory_total_mib": 32768, "utilization_percent": 1},
+      {"index": 2, "name": "Tesla V100-PCIE-32GB", "memory_used_mib": 0, "memory_total_mib": 32768, "utilization_percent": 0},
+      {"index": 3, "name": "Tesla V100-PCIE-32GB", "memory_used_mib": 4320, "memory_total_mib": 32768, "utilization_percent": 1}
+    ],
+    "cpu_observation": "UserKNN worker PID 18812 is consuming about one full CPU core; Hermes background process list is empty."
+  },
+  "git_and_artifact_safety": {
+    "git_dirty_state_observed": true,
+    "git_stage_commit_push_executed": false,
+    "latest_submission_csv_mtime_observed_utc": "2026-06-03T08:38:36Z",
+    "new_full_test_csv_created_this_tick": false
+  },
+  "actions_this_tick": [
+    "Loaded OpenCode no-submit loop guidance and used the Kaggle RecSys workflow context already supplied by the job.",
+    "Verified OpenCode CLI/auth availability without printing credentials.",
+    "Inspected Hermes background process list, OS processes, GPUs/CPU load, required reports/logs, runner state/quarantine, recent CSV mtimes, git status, and absence of active Kaggle submit processes.",
+    "Did not launch a new OpenCode/probe job because UserKNN gated fine-grid is still running and unclassified.",
+    "Wrote this timestamped JSON status report and matching Markdown report."
+  ],
+  "commands_launched_this_tick": [],
+  "new_material_change": false,
+  "new_failure_or_blocker": "potential_long_running_warning_heavy_userknn_probe_blocker",
+  "next_axis_hypotheses": [
+    "Defer fresh hypotheses until the live UserKNN fine-grid either produces metrics or is declared stalled/incomplete; launching a new axis now would duplicate active validation work.",
+    "If UserKNN closes weak/reject or is stopped as incomplete, run exactly one fresh OpenCode-first no-submit search with strict anti-repeat instructions against closed axes and quarantine families."
+  ],
+  "next_action": "Continue monitoring the live UserKNN gated residual fine-grid. When reports/20260606T132450KST_userknn_gated_residual_fine.json appears or PID 18812 exits, classify strictly: STRICT_PASS only if mean_delta >= +0.0015, min_delta >= 0, 3/3 splits positive, fixes > breaks, pooled exact p < 0.05, validation_only=true, candidate_csv_written=false, and kaggle_submit_executed=false. If the next tick still sees no report and only warning-tail progress, treat it as a stall/blocker and consider terminating/replacing it with a bounded, faster diagnostic before launching a new axis."
+}

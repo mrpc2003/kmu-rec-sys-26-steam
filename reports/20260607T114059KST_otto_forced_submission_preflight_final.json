@@ -1,0 +1,29 @@
+{
+  "candidate": "submissions/candidate_otto_coplay_top5_reverse_recent_w0090_w0040_forced_20260607T114059KST.csv",
+  "sha256": "d70af0f1e325c5c59985ed0df6dbc4232950edf6971f0ad26c72f7da8205985e",
+  "rows": 19998,
+  "columns": [
+    "ID",
+    "Label"
+  ],
+  "label_counts": {
+    "0": 9999,
+    "1": 9999
+  },
+  "id_min": 0,
+  "id_max": 19997,
+  "id_unique": 19998,
+  "matches_pairs_id_order": true,
+  "tophalf_bad_users": 0,
+  "tophalf_user_count": 4737,
+  "pre_submissions_csv": "reports/20260607T113547KST_otto_forced_pre_submissions.csv",
+  "live_submission_rows": 19,
+  "today_utc_complete_pending_count": 0,
+  "quota_available_assuming_5_per_day": true,
+  "current_live_best_public": 0.77825,
+  "current_live_best_file": "candidate_rank_blend_emb128_emb192.csv",
+  "not_already_live_filename": true,
+  "risk_label": "FORCED manual-risk verification probe; independent strict gate failed",
+  "strict_gate_passed": false,
+  "local_expected_public_range_note": "Because independent confirmation failed, expected not to beat current live best; probe is for judgment verification only."
+}

@@ -210,6 +210,16 @@
       "validation_mean_delta_vs_rankblend": 0.0007668200306728176,
       "transfer_ratio": -2.7385826086955816,
       "sha256": "96b28feafda52740866b37f3128eb9015d53d15a1dfa7604f6643f60d09755eb"
+    },
+    "tagcf_fulltest_sym_a0.1_raw_zblend_bw0.5": {
+      "time_kst": "2026-06-03T17:40:25.713580+09:00",
+      "reason": "tagcf_seed_family_negative_transfer_guard",
+      "source_variant": "tagcf_fulltest_seed2024_sym_a0.1_raw_zblend_bw0.5",
+      "public_delta_vs_previous_best": -0.0020999999999999908,
+      "validation_mean_delta_vs_rankblend": 0.0007668200306728176,
+      "transfer_ratio": -2.7385826086955816,
+      "sha256": "96b28feafda52740866b37f3128eb9015d53d15a1dfa7604f6643f60d09755eb",
+      "note": "Seed2024 TAG-CF full-test public 0.77615 vs best 0.77825; block sibling seed materializations from automatic submission."
     }
   },
   "last_similarity_postmortem_json": "reports/20260602T211027KST_autorun_batch_similarity_postmortem.json",

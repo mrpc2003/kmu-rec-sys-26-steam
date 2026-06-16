@@ -1,0 +1,128 @@
+{
+  "timestamp_kst": "2026-06-07T09:18:46+09:00",
+  "timestamp_utc": "2026-06-07T00:18:46Z",
+  "cron_role": "OpenCode-first no-submit improvement-axis discovery monitor",
+  "safety_flags": {
+    "validation_only": true,
+    "kaggle_submit_executed_by_this_tick": false,
+    "actual_kaggle_submit_process_count_excluding_self_after_tick": 0,
+    "full_test_candidate_or_submission_csv_created_by_this_tick": false,
+    "hidden_labels_used": false,
+    "private_answers_used": false,
+    "external_steam_scraping_used": false,
+    "quarantine_or_guard_logic_weakened": false,
+    "git_stage_commit_push_executed": false,
+    "credentials_or_tokens_printed": false,
+    "recursive_cron_scheduled": false
+  },
+  "actions_this_tick": [
+    "Loaded and followed the OpenCode no-submit improvement-axis-loop workflow and Kaggle RecSys safety gates.",
+    "Inspected Hermes sessions, OS processes, GPU state, required UserKNN/jackknife artifacts, runner state/quarantine, recent reports, and logs.",
+    "Verified OpenCode readiness with a smoke run captured at logs/20260607T090941KST_opencode_smoke.jsonl containing OPENCODE_CRON_SMOKE_OK.",
+    "Launched exactly one bounded OpenCode run from reports/20260607T090941KST_opencode_axis_loop_prompt.md using --format json with stdin closed; captured logs at logs/opencode_improvement_axis_loop_20260607T090941KST.jsonl.",
+    "OpenCode implemented and ran a bounded validation-only OTTO-style source-separated co-visitation smoke via scripts/otto_source_covisit_smoke.py; command recorded as timeout 600 env -u VIRTUAL_ENV UV_NO_ACTIVE_VENV=1 uv run --with numpy --with pandas --with scipy python scripts/otto_source_covisit_smoke.py.",
+    "Classified the new axis as WEAK_SIGNAL_STRICT_GATE_FAIL: it has 3/3 positive splits and p<0.05, but mean delta is below the +0.0015 escalation threshold.",
+    "Verified JSON parseability, py_compile, validation artifact headers/row counts, no active Kaggle submit process, no continuing project probe process, selected secret scan, and git diff --check."
+  ],
+  "active_processes_after_tick": {
+    "hermes_background_processes": [],
+    "project_matching_processes": [],
+    "real_kaggle_submit_processes": [],
+    "gpu_snapshot": [
+      {"index": 0, "memory_used_mib": 0, "memory_total_mib": 32768, "utilization_percent": 0},
+      {"index": 1, "memory_used_mib": 0, "memory_total_mib": 32768, "utilization_percent": 0},
+      {"index": 2, "memory_used_mib": 0, "memory_total_mib": 32768, "utilization_percent": 1},
+      {"index": 3, "memory_used_mib": 4320, "memory_total_mib": 32768, "utilization_percent": 2}
+    ]
+  },
+  "required_probe_checks": {
+    "userknn_gated_residual_fine": {
+      "expected_report_json": "reports/20260606T132450KST_userknn_gated_residual_fine.json",
+      "expected_report_md": "reports/20260606T132450KST_userknn_gated_residual_fine.md",
+      "expected_reports_exist": false,
+      "log": "logs/userknn_gated_residual_fine_20260606T132450KST.log",
+      "classification": "STALLED_INCOMPLETE_PREVIOUSLY_CLOSED",
+      "note": "No relaunch; previous log was warning-dominated and no metric report exists."
+    },
+    "jackknife_uncertainty_boundary_expanded": {
+      "expected_report_json": "reports/20260606T220406KST_jackknife_uncertainty_boundary_expanded.json",
+      "expected_report_md": "reports/20260606T220406KST_jackknife_uncertainty_boundary_expanded.md",
+      "expected_reports_exist": false,
+      "log": "logs/20260606T220406KST_jackknife_uncertainty_boundary_expanded.log",
+      "classification": "FAILED_INCOMPLETE_NO_METRIC_REPORT",
+      "note": "Log has only 12 lines and stops mid val_random_uniform_seed123; PID file value is not live."
+    },
+    "jackknife_uncertainty_boundary_smoke": {
+      "report_json": "reports/20260606T220406KST_jackknife_uncertainty_boundary_probe.json",
+      "classification": "WEAK_SIGNAL_STRICT_GATE_FAIL",
+      "top_variant": "vote_consensus__high_capacity_gap__B1__w0.1",
+      "mean_delta_vs_base": 0.0003667400146696309,
+      "min_delta_vs_base": -0.0012002400480095599,
+      "positive_splits": "2/3",
+      "fixes": 252,
+      "breaks": 230,
+      "pooled_p_exact": 0.33881500709211204
+    }
+  },
+  "new_opencode_run": {
+    "status": "COMPLETED",
+    "exit_code": 0,
+    "prompt": "reports/20260607T090941KST_opencode_axis_loop_prompt.md",
+    "jsonl_log": "logs/opencode_improvement_axis_loop_20260607T090941KST.jsonl",
+    "raw_text": "reports/20260607T090941KST_opencode_improvement_axis_loop_raw_text.md",
+    "report_json": "reports/20260607T090941KST_opencode_improvement_axis_loop.json",
+    "report_md": "reports/20260607T090941KST_opencode_improvement_axis_loop.md",
+    "final_report_verdict": "WEAK_SIGNAL",
+    "final_text_sentinel": "OPENCODE_AXIS_LOOP_DONE_WEAK_SIGNAL",
+    "note": "The full JSONL also contains sentinel option strings from the prompt; the final extracted text/report verdict is WEAK_SIGNAL."
+  },
+  "new_probe_classification": {
+    "axis": "OTTO-style source-separated co-visitation residual smoke",
+    "script": "scripts/otto_source_covisit_smoke.py",
+    "classification": "WEAK_SIGNAL_STRICT_GATE_FAIL",
+    "strict_pass": false,
+    "strict_gate_failures": ["mean_delta_vs_base < +0.0015"],
+    "top_variant": "base_plus_score_coplay_top5_mean_w0.2",
+    "mean_delta_vs_base": 0.0012335800493432265,
+    "min_delta_vs_base": 0.0005001000200040018,
+    "positive_splits": "3/3",
+    "fixes": 699,
+    "breaks": 625,
+    "pooled_p_exact": 0.044791873285533086,
+    "split_deltas": {
+      "val_random_uniform_seed42": 0.0005001000200040018,
+      "val_random_uniform_seed7": 0.001300260052010449,
+      "val_random_uniform_seed123": 0.001900380076015229
+    },
+    "interpretation": "This is a real weak multi-split signal, stronger than prior jackknife smoke, but still below the predeclared mean-delta threshold and therefore not candidate-like or submit-ready."
+  },
+  "artifacts": {
+    "status_json": "reports/20260607T091846KST_improvement_axis_cron_status.json",
+    "status_md": "reports/20260607T091846KST_improvement_axis_cron_status.md",
+    "opencode_prompt": "reports/20260607T090941KST_opencode_axis_loop_prompt.md",
+    "opencode_jsonl": "logs/opencode_improvement_axis_loop_20260607T090941KST.jsonl",
+    "opencode_raw_text": "reports/20260607T090941KST_opencode_improvement_axis_loop_raw_text.md",
+    "opencode_report_json": "reports/20260607T090941KST_opencode_improvement_axis_loop.json",
+    "opencode_report_md": "reports/20260607T090941KST_opencode_improvement_axis_loop.md",
+    "probe_log": "logs/20260607T090941KST_otto_source_covisit_smoke.log",
+    "validation_score_files": [
+      "artifacts/opencode_axis_loop_20260607T090941KST/otto_source_covisit/val_random_uniform_seed42/validation_otto_source_scores.csv",
+      "artifacts/opencode_axis_loop_20260607T090941KST/otto_source_covisit/val_random_uniform_seed7/validation_otto_source_scores.csv",
+      "artifacts/opencode_axis_loop_20260607T090941KST/otto_source_covisit/val_random_uniform_seed123/validation_otto_source_scores.csv"
+    ]
+  },
+  "verification": {
+    "opencode_cli_version": "1.15.11",
+    "opencode_smoke": "ok",
+    "opencode_json_parse": "ok",
+    "script_py_compile": "ok",
+    "validation_csv_rows_each": 19996,
+    "validation_csv_uploadable_headers": false,
+    "active_kaggle_submit_processes": 0,
+    "active_project_probe_processes": 0,
+    "secret_scan_selected_files": "ok_no_hits",
+    "git_diff_check_selected": "ok",
+    "git_stage_commit_push_executed": false
+  },
+  "exact_next_action": "Do not submit and do not create a full-test candidate. Treat OTTO source-separated co-visitation as WEAK_SIGNAL only. A future tick may run a bounded validation-only expansion around this source family only if it remains OpenCode-first, avoids test/submission materialization, and predeclares a stricter multi-split/noise gate; otherwise continue searching for a genuinely stronger independent axis."
+}

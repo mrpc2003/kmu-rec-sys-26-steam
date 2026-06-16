@@ -53,7 +53,24 @@ reports/deep_eda/*.csv
 *.bak
 reports/crashed_sweep_*/
 reports/*.log
+reports/*.jsonl
+reports/*_status.jsonl
+reports/*_status.txt
+reports/*_status/
+reports/*_submit_stdout.txt
+reports/*_submit_stderr.txt
+reports/latest_autorun_submit_ts.txt
+reports/*_autorun_submissions.csv
+reports/*_idle_autorun_submissions.csv
+reports/*_antifail_scan.json
+reports/media/*.err
 logs/
+
+# Agent/runtime continuation state
+.omo/
+
+# Final label CSVs stay local; commit manifest/preflight reports instead
+final_package/*.csv
 
 # eCampus build-output bundle (duplicates artifacts/ + raw data; rebuild from scripts)
 ecampus_bundle/

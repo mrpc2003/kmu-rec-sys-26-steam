@@ -1,0 +1,1025 @@
+[
+  {
+    "arxiv_id": "2606.00282v1",
+    "title": "Synthetic Data from Cross-Domain Events for Large-Scale Recommendation Systems",
+    "published": "2026-05-29",
+    "updated": "2026-05-29",
+    "authors": [
+      "Xiangyu Wang",
+      "Yawen He",
+      "Shivendra Pratap Singh",
+      "Han Huang",
+      "Mengtong Hu",
+      "Sharath Ciddu",
+      "Yi-Hsuan Hsieh",
+      "Erik Groving"
+    ],
+    "categories": [
+      "cs.IR",
+      "cs.AI"
+    ],
+    "summary": "Large-scale recommendation systems operate across diverse domains, yet they face the challenges of data sparsity and noisy implicit feedback. Traditional approaches mitigate this via model-specific knowledge distillation from source domains to a target domain. Inspired by the transformative success of synthetic data generation in large language models (LLMs), we introduce Synthetic Cross-domain Augmentation and Learning for Recommendation (SCALR), a framework that generates synthetic user-item interaction events for a target recommendation domain by leveraging observed events from a source domain. SCALR decomposes cross-domain learning into two modular stages. First, it translates observed user events in source domains by framing event generation as estimating the likelihood that a user would interact with a target-domain item, conditioned on their observed interactions in a source domain. Second, downstream models train on these synthetic events as cross-domain learning objectives, where the synthetic events augment the target domain's training data in a model-agnostic manner. Our approach yields statistically significant improvements in online A/B tests on an industrial recommendation platform. To the best of our knowledge, this is among the first works to explicitly frame cross-domain event transfer as synthetic data generation for recommendation systems.",
+    "abs_url": "https://arxiv.org/abs/2606.00282v1",
+    "pdf_url": "https://arxiv.org/pdf/2606.00282v1",
+    "query_tags": [
+      "llm_recommender_2025"
+    ]
+  },
+  {
+    "arxiv_id": "2605.28810v1",
+    "title": "Affective Music Recommendation: A Rollout-Based World Model for Offline Preference Optimization",
+    "published": "2026-05-27",
+    "updated": "2026-05-27",
+    "authors": [
+      "Audrey Chan",
+      "Aaron Labbé",
+      "Jacob Lavoie",
+      "Jordan Bannister",
+      "Arsène Fansi Tchango",
+      "Guillaume Lajoie",
+      "Laurent Charlin"
+    ],
+    "categories": [
+      "cs.LG",
+      "cs.IR",
+      "cs.SD"
+    ],
+    "summary": "Functional music applications, from consumer focus and sleep aids to clinical interventions, share a distinctive recommendation problem: success is defined by the listener's affective state, but online experimentation on emotion is ethically constrained, particularly for clinical populations who cannot reliably skip a song or report distress. We describe AMRS, the Affective Music Recommendation System deployed on LUCID's health-and-wellness platforms, which serve clinical users (primarily older adults with neurocognitive conditions) and consumer-wellness users across energize, focus, calm, and sleep modes. AMRS is built around a rollout-based world model: a causal transformer trained on logged listening data to jointly predict engagement, binary rating, and self-reported valence and arousal. The world model serves both as an in-silico simulator for offline policy training and as a stress-testing tool before deployment. A recommender policy initialized by behaviour cloning is fine-tuned offline with Direct Preference Optimization (DPO) against a configurable multi-objective utility function. Under a strict cold-start protocol, the world model predicts both behavioural and affective signals with usable fidelity; DPO improves predicted valence and arousal over the cloned baseline while maintaining a similar diversity profile and avoiding the distributional collapse produced by greedy optimization. We position the work as an early deployed validation of a methodology for affective recommendation when online experimentation is ethically untenable.",
+    "abs_url": "https://arxiv.org/abs/2605.28810v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.28810v1",
+    "query_tags": [
+      "dynamic_preference_optimization"
+    ]
+  },
+  {
+    "arxiv_id": "2605.25330v1",
+    "title": "How Reliable Are Semantic-ID Tokenizer Comparisons in Generative Recommendation?",
+    "published": "2026-05-25",
+    "updated": "2026-05-25",
+    "authors": [
+      "Qian Zhang",
+      "Lech Szymanski",
+      "Haibo Zhang",
+      "Jeremiah D. Deng"
+    ],
+    "categories": [
+      "cs.IR"
+    ],
+    "summary": "In Semantic-ID (SID) based generative recommendation, each item is represented as a sequence of discrete codes, and an autoregressive model is trained to generate the SID sequence of the next item; top-K performance is then measured by checking whether the SID sequence of the target item appears among the generated sequences. This evaluation protocol equates SID-level matching with item-level recommendation, an equivalence that holds only when every SID sequence maps to a single item. We show this assumption breaks down in practice: because tokenizers compress item features into a code space, semantically similar but collaboratively distinct items are frequently assigned the same SID sequence. Across four datasets and five representative tokenizers, the fraction of items involved in such collisions reaches 30.5%, so matching a shared SID sequence identifies only a collision group rather than the target item. Consequently, SID-level metrics overestimate item-level performance (Hit@10 is inflated by up to 103.36%), and the inflation grows with the collision rate. To support faithful comparison, we develop collision-aware item-level metrics computed directly from generated SID sequences, together with a post-tokenizer procedure that reassigns last-level SIDs at minimum cost to obtain a collision-free assignment for any existing tokenizer. Our results indicate that SID-level rankings in prior work should be interpreted with caution, and that reliable tokenizer evaluation requires either item-level correction or collision-free SID assignments.",
+    "abs_url": "https://arxiv.org/abs/2605.25330v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.25330v1",
+    "query_tags": [
+      "topk_objective"
+    ]
+  },
+  {
+    "arxiv_id": "2605.24667v1",
+    "title": "When Mean CE Fails: Median CE Can Better Track Language Model Quality",
+    "published": "2026-05-23",
+    "updated": "2026-05-23",
+    "authors": [
+      "Hao Guo",
+      "Simon Dennis",
+      "Rivaan Patil",
+      "Kevin Shabahang"
+    ],
+    "categories": [
+      "cs.AI",
+      "cs.LG"
+    ],
+    "summary": "Mean cross-entropy is the standard validation metric for language models, but it can fail to track model quality during training. We examine this in two common scenarios. First, in Qwen2.5-1.5B SFT on synthetic fact-learning, we find that mean CE rises substantially after the initial learning phase while held-out fact-recall accuracy remains near its peak. Second, we find that in top-K distillation on TinyStories, decreasing K improves median CE while worsening mean CE; the Top-5 student attains the highest LLM-judge score and crosses below its teacher on median CE, despite having the worst mean CE. In both cases, median CE correlates much more closely with task performance than does mean CE. Analyzing how bulk and tail percentile CE move during training reveals that training reshapes the empirical per-token CE distribution. In top-K distillation, smaller K yields a distribution with more mass at both extremes, decreasing the median and increasing the mean. In Qwen SFT, the bulk saturates quickly while the tail extends in the latter half of training. In both, the task-evaluation metric appears more sensitive to the bulk than to the tail. Practically, we recommend reporting a small set of percentile CE summaries alongside the mean, and using concordance among them as a tool to keep track of distribution reshaping, as well as a low-cost diagnostic for when mean and median CE disagree on model selection.",
+    "abs_url": "https://arxiv.org/abs/2605.24667v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.24667v1",
+    "query_tags": [
+      "topk_objective"
+    ]
+  },
+  {
+    "arxiv_id": "2605.23265v1",
+    "title": "Fairness in Aggregation: Optimal Top-$k$ and Improved Full Ranking",
+    "published": "2026-05-22",
+    "updated": "2026-05-22",
+    "authors": [
+      "Diptarka Chakraborty",
+      "Arya Mazumdar",
+      "Barna Saha",
+      "Alvin Hong Yao Yan"
+    ],
+    "categories": [
+      "cs.DS"
+    ],
+    "summary": "Ensuring fairness in algorithmic ranking systems is a critical challenge with significant societal implications for hiring, recommendations, web search, and data management. Standard methods for aggregating multiple preference orders into a consensus ranking may perpetuate and even amplify the lack of representation of underrepresented groups. To address this, recent research has focused on incorporating fairness constraints to ensure the presence of different groups in the top-$k$ positions of the final aggregate ranking. We study two fairness-aware variants under the well-known Spearman footrule, which corresponds to the $L_1$ distance between rankings. First, we address the practically salient task of computing a fair aggregate top-$k$ ranking -- crucial in settings like recommendations and hiring where selection is primarily based on the top-$k$ results -- and present the first optimal algorithm for this problem. Second, we consider fair (full) rank aggregation over all candidates (not specifically on top-$k$). We already know of a $3$-approximation for this fair rank aggregation variant (Wei et al., SIGMOD'22; Chakraborty et al., NeurIPS'22), whereas an exact algorithm exists for the corresponding unconstrained (unfair) version (Dwork et al., WWW'01). Closing the computational gap between fair and unconstrained rank aggregation has remained a tantalizing open problem. We make significant progress by giving a $2$-approximation algorithm for fair (full) rank aggregation, improving substantially over the previous $3$-approximation. Further, we complement our theoretical contributions with experiments on different real-world datasets, which corroborate our theoretical results and demonstrate strong empirical performance relative to state-of-the-art baselines.",
+    "abs_url": "https://arxiv.org/abs/2605.23265v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.23265v1",
+    "query_tags": [
+      "topk_objective"
+    ]
+  },
+  {
+    "arxiv_id": "2605.22766v1",
+    "title": "Diversed Model Discovery via Structured Table Discovery",
+    "published": "2026-05-21",
+    "updated": "2026-05-21",
+    "authors": [
+      "Zhengyuan Dong",
+      "Renée J. Miller"
+    ],
+    "categories": [
+      "cs.IR"
+    ],
+    "summary": "Model cards describe model behavior through a mixture of textual descriptions and structured artifacts, including performance, configuration, and dataset tables. Existing model search systems rely predominantly on semantic similarity over text, which can produce homogeneous result sets and limit exploration of alternatives. We argue that model search is inherently comparative: users want models that are task-aligned yet differentiated in measurable ways. We hypothesize that this balance requires retrieval over condensed, high-quality evidence rather than verbose descriptions, and much of that evidence is concentrated in structured tables. We present StructuredSemanticSearch, a table-driven model search framework built on the ModelTables benchmark. Given a query, StructuredSemanticSearch combines a semantic baseline for task alignment with a structure-aware pipeline that discovers query-related model-card tables using table discovery operators such as unionability, joinability, and keyword search. Retrieved tables are mapped back to model cards under a controlled top-k budget, enabling fair comparison between text-based and table-based retrieval. Beyond retrieval, StructuredSemanticSearch adapts table integration to the model-table domain through orientation-aware integration, producing compact integrated views of tables from partially overlapping and sometimes transposed evidence tables. For evaluation, we introduce a nugget-based, auditable protocol that extracts compact evidence items from model cards, matches queries to condition- or intent-specific nuggets, and measures evidence coverage and diversity over retrieved model-card candidate sets. This protocol also provides a scalable path toward approximate, evidence-based labeling in dynamic model lakes. Experiments on 597 model-recommendation queries show improved nugget coverage for the structure-aware pipeline than semantic baseline",
+    "abs_url": "https://arxiv.org/abs/2605.22766v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.22766v1",
+    "query_tags": [
+      "topk_objective"
+    ]
+  },
+  {
+    "arxiv_id": "2605.21967v1",
+    "title": "Reinforced Preference Optimization for Reasoning-Augmented Recommendations",
+    "published": "2026-05-21",
+    "updated": "2026-05-21",
+    "authors": [
+      "Jingtong Gao",
+      "Zeyu Song",
+      "Chi Lu",
+      "Xiaopeng Li",
+      "Derong Xu",
+      "Maolin Wang",
+      "Peng Jiang",
+      "Kun Gai"
+    ],
+    "categories": [
+      "cs.IR"
+    ],
+    "summary": "Recommender systems are critical for delivering personalized content across digital platforms, and recent advances in Large Language Models (LLMs) offer new opportunities to enhance them with richer world knowledge and explicit reasoning capabilities. With the help of reasoning knowledge, recommendations can better infer users' underlying intents, adapt to evolving preferences, and leverage semantic relationships for improved accuracy and interpretability. However, existing reasoning-based recommendation methods often fail to fully align the LLM's reasoning process with recommendation-specific objectives due to structural disruption during integration and difficulties in translating free-form generation into accurate item predictions. In this paper, we introduce RPORec, a reinforced preference optimization framework that unifies an LLM backbone's reasoning ability with a dedicated recommendation head (Rechead) for precise item retrieval. RPORec comprises two stages: (1) Reasoning-Augmented Recommendation Modeling, where high-quality Chain-of-Thought (CoT) reasoning is generated and used as auxiliary knowledge to guide the Rechead in learning recommendation-specific representations; and (2) Advanced Reasoning Refinement and Alignment, in which the trained Rechead produces verifiable rewards to fine-tune the LLM backbone via reinforcement learning, enhancing reasoning quality, structural consistency, and task relevance. Extensive experiments on public benchmarks and large-scale online deployments show that RPORec consistently outperforms state-of-the-art LLM-based recommendation methods, demonstrating the effectiveness of reasoning-augmented recommendation modeling in real-world systems.",
+    "abs_url": "https://arxiv.org/abs/2605.21967v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.21967v1",
+    "query_tags": [
+      "dynamic_preference_optimization"
+    ]
+  },
+  {
+    "arxiv_id": "2605.19246v1",
+    "title": "Example-Driven Intent Synthesis for Constrained Data Bundle Retrieval: Focused Text Snippet Extraction and Beyond",
+    "published": "2026-05-19",
+    "updated": "2026-05-19",
+    "authors": [
+      "Whanhee Cho",
+      "Kuangfei Long",
+      "Mahmood Jasim",
+      "Matteo Brucato",
+      "Alexandra Meliou",
+      "Peter J. Haas",
+      "Anna Fariha"
+    ],
+    "categories": [
+      "cs.DB"
+    ],
+    "summary": "Selecting a bundle of items that collectively satisfies constraints is a fundamental task across databases, recommender systems, and text summarization. Unlike traditional retrieval that returns individual or top-k items, bundle retrieval is inherently combinatorial and, in general, NP-hard. Although package queries can efficiently retrieve bundles given a well-formed query, two key user-centric challenges remain: (1) expressing and tuning multi-dimensional bundle intent through a user-friendly interface, and (2) ensuring feasibility when the query yields empty results. We introduce Ex2Bundle, an Example-driven Bundle retrieval framework that enables users to specify their intent through example bundles and automatically synthesizes package queries that capture the intent implicit in those example bundles via aggregate constraints. Ex2Bundle also addresses a challenge unique to bundle retrieval: when inferred aggregate constraints are infeasible over the target data, our data-aware constraint relaxation minimally adjusts the constraint bounds while preserving alignment with user intent. We instantiate a specific application of focused text snippet extraction by example to demonstrate the efficacy of the Ex2Bundle framework. Extensive experiments over real-world datasets and a user study demonstrate that Ex2Bundle improves usability and consistently returns intent-aligned bundles even under distributional shifts of the target database.",
+    "abs_url": "https://arxiv.org/abs/2605.19246v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.19246v1",
+    "query_tags": [
+      "topk_objective"
+    ]
+  },
+  {
+    "arxiv_id": "2605.17267v1",
+    "title": "RAGR: Review-Augmented Generative Recommendation",
+    "published": "2026-05-17",
+    "updated": "2026-05-17",
+    "authors": [
+      "Yingyi Zhang",
+      "Junyi Li",
+      "Yejing Wang",
+      "Wenlin Zhang",
+      "Xiaowei Qian",
+      "Sheng Zhang",
+      "Yue Feng",
+      "Yichao Wang"
+    ],
+    "categories": [
+      "cs.IR"
+    ],
+    "summary": "Sequential recommendation (SR) is traditionally formulated as next-item prediction over a chronological sequence of interacted items. Although recent generative recommendation (GR) methods introduce new machinery, such as semantic IDs, autoregressive decoding, and unified token spaces, they largely inherit the same item-only modeling assumption. We argue that this design constitutes a structural bottleneck, because user decision-making is not purely behavioral: while item interactions reveal what users choose, review feedback often explain why they choose it by exposing latent evaluative factors. Motivated by this observation, we propose Review-Augmented Generative Recommendation (RAGR), a novel GR framework that incorporates review feedback directly into the generative user sequence rather than treating reviews as auxiliary side information. Specifically, RAGR introduces a Review-Augmented User Sequence Modeling mechanism that interleaves item semantic IDs and review semantic IDs in chronological order to construct a mixed behavioral-semantic sequence, enabling review signals to participate directly in autoregressive next-token generation. To preserve the recommendation objective, we further introduce an Item-Centric Task Generation Alignment strategy based on direct preference optimization (DPO), which encourages the model to favor item tokens over review tokens at prediction positions. Experiments on three real-world datasets show that RAGR yields consistent and significant gains over strong GR backbones across all metrics. Our code and data are available at \\url{https://github.com/Zhang-Yingyi/TKDE_RAGR}.",
+    "abs_url": "https://arxiv.org/abs/2605.17267v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.17267v1",
+    "query_tags": [
+      "dynamic_preference_optimization"
+    ]
+  },
+  {
+    "arxiv_id": "2605.15905v1",
+    "title": "Generative Long-term User Interest Modeling for Click-Through Rate Prediction",
+    "published": "2026-05-15",
+    "updated": "2026-05-15",
+    "authors": [
+      "Jiangli Shao",
+      "Kaifu Zheng",
+      "Hao Fang",
+      "Huimu Ye",
+      "Zhiwei Liu",
+      "Bo Zhang",
+      "Shu Han",
+      "Xingxing Wang"
+    ],
+    "categories": [
+      "cs.IR",
+      "cs.AI"
+    ],
+    "summary": "Modeling long-term user interests with massive historical user behaviors enhances click-through rate (CTR) prediction performance in advertising and recommendation systems. Typically, a two-stage framework is widely adopted, where a general search unit (GSU) first retrieves top-$k$ relevant behaviors towards the target item, and an exact search unit (ESU) generates interest features via tailored attention. However, current target-centered GSU would ignore other latent user interests, leading to incomplete and biased interest features. Additionally, the matching-based retrieval process in GSUs depends on the pairwise similarity score between target item and each historical behavior, which not only becomes time-consuming for online services as user behaviors continue to grow, but also overlooks the interaction information among user behaviors. To combat these problems, we propose a \\textbf{Gen}erative \\textbf{L}ong-term user \\textbf{I}nterest model named GenLI for CTR prediction. GenLI consists of an interest generation module (IGM), a behavior retrieval module (BRM), and an interest fusion module (IFM). The IGM generates multiple interest distributions to indicate different aspects of real-time user interests, which is target-independent and incorporates interaction information among behaviors, ensuring complete and diverse interest features. The BRM selects related behaviors via a simple lookup operation, reducing the time complexity for weighting each behavior to $O(1)$. Finally, the IFM uses delicate gating mechanisms to generate interest features. Based on the generation process, GenLI improves the diversity of user interests and avoids complex matching-based behavioral retrieval, achieving a better balance between accuracy and efficiency for CTR prediction.",
+    "abs_url": "https://arxiv.org/abs/2605.15905v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.15905v1",
+    "query_tags": [
+      "topk_objective"
+    ]
+  },
+  {
+    "arxiv_id": "2605.10784v1",
+    "title": "MASS-DPO: Multi-negative Active Sample Selection for Direct Policy Optimization",
+    "published": "2026-05-11",
+    "updated": "2026-05-11",
+    "authors": [
+      "Rohan Surana",
+      "Xintong Li",
+      "Sheldon Yu",
+      "Yiran Jenny Shen",
+      "Chuhan Wang",
+      "Tong Yu",
+      "Prithviraj Ammanabrolu",
+      "Jingbo Shang"
+    ],
+    "categories": [
+      "cs.LG"
+    ],
+    "summary": "Multi-negative preference optimization under the Plackett--Luce (PL) model extends Direct Preference Optimization (DPO) by leveraging comparative signals across one preferred and multiple rejected responses. However, optimizing over large negative pools is costly, and many candidates contribute redundant gradients due to their similar effects on policy updates. We introduce MASS-DPO, a multi-negative active sample selection method that derives a PL-specific Fisher-information objective for selecting compact, informative negative subsets within each prompt. The resulting log-determinant objective selects negatives that contribute complementary information for policy updates, yielding compact subsets that retain the full pool's information while reducing redundancy. In practice, this favors negatives whose gradients cover different update directions, reducing redundant signal from near-duplicate candidates while preserving the most useful training information. Across four benchmarks spanning recommendation and multiple-choice QA and three model families, MASS-DPO consistently exceeds or matches existing methods in accuracy, improves Recall/NDCG and margin-based optimization dynamics, and delivers stronger alignment with substantially fewer negatives.",
+    "abs_url": "https://arxiv.org/abs/2605.10784v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.10784v1",
+    "query_tags": [
+      "dynamic_preference_optimization"
+    ]
+  },
+  {
+    "arxiv_id": "2605.07129v1",
+    "title": "RRCM: Ranking-Driven Retrieval over Collaborative and Meta Memories for LLM Recommendation",
+    "published": "2026-05-08",
+    "updated": "2026-05-08",
+    "authors": [
+      "Shijun Li",
+      "Wooseong Yang",
+      "Yu Wang",
+      "Tianxin Wei",
+      "Joydeep Ghosh"
+    ],
+    "categories": [
+      "cs.IR",
+      "cs.AI",
+      "cs.LG"
+    ],
+    "summary": "Large Language Models (LLMs) have emerged as a promising paradigm for next-generation recommender systems, offering strong semantic understanding and natural-language reasoning abilities. Despite recent progress, current LLM-based recommenders still face key challenges in constructing decision-relevant contexts from heterogeneous evidence. First, existing methods often rely on fixed context construction strategies: collaborative behavioral evidence and item-side metadata are typically incorporated through predefined prompts, static retrieval pipelines, or handcrafted injection mechanisms, making it difficult to determine what information is truly beneficial for each instance. Second, heterogeneous evidence introduces a severe context-efficiency bottleneck. Rich metadata and collaborative interaction records can quickly overwhelm the context window, while aggressive compression or heuristic filtering may discard fine-grained evidence critical for accurate recommendation. To address these challenges, we propose RRCM, a ranking-driven retrieval-and-reasoning framework over collaborative and metadata memories for LLM-based agentic recommendation. RRCM starts from a lightweight user-history context and learns whether to recommend directly, retrieve collaborative evidence, retrieve item metadata, or interleave both through reasoning. Both memories are represented in natural language and accessed through a unified retrieval interface, enabling flexible evidence acquisition without handcrafted CF injection or fixed retrieval rules. We optimize this memory-reading policy with an outcome-only ranking reward, instantiated using group relative policy optimization, so that retrieval decisions are directly driven by final top-k recommendation quality. Extensive experiments show that RRCM significantly outperforms traditional baselines and diverse LLM-based recommendation approaches.",
+    "abs_url": "https://arxiv.org/abs/2605.07129v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.07129v1",
+    "query_tags": [
+      "topk_objective"
+    ]
+  },
+  {
+    "arxiv_id": "2605.07075v1",
+    "title": "ModelLens: Finding the Best for Your Task from Myriads of Models",
+    "published": "2026-05-08",
+    "updated": "2026-05-08",
+    "authors": [
+      "Rui Cai",
+      "Weijie Jacky Mo",
+      "Xiaofei Wen",
+      "Qiyao Ma",
+      "Wenhui Zhu",
+      "Xiwen Chen",
+      "Muhao Chen",
+      "Zhe Zhao"
+    ],
+    "categories": [
+      "cs.LG"
+    ],
+    "summary": "The open-source model ecosystem now contains hundreds of thousands of pretrained models, yet picking the best model for a new dataset is increasingly infeasible: new models and unbenchmarked datasets emerge continuously, leaving practitioners with no prior records on either side. Existing approaches handle only fragments of this in-the-wild setting: AutoML and transferability estimation select models from small predefined pools or require expensive per-model forward passes on the target dataset, while model routing presupposes a given candidate pool. We introduce ModelLens, a unified framework for model recommendation in the wild. Our key insight is that public leaderboard interactions, though scattered and noisy, collectively trace out an implicit atlas of model capabilities across heterogeneous evaluation settings, a signal rich enough to learn from directly. By learning a performance-aware latent space over model--dataset--metric tuples, ModelLens ranks unseen models on unseen datasets without running candidates on the target dataset. On a new benchmark of 1.62M evaluation records spanning 47K models and 9.6K datasets, ModelLens surpasses baselines that either rely on metadata alone or require running each candidate on the target dataset. Its recommended Top-K pools further improve multiple representative routing methods by up to 81% across diverse QA benchmarks. Case studies on recently released benchmarks further confirm generalization to both text and vision-language tasks.",
+    "abs_url": "https://arxiv.org/abs/2605.07075v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.07075v1",
+    "query_tags": [
+      "topk_objective"
+    ]
+  },
+  {
+    "arxiv_id": "2605.16345v1",
+    "title": "Goal-Conditioned Supervised Learning for LLM Fine-Tuning",
+    "published": "2026-05-08",
+    "updated": "2026-05-08",
+    "authors": [
+      "Shijun Li",
+      "Kaiwen Dong",
+      "Xiang Gao",
+      "Joydeep Ghosh"
+    ],
+    "categories": [
+      "cs.LG",
+      "cs.AI"
+    ],
+    "summary": "Large language models often require fine-tuning to better align their behavior with user intent at deployment. Existing approaches are commonly divided into online and offline paradigms. Online methods, such as RL-based alignment, can directly optimize outcome quality but typically rely on external reward models and iterative rollouts, making them costly and difficult to deploy in many cases. Offline methods are more efficient, but prevailing approaches such as supervised fine-tuning (SFT) and direct preference optimization (DPO) remain limited: SFT typically collapses graded feedback into binary supervision, while DPO depends on paired preference data that is often unavailable or expensive to construct. In this paper, we propose goal-conditioned supervised learning (GCSL) as an offline fine-tuning framework for LLMs. Our core idea is to treat feedback signals directly as an explicit goal and train the model, purely through supervised learning, to generate responses that achieve that goal. To better exploit graded feedback, we further introduce a novel goal formulation that defines learning as consistently pursuing outcomes above a target quality threshold, rather than imitating samples from a selected high-quality subset. This design mitigates the bounded-learning effect of SFT and classic GCSL by explicitly guiding the model to learn the directional progression of quality. We also propose natural-language goal representations to better leverage the semantic understanding and reasoning capabilities of LLMs. We evaluate our method on three tasks: non-toxic generation, code generation, and LLM for recommendation. Results show that our approach consistently outperforms standard offline fine-tuning baselines while retaining the efficiency, scalability, and simple data requirements of supervised learning.",
+    "abs_url": "https://arxiv.org/abs/2605.16345v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.16345v1",
+    "query_tags": [
+      "dynamic_preference_optimization"
+    ]
+  },
+  {
+    "arxiv_id": "2605.06219v1",
+    "title": "Joint Consistency: A Unified Test-Time Aggregation Framework via Energy Minimization",
+    "published": "2026-05-07",
+    "updated": "2026-05-07",
+    "authors": [
+      "Yunzhen Yao",
+      "Hongye Wang",
+      "Yahong Wang",
+      "Michael C. Gastpar",
+      "Bo Jiang",
+      "Lie He"
+    ],
+    "categories": [
+      "cs.AI"
+    ],
+    "summary": "This paper studies test-time aggregation, an approach that generates multiple reasoning traces and aggregates them into a final answer. Most existing methods rely on evaluation signals collected from candidate traces in isolation or answer frequencies, while ignoring comparative interactions among candidates. We propose Joint Consistency (JC), formulated as a constrained Ising-type energy minimization problem, where independent evaluation signals act as external fields and pairwise comparisons act as interactions. JC provides a unified framework for test-time aggregation that subsumes existing voting and weighted aggregation methods as special cases. Our construction of the interaction matrix leverages LLM-as-a-judge comparisons, and admits a theoretical interpretation under answer-level homogeneity assumptions. Moreover, we develop an efficient approximation strategy that makes interaction modeling practical for large-scale test-time aggregation. Experiments on math and code reasoning benchmarks show that JC consistently outperforms existing baselines across tasks, judge models, trace budgets, and trace-generation settings.",
+    "abs_url": "https://arxiv.org/abs/2605.06219v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.06219v1",
+    "query_tags": [
+      "tag_cf"
+    ]
+  },
+  {
+    "arxiv_id": "2605.05592v1",
+    "title": "When Can Voting Help, Hurt, or Change Course? Exact Structure of Binary Test-Time Aggregation",
+    "published": "2026-05-07",
+    "updated": "2026-05-07",
+    "authors": [
+      "Yi Liu"
+    ],
+    "categories": [
+      "cs.LG",
+      "cs.IT"
+    ],
+    "summary": "Majority voting is one of the few black-box interventions that can improve a fixed stochastic predictor: repeated access can be cheaper than changing a high-capability model. Classical fixed-competence theory makes this intervention look monotone -- more votes help above the majority threshold and hurt below it. We show that this picture is fundamentally incomplete. Under the de Finetti representation for exchangeable repeated correctness, voting is governed by a latent distribution of per-example correctness probabilities. Even simple latent mixtures can generate sharply different voting curves, including nonmonotone behavior and, in an explicit construction, infinitely many trend changes. The full latent law determines the curve, but the curve does not determine the law. The exact object recovered by voting is a signed voting signature: at each binomial variance scale, it records excess latent mass above rather than below the majority threshold. Our main theorem proves that the complete odd-budget curve and this signature are equivalent: the curve increments are signed Hausdorff moments, and the full curve recovers the signature uniquely. This viewpoint explains shape phenomena, branch-symmetric nonidentifiability, realizability, variation, and endpoint rates. It also separates estimation regimes: direct per-example success-probability information targets the full signature, whereas fixed-depth grouped labels reveal only a finite prefix.",
+    "abs_url": "https://arxiv.org/abs/2605.05592v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.05592v1",
+    "query_tags": [
+      "tag_cf"
+    ]
+  },
+  {
+    "arxiv_id": "2605.00327v1",
+    "title": "DynamicPO: Dynamic Preference Optimization for Recommendation",
+    "published": "2026-05-01",
+    "updated": "2026-05-01",
+    "authors": [
+      "Xingyu Hu",
+      "Kai Zhang",
+      "Jiancan Wu",
+      "Shuli Wang",
+      "Chi Wang",
+      "Wenshuai Chen",
+      "Yinhua Zhu",
+      "Haitao Wang"
+    ],
+    "categories": [
+      "cs.IR",
+      "cs.AI"
+    ],
+    "summary": "In large language model (LLM)-based recommendation systems, direct preference optimization (DPO) effectively aligns recommendations with user preferences, requiring multi-negative objective functions to leverage abundant implicit-feedback negatives and sharpen preference boundaries. However, our empirical analyses reveal a counterintuitive phenomenon, preference optimization collapse, where increasing the number of negative samples can lead to performance degradation despite a continuously decreasing training loss. We further theoretically demonstrate that this collapse arises from gradient suppression, caused by the dominance of easily discriminable negatives over boundary-critical negatives that truly define user preference boundaries. As a result, boundary-relevant signals are under-optimized, weakening the model's decision boundary. Motivated by these observations, we propose DynamicPO (Dynamic Preference Optimization), a lightweight and plug-and-play framework comprising two adaptive mechanisms: Dynamic Boundary Negative Selection, which identifies and prioritizes informative negatives near the model's decision boundary, and Dual-Margin Dynamic beta Adjustment, which calibrates optimization strength per sample according to boundary ambiguity. Extensive experiments on three public datasets show that DynamicPO effectively prevents optimization collapse and improves recommendation accuracy on multi-negative preference optimization methods, with negligible computational overhead. Our code and datasets are available at https://github.com/xingyuHuxingyu/DynamicPO.",
+    "abs_url": "https://arxiv.org/abs/2605.00327v1",
+    "pdf_url": "https://arxiv.org/pdf/2605.00327v1",
+    "query_tags": [
+      "dynamic_preference_optimization",
+      "llm_recommender_2025"
+    ]
+  },
+  {
+    "arxiv_id": "2604.10048v1",
+    "title": "HARPO: Hierarchical Agentic Reasoning for User-Aligned Conversational Recommendation",
+    "published": "2026-04-11",
+    "updated": "2026-04-11",
+    "authors": [
+      "Subham Raj",
+      "Aman Vaibhav Jha",
+      "Mayank Anand",
+      "Sriparna Saha"
+    ],
+    "categories": [
+      "cs.IR"
+    ],
+    "summary": "Conversational recommender systems (CRSs) operate under incremental preference revelation, requiring systems to make recommendation decisions under uncertainty. While recent approaches particularly those built on large language models achieve strong performance on standard proxy metrics such as Recall@K and BLEU, they often fail to deliver high-quality, user-aligned recommendations in practice. This gap arises because existing methods primarily optimize for intermediate objectives like retrieval accuracy, fluent generation, or tool invocation, rather than recommendation quality itself. We propose HARPO (Hierarchical Agentic Reasoning with Preference Optimization), an agentic framework that reframes conversational recommendation as a structured decision-making process explicitly optimized for multi-dimensional recommendation quality. HARPO integrates hierarchical preference learning that decomposes recommendation quality into interpretable dimensions (relevance, diversity, predicted user satisfaction, and engagement) and learns context-dependent weights over these dimensions; (ii) deliberative tree-search reasoning guided by a learned value network that evaluates candidate reasoning paths based on predicted recommendation quality rather than task completion; and (iii) domain-agnostic reasoning abstractions through Virtual Tool Operations and multi-agent refinement, enabling transferable recommendation reasoning across domains. We evaluate HARPO on ReDial, INSPIRED, and MUSE, demonstrating consistent improvements over strong baselines on recommendation-centric metrics while maintaining competitive response quality. These results highlight the importance of explicit, user-aligned quality optimization for conversational recommendation.",
+    "abs_url": "https://arxiv.org/abs/2604.10048v1",
+    "pdf_url": "https://arxiv.org/pdf/2604.10048v1",
+    "query_tags": [
+      "dynamic_preference_optimization"
+    ]
+  },
+  {
+    "arxiv_id": "2604.03671v1",
+    "title": "User Simulator-Guided Multi-Turn Preference Optimization for Reasoning LLM-based Conversational Recommendation",
+    "published": "2026-04-04",
+    "updated": "2026-04-04",
+    "authors": [
+      "Xingyuan Xiang",
+      "Xiangchen Pan",
+      "Wei Wei"
+    ],
+    "categories": [
+      "cs.IR"
+    ],
+    "summary": "Conversational Recommender Systems (CRSs) leverage natural language interactions for personalized recommendation, yet information-scarce dialogue histories and single-turn recommendation paradigms may severely hinder accurate modeling of complex user preferences. To alleviate this issue, recent studies have introduced LLM-based user simulators, which generate natural language feedback and perform simulated multi-turn interactions to assist recommendation. Nevertheless, since simulators cannot access true user preference labels during inference, their feedback may deviate from actual user interests, causing errors to accumulate over multiple interactions and severely affecting the generalization of the recommender. Inspired by the multi-step reasoning capabilities of LLMs and the effectiveness of reinforcement learning in policy optimization, we propose SMTPO, a user simulator-guided multi-turn preference optimization conversational recommendation framework. To align simulator-generated feedback with true user preferences in the absence of explicit labels, we enhance feedback quality via multi-task supervised fine-tuning (SFT), enabling the simulator to better reflect users' complex and diverse needs. To address the challenge of biased feedback destabilizing multi-turn optimization, we first allow the reasoning LLM-based recommender to learn preference reasoning and recommendation patterns through SFT and then employ reinforcement learning with fine-grained reward design to progressively align with true user preferences, improving recommendation performance. Extensive experiments on public datasets demonstrate the effectiveness and transferability of our method.",
+    "abs_url": "https://arxiv.org/abs/2604.03671v1",
+    "pdf_url": "https://arxiv.org/pdf/2604.03671v1",
+    "query_tags": [
+      "dynamic_preference_optimization"
+    ]
+  },
+  {
+    "arxiv_id": "2604.00985v1",
+    "title": "Maximizing T2-Only Prostate Cancer Localization from Expected Diffusion Weighted Imaging",
+    "published": "2026-04-01",
+    "updated": "2026-04-01",
+    "authors": [
+      "Weixi Yi",
+      "Yipei Wang",
+      "Wen Yan",
+      "Hanyuan Zhang",
+      "Natasha Thorley",
+      "Alexander Ng",
+      "Shonit Punwani",
+      "Fernando Bianco"
+    ],
+    "categories": [
+      "cs.CV"
+    ],
+    "summary": "Multiparametric MRI is increasingly recommended as a first-line noninvasive approach to detect and localize prostate cancer, requiring at minimum diffusion-weighted (DWI) and T2-weighted (T2w) MR sequences. Early machine learning attempts using only T2w images have shown promising diagnostic performance in segmenting radiologist-annotated lesions. Such uni-modal T2-only approaches deliver substantial clinical benefits by reducing costs and expertise required to acquire other sequences. This work investigates an arguably more challenging application using only T2w at inference, but to localize individual cancers based on independent histopathology labels. We formulate DWI images as a latent modality (readily available during training) to classify cancer presence at local Barzell zones, given only T2w images as input. In the resulting expectation-maximization algorithm, a latent modality generator (implemented using a flow matching-based generative model) approximates the latent DWI image posterior distribution in the E-steps, while in M-steps a cancer localizer is simultaneously optimized with the generative model to maximize the expected likelihood of cancer presence. The proposed approach provides a novel theoretical framework for learning from a privileged DWI modality, yielding superior cancer localization performance compared to approaches that lack training DWI images or existing frameworks for privileged learning and incomplete modalities. The proposed T2-only methods perform competitively or better than baseline methods using multiple input sequences (e.g., improving the patient-level F1 score by 14.4\\% and zone-level QWK by 5.3\\% over the T2w+DWI baseline). We present quantitative evaluations using internal and external datasets from 4,133 prostate cancer patients with histopathology-verified labels.",
+    "abs_url": "https://arxiv.org/abs/2604.00985v1",
+    "pdf_url": "https://arxiv.org/pdf/2604.00985v1",
+    "query_tags": [
+      "flow_matching_recommender"
+    ]
+  },
+  {
+    "arxiv_id": "2603.29259v1",
+    "title": "Aligning Multimodal Sequential Recommendations via Robust Direct Preference Optimization with Sparse MoE",
+    "published": "2026-03-31",
+    "updated": "2026-03-31",
+    "authors": [
+      "Hejin Huang",
+      "Jusheng Zhang",
+      "Kaitong Cai",
+      "Jian Wang",
+      "Rong Pan"
+    ],
+    "categories": [
+      "cs.IR",
+      "cs.CL"
+    ],
+    "summary": "Preference-based alignment objectives have been widely adopted, from RLHF-style pairwise learning in large language models to emerging applications in recommender systems. Yet, existing work rarely examines how Direct Preference Optimization (DPO) behaves under implicit feedback, where unobserved items are not reliable negatives. We conduct systematic experiments on multimodal sequential recommendation to compare common negative-selection strategies and their interaction with DPO training. Our central finding is that a simple modification, replacing deterministic hard negatives with stochastic sampling from a dynamic top-K candidate pool, consistently improves ranking performance. We attribute its effectiveness to two factors: (1) reducing erroneous suppressive gradients caused by false negatives, and (2) retaining informative hard signals while smoothing optimization via controlled stochasticity. With an optional sparse Mixture-of-Experts encoder for efficient capacity scaling, RoDPO achieves up to 5.25% NDCG@5 on three Amazon benchmarks, with nearly unchanged inference cost.",
+    "abs_url": "https://arxiv.org/abs/2603.29259v1",
+    "pdf_url": "https://arxiv.org/pdf/2603.29259v1",
+    "query_tags": [
+      "llm_recommender_2025"
+    ]
+  },
+  {
+    "arxiv_id": "2603.21613v1",
+    "title": "AgenticRec: End-to-End Tool-Integrated Policy Optimization for Ranking-Oriented Recommender Agents",
+    "published": "2026-03-23",
+    "updated": "2026-03-23",
+    "authors": [
+      "Tianyi Li",
+      "Zixuan Wang",
+      "Guidong Lei",
+      "Xiaodong Li",
+      "Hui Li"
+    ],
+    "categories": [
+      "cs.IR",
+      "cs.AI"
+    ],
+    "summary": "Recommender agents built on Large Language Models offer a promising paradigm for recommendation. However, existing recommender agents typically suffer from a disconnect between intermediate reasoning and final ranking feedback, and are unable to capture fine-grained preferences. To address this, we present AgenticRec, a ranking-oriented agentic recommendation framework that optimizes the entire decision-making trajectory (including intermediate reasoning, tool invocation, and final ranking list generation) under sparse implicit feedback. Our approach makes three key contributions. First, we design a suite of recommendation-specific tools integrated into a ReAct loop to support evidence-grounded reasoning. Second, we propose theoretically unbiased List-Wise Group Relative Policy Optimization (list-wise GRPO) to maximize ranking utility, ensuring accurate credit assignment for complex tool-use trajectories. Third, we introduce Progressive Preference Refinement (PPR) to resolve fine-grained preference ambiguities. By mining hard negatives from ranking violations and applying bidirectional preference alignment, PPR minimizes the convex upper bound of pairwise ranking errors. Experiments on benchmarks confirm that AgenticRec significantly outperforms baselines, validating the necessity of unifying reasoning, tool use, and ranking optimization.",
+    "abs_url": "https://arxiv.org/abs/2603.21613v1",
+    "pdf_url": "https://arxiv.org/pdf/2603.21613v1",
+    "query_tags": [
+      "llm_recommender_2025"
+    ]
+  },
+  {
+    "arxiv_id": "2603.18886v1",
+    "title": "Reasoning over mathematical objects: on-policy reward modeling and test time aggregation",
+    "published": "2026-03-19",
+    "updated": "2026-03-19",
+    "authors": [
+      "Pranjal Aggarwal",
+      "Marjan Ghazvininejad",
+      "Seungone Kim",
+      "Ilia Kulikov",
+      "Jack Lanchantin",
+      "Xian Li",
+      "Tianjian Li",
+      "Bo Liu"
+    ],
+    "categories": [
+      "cs.AI",
+      "cs.CL"
+    ],
+    "summary": "The ability to precisely derive mathematical objects is a core requirement for downstream STEM applications, including mathematics, physics, and chemistry, where reasoning must culminate in formally structured expressions. Yet, current LM evaluations of mathematical and scientific reasoning rely heavily on simplified answer formats such as numerical values or multiple choice options due to the convenience of automated assessment. In this paper we provide three contributions for improving reasoning over mathematical objects: (i) we build and release training data and benchmarks for deriving mathematical objects, the Principia suite; (ii) we provide training recipes with strong LLM-judges and verifiers, where we show that on-policy judge training boosts performance; (iii) we show how on-policy training can also be used to scale test-time compute via aggregation. We find that strong LMs such as Qwen3-235B and o3 struggle on Principia, while our training recipes can bring significant improvements over different LLM backbones, while simultaneously improving results on existing numerical and MCQA tasks, demonstrating cross-format generalization of reasoning abilities.",
+    "abs_url": "https://arxiv.org/abs/2603.18886v1",
+    "pdf_url": "https://arxiv.org/pdf/2603.18886v1",
+    "query_tags": [
+      "tag_cf"
+    ]
+  },
+  {
+    "arxiv_id": "2603.03820v1",
+    "title": "Fairness Begins with State: Purifying Latent Preferences for Hierarchical Reinforcement Learning in Interactive Recommendation",
+    "published": "2026-03-04",
+    "updated": "2026-03-04",
+    "authors": [
+      "Yun Lu",
+      "Xiaoyu Shi",
+      "Hong Xie",
+      "Xiangyu Zhao",
+      "Mingsheng Shang"
+    ],
+    "categories": [
+      "cs.LG",
+      "cs.AI"
+    ],
+    "summary": "Interactive recommender systems (IRS) are increasingly optimized with Reinforcement Learning (RL) to capture the sequential nature of user-system dynamics. However, existing fairness-aware methods often suffer from a fundamental oversight: they assume the observed user state is a faithful representation of true preferences. In reality, implicit feedback is contaminated by popularity-driven noise and exposure bias, creating a distorted state that misleads the RL agent. We argue that the persistent conflict between accuracy and fairness is not merely a reward-shaping issue, but a state estimation failure. In this work, we propose \\textbf{DSRM-HRL}, a framework that reformulates fairness-aware recommendation as a latent state purification problem followed by decoupled hierarchical decision-making. We introduce a Denoising State Representation Module (DSRM) based on diffusion models to recover the low-entropy latent preference manifold from high-entropy, noisy interaction histories. Built upon this purified state, a Hierarchical Reinforcement Learning (HRL) agent is employed to decouple conflicting objectives: a high-level policy regulates long-term fairness trajectories, while a low-level policy optimizes short-term engagement under these dynamic constraints. Extensive experiments on high-fidelity simulators (KuaiRec, KuaiRand) demonstrate that DSRM-HRL effectively breaks the \"rich-get-richer\" feedback loop, achieving a superior Pareto frontier between recommendation utility and exposure equity.",
+    "abs_url": "https://arxiv.org/abs/2603.03820v1",
+    "pdf_url": "https://arxiv.org/pdf/2603.03820v1",
+    "query_tags": [
+      "diffusion_recommendation_implicit"
+    ]
+  },
+  {
+    "arxiv_id": "2603.01926v1",
+    "title": "MealRec: Multi-granularity Sequential Modeling via Hierarchical Diffusion Models for Micro-Video Recommendation",
+    "published": "2026-03-02",
+    "updated": "2026-03-02",
+    "authors": [
+      "Xinxin Dong",
+      "Haokai Ma",
+      "Yuze Zheng",
+      "Yongfu Zha",
+      "Yonghui Yang",
+      "Xiaodong Wang"
+    ],
+    "categories": [
+      "cs.IR",
+      "cs.CV"
+    ],
+    "summary": "Micro-video recommendation aims to capture user preferences from the collaborative and context information of the interacted micro-videos, thereby predicting the appropriate videos. This target is often hindered by the inherent noise within multimodal content and unreliable implicit feedback, which weakens the correspondence between behaviors and underlying interests. While conventional works have predominantly approached such scenario through behavior-augmented modeling and content-centric multimodal analysis, these paradigms can inadvertently give rise to two non-trivial challenges: preference-irrelative video representation extraction and inherent modality conflicts. To address these issues, we propose a Multi-granularity sequential modeling method via hierarchical diffusion models for micro-video Recommendation (MealRec), which simultaneously considers temporal correlations during preference modeling from intra- and inter-video perspectives. Specifically, we first propose Temporal-guided Content Diffusion (TCD) to refine video representations under intra-video temporal guidance and personalized collaborative signals to emphasize salient content while suppressing redundancy. To achieve the semantically coherent preference modeling, we further design the Noise-unconditional Preference Denoising (NPD) to recovers informative user preferences from corrupted states under the blind denoising. Extensive experiments and analyses on four micro-video datasets from two platforms demonstrate the effectiveness, universality, and robustness of our MealRec, further uncovering the effective mechanism of our proposed TCD and NPD. The source code and corresponding dataset will be available upon acceptance.",
+    "abs_url": "https://arxiv.org/abs/2603.01926v1",
+    "pdf_url": "https://arxiv.org/pdf/2603.01926v1",
+    "query_tags": [
+      "diffusion_recommendation_implicit"
+    ]
+  },
+  {
+    "arxiv_id": "2601.18009v1",
+    "title": "Post-Training Denoising of User Profiles with LLMs in Collaborative Filtering Recommendation",
+    "published": "2026-01-25",
+    "updated": "2026-01-25",
+    "authors": [
+      "Ervin Dervishaj",
+      "Maria Maistro",
+      "Tuukka Ruotsalo",
+      "Christina Lioma"
+    ],
+    "categories": [
+      "cs.IR"
+    ],
+    "summary": "Implicit feedback -- the main data source for training Recommender Systems (RSs) -- is inherently noisy and has been shown to negatively affect recommendation effectiveness. Denoising has been proposed as a method for removing noisy implicit feedback and improving recommendations. Prior work has focused on in-training denoising, however this requires additional data, changes to the model architecture and training procedure or fine-tuning, all of which can be costly and data hungry. In this work, we focus on post-training denoising. Different from in-training denoising, post-training denoising does not involve changing the architecture of the model nor its training procedure, and does not require additional data. Specifically, we present a method for post-training denoising user profiles using Large Language Models (LLMs) for Collaborative Filtering (CF) recommendations. Our approach prompts LLMs with (i) a user profile (user interactions), (ii) a candidate item, and (iii) its rank as given by the CF recommender, and asks the LLM to remove items from the user profile to improve the rank of the candidate item. Experiments with a state-of-the-art CF recommender and 4 open and closed source LLMs in 3 datasets show that our denoising yields improvements up to 13% in effectiveness over the original user profiles. Our code is available at https://github.com/edervishaj/denoising-user-profiles-LLM.",
+    "abs_url": "https://arxiv.org/abs/2601.18009v1",
+    "pdf_url": "https://arxiv.org/pdf/2601.18009v1",
+    "query_tags": [
+      "llm_recommender_2025"
+    ]
+  },
+  {
+    "arxiv_id": "2601.01448v1",
+    "title": "Adaptive Diffusion-based Augmentation for Recommendation",
+    "published": "2026-01-04",
+    "updated": "2026-01-04",
+    "authors": [
+      "Na Li",
+      "Fanghui Sun",
+      "Yan Zou",
+      "Yangfu Zhu",
+      "Xiatian Zhu",
+      "Ying Ma"
+    ],
+    "categories": [
+      "cs.IR"
+    ],
+    "summary": "Recommendation systems often rely on implicit feedback, where only positive user-item interactions can be observed. Negative sampling is therefore crucial to provide proper negative training signals. However, existing methods tend to mislabel potentially positive but unobserved items as negatives and lack precise control over negative sample selection. We aim to address these by generating controllable negative samples, rather than sampling from the existing item pool. In this context, we propose Adaptive Diffusion-based Augmentation for Recommendation (ADAR), a novel and model-agnostic module that leverages diffusion to synthesize informative negatives. Inspired by the progressive corruption process in diffusion, ADAR simulates a continuous transition from positive to negative, allowing for fine-grained control over sample hardness. To mine suitable negative samples, we theoretically identify the transition point at which a positive sample turns negative and derive a score-aware function to adaptively determine the optimal sampling timestep. By identifying this transition point, ADAR generates challenging negative samples that effectively refine the model's decision boundary. Experiments confirm that ADAR is broadly compatible and boosts the performance of existing recommendation models substantially, including collaborative filtering and sequential recommendation, without architectural modifications.",
+    "abs_url": "https://arxiv.org/abs/2601.01448v1",
+    "pdf_url": "https://arxiv.org/pdf/2601.01448v1",
+    "query_tags": [
+      "diffusion_recommendation_implicit"
+    ]
+  },
+  {
+    "arxiv_id": "2512.00679v2",
+    "title": "ProEx: A Unified Framework Leveraging Large Language Model with Profile Extrapolation for Recommendation",
+    "published": "2025-11-30",
+    "updated": "2025-12-12",
+    "authors": [
+      "Yi Zhang",
+      "Yiwen Zhang",
+      "Yu Wang",
+      "Tong Chen",
+      "Hongzhi Yin"
+    ],
+    "categories": [
+      "cs.IR"
+    ],
+    "summary": "The powerful text understanding and generation capabilities of large language models (LLMs) have brought new vitality to general recommendation with implicit feedback. One possible strategy involves generating a unique user (or item) profile from historical interaction data, which is then mapped to a semantic representation in the language space. However, a single-instance profile may be insufficient to comprehensively capture the complex intentions behind a user's interacted items. Moreover, due to the inherent instability of LLMs, a biased or misinterpreted profile could even undermine the original recommendation performance. Consequently, an intuitive solution is to generate multiple profiles for each user (or item), each reflecting a distinct aspect of their characteristics. In light of this, we propose a unified recommendation framework with multi-faceted profile extrapolation (ProEx) in this paper. By leveraging chain-of-thought reasoning, we construct multiple distinct profiles for each user and item. These new profiles are subsequently mapped into semantic vectors, extrapolating from the position of the original profile to explore a broader region of the language space. Subsequently, we introduce the concept of environments, where each environment represents a possible linear combination of all profiles. The differences across environments are minimized to reveal the inherent invariance of user preferences. We apply ProEx to three discriminative methods and three generative methods, and conduct extensive experiments on three datasets. The experimental results demonstrate that ProEx significantly enhances the performance of these base recommendation models.",
+    "abs_url": "https://arxiv.org/abs/2512.00679v2",
+    "pdf_url": "https://arxiv.org/pdf/2512.00679v2",
+    "query_tags": [
+      "llm_recommender_2025"
+    ]
+  },
+  {
+    "arxiv_id": "2511.07295v2",
+    "title": "Hard vs. Noise: Resolving Hard-Noisy Sample Confusion in Recommender Systems via Large Language Models",
+    "published": "2025-11-10",
+    "updated": "2025-11-11",
+    "authors": [
+      "Tianrui Song",
+      "Wen-Shuo Chao",
+      "Hao Liu"
+    ],
+    "categories": [
+      "cs.IR",
+      "cs.AI"
+    ],
+    "summary": "Implicit feedback, employed in training recommender systems, unavoidably confronts noise due to factors such as misclicks and position bias. Previous studies have attempted to identify noisy samples through their diverged data patterns, such as higher loss values, and mitigate their influence through sample dropping or reweighting. However, we observed that noisy samples and hard samples display similar patterns, leading to hard-noisy confusion issue. Such confusion is problematic as hard samples are vital for modeling user preferences. To solve this problem, we propose LLMHNI framework, leveraging two auxiliary user-item relevance signals generated by Large Language Models (LLMs) to differentiate hard and noisy samples. LLMHNI obtains user-item semantic relevance from LLM-encoded embeddings, which is used in negative sampling to select hard negatives while filtering out noisy false negatives. An objective alignment strategy is proposed to project LLM-encoded embeddings, originally for general language tasks, into a representation space optimized for user-item relevance modeling. LLMHNI also exploits LLM-inferred logical relevance within user-item interactions to identify hard and noisy samples. These LLM-inferred interactions are integrated into the interaction graph and guide denoising with cross-graph contrastive alignment. To eliminate the impact of unreliable interactions induced by LLM hallucination, we propose a graph contrastive learning strategy that aligns representations from randomly edge-dropped views to suppress unreliable edges. Empirical results demonstrate that LLMHNI significantly improves denoising and recommendation performance.",
+    "abs_url": "https://arxiv.org/abs/2511.07295v2",
+    "pdf_url": "https://arxiv.org/pdf/2511.07295v2",
+    "query_tags": [
+      "llm_recommender_2025"
+    ]
+  },
+  {
+    "arxiv_id": "2510.21021v1",
+    "title": "Gaussian Mixture Flow Matching with Domain Alignment for Multi-Domain Sequential Recommendation",
+    "published": "2025-10-23",
+    "updated": "2025-10-23",
+    "authors": [
+      "Xiaoxin Ye",
+      "Chengkai Huang",
+      "Hongtao Huang",
+      "Lina Yao"
+    ],
+    "categories": [
+      "cs.IR"
+    ],
+    "summary": "Users increasingly interact with content across multiple domains, resulting in sequential behaviors marked by frequent and complex transitions. While Cross-Domain Sequential Recommendation (CDSR) models two-domain interactions, Multi-Domain Sequential Recommendation (MDSR) introduces significantly more domain transitions, compounded by challenges such as domain heterogeneity and imbalance. Existing approaches often overlook the intricacies of domain transitions, tend to overfit to dense domains while underfitting sparse ones, and struggle to scale effectively as the number of domains increases. We propose \\textit{GMFlowRec}, an efficient generative framework for MDSR that models domain-aware transition trajectories via Gaussian Mixture Flow Matching. GMFlowRec integrates: (1) a unified dual-masked Transformer to disentangle domain-invariant and domain-specific intents, (2) a Gaussian Mixture flow field to capture diverse behavioral patterns, and (3) a domain-aligned prior to support frequent and sparse transitions. Extensive experiments on JD and Amazon datasets demonstrate that GMFlowRec achieves state-of-the-art performance with up to 44\\% improvement in NDCG@5, while maintaining high efficiency via a single unified backbone, making it scalable for real-world multi-domain sequential recommendation.",
+    "abs_url": "https://arxiv.org/abs/2510.21021v1",
+    "pdf_url": "https://arxiv.org/pdf/2510.21021v1",
+    "query_tags": [
+      "flow_matching_recommender"
+    ]
+  },
+  {
+    "arxiv_id": "2510.11472v2",
+    "title": "Differentiable Fast Top-K Selection for Large-Scale Recommendation",
+    "published": "2025-10-13",
+    "updated": "2025-11-04",
+    "authors": [
+      "Yanjie Zhu",
+      "Zhen Zhang",
+      "Yunli Wang",
+      "Zhiqiang Wang",
+      "Yu Li",
+      "Rufan Zhou",
+      "Shiyang Wen",
+      "Peng Jiang"
+    ],
+    "categories": [
+      "cs.LG"
+    ],
+    "summary": "Cascade ranking is a widely adopted paradigm in large-scale information retrieval systems for Top-K item selection. However, the Top-K operator is non-differentiable, hindering end-to-end training. Existing methods include Learning-to-Rank approaches (e.g., LambdaLoss), which optimize ranking metrics like NDCG and suffer from objective misalignment, and differentiable sorting-based methods (e.g., ARF, LCRON), which relax permutation matrices for direct Top-K optimization but introduce gradient conflicts through matrix aggregation. A promising alternative is to directly construct a differentiable approximation of the Top-K selection operator, bypassing the use of soft permutation matrices. However, even state-of-the-art differentiable Top-K operator (e.g., LapSum) require $O(n \\log n)$ complexity due to their dependence on sorting for solving the threshold. Thus, we propose DFTopK, a novel differentiable Top-K operator achieving optimal $O(n)$ time complexity. By relaxing normalization constraints, DFTopK admits a closed-form solution and avoids sorting. DFTopK also avoids the gradient conflicts inherent in differentiable sorting-based methods. We evaluate DFTopK on both the public benchmark RecFLow and an industrial system. Experimental results show that DFTopK significantly improves training efficiency while achieving superior performance, which enables us to scale up training samples more efficiently. In the online A/B test, DFTopK yielded a +1.77% revenue lift with the same computational budget compared to the baseline. To the best of our knowledge, this work is the first to introduce differentiable Top-K operators into recommendation systems and the first to achieve theoretically optimal linear-time complexity for Top-K selection. We have open-sourced our implementation to facilitate future research in both academia and industry.",
+    "abs_url": "https://arxiv.org/abs/2510.11472v2",
+    "pdf_url": "https://arxiv.org/pdf/2510.11472v2",
+    "query_tags": [
+      "differentiable_topk"
+    ]
+  },
+  {
+    "arxiv_id": "2509.24956v2",
+    "title": "MSG: Multi-Stream Generative Policies for Sample-Efficient Robotic Manipulation",
+    "published": "2025-09-29",
+    "updated": "2026-03-31",
+    "authors": [
+      "Jan Ole von Hartz",
+      "Lukas Schweizer",
+      "Joschka Boedecker",
+      "Abhinav Valada"
+    ],
+    "categories": [
+      "cs.RO",
+      "cs.AI",
+      "cs.LG"
+    ],
+    "summary": "Generative robot policies such as Flow Matching offer flexible, multi-modal policy learning but are sample-inefficient. Although object-centric policies improve sample efficiency, it does not resolve this limitation. In this work, we propose Multi-Stream Generative Policy (MSG), an inference-time composition framework that trains multiple object-centric policies and combines them at inference to improve generalization and sample efficiency. MSG is model-agnostic and inference-only, hence widely applicable to various generative policies and training paradigms. We perform extensive experiments both in simulation and on a real robot, demonstrating that our approach learns high-quality generative policies from as few as five demonstrations, resulting in a 95% reduction in demonstrations, and improves policy performance by 89 percent compared to single-stream approaches. Furthermore, we present comprehensive ablation studies on various composition strategies and provide practical recommendations for deployment. Finally, MSG enables zero-shot object instance transfer. We make our code publicly available at https://msg.cs.uni-freiburg.de.",
+    "abs_url": "https://arxiv.org/abs/2509.24956v2",
+    "pdf_url": "https://arxiv.org/pdf/2509.24956v2",
+    "query_tags": [
+      "flow_matching_recommender"
+    ]
+  },
+  {
+    "arxiv_id": "2508.18665v5",
+    "title": "Membership Inference Attacks on LLM-based Recommender Systems",
+    "published": "2025-08-26",
+    "updated": "2026-01-22",
+    "authors": [
+      "Jiajie He",
+      "Min-Chun Chen",
+      "Xintong Chen",
+      "Xinyang Fang",
+      "Yuechun Gu",
+      "Keke Chen"
+    ],
+    "categories": [
+      "cs.IR",
+      "cs.AI",
+      "cs.CL",
+      "cs.CR",
+      "cs.LG"
+    ],
+    "summary": "Large language models (LLMs) based recommender systems (RecSys) can adapt to different domains flexibly. It utilizes in-context learning (ICL), i.e., prompts, to customize the recommendation functions, which include sensitive historical user-specific item interactions, encompassing implicit feedback such as clicked items and explicit product reviews. Such private information may be exposed by novel privacy attacks. However, no study has been conducted on this important issue. We design several membership inference attacks (MIAs) aimed to revealing whether system prompts include victims' historical interactions. The attacks are \\emph{Similarity, Memorization, Inquiry, and Poisoning attacks}, each utilizing unique features of LLMs or RecSys. We have carefully evaluated them on five of the latest open-source LLMs and three well-known RecSys benchmark datasets. The results confirm that the MIA threat to LLM RecSys is realistic: inquiry and poisoning attacks show significantly high attack advantages. We also discussed possible methods to mitigate such MIA threats. We have also analyzed the factors affecting these attacks, such as the number of shots in system prompts, the position of the victim in the shots, the number of poisoning items in the prompt,etc.",
+    "abs_url": "https://arxiv.org/abs/2508.18665v5",
+    "pdf_url": "https://arxiv.org/pdf/2508.18665v5",
+    "query_tags": [
+      "llm_recommender_2025"
+    ]
+  },
+  {
+    "arxiv_id": "2508.17618v1",
+    "title": "Preference Trajectory Modeling via Flow Matching for Sequential Recommendation",
+    "published": "2025-08-25",
+    "updated": "2025-08-25",
+    "authors": [
+      "Li Li",
+      "Mingyue Cheng",
+      "Yuyang Ye",
+      "Zhiding Liu",
+      "Enhong Chen"
+    ],
+    "categories": [
+      "cs.IR"
+    ],
+    "summary": "Sequential recommendation predicts each user's next item based on their historical interaction sequence. Recently, diffusion models have attracted significant attention in this area due to their strong ability to model user interest distributions. They typically generate target items by denoising Gaussian noise conditioned on historical interactions. However, these models face two critical limitations. First, they exhibit high sensitivity to the condition, making it difficult to recover target items from pure Gaussian noise. Second, the inference process is computationally expensive, limiting practical deployment. To address these issues, we propose FlowRec, a simple yet effective sequential recommendation framework which leverages flow matching to explicitly model user preference trajectories from current states to future interests. Flow matching is an emerging generative paradigm, which offers greater flexibility in initial distributions and enables more efficient sampling. Based on this, we construct a personalized behavior-based prior distribution to replace Gaussian noise and learn a vector field to model user preference trajectories. To better align flow matching with the recommendation objective, we further design a single-step alignment loss incorporating both positive and negative samples, improving sampling efficiency and generation quality. Extensive experiments on four benchmark datasets verify the superiority of FlowRec over the state-of-the-art baselines.",
+    "abs_url": "https://arxiv.org/abs/2508.17618v1",
+    "pdf_url": "https://arxiv.org/pdf/2508.17618v1",
+    "query_tags": [
+      "flow_matching_recommender"
+    ]
+  },
+  {
+    "arxiv_id": "2508.05352v1",
+    "title": "Multi-Modal Multi-Behavior Sequential Recommendation with Conditional Diffusion-Based Feature Denoising",
+    "published": "2025-08-07",
+    "updated": "2025-08-07",
+    "authors": [
+      "Xiaoxi Cui",
+      "Weihai Lu",
+      "Yu Tong",
+      "Yiheng Li",
+      "Zhejun Zhao"
+    ],
+    "categories": [
+      "cs.IR",
+      "cs.AI"
+    ],
+    "summary": "The sequential recommendation system utilizes historical user interactions to predict preferences. Effectively integrating diverse user behavior patterns with rich multimodal information of items to enhance the accuracy of sequential recommendations is an emerging and challenging research direction. This paper focuses on the problem of multi-modal multi-behavior sequential recommendation, aiming to address the following challenges: (1) the lack of effective characterization of modal preferences across different behaviors, as user attention to different item modalities varies depending on the behavior; (2) the difficulty of effectively mitigating implicit noise in user behavior, such as unintended actions like accidental clicks; (3) the inability to handle modality noise in multi-modal representations, which further impacts the accurate modeling of user preferences. To tackle these issues, we propose a novel Multi-Modal Multi-Behavior Sequential Recommendation model (M$^3$BSR). This model first removes noise in multi-modal representations using a Conditional Diffusion Modality Denoising Layer. Subsequently, it utilizes deep behavioral information to guide the denoising of shallow behavioral data, thereby alleviating the impact of noise in implicit feedback through Conditional Diffusion Behavior Denoising. Finally, by introducing a Multi-Expert Interest Extraction Layer, M$^3$BSR explicitly models the common and specific interests across behaviors and modalities to enhance recommendation performance. Experimental results indicate that M$^3$BSR significantly outperforms existing state-of-the-art methods on benchmark datasets.",
+    "abs_url": "https://arxiv.org/abs/2508.05352v1",
+    "pdf_url": "https://arxiv.org/pdf/2508.05352v1",
+    "query_tags": [
+      "diffusion_recommendation_implicit"
+    ]
+  },
+  {
+    "arxiv_id": "2508.05673v1",
+    "title": "Breaking the Top-$K$ Barrier: Advancing Top-$K$ Ranking Metrics Optimization in Recommender Systems",
+    "published": "2025-08-04",
+    "updated": "2025-08-04",
+    "authors": [
+      "Weiqin Yang",
+      "Jiawei Chen",
+      "Shengjia Zhang",
+      "Peng Wu",
+      "Yuegang Sun",
+      "Yan Feng",
+      "Chun Chen",
+      "Can Wang"
+    ],
+    "categories": [
+      "cs.IR",
+      "cs.AI",
+      "cs.LG"
+    ],
+    "summary": "In the realm of recommender systems (RS), Top-$K$ ranking metrics such as NDCG@$K$ are the gold standard for evaluating recommendation performance. However, during the training of recommendation models, optimizing NDCG@$K$ poses significant challenges due to its inherent discontinuous nature and the intricate Top-$K$ truncation. Recent efforts to optimize NDCG@$K$ have either overlooked the Top-$K$ truncation or suffered from high computational costs and training instability. To overcome these limitations, we propose SoftmaxLoss@$K$ (SL@$K$), a novel recommendation loss tailored for NDCG@$K$ optimization. Specifically, we integrate the quantile technique to handle Top-$K$ truncation and derive a smooth upper bound for optimizing NDCG@$K$ to address discontinuity. The resulting SL@$K$ loss has several desirable properties, including theoretical guarantees, ease of implementation, computational efficiency, gradient stability, and noise robustness. Extensive experiments on four real-world datasets and three recommendation backbones demonstrate that SL@$K$ outperforms existing losses with a notable average improvement of 6.03%. The code is available at https://github.com/Tiny-Snow/IR-Benchmark.",
+    "abs_url": "https://arxiv.org/abs/2508.05673v1",
+    "pdf_url": "https://arxiv.org/pdf/2508.05673v1",
+    "query_tags": [
+      "softmax_loss_at_k"
+    ]
+  },
+  {
+    "arxiv_id": "2505.16298v1",
+    "title": "Flow Matching based Sequential Recommender Model",
+    "published": "2025-05-22",
+    "updated": "2025-05-22",
+    "authors": [
+      "Feng Liu",
+      "Lixin Zou",
+      "Xiangyu Zhao",
+      "Min Tang",
+      "Liming Dong",
+      "Dan Luo",
+      "Xiangyang Luo",
+      "Chenliang Li"
+    ],
+    "categories": [
+      "cs.IR"
+    ],
+    "summary": "Generative models, particularly diffusion model, have emerged as powerful tools for sequential recommendation. However, accurately modeling user preferences remains challenging due to the noise perturbations inherent in the forward and reverse processes of diffusion-based methods. Towards this end, this study introduces FMRec, a Flow Matching based model that employs a straight flow trajectory and a modified loss tailored for the recommendation task. Additionally, from the diffusion-model perspective, we integrate a reconstruction loss to improve robustness against noise perturbations, thereby retaining user preferences during the forward process. In the reverse process, we employ a deterministic reverse sampler, specifically an ODE-based updating function, to eliminate unnecessary randomness, thereby ensuring that the generated recommendations closely align with user needs. Extensive evaluations on four benchmark datasets reveal that FMRec achieves an average improvement of 6.53% over state-of-the-art methods. The replication code is available at https://github.com/FengLiu-1/FMRec.",
+    "abs_url": "https://arxiv.org/abs/2505.16298v1",
+    "pdf_url": "https://arxiv.org/pdf/2505.16298v1",
+    "query_tags": [
+      "flow_matching_recommender"
+    ]
+  },
+  {
+    "arxiv_id": "2502.07303v2",
+    "title": "Flow Matching for Collaborative Filtering",
+    "published": "2025-02-11",
+    "updated": "2025-09-04",
+    "authors": [
+      "Chengkai Liu",
+      "Yangtian Zhang",
+      "Jianling Wang",
+      "Rex Ying",
+      "James Caverlee"
+    ],
+    "categories": [
+      "cs.IR"
+    ],
+    "summary": "Generative models have shown great promise in collaborative filtering by capturing the underlying distribution of user interests and preferences. However, existing approaches struggle with inaccurate posterior approximations and misalignment with the discrete nature of recommendation data, limiting their expressiveness and real-world performance. To address these limitations, we propose FlowCF, a novel flow-based recommendation system leveraging flow matching for collaborative filtering. We tailor flow matching to the unique challenges in recommendation through two key innovations: (1) a behavior-guided prior that aligns with user behavior patterns to handle the sparse and heterogeneous user-item interactions, and (2) a discrete flow framework to preserve the binary nature of implicit feedback while maintaining the benefits of flow matching, such as stable training and efficient inference. Extensive experiments demonstrate that FlowCF achieves state-of-the-art recommendation accuracy across various datasets with the fastest inference speed, making it a compelling approach for real-world recommender systems. The code is available at https://github.com/chengkai-liu/FlowCF.",
+    "abs_url": "https://arxiv.org/abs/2502.07303v2",
+    "pdf_url": "https://arxiv.org/pdf/2502.07303v2",
+    "query_tags": [
+      "flow_matching_recommender"
+    ]
+  },
+  {
+    "arxiv_id": "2502.18477v3",
+    "title": "Personalized Image Generation for Recommendations Beyond Catalogs",
+    "published": "2025-02-05",
+    "updated": "2025-11-25",
+    "authors": [
+      "Gabriel Patron",
+      "Zhiwei Xu",
+      "Ishan Kapnadak",
+      "Felipe Maia Polo"
+    ],
+    "categories": [
+      "cs.IR",
+      "cs.AI",
+      "cs.LG"
+    ],
+    "summary": "Personalization is central to human-AI interaction, yet current diffusion-based image generation systems remain largely insensitive to user diversity. Existing attempts to address this often rely on costly paired preference data or introduce latency through Large Language Models. In this work, we introduce REBECA (REcommendations BEyond CAtalogs), a lightweight and scalable framework for personalized image generation that learns directly from implicit feedback signals such as likes, ratings, and clicks. Instead of fine-tuning the underlying diffusion model, REBECA employs a two-stage process: training a conditional diffusion model to sample user- and rating-specific image embeddings, which are subsequently decoded into images using a pretrained diffusion backbone. This approach enables efficient, fine-tuning-free personalization across large user bases. We rigorously evaluate REBECA on real-world datasets, proposing a novel statistical personalization verifier and a permutation-based hypothesis test to assess preference alignment. Our results demonstrate that REBECA consistently produces high-fidelity images tailored to individual tastes, outperforming baselines while maintaining computational efficiency.",
+    "abs_url": "https://arxiv.org/abs/2502.18477v3",
+    "pdf_url": "https://arxiv.org/pdf/2502.18477v3",
+    "query_tags": [
+      "diffusion_recommendation_implicit"
+    ]
+  },
+  {
+    "arxiv_id": "2409.12147v2",
+    "title": "MAgICoRe: Multi-Agent, Iterative, Coarse-to-Fine Refinement for Reasoning",
+    "published": "2024-09-18",
+    "updated": "2025-09-17",
+    "authors": [
+      "Justin Chih-Yao Chen",
+      "Archiki Prasad",
+      "Swarnadeep Saha",
+      "Elias Stengel-Eskin",
+      "Mohit Bansal"
+    ],
+    "categories": [
+      "cs.CL"
+    ],
+    "summary": "Large Language Models' (LLM) reasoning can be improved using test-time aggregation strategies, i.e., generating multiple samples and voting among generated samples. While these improve performance, they often reach a saturation point. Refinement offers an alternative by using LLM-generated feedback to improve solution quality. However, refinement introduces 3 key challenges: (1) Excessive refinement: Uniformly refining all instances can over-correct and reduce the overall performance. (2) Inability to localize and address errors: LLMs have a limited ability to self-correct and struggle to identify and correct their own mistakes. (3) Insufficient refinement: Deciding how many iterations of refinement are needed is non-trivial, and stopping too soon could leave errors unaddressed. To tackle these issues, we propose MAgICoRe, which avoids excessive refinement by categorizing problem difficulty as easy or hard, solving easy problems with coarse-grained aggregation and hard ones with fine-grained and iterative multi-agent refinement. To improve error localization, we incorporate external step-wise reward model (RM) scores. Moreover, to ensure effective refinement, we employ a multi-agent loop with three agents: Solver, Reviewer (which generates targeted feedback based on step-wise RM scores), and the Refiner (which incorporates feedback). To ensure sufficient refinement, we re-evaluate updated solutions, iteratively initiating further rounds of refinement. We evaluate MAgICoRe on Llama-3-8B and GPT-3.5 and show its effectiveness across 5 math datasets. Even one iteration of MAgICoRe beats Self-Consistency by 3.4%, Best-of-k by 3.2%, and Self-Refine by 4.0% while using less than half the samples. Unlike iterative refinement with baselines, MAgICoRe continues to improve with more iterations. Finally, our ablations highlight the importance of MAgICoRe's RMs and multi-agent communication.",
+    "abs_url": "https://arxiv.org/abs/2409.12147v2",
+    "pdf_url": "https://arxiv.org/pdf/2409.12147v2",
+    "query_tags": [
+      "tag_cf"
+    ]
+  },
+  {
+    "arxiv_id": "2404.08660v2",
+    "title": "How Does Message Passing Improve Collaborative Filtering?",
+    "published": "2024-03-27",
+    "updated": "2024-10-28",
+    "authors": [
+      "Mingxuan Ju",
+      "William Shiao",
+      "Zhichun Guo",
+      "Yanfang Ye",
+      "Yozen Liu",
+      "Neil Shah",
+      "Tong Zhao"
+    ],
+    "categories": [
+      "cs.IR",
+      "cs.LG"
+    ],
+    "summary": "Collaborative filtering (CF) has exhibited prominent results for recommender systems and been broadly utilized for real-world applications. A branch of research enhances CF methods by message passing used in graph neural networks, due to its strong capabilities of extracting knowledge from graph-structured data, like user-item bipartite graphs that naturally exist in CF. They assume that message passing helps CF methods in a manner akin to its benefits for graph-based learning tasks in general. However, even though message passing empirically improves CF, whether or not this assumption is correct still needs verification. To address this gap, we formally investigate why message passing helps CF from multiple perspectives and show that many assumptions made by previous works are not entirely accurate. With our curated ablation studies and theoretical analyses, we discover that (1) message passing improves the CF performance primarily by additional representations passed from neighbors during the forward pass instead of additional gradient updates to neighbor representations during the model back-propagation and (ii) message passing usually helps low-degree nodes more than high-degree nodes. Utilizing these novel findings, we present Test-time Aggregation for CF, namely TAG-CF, a test-time augmentation framework that only conducts message passing once at inference time. The key novelty of TAG-CF is that it effectively utilizes graph knowledge while circumventing most of notorious computational overheads of message passing. Besides, TAG-CF is extremely versatile can be used as a plug-and-play module to enhance representations trained by different CF supervision signals. Evaluated on six datasets, TAG-CF consistently improves the recommendation performance of CF methods without graph by up to 39.2% on cold users and 31.7% on all users, with little to no extra computational overheads.",
+    "abs_url": "https://arxiv.org/abs/2404.08660v2",
+    "pdf_url": "https://arxiv.org/pdf/2404.08660v2",
+    "query_tags": [
+      "test_time_aggregation",
+      "tag_cf"
+    ]
+  },
+  {
+    "arxiv_id": "2401.06982v4",
+    "title": "Denoising Diffusion Recommender Model",
+    "published": "2024-01-13",
+    "updated": "2024-06-17",
+    "authors": [
+      "Jujia Zhao",
+      "Wenjie Wang",
+      "Yiyan Xu",
+      "Teng Sun",
+      "Fuli Feng",
+      "Tat-Seng Chua"
+    ],
+    "categories": [
+      "cs.IR"
+    ],
+    "summary": "Recommender systems often grapple with noisy implicit feedback. Most studies alleviate the noise issues from data cleaning perspective such as data resampling and reweighting, but they are constrained by heuristic assumptions. Another denoising avenue is from model perspective, which proactively injects noises into user-item interactions and enhances the intrinsic denoising ability of models. However, this kind of denoising process poses significant challenges to the recommender model's representation capacity to capture noise patterns. To address this issue, we propose Denoising Diffusion Recommender Model (DDRM), which leverages multi-step denoising process of diffusion models to robustify user and item embeddings from any recommender models. DDRM injects controlled Gaussian noises in the forward process and iteratively removes noises in the reverse denoising process, thereby improving embedding robustness against noisy feedback. To achieve this target, the key lies in offering appropriate guidance to steer the reverse denoising process and providing a proper starting point to start the forward-reverse process during inference. In particular, we propose a dedicated denoising module that encodes collaborative information as denoising guidance. Besides, in the inference stage, DDRM utilizes the average embeddings of users' historically liked items as the starting point rather than using pure noise since pure noise lacks personalization, which increases the difficulty of the denoising process. Extensive experiments on three datasets with three representative backend recommender models demonstrate the effectiveness of DDRM.",
+    "abs_url": "https://arxiv.org/abs/2401.06982v4",
+    "pdf_url": "https://arxiv.org/pdf/2401.06982v4",
+    "query_tags": [
+      "diffusion_recommendation_implicit"
+    ]
+  },
+  {
+    "arxiv_id": "2311.08744v3",
+    "title": "Graph Signal Diffusion Model for Collaborative Filtering",
+    "published": "2023-11-15",
+    "updated": "2024-04-24",
+    "authors": [
+      "Yunqin Zhu",
+      "Chao Wang",
+      "Qi Zhang",
+      "Hui Xiong"
+    ],
+    "categories": [
+      "cs.IR",
+      "cs.LG"
+    ],
+    "summary": "Collaborative filtering is a critical technique in recommender systems. It has been increasingly viewed as a conditional generative task for user feedback data, where newly developed diffusion model shows great potential. However, existing studies on diffusion model lack effective solutions for modeling implicit feedback. Particularly, the standard isotropic diffusion process overlooks correlation between items, misaligned with the graphical structure of the interaction space. Meanwhile, Gaussian noise destroys personalized information in a user's interaction vector, causing difficulty in its reconstruction. In this paper, we adapt standard diffusion model and propose a novel Graph Signal Diffusion Model for Collaborative Filtering (named GiffCF). To better represent the correlated distribution of user-item interactions, we define a generalized diffusion process using heat equation on the item-item similarity graph. Our forward process smooths interaction signals with an advanced family of graph filters, introducing the graph adjacency as beneficial prior knowledge for recommendation. Our reverse process iteratively refines and sharpens latent signals in a noise-free manner, where the updates are conditioned on the user's history and computed from a carefully designed two-stage denoiser, leading to high-quality reconstruction. Finally, through extensive experiments, we show that GiffCF effectively leverages the advantages of both diffusion model and graph signal processing, and achieves state-of-the-art performance on three benchmark datasets.",
+    "abs_url": "https://arxiv.org/abs/2311.08744v3",
+    "pdf_url": "https://arxiv.org/pdf/2311.08744v3",
+    "query_tags": [
+      "diffusion_recommendation_implicit"
+    ]
+  },
+  {
+    "arxiv_id": "1208.3876v1",
+    "title": "Digging Deeper into Deep Web Databases by Breaking Through the Top-k Barrier",
+    "published": "2012-08-19",
+    "updated": "2012-08-19",
+    "authors": [
+      "Saravanan Thirumuruganathan",
+      "Nan Zhang",
+      "Gautam Das"
+    ],
+    "categories": [
+      "cs.DB"
+    ],
+    "summary": "A large number of web databases are only accessible through proprietary form-like interfaces which require users to query the system by entering desired values for a few attributes. A key restriction enforced by such an interface is the top-k output constraint - i.e., when there are a large number of matching tuples, only a few (top-k) of them are preferentially selected and returned by the website, often according to a proprietary ranking function. Since most web database owners set k to be a small value, the top-k output constraint prevents many interesting third-party (e.g., mashup) services from being developed over real-world web databases. In this paper we consider the novel problem of \"digging deeper\" into such web databases. Our main contribution is the meta-algorithm GetNext that can retrieve the next ranked tuple from the hidden web database using only the restrictive interface of a web database without any prior knowledge of its ranking function. This algorithm can then be called iteratively to retrieve as many top ranked tuples as necessary. We develop principled and efficient algorithms that are based on generating and executing multiple reformulated queries and inferring the next ranked tuple from their returned results. We provide theoretical analysis of our algorithms, as well as extensive experimental results over synthetic and real-world databases that illustrate the effectiveness of our techniques.",
+    "abs_url": "https://arxiv.org/abs/1208.3876v1",
+    "pdf_url": "https://arxiv.org/pdf/1208.3876v1",
+    "query_tags": [
+      "softmax_loss_at_k"
+    ]
+  }
+]

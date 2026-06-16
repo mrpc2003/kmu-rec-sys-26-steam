@@ -1,0 +1,100 @@
+{
+  "run_root": "artifacts/lightgcn_checkpoint_avg_smoke_20260613T0106KST",
+  "validation_only": true,
+  "no_kaggle_submit": true,
+  "candidate_csv_written": false,
+  "external_metadata_used": false,
+  "gate": {
+    "mean_delta_required_for_swa_axis": 0.0015,
+    "min_delta_required": 0.0,
+    "splits_required": 3,
+    "candidate_materialization_allowed": false
+  },
+  "gate_pass": false,
+  "best_overall": {
+    "variant": "score_ep2",
+    "splits": 1,
+    "mean_acc": 0.7220444088817763,
+    "mean_baseline": 0.7650530106021204,
+    "mean_delta": -0.04300860172034404,
+    "min_delta": -0.04300860172034404,
+    "max_delta": -0.04300860172034404,
+    "positive_splits": 0
+  },
+  "overall": [
+    {
+      "variant": "score_ep2",
+      "splits": 1,
+      "mean_acc": 0.7220444088817763,
+      "mean_baseline": 0.7650530106021204,
+      "mean_delta": -0.04300860172034404,
+      "min_delta": -0.04300860172034404,
+      "max_delta": -0.04300860172034404,
+      "positive_splits": 0
+    },
+    {
+      "variant": "score_avg_last2_1_2",
+      "splits": 1,
+      "mean_acc": 0.7219443888777756,
+      "mean_baseline": 0.7650530106021204,
+      "mean_delta": -0.04310862172434482,
+      "min_delta": -0.04310862172434482,
+      "max_delta": -0.04310862172434482,
+      "positive_splits": 0
+    },
+    {
+      "variant": "score_ep1",
+      "splits": 1,
+      "mean_acc": 0.72124424884977,
+      "mean_baseline": 0.7650530106021204,
+      "mean_delta": -0.04380876175235038,
+      "min_delta": -0.04380876175235038,
+      "max_delta": -0.04380876175235038,
+      "positive_splits": 0
+    }
+  ],
+  "by_split": [
+    {
+      "split": "val_random_uniform_seed42",
+      "variant": "score_avg_last2_1_2",
+      "seeds_present": [
+        31415
+      ],
+      "n_seeds": 1,
+      "ensemble_acc": 0.7219443888777756,
+      "baseline_4seed_acc": 0.7650530106021204,
+      "delta_vs_baseline": -0.04310862172434482,
+      "rows": 19996,
+      "users": 4736
+    },
+    {
+      "split": "val_random_uniform_seed42",
+      "variant": "score_ep1",
+      "seeds_present": [
+        31415
+      ],
+      "n_seeds": 1,
+      "ensemble_acc": 0.72124424884977,
+      "baseline_4seed_acc": 0.7650530106021204,
+      "delta_vs_baseline": -0.04380876175235038,
+      "rows": 19996,
+      "users": 4736
+    },
+    {
+      "split": "val_random_uniform_seed42",
+      "variant": "score_ep2",
+      "seeds_present": [
+        31415
+      ],
+      "n_seeds": 1,
+      "ensemble_acc": 0.7220444088817763,
+      "baseline_4seed_acc": 0.7650530106021204,
+      "delta_vs_baseline": -0.04300860172034404,
+      "rows": 19996,
+      "users": 4736
+    }
+  ],
+  "score_files": [
+    "artifacts/lightgcn_checkpoint_avg_smoke_20260613T0106KST/val_random_uniform_seed42/seed31415/checkpoint_scores.csv"
+  ]
+}

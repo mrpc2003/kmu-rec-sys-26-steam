@@ -1,0 +1,129 @@
+{
+  "safety_flags": {
+    "validation_only": true,
+    "candidate_csv_written": false,
+    "full_test_candidate_or_submission_csv_created": false,
+    "kaggle_submit_executed": false,
+    "hidden_labels_used": false,
+    "private_answers_used": false,
+    "external_steam_scraping_used": false,
+    "credentials_or_tokens_printed": false,
+    "quarantine_or_guard_logic_weakened": false,
+    "git_stage_commit_push_executed": false,
+    "recursive_cron_scheduled": false
+  },
+  "axis_decision": "no safe axis",
+  "new_probe": {
+    "launched": false,
+    "status": "not_launched",
+    "command": null,
+    "pid_file": null,
+    "log": null,
+    "report_json": null,
+    "report_md": null,
+    "artifact_dir": "artifacts/opencode_hermes_axis_loop_20260607T074546KST",
+    "reason": "No fresh independent bounded validation-only probe survived strict-gate, closed-family, and quarantine/public-negative review in iteration 04."
+  },
+  "best_or_top_metrics": {
+    "variant": "boundary/frontier internal validation rows from reports/20260603T164750KST_boundary_factory_frontier.json (blocked)",
+    "mean_delta_vs_base": 0.0017003400680135987,
+    "min_delta_vs_base": null,
+    "positive_splits": 3,
+    "fixes": null,
+    "breaks": null,
+    "pooled_p_exact": 0.0005242948680109718,
+    "quarantine_conflict": true,
+    "status": "blocked_public_negative_family",
+    "note": "This is the strongest apparent metric found by direct sweep, but it belongs to the boundary/frontier/capacity scoreblend family that Hermes already rejected for quarantine/public-negative conflict."
+  },
+  "strict_gate": {
+    "mean_delta_threshold": 0.0015,
+    "min_delta_nonnegative": true,
+    "required_positive_splits": "3/3",
+    "requires_fixes_gt_breaks": true,
+    "pooled_exact_or_mcnemar_p_lt": 0.05,
+    "requires_validation_only": true,
+    "requires_candidate_csv_written_false": true,
+    "requires_full_test_candidate_or_submission_csv_created_false": true,
+    "requires_kaggle_submit_executed_false": true,
+    "requires_no_quarantine_or_near_duplicate_conflict": true
+  },
+  "inspected_evidence": {
+    "reports": [
+      "reports/20260607T074546KST_axis_loop_iter01_opencode.json",
+      "reports/20260607T074546KST_axis_loop_iter02_opencode.json",
+      "reports/20260607T074546KST_axis_loop_iter03_opencode.json",
+      "reports/20260607T063604KST_opencode_improvement_axis_loop.json",
+      "reports/20260606T220406KST_jackknife_uncertainty_boundary_probe.json",
+      "reports/20260603T180707KST_userknn_gated_residual_probe.json",
+      "reports/20260603T164750KST_boundary_factory_frontier.json",
+      "reports/20260601_gbdt_ranker_crosssplit.json",
+      "reports/20260601_gbdt_multimodel_crosssplit.json",
+      "reports/20260606T125011KST_multi_interest_svd_smoke.json"
+    ],
+    "state_files": [
+      "state/aggressive_quota_runner_state.json",
+      "state/autonomous_submission_policy.json"
+    ],
+    "scripts": [
+      "scripts/opencode_hermes_axis_rejection_loop.py",
+      "scripts/userknn_gated_residual_probe.py",
+      "scripts/jackknife_uncertainty_boundary_probe.py",
+      "scripts/gbdt_ranker_probe.py",
+      "scripts/gbdt_multimodel_probe.py",
+      "scripts/semantic_residual_probe.py",
+      "scripts/tagcf_testtime_aggregation_probe.py"
+    ],
+    "direct_searches": [
+      "rg over reports/scripts/state for axis/probe/validation/strict/quarantine/McNemar/emb128 terms",
+      "metric sweep over reports/*.json for mean_delta/delta/p_exact/pooled_p_exact/strict_pass objects",
+      "rg over probe/gate/panel scripts for argparse/report/artifact and submission-safety surfaces",
+      "rg for GBDT/FM/supervised stacker closure evidence"
+    ]
+  },
+  "closed_or_rejected_axes_checked": [
+    {
+      "axis": "UserKNN gated residual fine-grid and smoke",
+      "status": "closed_stalled_or_weak",
+      "evidence": "Fine-grid report artifacts remain absent and supplied log tail shows repeated invalid-divide warnings; prior smoke top mean delta +0.000900, 3/3 positive, fixes/breaks 406/352, p=0.05415 fails strict mean and p gates."
+    },
+    {
+      "axis": "Jackknife uncertainty boundary smoke/expanded",
+      "status": "closed_weak_or_incomplete",
+      "evidence": "Smoke best mean delta +0.0003667, min delta -0.0012002, 2/3 positive, fixes/breaks 252/230, p=0.3388; expanded probe has no metric report."
+    },
+    {
+      "axis": "Boundary/frontier/capacity and rankblend residual families",
+      "status": "blocked_by_quarantine_public_negative",
+      "evidence": "Direct metric sweep finds the strongest rows here, but prior public transfer was negative/non-improving versus current 0.77825 best and Hermes explicitly rejected iteration 03 for quarantine conflict."
+    },
+    {
+      "axis": "Supervised GBDT/FM/stacker collaboration",
+      "status": "closed_redundant_or_public_negative_adjacent",
+      "evidence": "GBDT ranker and multimodel cross-split reports are REDUNDANT with deltas +0.0005/+0.0001 within noise; logreg stacker was submitted earlier and regressed publicly to 0.75355."
+    },
+    {
+      "axis": "Layer mix, SL@K-lite, multi-interest SVD, semantic/text/README/LM, temporal/hours/exact-K/last-slot/DNS, TAG-CF",
+      "status": "closed_or_rejected_by_prompt_and_reports",
+      "evidence": "Recent reports and prompt closures mark these weak, split-negative, incomplete, public-noise risk, quarantined, or too large for a bounded validation-only iteration."
+    }
+  ],
+  "ranked_next_axis_hypotheses": [
+    {
+      "rank": 1,
+      "axis": "Engineering-only finite-value fix for UserKNN z-normalization warnings",
+      "why_not_launched_now": "It may make a stalled script cleaner but is not a fresh independent improvement axis and the UserKNN family is explicitly closed unless materially redesigned."
+    },
+    {
+      "rank": 2,
+      "axis": "A genuinely new validation-label-free base model family trained from scratch",
+      "why_not_launched_now": "Implemented candidates in the repo are already weak/closed; starting a new family would exceed a bounded single iteration and likely produce only underpowered one-split evidence."
+    },
+    {
+      "rank": 3,
+      "axis": "Non-boundary, non-residual model-disagreement diagnostic",
+      "why_not_launched_now": "Existing disagreement surfaces overlap jackknife, frontier/capacity, layer-mixture, or rankblend families and do not avoid quarantine/near-duplicate risk."
+    }
+  ],
+  "verdict": "NO_SAFE_AXIS"
+}

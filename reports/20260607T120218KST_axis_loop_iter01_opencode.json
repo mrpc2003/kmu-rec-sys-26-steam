@@ -1,0 +1,38 @@
+{
+  "safety_flags": {
+    "validation_only": true,
+    "candidate_csv_written": false,
+    "full_test_candidate_or_submission_csv_created": false,
+    "kaggle_submit_executed": false,
+    "hidden_labels_used": false,
+    "private_answers_used": false,
+    "external_steam_scraping_used": false,
+    "credentials_or_tokens_printed": false,
+    "quarantine_or_guard_logic_weakened": false,
+    "git_stage_commit_push_executed": false,
+    "recursive_cron_scheduled": false
+  },
+  "axis_decision": "dry_run_no_opencode_called",
+  "new_probe": {
+    "launched": false,
+    "status": "dry_run",
+    "command": null,
+    "pid_file": null,
+    "log": null,
+    "report_json": null,
+    "report_md": null,
+    "artifact_dir": null
+  },
+  "best_or_top_metrics": {
+    "variant": null,
+    "mean_delta_vs_base": null,
+    "min_delta_vs_base": null,
+    "positive_splits": null,
+    "fixes": null,
+    "breaks": null,
+    "pooled_p_exact": null,
+    "quarantine_conflict": false
+  },
+  "ranked_next_axis_hypotheses": [],
+  "verdict": "DRY_RUN"
+}

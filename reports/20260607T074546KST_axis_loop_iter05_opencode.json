@@ -1,0 +1,157 @@
+{
+  "safety_flags": {
+    "validation_only": true,
+    "candidate_csv_written": false,
+    "full_test_candidate_or_submission_csv_created": false,
+    "kaggle_submit_executed": false,
+    "hidden_labels_used": false,
+    "private_answers_used": false,
+    "external_steam_scraping_used": false,
+    "credentials_or_tokens_printed": false,
+    "quarantine_or_guard_logic_weakened": false,
+    "git_stage_commit_push_executed": false,
+    "recursive_cron_scheduled": false
+  },
+  "axis_decision": "no safe axis",
+  "new_probe": {
+    "launched": false,
+    "status": "not_launched",
+    "command": null,
+    "pid_file": null,
+    "log": null,
+    "report_json": null,
+    "report_md": null,
+    "artifact_dir": "artifacts/opencode_hermes_axis_loop_20260607T074546KST",
+    "reason": "No fresh independent bounded validation-only probe survived review; every plausible local surface overlapped a closed, stalled, weak, quarantined, public-negative, or underpowered one-split family."
+  },
+  "best_or_top_metrics": {
+    "variant": "boundary/frontier internal validation rows from reports/20260603T164750KST_boundary_factory_frontier.json (blocked)",
+    "mean_delta_vs_base": 0.0017003400680135987,
+    "min_delta_vs_base": null,
+    "positive_splits": 3,
+    "fixes": null,
+    "breaks": null,
+    "pooled_p_exact": 0.0005242948680109718,
+    "quarantine_conflict": true,
+    "status": "blocked_public_negative_family",
+    "strict_gate_failures": [
+      "min_delta unavailable",
+      "fixes_gt_breaks unavailable",
+      "quarantine/public-negative family conflict"
+    ],
+    "note": "This remains the strongest apparent metric-bearing row found across prior reports, but Hermes already rejected this family and state/aggressive_quota_runner_state.json records negative public transfer for boundary/frontier variants."
+  },
+  "strict_gate": {
+    "mean_delta_threshold": 0.0015,
+    "min_delta_nonnegative": true,
+    "required_positive_splits": "3/3",
+    "requires_fixes_gt_breaks": true,
+    "pooled_exact_or_mcnemar_p_lt": 0.05,
+    "requires_validation_only": true,
+    "requires_candidate_csv_written_false": true,
+    "requires_full_test_candidate_or_submission_csv_created_false": true,
+    "requires_kaggle_submit_executed_false": true,
+    "requires_no_quarantine_or_near_duplicate_conflict": true
+  },
+  "search_effort": {
+    "delegation_used": false,
+    "reason_delegation_not_used": "The iteration prompt explicitly forbids sub-agents and waiting for parallel agents.",
+    "direct_searches": [
+      "rg over reports/scripts/state/README for quarantine, guard, public-negative, probe, validation_only, submit, axis",
+      "rg over scripts for validation split/report/McNemar/delta interfaces",
+      "rg over reports/scripts for Hyperbolic, SASRec, MultiVAE, AlphaRec, TurboCF, XSimGCL, SGL, DirectAU, semantic/text, temporal, hours, exact-K, DNS, capacity, frontier, TAG-CF, rankblend, boundary",
+      "ast-grep for subprocess.run call-sites in scripts",
+      "ast-grep for to_csv call-sites in scripts",
+      "process scan for Kaggle submit, existing loop, UserKNN, jackknife, and runner processes",
+      "py_compile of relevant existing probe/controller scripts"
+    ],
+    "compiled_scripts": [
+      "scripts/opencode_hermes_axis_rejection_loop.py",
+      "scripts/jackknife_uncertainty_boundary_probe.py",
+      "scripts/userknn_gated_residual_probe.py",
+      "scripts/semantic_residual_probe.py",
+      "scripts/sasrec_probe.py",
+      "scripts/lightgcn_hyperbolic.py",
+      "scripts/turbocf_uniform_gate.py"
+    ]
+  },
+  "closed_or_rejected_axes_checked": [
+    {
+      "axis": "UserKNN gated residual fine-grid and smoke",
+      "status": "closed_stalled_or_weak",
+      "evidence": "Expected fine-grid reports are absent; prior logs show repeated invalid-divide warnings and no metric report. Previous smoke top mean delta +0.000900, min +0.000200, 3/3 positive, fixes/breaks 406/352, pooled p=0.05415: below strict mean and p gates."
+    },
+    {
+      "axis": "Jackknife uncertainty boundary smoke/expanded",
+      "status": "closed_weak_or_failed_incomplete",
+      "evidence": "Smoke best mean delta +0.0003667, min -0.0012002, 2/3 positive, fixes/breaks 252/230, p=0.3388. Expanded probe has no metric report and is classified failed/incomplete."
+    },
+    {
+      "axis": "Boundary/frontier/capacity/rankblend residual/TAG-CF",
+      "status": "blocked_by_quarantine_or_public_negative_transfer",
+      "evidence": "State records negative public transfer for rankblend residual, boundary scoreblend, frontier, and TAG-CF variants versus current 0.77825 public best; Hermes rejected iterations 03-04 for quarantine conflict."
+    },
+    {
+      "axis": "DNS pool=1 and capacity/emb192 micro-ensembles",
+      "status": "closed_public_noise_or_marginal",
+      "evidence": "DNS pool=1 is split-specific/public-noise risk; emb192/capacity/frontier rows are marginal and public-tested variants did not beat current best."
+    },
+    {
+      "axis": "Temporal, hours-confidence, exact-K, SL@K-lite, last-slot sparse agreement",
+      "status": "closed_by_prompt_and_prior_reports",
+      "evidence": "Explicitly listed as closed/stalled in the iteration prompt; no materially new bounded design found."
+    },
+    {
+      "axis": "Semantic/text/README/LM and multi-interest SVD",
+      "status": "weak_or_redundant",
+      "evidence": "Semantic/text families are closed as weak/redundant; multi-interest SVD smoke has best blend50 delta -0.071414 vs emb128 ref and decision NO_CANDIDATE."
+    },
+    {
+      "axis": "TurboCF / EASE / ItemKNN graph filtering",
+      "status": "closed_redundant",
+      "evidence": "scripts/turbocf_uniform_gate.py is implemented, but reports/20260602_aggressive_advisory_prompt.md explicitly closes EASE/ALS/MultiVAE/TurboCF/itemKNN as redundant; launching it would repeat a closed family."
+    },
+    {
+      "axis": "SASRec, Hyperbolic, SGL, XSimGCL, DirectAU, MultiVAE, AlphaRec",
+      "status": "closed_or_too_large_for_bounded_iteration",
+      "evidence": "Recent loop reports classify these backbone/loss directions as weak/negative/closed or not credible for a bounded validation-only run without underpowered one-split evidence."
+    }
+  ],
+  "process_observation": {
+    "kaggle_submit_observed": false,
+    "notes": [
+      "Process scan observed the pre-existing Hermes gateway and opencode_hermes_axis_rejection_loop driver/controller for this run.",
+      "No separate Kaggle competitions submit process was observed; the scan naturally matched the current prompt text and the rg search process itself."
+    ]
+  },
+  "ranked_next_axis_hypotheses": [
+    {
+      "rank": 1,
+      "axis": "A genuinely new validation-label-free base model family trained from scratch",
+      "why_not_launched_now": "No implemented local surface is both fresh and credible; starting a new family here would likely exceed the bounded iteration or produce an underpowered one-split blip."
+    },
+    {
+      "rank": 2,
+      "axis": "Tiny UserKNN finite-value/complexity diagnostic",
+      "why_not_launched_now": "This would be script hygiene rather than an independent improvement axis, and the family is explicitly stalled/closed without a materially new design."
+    },
+    {
+      "rank": 3,
+      "axis": "Non-boundary, non-residual disagreement diagnostic",
+      "why_not_launched_now": "Existing disagreement/margin surfaces collapse into jackknife, boundary/frontier, rankblend, or capacity families that are closed or quarantined."
+    }
+  ],
+  "artifacts_reports_produced": {
+    "reports": [
+      "reports/20260607T074546KST_axis_loop_iter05_opencode.json",
+      "reports/20260607T074546KST_axis_loop_iter05_opencode.md"
+    ],
+    "validation_artifacts": [
+      "artifacts/opencode_hermes_axis_loop_20260607T074546KST/"
+    ],
+    "candidate_or_submission_csv": [],
+    "kaggle_submission_artifacts": [],
+    "git_artifacts": []
+  },
+  "verdict": "NO_SAFE_AXIS"
+}

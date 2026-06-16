@@ -1,0 +1,69 @@
+{
+  "timestamp_kst": "2026-06-07T07:45:28.992034+09:00",
+  "run_ts": "20260607T074528KST",
+  "dry_run": true,
+  "final_verdict": "DRY_RUN_COMPLETE",
+  "safety_contract": {
+    "no_kaggle_submit": true,
+    "no_full_test_candidate_or_submission_csv": true,
+    "no_hidden_labels_or_private_answers": true,
+    "no_external_steam_scraping": true,
+    "no_git_stage_commit_push": true,
+    "no_recursive_cron": true
+  },
+  "iterations": [
+    {
+      "iteration": 1,
+      "timestamp_kst": "2026-06-07T07:45:28.991425+09:00",
+      "dry_run": true,
+      "prompt_path": "reports/20260607T074528KST_axis_loop_iter01_prompt.md",
+      "opencode_jsonl": null,
+      "raw_text_path": "reports/20260607T074528KST_axis_loop_iter01_opencode_raw_text.md",
+      "expected_report_json": "reports/20260607T074528KST_axis_loop_iter01_opencode.json",
+      "expected_report_md": "reports/20260607T074528KST_axis_loop_iter01_opencode.md",
+      "opencode_exit_code": 0,
+      "opencode_timed_out": false,
+      "sentinel": "OPENCODE_AXIS_LOOP_DONE_BLOCKED",
+      "hermes_verdict": "BLOCKED_REJECTED_FOR_LOOP_CONTINUATION",
+      "strict_pass": false,
+      "rejection_reasons": [
+        "best_metrics_failed:mean_delta,min_delta,positive_splits,fixes_gt_breaks"
+      ],
+      "safety_issues": [],
+      "metrics_checked": [
+        {
+          "variant": null,
+          "mean_delta": null,
+          "min_delta": null,
+          "positive_splits": null,
+          "fixes": null,
+          "breaks": null,
+          "p": null,
+          "quarantine_conflict": false,
+          "strict_pass": false,
+          "failed": [
+            "mean_delta",
+            "min_delta",
+            "positive_splits",
+            "fixes_gt_breaks"
+          ]
+        }
+      ],
+      "new_probe": {
+        "launched": false,
+        "status": "dry_run",
+        "command": null,
+        "pid_file": null,
+        "log": null,
+        "report_json": null,
+        "report_md": null,
+        "artifact_dir": null,
+        "hermes_wait_info": {
+          "waited": false,
+          "reason": "no_probe_launched"
+        }
+      },
+      "new_submission_csvs": []
+    }
+  ]
+}

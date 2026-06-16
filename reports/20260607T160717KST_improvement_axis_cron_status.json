@@ -1,0 +1,149 @@
+{
+  "timestamp_kst": "20260607T160717KST",
+  "timestamp_utc": "2026-06-07T07:07:17Z",
+  "repo": "/opt/data/kaggle/kmu-rec-sys-26-steam",
+  "cron_role": "OpenCode-first no-submit improvement-axis discovery loop",
+  "safety_flags": {
+    "validation_only": true,
+    "candidate_csv_written_this_tick": false,
+    "full_test_candidate_or_submission_csv_created_this_tick": false,
+    "kaggle_submit_executed_this_tick": false,
+    "hidden_labels_or_private_answers_used": false,
+    "external_steam_scraping_used": false,
+    "credentials_or_tokens_printed": false,
+    "quarantine_or_guard_logic_weakened": false,
+    "git_stage_commit_push_executed": false,
+    "recursive_cron_scheduled": false
+  },
+  "environment_checks": {
+    "active_hermes_background_processes": [],
+    "relevant_process_count_after_opencode": 0,
+    "active_kaggle_submit_processes": [],
+    "gpu_summary_after_opencode": [
+      "GPU0: 0 MiB / 32768 MiB, 0% util, 30C",
+      "GPU1: 0 MiB / 32768 MiB, 1% util, 32C",
+      "GPU2: 0 MiB / 32768 MiB, 0% util, 30C",
+      "GPU3: 4320 MiB / 32768 MiB, 2% util, 31C; no relevant repo process matched in ps"
+    ],
+    "submission_csv_count_before_tick": 23,
+    "submission_csv_count_after_tick": 23,
+    "new_submission_csv_since_20260607T160111KST": [],
+    "git_diff_check_for_new_tick_artifacts_ok": true
+  },
+  "specific_required_checks": {
+    "userknn_gated_residual_fine": {
+      "expected_json": "reports/20260606T132450KST_userknn_gated_residual_fine.json",
+      "found": false,
+      "classification": "STALLED_INCOMPLETE",
+      "reason": "Final metric JSON is still absent; prior status reports warning-dominated log and no metric report. Not relaunched."
+    },
+    "jackknife_uncertainty_boundary_expanded": {
+      "expected_json": "reports/20260606T220406KST_jackknife_uncertainty_boundary_expanded.json",
+      "expected_md": "reports/20260606T220406KST_jackknife_uncertainty_boundary_expanded.md",
+      "expected_log": "logs/20260606T220406KST_jackknife_uncertainty_boundary_expanded.log",
+      "found": false,
+      "classification": "FAILED_INCOMPLETE_OR_NOT_PRESENT",
+      "reason": "Expanded report files are absent; log is only 12 lines and stops at seed123 invalid-value warning without a final report. No live pid/process found."
+    },
+    "jackknife_uncertainty_boundary_probe_smoke": {
+      "report_json": "reports/20260606T220406KST_jackknife_uncertainty_boundary_probe.json",
+      "classification": "WEAK_SIGNAL_STRICT_GATE_FAIL",
+      "top_variant": "vote_consensus__high_capacity_gap__B1__w0.1",
+      "mean_delta_vs_base": 0.0003667400146696309,
+      "min_delta_vs_base": -0.0012002400480095599,
+      "positive_splits": "2/3",
+      "fixes": 252,
+      "breaks": 230,
+      "pooled_p_exact": 0.33881500709211204,
+      "strict_failures": [
+        "mean_delta_below_0.0015",
+        "min_delta_negative",
+        "not_3_of_3_positive",
+        "p_not_significant"
+      ]
+    }
+  },
+  "opencode_run_this_tick": {
+    "smoke_test": {
+      "command": "opencode run '...OPENCODE_AXIS_SMOKE_OK...' --format json with stdin DEVNULL",
+      "exit_code": 0,
+      "sentinel_found": "OPENCODE_AXIS_SMOKE_OK"
+    },
+    "prompt": "reports/20260607T160111KST_opencode_axis_loop_prompt.md",
+    "log_jsonl": "logs/20260607T160111KST_opencode_improvement_axis_loop.jsonl",
+    "raw_text": "reports/20260607T160111KST_opencode_improvement_axis_loop_raw_text.md",
+    "report_json": "reports/20260607T160111KST_opencode_improvement_axis_loop.json",
+    "report_md": "reports/20260607T160111KST_opencode_improvement_axis_loop.md",
+    "exit_code": 0,
+    "sentinel": "OPENCODE_AXIS_LOOP_DONE_NO_SAFE_AXIS",
+    "verdict": "NO_SAFE_AXIS",
+    "new_probe_launched": false,
+    "json_md_qa_ok": true,
+    "evidence_count": 15,
+    "hypothesis_count": 6
+  },
+  "completed_or_recent_axis_classifications": [
+    {
+      "axis": "fresh 20260607T160111KST OpenCode adviser/worker run",
+      "classification": "NO_SAFE_AXIS",
+      "evidence": "OpenCode reviewed required stale reports, latest after-ALS loop, failed_axes ledger, aggressive runner state, residual atlas, ALS independent confirmation, and script inventory; it found no fresh bounded independent axis outside closed/stalled/quarantined/materializer families and launched no probe."
+    },
+    {
+      "axis": "current-best ALS/rankblend residual diagnostic row",
+      "classification": "WEAK_SIGNAL_STRICT_GATE_FAIL_REJECT_FOR_ESCALATION",
+      "evidence": "Strongest remaining row remains mean +0.0011335600453423744, min +0.0004000800160031126, 3/3 positive, fixes/breaks 462/394, p=0.021965674090633346, but below +0.0015 mean gate and same-family/quarantine-conflicted; pre-registered independent row had mean +0.0008001600320064103 and min -0.0003000600120024455."
+    },
+    {
+      "axis": "OTTO/source-separated co-visitation",
+      "classification": "REJECT_CLOSED_AFTER_PUBLIC_NEGATIVE_VS_CURRENT_BEST",
+      "evidence": "Independent confirmation failed strict gate and forced public score 0.77815 did not beat current best 0.77825."
+    },
+    {
+      "axis": "UserKNN gated residual fine-grid",
+      "classification": "STALLED_INCOMPLETE",
+      "evidence": "Expected final report absent; not relaunched because it is not a new independent axis."
+    },
+    {
+      "axis": "Jackknife uncertainty boundary",
+      "classification": "WEAK_SIGNAL_OR_INCOMPLETE_REJECT",
+      "evidence": "Smoke report top mean +0.0003667400146696309, min negative, 2/3 positive, p=0.33881500709211204; expanded report absent/incomplete."
+    }
+  ],
+  "next_axis_hypotheses": [
+    {
+      "rank": 1,
+      "axis": "Genuinely new validation-label-free base model family not already implemented locally",
+      "status": "not_launched",
+      "reason": "Fresh OpenCode run could not identify a concrete bounded local surface that is both fresh and credible under the strict gate."
+    },
+    {
+      "rank": 2,
+      "axis": "ALS/rankblend/current-best residual diagnostics",
+      "status": "closed_quarantined_not_launched",
+      "reason": "Below mean gate and same-family/quarantine conflict."
+    },
+    {
+      "rank": 3,
+      "axis": "OTTO/source co-visitation, UserKNN, jackknife, exact-K, temporal, DNS, hours-confidence, SL@K-lite, last-slot, semantic/text, capacity/frontier, public-tested rankblend variants",
+      "status": "closed_stalled_weak_or_forbidden_not_launched",
+      "reason": "All are explicitly closed, stalled/incomplete, weak, public-negative, redundant, or would require forbidden candidate materialization."
+    }
+  ],
+  "commands_or_work_launched": [
+    "OpenCode smoke test with OPENCODE_AXIS_SMOKE_OK sentinel; exit 0.",
+    "Fresh bounded OpenCode run from reports/20260607T160111KST_opencode_axis_loop_prompt.md with --format json and stdin closed; exit 0.",
+    "Extracted OpenCode text parts to reports/20260607T160111KST_opencode_improvement_axis_loop_raw_text.md.",
+    "No validation probe, Kaggle submit, candidate materialization, git stage/commit/push, or cron scheduling was performed."
+  ],
+  "artifacts_written_this_tick": {
+    "opencode_prompt": "reports/20260607T160111KST_opencode_axis_loop_prompt.md",
+    "opencode_log_jsonl": "logs/20260607T160111KST_opencode_improvement_axis_loop.jsonl",
+    "opencode_raw_text": "reports/20260607T160111KST_opencode_improvement_axis_loop_raw_text.md",
+    "opencode_report_json": "reports/20260607T160111KST_opencode_improvement_axis_loop.json",
+    "opencode_report_md": "reports/20260607T160111KST_opencode_improvement_axis_loop.md",
+    "status_json": "reports/20260607T160717KST_improvement_axis_cron_status.json",
+    "status_md": "reports/20260607T160717KST_improvement_axis_cron_status.md"
+  },
+  "final_classification": "NO_SAFE_AXIS_AFTER_FRESH_OPENCODE_RUN",
+  "exact_next_action": "Continue the scheduled no-submit discovery loop later. Do not relaunch ALS/rankblend residual, OTTO, UserKNN fine-grid, jackknife boundary, exact-K, temporal, DNS, hours-confidence, SL@K-lite, last-slot, semantic/text, capacity/frontier, public-tested rankblend, or other closed/quarantined families unless a materially new independent validation-only design is found. No Kaggle submission or uploadable CSV should be produced by this cron."
+}

@@ -1,0 +1,36 @@
+[
+  {
+    "src": "submissions/candidate_rank_blend_emb128_emb192.csv",
+    "dst": "final_package/final_slot1_rank_blend_emb128_emb192_LABEL.csv",
+    "rows": 19998,
+    "sha256": "1d38c3edf7afae2bbcde9f3d548aa92276323379af2c0c143b66844f25cef052",
+    "label_counts": {
+      "0": 9999,
+      "1": 9999
+    },
+    "id_unique": true,
+    "id_contiguous": true,
+    "bad_users_tophalf": 0,
+    "columns": [
+      "ID",
+      "Label"
+    ]
+  },
+  {
+    "src": "artifacts/lightgcn_emb128L4r3_fulltest/test_candidate/candidate_lightgcn_emb128L4r3_seed_ens.csv",
+    "dst": "final_package/final_slot2_lightgcn_emb128L4r3_4seed_LABEL.csv",
+    "rows": 19998,
+    "sha256": "7e3191dead2d85637dbf01f7ad50aeb61394c6b709959f2c2850bc53c430c195",
+    "label_counts": {
+      "0": 9999,
+      "1": 9999
+    },
+    "id_unique": true,
+    "id_contiguous": true,
+    "bad_users_tophalf": 0,
+    "columns": [
+      "ID",
+      "Label"
+    ]
+  }
+]

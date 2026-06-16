@@ -1,0 +1,80 @@
+{
+  "note": "UltraGCN-style constraint-loss smoke. Validation-only; no Kaggle submission; no full-test candidate.",
+  "safety": {
+    "validation_only": true,
+    "candidate_csv_written": false,
+    "full_test_scored": false,
+    "submission_csv_written": false,
+    "kaggle_submit_executed": false,
+    "hidden_labels_used": false,
+    "external_metadata_used": false
+  },
+  "split": "val_random_uniform_seed42",
+  "artifact_dir": "artifacts/ultragcn_constraint_smoke/d128_seed42/val_random_uniform_seed42",
+  "config": {
+    "split": "val_random_uniform_seed42",
+    "validation_root": "artifacts/validation",
+    "out_dir": "artifacts/ultragcn_constraint_smoke",
+    "report_json": "reports/20260616T_ultragcn_constraint_smoke.json",
+    "report_md": "reports/20260616T_ultragcn_constraint_smoke.md",
+    "emb_dim": 128,
+    "lr": 0.001,
+    "reg": 0.0001,
+    "epochs": 80,
+    "batch_size": 4096,
+    "item_topk": 10,
+    "bpr_weight": 1.0,
+    "pointwise_weight": 0.2,
+    "item_constraint_weight": 0.05,
+    "seed": 42,
+    "device": "cuda:0",
+    "effective_device": "cuda:0"
+  },
+  "references": {
+    "emb128_single_seed_uniform": 0.76205,
+    "emb128_4seed_uniform": 0.76505,
+    "noise": 0.0007
+  },
+  "metrics": {
+    "solo_acc": 0.71644,
+    "delta_vs_emb128_single": -0.04561,
+    "delta_vs_emb128_4seed": -0.04861,
+    "corr_z_vs_emb128_4seed": 0.7692,
+    "eq_blend_acc": 0.75155,
+    "eq_blend_delta_vs_emb128_4seed": -0.0135,
+    "solo_summary": {
+      "score_col": "score_ultragcn",
+      "rows": 19996,
+      "users": 4736,
+      "row_accuracy": 0.7164432886577315,
+      "per_user_mean_accuracy": 0.7355134381038987,
+      "per_user_min_accuracy": 0.0,
+      "per_user_p05_accuracy": 0.0,
+      "per_user_p50_accuracy": 1.0,
+      "per_user_p95_accuracy": 1.0,
+      "predicted_positive_total": 9998,
+      "true_positive_total": 9998,
+      "all_user_positive_counts_match": true
+    }
+  },
+  "train_meta": {
+    "emb_dim": 128,
+    "lr": 0.001,
+    "reg": 0.0001,
+    "epochs": 80,
+    "batch_size": 4096,
+    "bpr_weight": 1.0,
+    "pointwise_weight": 0.2,
+    "item_constraint_weight": 0.05,
+    "n_users": 6710,
+    "n_items": 2437,
+    "n_interactions": 165002,
+    "n_batches": 40,
+    "final_loss": 0.0936957135796547,
+    "train_seconds": 504.2,
+    "device": "cuda:0",
+    "seed": 42
+  },
+  "tier": "KILL_WEAK_SOLO",
+  "tier_reason": "solo 0.71644 <= 0.76000 kill gate"
+}

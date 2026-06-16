@@ -1,0 +1,177 @@
+{
+  "timestamp_kst": "20260607T171551KST",
+  "verdict": "NO_SAFE_AXIS",
+  "safety_flags": {
+    "validation_only": true,
+    "candidate_csv_written": false,
+    "full_test_candidate_or_submission_csv_created": false,
+    "kaggle_submit_executed": false,
+    "hidden_labels_used": false,
+    "private_answers_used": false,
+    "external_steam_scraping_used": false,
+    "credentials_or_tokens_printed": false,
+    "quarantine_or_guard_logic_weakened": false,
+    "git_stage_commit_push_executed": false,
+    "recursive_cron_scheduled": false
+  },
+  "evidence_reviewed": [
+    {
+      "path": "README.md",
+      "status": "reviewed",
+      "finding": "Repository rules confirm validation-first operation, no unauthorized Kaggle submission, no Steam scraping, no hidden/private labels, and that data/artifacts/submissions are local-only surfaces."
+    },
+    {
+      "path": "reports/20260606T132450KST_userknn_gated_residual_fine.json",
+      "status": "missing",
+      "finding": "Expected final UserKNN fine-grid JSON is absent; this remains STALLED_INCOMPLETE and was not relaunched because it is not a fresh independent axis."
+    },
+    {
+      "path": "reports/20260606T220406KST_jackknife_uncertainty_boundary_expanded.json",
+      "status": "missing",
+      "finding": "Expected expanded jackknife JSON is absent."
+    },
+    {
+      "path": "reports/20260606T220406KST_jackknife_uncertainty_boundary_expanded.md",
+      "status": "missing",
+      "finding": "Expected expanded jackknife Markdown is absent."
+    },
+    {
+      "path": "logs/20260606T220406KST_jackknife_uncertainty_boundary_expanded.log",
+      "status": "present_incomplete",
+      "finding": "Log has only 12 lines, processes seed42/seed7, starts seed123, and stops after invalid-value warnings without a final report."
+    },
+    {
+      "path": "reports/20260606T220406KST_jackknife_uncertainty_boundary_probe.json",
+      "status": "reviewed",
+      "finding": "Smoke top row vote_consensus__high_capacity_gap__B1__w0.1 has mean +0.0003667400146696309, min -0.0012002400480095599, 2/3 positive splits, fixes/breaks 252/230, p=0.33881500709211204; strict gate fails on effect size, min split, positivity, and significance."
+    },
+    {
+      "path": "reports/20260607T160717KST_improvement_axis_cron_status.json",
+      "status": "reviewed",
+      "finding": "Latest cron status reports the 16:01 KST OpenCode run as NO_SAFE_AXIS, no probe launched, no relevant process after the run, no new submission CSV, and clean safety flags."
+    },
+    {
+      "path": "reports/20260607T160111KST_opencode_improvement_axis_loop.json",
+      "status": "reviewed",
+      "finding": "Prior fresh OpenCode run reviewed the same stalled/weak/closed axes and found no fresh bounded independent validation-only axis."
+    },
+    {
+      "path": "reports/20260607T145142KST_after_als_manual_no_safe_axis_stop_summary.json",
+      "status": "reviewed",
+      "finding": "Manual after-ALS loop stopped after two consecutive NO_SAFE_AXIS iterations with no probe; strongest ALS diagnostic row mean +0.00113356 but quarantine-conflicted and below strict mean gate."
+    },
+    {
+      "path": "reports/20260607T145927KST_after_als_exit13_iter03_reconciliation.json",
+      "status": "reviewed",
+      "finding": "Exit -13 was reconciled as wrapper SIGPIPE after iter03 artifacts were written; iter03 verdict NO_SAFE_AXIS, no probe, no candidate/submission CSV, no active relevant process."
+    },
+    {
+      "path": "reports/failed_axes.json",
+      "status": "reviewed",
+      "finding": "Failed-axis ledger blocks stacker public regression, OTTO forced public negative vs current best, and current-best ALS independent strict failure as repeat candidates."
+    },
+    {
+      "path": "state/aggressive_quota_runner_state.json",
+      "status": "reviewed",
+      "finding": "Runner state closes public-tested rankblend/ALS boundary/frontier/tagcf variants; skipped/quarantined families include ALS/rankblend retunes and boundary/frontier variants."
+    },
+    {
+      "path": "reports/20260607T125601KST_current_best_residual_atlas.json",
+      "status": "reviewed",
+      "finding": "Residual atlas is validation-only and diagnostic; top residual-style gains need independent confirmation and are same-family sensitive."
+    },
+    {
+      "path": "reports/20260607T130533KST_current_best_als_independent_confirmation.json",
+      "status": "reviewed",
+      "finding": "Pre-registered independent ALS row fails strict gate: mean +0.0008001600320064103, min -0.0003000600120024455, 2/3 positive, fixes/breaks 504/456, p=0.12924401684163647. Diagnostic best row is 3/3 and p=0.021965674090633346 but mean +0.0011335600453423744 remains below +0.0015 and same-family/quarantine-conflicted."
+    },
+    {
+      "path": "scripts/ direct rg inventory and ast-grep to_csv/subprocess search",
+      "status": "reviewed",
+      "finding": "Script inventory found many validation diagnostics, known closed model-family probes, full-test materializers, and submission-capable/autonomous-runner surfaces. No concrete bounded fresh independent validation-only probe was credible under the strict gate without repeating closed axes or risking forbidden candidate/submission materialization."
+    }
+  ],
+  "active_or_completed_processes": [
+    {
+      "process": "current Hermes/OpenCode wrapper and this worker's inspection commands",
+      "status": "active_current_worker_only",
+      "finding": "ps showed the current OpenCode run launched by Hermes plus transient inspection commands; no separate validation probe, Kaggle submit process, UserKNN, jackknife, aggressive runner, or LightGCN training process was launched by this run."
+    }
+  ],
+  "completed_probe_classification": null,
+  "new_probe": {
+    "launched": false,
+    "command": null,
+    "pid": null,
+    "log": null,
+    "report_json": null,
+    "report_md": null
+  },
+  "best_or_top_metrics": {
+    "source": "reports/20260607T130533KST_current_best_als_independent_confirmation.json",
+    "variant": "atlas_als_f32_popa4_w0.20_band1 diagnostic row",
+    "mean_delta_vs_rankblend": 0.0011335600453423744,
+    "min_delta_vs_rankblend": 0.0004000800160031126,
+    "positive_splits": "3/3",
+    "fixes": 462,
+    "breaks": 394,
+    "pooled_p_exact": 0.021965674090633346,
+    "strict_gate_pass": false,
+    "quarantine_conflict": true,
+    "failed_gates": [
+      "mean_delta_lt_0.0015",
+      "same_family_or_quarantine_conflict",
+      "not_pre_registered_independent_axis"
+    ],
+    "pre_registered_independent_row": {
+      "variant": "pre_registered_atlas_top_als_f32_popa4_w0.30_band2",
+      "mean_delta_vs_rankblend": 0.0008001600320064103,
+      "min_delta_vs_rankblend": -0.0003000600120024455,
+      "positive_splits": "2/3",
+      "fixes": 504,
+      "breaks": 456,
+      "pooled_p_exact": 0.12924401684163647,
+      "strict_gate_pass": false
+    }
+  },
+  "ranked_next_axis_hypotheses": [
+    {
+      "rank": 1,
+      "axis": "Genuinely new validation-label-free base model family not already implemented locally",
+      "status": "not_launched",
+      "reason": "Still the only theoretically acceptable direction, but this run found no concrete bounded local implementation surface with enough prior evidence to justify a validation-only probe under the strict gate."
+    },
+    {
+      "rank": 2,
+      "axis": "ALS/rankblend/current-best residual diagnostics",
+      "status": "closed_quarantined_not_launched",
+      "reason": "Diagnostic best is below +0.0015 mean and same-family/quarantine-conflicted; pre-registered independent confirmation has negative min split and p=0.129."
+    },
+    {
+      "rank": 3,
+      "axis": "OTTO/source-separated co-visitation",
+      "status": "closed_negative_not_launched",
+      "reason": "Independent validation failed strict gate and forced public score 0.77815 did not beat current best 0.77825."
+    },
+    {
+      "rank": 4,
+      "axis": "UserKNN gated residual fine-grid and jackknife uncertainty boundary expansion",
+      "status": "stalled_or_weak_not_launched",
+      "reason": "UserKNN final JSON is absent; jackknife expanded report absent/incomplete and smoke top is weak with negative min split and p=0.3388. Relaunching would be duplicate busywork."
+    },
+    {
+      "rank": 5,
+      "axis": "DNS, hours-confidence, exact-K, temporal compatibility, boundary covariates, SL@K-lite, last-slot, semantic/text/README/LM, capacity/frontier, public-tested rankblend variants",
+      "status": "closed_not_launched",
+      "reason": "These are explicitly closed by prompt, ledgers, reports, or public-negative transfer."
+    },
+    {
+      "rank": 6,
+      "axis": "Full-test materializers, autonomous runner, or submission-preflight variants",
+      "status": "forbidden_not_launched",
+      "reason": "Would risk creating uploadable candidate/submission CSVs or invoking Kaggle submission surfaces, violating this run's hard safety contract."
+    }
+  ],
+  "why_not_candidate": "No fresh independent validation-only axis satisfied the strict gate or justified a bounded launch. The strongest remaining metric is a same-family ALS/rankblend diagnostic below the +0.0015 mean-delta gate and quarantine-conflicted; the pre-registered independent ALS row has a negative split and non-significant p-value. All other plausible local surfaces are explicitly closed, stalled/incomplete, weak, public-negative, duplicate, too expensive/unbounded for this run, or forbidden materializers/submission surfaces.",
+  "sentinel": "OPENCODE_AXIS_LOOP_DONE_NO_SAFE_AXIS"
+}

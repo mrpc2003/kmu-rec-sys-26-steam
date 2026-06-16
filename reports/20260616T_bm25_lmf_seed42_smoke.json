@@ -1,0 +1,118 @@
+{
+  "artifact": "bm25_lmf_seed42_smoke",
+  "validation_only": true,
+  "no_kaggle_submit": true,
+  "candidate_csv_written": false,
+  "full_test_candidate_materialized": false,
+  "split": "val_random_uniform_seed42",
+  "params": {
+    "factors": 64,
+    "iterations": 50,
+    "learning_rate": 1.0,
+    "regularization": 0.6,
+    "neg_prop": 30,
+    "bm25_k1": 100.0,
+    "bm25_b": 0.8,
+    "seed": 42
+  },
+  "train_seconds": 12.09,
+  "rows": 19996,
+  "users": 4736,
+  "items": 2437,
+  "solo_accuracy": 0.670134026805361,
+  "base_accuracy": 0.7650530106021204,
+  "base_ref": 0.7650530106021204,
+  "base_accuracy_delta_vs_ref": 0.0,
+  "blend50_accuracy": 0.7350470094018804,
+  "blend50_delta_vs_base": -0.030006001200239996,
+  "solo_gate": 0.735,
+  "blend_gate_accuracy": 0.7657530106021204,
+  "delta_gate": 0.0007,
+  "corr_z_vs_base": 0.5877284038364887,
+  "rank_corr_vs_base": 0.5432548834473017,
+  "fixes": 1691,
+  "breaks": 3589,
+  "net_fixes": -1898,
+  "changed_rows_vs_base": 5280,
+  "failed_union_rows": 1516,
+  "failed_union_overlap_rows": 369,
+  "failed_union_overlap_frac": 0.06988636363636364,
+  "head_only_lift": false,
+  "item_degree_bucket_rows": [
+    {
+      "item_degree_decile": 0,
+      "changed_rows": 227,
+      "fixes": 66,
+      "breaks": 161,
+      "net_fixes": -95
+    },
+    {
+      "item_degree_decile": 1,
+      "changed_rows": 262,
+      "fixes": 75,
+      "breaks": 187,
+      "net_fixes": -112
+    },
+    {
+      "item_degree_decile": 2,
+      "changed_rows": 290,
+      "fixes": 78,
+      "breaks": 212,
+      "net_fixes": -134
+    },
+    {
+      "item_degree_decile": 3,
+      "changed_rows": 367,
+      "fixes": 143,
+      "breaks": 224,
+      "net_fixes": -81
+    },
+    {
+      "item_degree_decile": 4,
+      "changed_rows": 433,
+      "fixes": 126,
+      "breaks": 307,
+      "net_fixes": -181
+    },
+    {
+      "item_degree_decile": 5,
+      "changed_rows": 517,
+      "fixes": 166,
+      "breaks": 351,
+      "net_fixes": -185
+    },
+    {
+      "item_degree_decile": 6,
+      "changed_rows": 614,
+      "fixes": 211,
+      "breaks": 403,
+      "net_fixes": -192
+    },
+    {
+      "item_degree_decile": 7,
+      "changed_rows": 754,
+      "fixes": 262,
+      "breaks": 492,
+      "net_fixes": -230
+    },
+    {
+      "item_degree_decile": 8,
+      "changed_rows": 804,
+      "fixes": 286,
+      "breaks": 518,
+      "net_fixes": -232
+    },
+    {
+      "item_degree_decile": 9,
+      "changed_rows": 1012,
+      "fixes": 278,
+      "breaks": 734,
+      "net_fixes": -456
+    }
+  ],
+  "tier": "KILL_WEAK_SOLO",
+  "verdict": "BM25+LMF solo accuracy missed the 0.735 floor, so this one-shot is underpowered despite competition precedent.",
+  "score_csv": "artifacts/bm25_lmf_seed42_smoke/val_random_uniform_seed42/bm25_lmf_validation_scores.csv",
+  "report_json": "reports/20260616T_bm25_lmf_seed42_smoke.json",
+  "report_md": "reports/20260616T_bm25_lmf_seed42_smoke.md"
+}

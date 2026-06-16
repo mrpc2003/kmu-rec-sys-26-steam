@@ -1,0 +1,90 @@
+{
+  "safety_flags": {
+    "validation_only": true,
+    "candidate_csv_written": false,
+    "full_test_candidate_or_submission_csv_created": false,
+    "kaggle_submit_executed": false,
+    "hidden_labels_used": false,
+    "private_answers_used": false,
+    "external_steam_scraping_used": false,
+    "credentials_or_tokens_printed": false,
+    "quarantine_or_guard_logic_weakened": false,
+    "git_stage_commit_push_executed": false,
+    "recursive_cron_scheduled": false
+  },
+  "axis_decision": "no safe axis",
+  "new_probe": {
+    "launched": false,
+    "status": "not_launched",
+    "command": null,
+    "pid_file": null,
+    "log": null,
+    "report_json": null,
+    "report_md": null,
+    "artifact_dir": null
+  },
+  "best_or_top_metrics": {
+    "variant": "diagnostic_atlas_als_f32_popa4_w0.20_band1_from_20260607T130533KST_current_best_als_independent_confirmation",
+    "mean_delta_vs_base": 0.0011335600453423744,
+    "min_delta_vs_base": 0.0004000800160031126,
+    "positive_splits": "3/3",
+    "fixes": 462,
+    "breaks": 394,
+    "pooled_p_exact": 0.021965674090633346,
+    "quarantine_conflict": true,
+    "why_not_candidate": "Diagnostic same-family ALS residual/boundary row is below the strict mean_delta >= +0.0015 gate and is not pre-registered; the pre-registered row failed with mean +0.00080016, min -0.00030006, 2/3 positive, p=0.129244."
+  },
+  "ranked_next_axis_hypotheses": [
+    {
+      "rank": 1,
+      "axis": "Genuinely new validation-label-free base model family not already implemented locally",
+      "status": "not_launched",
+      "why_not_launched_now": "No local script/report surface was both fresh and credible within <=3600s. Starting a new family from scratch in this iteration would likely be underpowered or exceed the bounded validation-only scope."
+    },
+    {
+      "rank": 2,
+      "axis": "Finite-value/debug-only UserKNN cleanup",
+      "status": "not_launched",
+      "why_not_launched_now": "This would repair a stalled family rather than introduce materially new independent information; broad UserKNN fine-grid is explicitly stalled with warning-dominated incomplete logs."
+    },
+    {
+      "rank": 3,
+      "axis": "New non-boundary disagreement diagnostic independent of rankblend/capacity/frontier/jackknife",
+      "status": "not_launched",
+      "why_not_launched_now": "Direct rg plus AST inventory found available disagreement/margin probes collapse into closed boundary, frontier/capacity, rankblend residual, jackknife, layer-mix, or public-negative families."
+    }
+  ],
+  "verdict": "NO_SAFE_AXIS",
+  "evidence_reviewed": {
+    "direct_search": [
+      "rg over scripts/reports/state for axis/probe/rankblend/quarantine/validation_only",
+      "rg over forbidden patterns: submit/submissions/candidate CSV/full-test/to_csv",
+      "ast-grep inventory of runnable Python main entrypoints"
+    ],
+    "key_reports": [
+      "reports/20260607T120245KST_axis_loop_iter01_opencode.md",
+      "reports/20260607T130533KST_current_best_als_independent_confirmation.json",
+      "reports/20260606T125011KST_multi_interest_svd_smoke.json",
+      "reports/20260603T180707KST_userknn_gated_residual_probe.json",
+      "reports/20260607T120407KST_opencode_improvement_axis_loop.json",
+      "reports/20260607T121032KST_improvement_axis_cron_status.json",
+      "state/aggressive_quota_runner_state.json"
+    ],
+    "closed_or_blocked_families_confirmed": [
+      "OTTO/source-separated co-visitation: independent mean +0.0006668, min -0.0006001, 2/3, p=0.1700; forced public 0.77815 below 0.77825.",
+      "ALS/rankblend residual: pre-registered fresh-panel row failed mean/min/3-of-3/p gates; diagnostic row below +0.0015 and same-family only.",
+      "UserKNN: previous smoke below strict effect-size gate; fine-grid incomplete/stalled with invalid-divide warnings.",
+      "Jackknife uncertainty: weak/split-negative smoke and expanded run incomplete.",
+      "Boundary/frontier/capacity/TAG-CF: public-negative or quarantined/near-duplicate risk.",
+      "Semantic/text/LM, multi-interest SVD, SASRec/DIN, SGL/XSimGCL/DirectAU, MultiVAE/AlphaRec/TurboCF: prior reports show weak, redundant, closed, public-negative, or too large for a bounded credible tick."
+    ]
+  },
+  "manual_qa": {
+    "surface": "report artifacts",
+    "checks": [
+      "Required JSON and Markdown report paths written under reports/.",
+      "No probe process launched by this worker.",
+      "No submissions/ writes, no kaggle competitions submit, no git stage/commit/push."
+    ]
+  }
+}

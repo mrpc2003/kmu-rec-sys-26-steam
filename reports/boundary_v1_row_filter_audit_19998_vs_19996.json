@@ -1,0 +1,638 @@
+{
+  "artifact": "boundary_v1_row_filter_audit_19998_vs_19996",
+  "validation_only": true,
+  "no_kaggle_submit": true,
+  "candidate_csv_written": false,
+  "public_lb_feedback_used": false,
+  "raw_pairs": {
+    "path": "data/raw/public/data/pairs.csv",
+    "rows": 19998,
+    "users": 4737,
+    "items": 2429,
+    "all_candidate_counts_even": true,
+    "odd_candidate_count_users": [],
+    "per_user_count_summary": {
+      "min": 2,
+      "median": 4.0,
+      "max": 38,
+      "mean": 4.221659278024066
+    }
+  },
+  "panel20": {
+    "path": "artifacts/validation_uniform_panel20_20260612T214626KST/validation_splits_summary.json",
+    "split_count": 20,
+    "candidate_rows_unique": [
+      19996
+    ],
+    "candidate_users_unique": [
+      4736
+    ],
+    "heldout_positive_rows_unique": [
+      9998
+    ],
+    "all_splits_even_after_filter": true,
+    "all_splits_positive_half_after_filter": true,
+    "unique_dropped_users_vs_pairs": [
+      {
+        "userID": "u57101927",
+        "raw_pair_rows": 2,
+        "raw_pair_ids": [
+          2658,
+          11536
+        ],
+        "raw_pair_games": [
+          "g94132851",
+          "g91440237"
+        ]
+      }
+    ],
+    "split_rows": [
+      {
+        "split": "val_random_uniform_seed101",
+        "candidate_rows": 19996,
+        "candidate_users": 4736,
+        "heldout_positive_rows": 9998,
+        "expected_positive_rows_from_half": 9998,
+        "dropped_user_count_vs_pairs": 1,
+        "dropped_users": [
+          "u57101927"
+        ],
+        "dropped_pair_row_count": 2,
+        "dropped_pair_ids": [
+          2658,
+          11536
+        ],
+        "extra_user_count_vs_pairs": 0,
+        "all_candidate_counts_even_after_filter": true,
+        "all_positive_counts_half_after_filter": true,
+        "summary_adjusted_users": 1,
+        "summary_skipped_users": 1,
+        "summary_adjusted_user_examples": [
+          {
+            "userID": "u57101927",
+            "requested_k": 1,
+            "actual_k": 0,
+            "train_n": 1
+          }
+        ]
+      },
+      {
+        "split": "val_random_uniform_seed202",
+        "candidate_rows": 19996,
+        "candidate_users": 4736,
+        "heldout_positive_rows": 9998,
+        "expected_positive_rows_from_half": 9998,
+        "dropped_user_count_vs_pairs": 1,
+        "dropped_users": [
+          "u57101927"
+        ],
+        "dropped_pair_row_count": 2,
+        "dropped_pair_ids": [
+          2658,
+          11536
+        ],
+        "extra_user_count_vs_pairs": 0,
+        "all_candidate_counts_even_after_filter": true,
+        "all_positive_counts_half_after_filter": true,
+        "summary_adjusted_users": 1,
+        "summary_skipped_users": 1,
+        "summary_adjusted_user_examples": [
+          {
+            "userID": "u57101927",
+            "requested_k": 1,
+            "actual_k": 0,
+            "train_n": 1
+          }
+        ]
+      },
+      {
+        "split": "val_random_uniform_seed303",
+        "candidate_rows": 19996,
+        "candidate_users": 4736,
+        "heldout_positive_rows": 9998,
+        "expected_positive_rows_from_half": 9998,
+        "dropped_user_count_vs_pairs": 1,
+        "dropped_users": [
+          "u57101927"
+        ],
+        "dropped_pair_row_count": 2,
+        "dropped_pair_ids": [
+          2658,
+          11536
+        ],
+        "extra_user_count_vs_pairs": 0,
+        "all_candidate_counts_even_after_filter": true,
+        "all_positive_counts_half_after_filter": true,
+        "summary_adjusted_users": 1,
+        "summary_skipped_users": 1,
+        "summary_adjusted_user_examples": [
+          {
+            "userID": "u57101927",
+            "requested_k": 1,
+            "actual_k": 0,
+            "train_n": 1
+          }
+        ]
+      },
+      {
+        "split": "val_random_uniform_seed404",
+        "candidate_rows": 19996,
+        "candidate_users": 4736,
+        "heldout_positive_rows": 9998,
+        "expected_positive_rows_from_half": 9998,
+        "dropped_user_count_vs_pairs": 1,
+        "dropped_users": [
+          "u57101927"
+        ],
+        "dropped_pair_row_count": 2,
+        "dropped_pair_ids": [
+          2658,
+          11536
+        ],
+        "extra_user_count_vs_pairs": 0,
+        "all_candidate_counts_even_after_filter": true,
+        "all_positive_counts_half_after_filter": true,
+        "summary_adjusted_users": 1,
+        "summary_skipped_users": 1,
+        "summary_adjusted_user_examples": [
+          {
+            "userID": "u57101927",
+            "requested_k": 1,
+            "actual_k": 0,
+            "train_n": 1
+          }
+        ]
+      },
+      {
+        "split": "val_random_uniform_seed505",
+        "candidate_rows": 19996,
+        "candidate_users": 4736,
+        "heldout_positive_rows": 9998,
+        "expected_positive_rows_from_half": 9998,
+        "dropped_user_count_vs_pairs": 1,
+        "dropped_users": [
+          "u57101927"
+        ],
+        "dropped_pair_row_count": 2,
+        "dropped_pair_ids": [
+          2658,
+          11536
+        ],
+        "extra_user_count_vs_pairs": 0,
+        "all_candidate_counts_even_after_filter": true,
+        "all_positive_counts_half_after_filter": true,
+        "summary_adjusted_users": 1,
+        "summary_skipped_users": 1,
+        "summary_adjusted_user_examples": [
+          {
+            "userID": "u57101927",
+            "requested_k": 1,
+            "actual_k": 0,
+            "train_n": 1
+          }
+        ]
+      },
+      {
+        "split": "val_random_uniform_seed606",
+        "candidate_rows": 19996,
+        "candidate_users": 4736,
+        "heldout_positive_rows": 9998,
+        "expected_positive_rows_from_half": 9998,
+        "dropped_user_count_vs_pairs": 1,
+        "dropped_users": [
+          "u57101927"
+        ],
+        "dropped_pair_row_count": 2,
+        "dropped_pair_ids": [
+          2658,
+          11536
+        ],
+        "extra_user_count_vs_pairs": 0,
+        "all_candidate_counts_even_after_filter": true,
+        "all_positive_counts_half_after_filter": true,
+        "summary_adjusted_users": 1,
+        "summary_skipped_users": 1,
+        "summary_adjusted_user_examples": [
+          {
+            "userID": "u57101927",
+            "requested_k": 1,
+            "actual_k": 0,
+            "train_n": 1
+          }
+        ]
+      },
+      {
+        "split": "val_random_uniform_seed707",
+        "candidate_rows": 19996,
+        "candidate_users": 4736,
+        "heldout_positive_rows": 9998,
+        "expected_positive_rows_from_half": 9998,
+        "dropped_user_count_vs_pairs": 1,
+        "dropped_users": [
+          "u57101927"
+        ],
+        "dropped_pair_row_count": 2,
+        "dropped_pair_ids": [
+          2658,
+          11536
+        ],
+        "extra_user_count_vs_pairs": 0,
+        "all_candidate_counts_even_after_filter": true,
+        "all_positive_counts_half_after_filter": true,
+        "summary_adjusted_users": 1,
+        "summary_skipped_users": 1,
+        "summary_adjusted_user_examples": [
+          {
+            "userID": "u57101927",
+            "requested_k": 1,
+            "actual_k": 0,
+            "train_n": 1
+          }
+        ]
+      },
+      {
+        "split": "val_random_uniform_seed808",
+        "candidate_rows": 19996,
+        "candidate_users": 4736,
+        "heldout_positive_rows": 9998,
+        "expected_positive_rows_from_half": 9998,
+        "dropped_user_count_vs_pairs": 1,
+        "dropped_users": [
+          "u57101927"
+        ],
+        "dropped_pair_row_count": 2,
+        "dropped_pair_ids": [
+          2658,
+          11536
+        ],
+        "extra_user_count_vs_pairs": 0,
+        "all_candidate_counts_even_after_filter": true,
+        "all_positive_counts_half_after_filter": true,
+        "summary_adjusted_users": 1,
+        "summary_skipped_users": 1,
+        "summary_adjusted_user_examples": [
+          {
+            "userID": "u57101927",
+            "requested_k": 1,
+            "actual_k": 0,
+            "train_n": 1
+          }
+        ]
+      },
+      {
+        "split": "val_random_uniform_seed909",
+        "candidate_rows": 19996,
+        "candidate_users": 4736,
+        "heldout_positive_rows": 9998,
+        "expected_positive_rows_from_half": 9998,
+        "dropped_user_count_vs_pairs": 1,
+        "dropped_users": [
+          "u57101927"
+        ],
+        "dropped_pair_row_count": 2,
+        "dropped_pair_ids": [
+          2658,
+          11536
+        ],
+        "extra_user_count_vs_pairs": 0,
+        "all_candidate_counts_even_after_filter": true,
+        "all_positive_counts_half_after_filter": true,
+        "summary_adjusted_users": 1,
+        "summary_skipped_users": 1,
+        "summary_adjusted_user_examples": [
+          {
+            "userID": "u57101927",
+            "requested_k": 1,
+            "actual_k": 0,
+            "train_n": 1
+          }
+        ]
+      },
+      {
+        "split": "val_random_uniform_seed1001",
+        "candidate_rows": 19996,
+        "candidate_users": 4736,
+        "heldout_positive_rows": 9998,
+        "expected_positive_rows_from_half": 9998,
+        "dropped_user_count_vs_pairs": 1,
+        "dropped_users": [
+          "u57101927"
+        ],
+        "dropped_pair_row_count": 2,
+        "dropped_pair_ids": [
+          2658,
+          11536
+        ],
+        "extra_user_count_vs_pairs": 0,
+        "all_candidate_counts_even_after_filter": true,
+        "all_positive_counts_half_after_filter": true,
+        "summary_adjusted_users": 1,
+        "summary_skipped_users": 1,
+        "summary_adjusted_user_examples": [
+          {
+            "userID": "u57101927",
+            "requested_k": 1,
+            "actual_k": 0,
+            "train_n": 1
+          }
+        ]
+      },
+      {
+        "split": "val_random_uniform_seed1102",
+        "candidate_rows": 19996,
+        "candidate_users": 4736,
+        "heldout_positive_rows": 9998,
+        "expected_positive_rows_from_half": 9998,
+        "dropped_user_count_vs_pairs": 1,
+        "dropped_users": [
+          "u57101927"
+        ],
+        "dropped_pair_row_count": 2,
+        "dropped_pair_ids": [
+          2658,
+          11536
+        ],
+        "extra_user_count_vs_pairs": 0,
+        "all_candidate_counts_even_after_filter": true,
+        "all_positive_counts_half_after_filter": true,
+        "summary_adjusted_users": 1,
+        "summary_skipped_users": 1,
+        "summary_adjusted_user_examples": [
+          {
+            "userID": "u57101927",
+            "requested_k": 1,
+            "actual_k": 0,
+            "train_n": 1
+          }
+        ]
+      },
+      {
+        "split": "val_random_uniform_seed1203",
+        "candidate_rows": 19996,
+        "candidate_users": 4736,
+        "heldout_positive_rows": 9998,
+        "expected_positive_rows_from_half": 9998,
+        "dropped_user_count_vs_pairs": 1,
+        "dropped_users": [
+          "u57101927"
+        ],
+        "dropped_pair_row_count": 2,
+        "dropped_pair_ids": [
+          2658,
+          11536
+        ],
+        "extra_user_count_vs_pairs": 0,
+        "all_candidate_counts_even_after_filter": true,
+        "all_positive_counts_half_after_filter": true,
+        "summary_adjusted_users": 1,
+        "summary_skipped_users": 1,
+        "summary_adjusted_user_examples": [
+          {
+            "userID": "u57101927",
+            "requested_k": 1,
+            "actual_k": 0,
+            "train_n": 1
+          }
+        ]
+      },
+      {
+        "split": "val_random_uniform_seed1304",
+        "candidate_rows": 19996,
+        "candidate_users": 4736,
+        "heldout_positive_rows": 9998,
+        "expected_positive_rows_from_half": 9998,
+        "dropped_user_count_vs_pairs": 1,
+        "dropped_users": [
+          "u57101927"
+        ],
+        "dropped_pair_row_count": 2,
+        "dropped_pair_ids": [
+          2658,
+          11536
+        ],
+        "extra_user_count_vs_pairs": 0,
+        "all_candidate_counts_even_after_filter": true,
+        "all_positive_counts_half_after_filter": true,
+        "summary_adjusted_users": 1,
+        "summary_skipped_users": 1,
+        "summary_adjusted_user_examples": [
+          {
+            "userID": "u57101927",
+            "requested_k": 1,
+            "actual_k": 0,
+            "train_n": 1
+          }
+        ]
+      },
+      {
+        "split": "val_random_uniform_seed1405",
+        "candidate_rows": 19996,
+        "candidate_users": 4736,
+        "heldout_positive_rows": 9998,
+        "expected_positive_rows_from_half": 9998,
+        "dropped_user_count_vs_pairs": 1,
+        "dropped_users": [
+          "u57101927"
+        ],
+        "dropped_pair_row_count": 2,
+        "dropped_pair_ids": [
+          2658,
+          11536
+        ],
+        "extra_user_count_vs_pairs": 0,
+        "all_candidate_counts_even_after_filter": true,
+        "all_positive_counts_half_after_filter": true,
+        "summary_adjusted_users": 1,
+        "summary_skipped_users": 1,
+        "summary_adjusted_user_examples": [
+          {
+            "userID": "u57101927",
+            "requested_k": 1,
+            "actual_k": 0,
+            "train_n": 1
+          }
+        ]
+      },
+      {
+        "split": "val_random_uniform_seed1506",
+        "candidate_rows": 19996,
+        "candidate_users": 4736,
+        "heldout_positive_rows": 9998,
+        "expected_positive_rows_from_half": 9998,
+        "dropped_user_count_vs_pairs": 1,
+        "dropped_users": [
+          "u57101927"
+        ],
+        "dropped_pair_row_count": 2,
+        "dropped_pair_ids": [
+          2658,
+          11536
+        ],
+        "extra_user_count_vs_pairs": 0,
+        "all_candidate_counts_even_after_filter": true,
+        "all_positive_counts_half_after_filter": true,
+        "summary_adjusted_users": 1,
+        "summary_skipped_users": 1,
+        "summary_adjusted_user_examples": [
+          {
+            "userID": "u57101927",
+            "requested_k": 1,
+            "actual_k": 0,
+            "train_n": 1
+          }
+        ]
+      },
+      {
+        "split": "val_random_uniform_seed1607",
+        "candidate_rows": 19996,
+        "candidate_users": 4736,
+        "heldout_positive_rows": 9998,
+        "expected_positive_rows_from_half": 9998,
+        "dropped_user_count_vs_pairs": 1,
+        "dropped_users": [
+          "u57101927"
+        ],
+        "dropped_pair_row_count": 2,
+        "dropped_pair_ids": [
+          2658,
+          11536
+        ],
+        "extra_user_count_vs_pairs": 0,
+        "all_candidate_counts_even_after_filter": true,
+        "all_positive_counts_half_after_filter": true,
+        "summary_adjusted_users": 1,
+        "summary_skipped_users": 1,
+        "summary_adjusted_user_examples": [
+          {
+            "userID": "u57101927",
+            "requested_k": 1,
+            "actual_k": 0,
+            "train_n": 1
+          }
+        ]
+      },
+      {
+        "split": "val_random_uniform_seed1708",
+        "candidate_rows": 19996,
+        "candidate_users": 4736,
+        "heldout_positive_rows": 9998,
+        "expected_positive_rows_from_half": 9998,
+        "dropped_user_count_vs_pairs": 1,
+        "dropped_users": [
+          "u57101927"
+        ],
+        "dropped_pair_row_count": 2,
+        "dropped_pair_ids": [
+          2658,
+          11536
+        ],
+        "extra_user_count_vs_pairs": 0,
+        "all_candidate_counts_even_after_filter": true,
+        "all_positive_counts_half_after_filter": true,
+        "summary_adjusted_users": 1,
+        "summary_skipped_users": 1,
+        "summary_adjusted_user_examples": [
+          {
+            "userID": "u57101927",
+            "requested_k": 1,
+            "actual_k": 0,
+            "train_n": 1
+          }
+        ]
+      },
+      {
+        "split": "val_random_uniform_seed1809",
+        "candidate_rows": 19996,
+        "candidate_users": 4736,
+        "heldout_positive_rows": 9998,
+        "expected_positive_rows_from_half": 9998,
+        "dropped_user_count_vs_pairs": 1,
+        "dropped_users": [
+          "u57101927"
+        ],
+        "dropped_pair_row_count": 2,
+        "dropped_pair_ids": [
+          2658,
+          11536
+        ],
+        "extra_user_count_vs_pairs": 0,
+        "all_candidate_counts_even_after_filter": true,
+        "all_positive_counts_half_after_filter": true,
+        "summary_adjusted_users": 1,
+        "summary_skipped_users": 1,
+        "summary_adjusted_user_examples": [
+          {
+            "userID": "u57101927",
+            "requested_k": 1,
+            "actual_k": 0,
+            "train_n": 1
+          }
+        ]
+      },
+      {
+        "split": "val_random_uniform_seed1910",
+        "candidate_rows": 19996,
+        "candidate_users": 4736,
+        "heldout_positive_rows": 9998,
+        "expected_positive_rows_from_half": 9998,
+        "dropped_user_count_vs_pairs": 1,
+        "dropped_users": [
+          "u57101927"
+        ],
+        "dropped_pair_row_count": 2,
+        "dropped_pair_ids": [
+          2658,
+          11536
+        ],
+        "extra_user_count_vs_pairs": 0,
+        "all_candidate_counts_even_after_filter": true,
+        "all_positive_counts_half_after_filter": true,
+        "summary_adjusted_users": 1,
+        "summary_skipped_users": 1,
+        "summary_adjusted_user_examples": [
+          {
+            "userID": "u57101927",
+            "requested_k": 1,
+            "actual_k": 0,
+            "train_n": 1
+          }
+        ]
+      },
+      {
+        "split": "val_random_uniform_seed2011",
+        "candidate_rows": 19996,
+        "candidate_users": 4736,
+        "heldout_positive_rows": 9998,
+        "expected_positive_rows_from_half": 9998,
+        "dropped_user_count_vs_pairs": 1,
+        "dropped_users": [
+          "u57101927"
+        ],
+        "dropped_pair_row_count": 2,
+        "dropped_pair_ids": [
+          2658,
+          11536
+        ],
+        "extra_user_count_vs_pairs": 0,
+        "all_candidate_counts_even_after_filter": true,
+        "all_positive_counts_half_after_filter": true,
+        "summary_adjusted_users": 1,
+        "summary_skipped_users": 1,
+        "summary_adjusted_user_examples": [
+          {
+            "userID": "u57101927",
+            "requested_k": 1,
+            "actual_k": 0,
+            "train_n": 1
+          }
+        ]
+      }
+    ]
+  },
+  "interpretation": {
+    "mismatch_status": "explained_by_one_user_filtered_from_all_panel20_splits",
+    "reason_from_split_summary": "The split builder keeps at least one fold-train interaction per user. User u57101927 has train_n=1, requested_k=1, actual_k=0, so that user is skipped.",
+    "effect": "raw pairs 19998 rows / 4737 users -> panel20 19996 rows / 4736 users; 2 raw pair rows from the skipped user are absent.",
+    "phase1_risk": "Boundary scored evaluation must either keep this same panel filter or explicitly document a different policy before comparing diff-band precision."
+  }
+}

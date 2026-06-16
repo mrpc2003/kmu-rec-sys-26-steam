@@ -1,0 +1,157 @@
+{
+  "timestamp_kst": "20260607T121032KST",
+  "timestamp_utc": "2026-06-07T03:10:32Z",
+  "repo": "/opt/data/kaggle/kmu-rec-sys-26-steam",
+  "cron_role": "OpenCode-first no-submit improvement-axis discovery loop",
+  "safety_flags": {
+    "validation_only": true,
+    "candidate_csv_written_this_tick": false,
+    "full_test_candidate_or_submission_csv_created_this_tick": false,
+    "kaggle_submit_executed_this_tick": false,
+    "hidden_labels_or_private_answers_used": false,
+    "external_steam_scraping_used": false,
+    "credentials_or_tokens_printed": false,
+    "quarantine_or_guard_logic_weakened": false,
+    "git_stage_commit_push_executed": false,
+    "recursive_cron_scheduled": false
+  },
+  "environment_checks": {
+    "opencode_version": "1.15.11",
+    "gpu_summary": [
+      "GPU0: 0MiB, 0% util",
+      "GPU1: 0MiB, 0% util",
+      "GPU2: 0MiB, ~1% util",
+      "GPU3: 4320MiB displayed, nvidia-smi process table empty"
+    ],
+    "active_hermes_background_processes": [],
+    "current_relevant_processes_after_tick": [
+      "Hermes gateway only; no live OpenCode/UserKNN/Jackknife/parallel runner found by final ps check"
+    ],
+    "active_kaggle_submit_processes": []
+  },
+  "specific_required_checks": {
+    "userknn_gated_residual_fine": {
+      "expected_json": "reports/20260606T132450KST_userknn_gated_residual_fine.json",
+      "expected_md": "reports/20260606T132450KST_userknn_gated_residual_fine.md",
+      "found": false,
+      "classification": "STALLED_INCOMPLETE",
+      "evidence_report": "reports/20260607T042200KST_userknn_stalled_opencode_no_safe_axis_reconciled.md",
+      "reason": "Expected metric reports remain missing; previous reconciliation recorded exit 143 and repeated invalid-divide warnings. Do not relaunch broad UserKNN fine grid as-is."
+    },
+    "jackknife_uncertainty_boundary_expanded": {
+      "expected_json": "reports/20260606T220406KST_jackknife_uncertainty_boundary_expanded.json",
+      "expected_md": "reports/20260606T220406KST_jackknife_uncertainty_boundary_expanded.md",
+      "expected_log": "logs/20260606T220406KST_jackknife_uncertainty_boundary_expanded.log",
+      "found_by_initial_search": false,
+      "classification": "FAILED_INCOMPLETE_OR_NOT_PRESENT_THIS_TICK",
+      "note": "The completed available artifact is the smoke/probe report, not the requested expanded report."
+    },
+    "jackknife_uncertainty_boundary_probe": {
+      "report_json": "reports/20260606T220406KST_jackknife_uncertainty_boundary_probe.json",
+      "report_md": "reports/20260606T220406KST_jackknife_uncertainty_boundary_probe.md",
+      "classification": "WEAK_SIGNAL_STRICT_GATE_FAIL",
+      "top_variant": "vote_consensus__high_capacity_gap__B1__w0.1",
+      "mean_delta_vs_base": 0.0003667400146696309,
+      "min_delta_vs_base": -0.0012002400480095599,
+      "positive_splits": "2/3",
+      "fixes": 252,
+      "breaks": 230,
+      "pooled_p_exact": 0.33881500709211204,
+      "strict_failures": ["mean_delta_below_0.0015", "min_delta_negative", "not_3_of_3_positive", "p_not_significant"]
+    }
+  },
+  "opencode_run_this_tick": {
+    "launched": true,
+    "prompt": "reports/20260607T120407KST_opencode_axis_loop_prompt.md",
+    "log_jsonl": "logs/opencode_improvement_axis_loop_20260607T120407KST.jsonl",
+    "exit_json": "logs/opencode_improvement_axis_loop_20260607T120407KST.exit.json",
+    "raw_text": "reports/20260607T120407KST_opencode_improvement_axis_loop_raw_text.md",
+    "report_json": "reports/20260607T120407KST_opencode_improvement_axis_loop.json",
+    "report_md": "reports/20260607T120407KST_opencode_improvement_axis_loop.md",
+    "exit_code": 0,
+    "timed_out": false,
+    "elapsed_seconds": 198.403,
+    "final_sentinel": "OPENCODE_AXIS_LOOP_DONE_NO_SAFE_AXIS",
+    "axis_decision": "NO_SAFE_AXIS",
+    "new_probe_launched": false,
+    "open_code_top_metric": {
+      "variant": "pre_registered_old_panel_top_coplay_top5_reverse_recent",
+      "mean_delta_vs_base": 0.0006668000266719654,
+      "min_delta_vs_base": -0.000600120024004891,
+      "positive_splits": "2/3",
+      "fixes": 424,
+      "breaks": 384,
+      "pooled_p_exact": 0.1700198674835568,
+      "strict_gate_pass": false,
+      "quarantine_conflict": true
+    }
+  },
+  "concurrent_controller_reconciliation": {
+    "detected": true,
+    "launch_status": "reports/20260607T120404KST_after_otto_axis_loop_launch_status.md",
+    "driver_log": "logs/20260607T120245KST_opencode_hermes_axis_loop_after_otto_driver.log",
+    "iter1_report_json": "reports/20260607T120245KST_axis_loop_iter01_opencode.json",
+    "iter1_classification": "NO_SAFE_AXIS_REJECTED_CONTINUE",
+    "iter2_log": "logs/20260607T120245KST_axis_loop_iter02_opencode.jsonl",
+    "iter2_report_json_found": false,
+    "iter2_classification": "TERMINATED_INCOMPLETE_NO_FINAL_REPORT",
+    "active_now": false,
+    "note": "A separate after-OTTO controller overlapped this tick, reached iter2, then stopped before producing an iter2 report; final ps check found no live controller/OpenCode process. No probe or submission artifact was detected from it."
+  },
+  "completed_or_recent_axis_classifications": [
+    {
+      "axis": "OTTO/source-separated coplay_top5 + reverse_recent",
+      "classification": "REJECT_OR_CLOSED_AFTER_PUBLIC_NEGATIVE_VS_CURRENT_BEST",
+      "evidence": "Independent confirmation failed strict gate: mean +0.0006668, min -0.0006001, 2/3 positive, p 0.1700; forced public result 0.77815 < current best 0.77825.",
+      "reports": [
+        "reports/20260607T095549KST_otto_independent_uniform_confirmation.json",
+        "reports/20260607T114059KST_otto_forced_post_submission_analysis.json"
+      ]
+    },
+    {
+      "axis": "DNS pool=1",
+      "classification": "REJECT_CLOSED",
+      "evidence": "Three-uniform-panel mean deltas negative and only 1/3 positive; recorded as split-specific noise."
+    },
+    {
+      "axis": "UserKNN gated residual fine-grid",
+      "classification": "STALLED_INCOMPLETE",
+      "evidence": "Expected final reports still missing; previous process exit 143."
+    },
+    {
+      "axis": "Jackknife uncertainty boundary",
+      "classification": "WEAK_SIGNAL_STRICT_GATE_FAIL",
+      "evidence": "Top available probe mean +0.0003667, min -0.0012002, 2/3 positive, p 0.3388."
+    }
+  ],
+  "verification": {
+    "opencode_report_json_parsed": true,
+    "opencode_exit_json_parsed": true,
+    "final_sentinel_from_extracted_text": "OPENCODE_AXIS_LOOP_DONE_NO_SAFE_AXIS",
+    "suspicious_uploadable_csv_created_since_opencode_start": [],
+    "secret_scan_hits_in_new_text_artifacts": [],
+    "forbidden_submit_processes_final_check": [],
+    "git_status_checked": true,
+    "git_stage_commit_push_done": false,
+    "note": "Working tree already contains many unrelated untracked artifacts; no staging/commit/push was performed."
+  },
+  "next_axis_hypotheses": [
+    {
+      "rank": 1,
+      "axis": "genuinely independent validation-label-free base-model family evaluated against current live-best/rankblend anchor on multiple splits",
+      "action": "hold until a bounded, non-duplicate local implementation surface exists; do not start from scratch in this cron tick"
+    },
+    {
+      "rank": 2,
+      "axis": "UserKNN finite-value hygiene/debug-only cleanup",
+      "action": "not an improvement axis; only consider as script hygiene, not broad relaunch"
+    },
+    {
+      "rank": 3,
+      "axis": "new non-boundary disagreement diagnostic independent of quarantined rankblend/capacity/frontier/jackknife families",
+      "action": "OpenCode found no safe local surface this tick"
+    }
+  ],
+  "final_classification": "NO_SAFE_AXIS_AFTER_OPENCODE",
+  "next_action": "Continue monitoring in the next scheduled tick; do not submit, do not materialize full-test candidates, and avoid repeating OTTO/UserKNN/jackknife/DNS/closed-public-negative axes."
+}

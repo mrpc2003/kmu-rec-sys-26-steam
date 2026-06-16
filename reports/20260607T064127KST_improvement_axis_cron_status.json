@@ -1,0 +1,148 @@
+{
+  "timestamp_kst": "2026-06-07T06:41:27+09:00",
+  "timestamp_utc": "2026-06-06T21:41:27Z",
+  "cron_role": "OpenCode-first no-submit improvement-axis discovery monitor",
+  "safety_flags": {
+    "validation_only": true,
+    "kaggle_submit_executed_by_this_tick": false,
+    "actual_kaggle_submit_process_count_excluding_self_after_tick": 0,
+    "full_test_candidate_or_submission_csv_created_by_this_tick": false,
+    "hidden_labels_used": false,
+    "private_answers_used": false,
+    "external_steam_scraping_used": false,
+    "quarantine_or_guard_logic_weakened": false,
+    "git_stage_commit_push_executed": false,
+    "credentials_or_tokens_printed": false,
+    "recursive_cron_scheduled": false
+  },
+  "actions_this_tick": [
+    "Loaded and followed the OpenCode no-submit improvement-axis-loop workflow and Kaggle RecSys safety gates.",
+    "Inspected Hermes background sessions, OS processes, GPU state, required UserKNN/jackknife report paths, logs, runner state, and recent OpenCode/status reports.",
+    "Observed a pre-existing scripts/aggressive_quota_runner.py process pair (pids 208 and 226) whose code path can call kaggle competitions submit; stopped it to enforce this cron job's hard no-submit/no-candidate contract. Post-stop process scan found no aggressive_quota_runner.py and no kaggle submit process.",
+    "Verified UserKNN gated residual fine-grid remains stalled/incomplete: expected JSON/MD reports are missing and the log has 40121 repeated invalid-divide warning lines with no metric report.",
+    "Verified jackknife uncertainty boundary expanded remains failed/incomplete: pid 28646 is not live, expected JSON/MD reports are missing, and the log has only 12 lines stopping mid val_random_uniform_seed123.",
+    "Launched exactly one bounded OpenCode run using reports/20260607T063604KST_opencode_axis_loop_prompt.md with --format json and stdin closed; captured logs under logs/opencode_improvement_axis_loop_20260607T063604KST.jsonl.",
+    "Extracted OpenCode text to reports/20260607T063604KST_opencode_improvement_axis_loop_raw_text.md and verified sentinel OPENCODE_AXIS_LOOP_DONE_NO_SAFE_AXIS.",
+    "Validated OpenCode JSON report parseability/required keys, checked no new CSVs since the OpenCode run start, checked active submit process count is 0, reviewed the secret-scan hit as WANDB_DIR path false positive only, and ran git diff --check on touched report artifacts."
+  ],
+  "active_processes_after_tick": {
+    "hermes_background_processes": [],
+    "aggressive_quota_runner": {
+      "status": "STOPPED_BY_THIS_TICK_FOR_HARD_NO_SUBMIT_SAFETY",
+      "stopped_pids": [208, 226],
+      "post_stop_processes": []
+    },
+    "userknn_gated_residual_fine": {
+      "status": "NOT_RUNNING_STALLED_INCOMPLETE",
+      "log": "logs/userknn_gated_residual_fine_20260606T132450KST.log",
+      "expected_report_json": "reports/20260606T132450KST_userknn_gated_residual_fine.json",
+      "expected_report_md": "reports/20260606T132450KST_userknn_gated_residual_fine.md",
+      "expected_reports_exist": false,
+      "log_lines_observed": 40121,
+      "classification": "STALLED_INCOMPLETE"
+    },
+    "jackknife_uncertainty_boundary_expanded": {
+      "status": "NOT_RUNNING_FAILED_INCOMPLETE_NO_METRIC_REPORT",
+      "pid_file": "logs/20260606T220406KST_jackknife_uncertainty_boundary_expanded.pid",
+      "pid_file_value": 28646,
+      "pid_file_pid_live": false,
+      "log": "logs/20260606T220406KST_jackknife_uncertainty_boundary_expanded.log",
+      "log_lines_observed": 12,
+      "expected_report_json": "reports/20260606T220406KST_jackknife_uncertainty_boundary_expanded.json",
+      "expected_report_md": "reports/20260606T220406KST_jackknife_uncertainty_boundary_expanded.md",
+      "expected_reports_exist": false,
+      "classification": "FAILED_INCOMPLETE_NO_METRIC_REPORT"
+    },
+    "opencode_axis_loop": {
+      "status": "COMPLETED",
+      "exit_code": 0,
+      "sentinel": "OPENCODE_AXIS_LOOP_DONE_NO_SAFE_AXIS",
+      "prompt": "reports/20260607T063604KST_opencode_axis_loop_prompt.md",
+      "jsonl_log": "logs/opencode_improvement_axis_loop_20260607T063604KST.jsonl",
+      "raw_text": "reports/20260607T063604KST_opencode_improvement_axis_loop_raw_text.md",
+      "report_md": "reports/20260607T063604KST_opencode_improvement_axis_loop.md",
+      "report_json": "reports/20260607T063604KST_opencode_improvement_axis_loop.json",
+      "new_probe_launched": false
+    }
+  },
+  "completed_probe_classification": {
+    "jackknife_uncertainty_boundary_smoke": {
+      "report_json": "reports/20260606T220406KST_jackknife_uncertainty_boundary_probe.json",
+      "classification": "WEAK_SIGNAL_STRICT_GATE_FAIL",
+      "top_variant": "vote_consensus__high_capacity_gap__B1__w0.1",
+      "mean_delta_vs_base": 0.0003667400146696309,
+      "min_delta_vs_base": -0.0012002400480095599,
+      "positive_splits": "2/3",
+      "fixes": 252,
+      "breaks": 230,
+      "pooled_p_exact": 0.33881500709211204,
+      "strict_gate_result": "FAIL"
+    },
+    "userknn_gated_residual_smoke_previous": {
+      "report_json": "reports/20260603T180707KST_userknn_gated_residual_probe.json",
+      "classification": "WEAK_SIGNAL_STRICT_GATE_FAIL",
+      "top_mean_delta_vs_base": 0.0009001800360071884,
+      "top_min_delta_vs_base": 0.0002000400080015563,
+      "top_positive_splits": "3/3",
+      "top_fixes": 406,
+      "top_breaks": 352,
+      "top_pooled_p_exact": 0.05415183075028983,
+      "strict_gate_result": "FAIL"
+    },
+    "dns_pool1_panel": {
+      "classification": "CLOSED_NO_CANDIDATE",
+      "reason": "Previously rejected as split-specific/public-noise risk and not a fresh independent axis."
+    },
+    "last_slot_sparse_agreement": {
+      "classification": "REJECT",
+      "reason": "Closed negative/weak last-slot axis; not a strict improvement candidate."
+    },
+    "quarantined_public_negative_families": {
+      "classification": "CLOSED_OR_BLOCKED_BY_QUARANTINE",
+      "state_json": "state/aggressive_quota_runner_state.json",
+      "families_seen": ["rankblend ALS/BPR residuals", "boundary scoreblend", "frontier/capacity", "TAG-CF full-test"],
+      "reason": "State records public-negative/non-improving transfer versus current public best 0.77825."
+    }
+  },
+  "opencode_verdict": {
+    "verdict": "NO_SAFE_AXIS",
+    "new_axis_decision": "OpenCode did not identify a fresh independent bounded validation-only axis. No probe was launched.",
+    "ranked_next_axis_hypotheses": [
+      "Tiny UserKNN finite-value/complexity diagnostic only after isolating invalid-divide behavior; diagnostic/debug only, not a current improvement axis.",
+      "New non-leaky OOF residual calibration using existing validation artifacts; currently blocked by quarantine/public-negative near-family risk.",
+      "New backbone/loss beyond LightGCN capacity frontier; currently no fresh strict-gate clue and too large for this bounded tick.",
+      "DNS/capacity micro-ensemble refinement; currently split-specific/public-noise and below strict gate."
+    ]
+  },
+  "resource_snapshot_after_tick": {
+    "gpu_snapshot": [
+      {"index": 0, "name": "Tesla V100-PCIE-32GB", "memory_used_mib": 0, "memory_total_mib": 32768, "utilization_percent": 0},
+      {"index": 1, "name": "Tesla V100-PCIE-32GB", "memory_used_mib": 0, "memory_total_mib": 32768, "utilization_percent": 0},
+      {"index": 2, "name": "Tesla V100-PCIE-32GB", "memory_used_mib": 0, "memory_total_mib": 32768, "utilization_percent": 1},
+      {"index": 3, "name": "Tesla V100-PCIE-32GB", "memory_used_mib": 4320, "memory_total_mib": 32768, "utilization_percent": 1}
+    ]
+  },
+  "verification": {
+    "opencode_cli_version": "1.15.11",
+    "opencode_json_parse": "ok",
+    "opencode_json_required_keys_missing": [],
+    "open_code_sentinel_found": true,
+    "new_csv_created_since_opencode_start": false,
+    "new_csv_count_since_opencode_start": 0,
+    "active_kaggle_submit_processes": 0,
+    "aggressive_quota_runner_processes_after_stop": 0,
+    "secret_scan_touched_reports": "no_credentials; only WANDB_DIR path false-positive in OpenCode JSONL",
+    "git_diff_check_touched_artifacts": "ok",
+    "git_stage_commit_push_executed": false
+  },
+  "artifacts": {
+    "status_json": "reports/20260607T064127KST_improvement_axis_cron_status.json",
+    "status_md": "reports/20260607T064127KST_improvement_axis_cron_status.md",
+    "opencode_prompt": "reports/20260607T063604KST_opencode_axis_loop_prompt.md",
+    "opencode_jsonl": "logs/opencode_improvement_axis_loop_20260607T063604KST.jsonl",
+    "opencode_raw_text": "reports/20260607T063604KST_opencode_improvement_axis_loop_raw_text.md",
+    "opencode_report_md": "reports/20260607T063604KST_opencode_improvement_axis_loop.md",
+    "opencode_report_json": "reports/20260607T063604KST_opencode_improvement_axis_loop.json"
+  },
+  "next_action": "Continue no-submit monitoring only. Do not restart aggressive_quota_runner from this cron. Do not relaunch broad UserKNN or jackknife grids; only consider a future bounded validation-only probe if a genuinely independent axis appears and the hard no-submit/no-candidate contract remains enforced."
+}

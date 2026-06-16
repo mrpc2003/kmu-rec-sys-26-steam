@@ -1,0 +1,136 @@
+{
+  "date_kst": "2026-06-02",
+  "scope": "KMU RecSys 26 Steam latest paper and Hugging Face model feasibility scan",
+  "safety": {
+    "validation_only": true,
+    "candidate_csv_written": false,
+    "kaggle_submit_executed": false,
+    "hidden_label_access": false,
+    "external_steam_scraping": false
+  },
+  "raw_artifacts": [
+    "reports/20260602_latest_papers_arxiv_raw.json",
+    "reports/20260602_selected_papers_arxiv_metadata.json",
+    "reports/20260602_hf_model_probe_raw.json"
+  ],
+  "gpu_probe": "4x Tesla V100-PCIE-32GB; V100 lacks native BF16 acceleration, so prefer FP16 for large embedding models.",
+  "paper_triage": [
+    {
+      "priority": 1,
+      "source": "RAGR: Review-Augmented Generative Recommendation",
+      "arxiv": "2605.17267",
+      "mechanism": "review-augmented generative recommendation with item/review semantic IDs and DPO alignment",
+      "verdict": "reduce_to_review_embedding_probe",
+      "reason": "review text is the only allowed non-adjacency signal; full sequential/generative framing overlaps the rejected SASRec axis"
+    },
+    {
+      "priority": 2,
+      "source": "Qwen3 Embedding / Qwen3-VL Embedding reports",
+      "arxiv": "2506.05176 / 2601.04720",
+      "mechanism": "strong public pretrained embedding/reranking models",
+      "verdict": "usable_for_review_semantic_probe",
+      "reason": "non-gated HF models can encode train reviews reproducibly; no hidden/test data needed"
+    },
+    {
+      "priority": 3,
+      "source": "DynamicPO / MASS-DPO",
+      "arxiv": "2605.00327 / 2605.10784",
+      "mechanism": "multi-negative preference optimization",
+      "verdict": "defer",
+      "reason": "overlaps DNS/hard-negative and top-K objective axes; needs generative/pairwise setup first"
+    },
+    {
+      "priority": 4,
+      "source": "TopKGAT",
+      "arxiv": "2601.18432",
+      "code": "https://github.com/StupidThree/TopKGAT",
+      "mechanism": "Precision@K-aligned graph attention architecture",
+      "verdict": "not_first_priority",
+      "reason": "top-K objective axis was already approximated by SL@K-lite and rejected; full port likely high cost and graph-CF redundant"
+    },
+    {
+      "priority": 5,
+      "source": "Talos",
+      "arxiv": "2601.19276",
+      "mechanism": "top-K accuracy optimization under distribution shift",
+      "verdict": "read_only_or_defer",
+      "reason": "same objective-geometry family after SL@K-lite rejection"
+    },
+    {
+      "priority": 6,
+      "source": "Breaking the Top-K Barrier / SL@K",
+      "arxiv": "2508.05673",
+      "code": "https://github.com/Tiny-Snow/IR-Benchmark",
+      "mechanism": "SoftmaxLoss@K with quantile top-K truncation",
+      "verdict": "closed_by_existing_slk_lite_panel",
+      "reason": "project-specific SL@K-lite continuation was negative on all 3 splits"
+    }
+  ],
+  "hf_model_triage": [
+    {
+      "priority": 1,
+      "model": "Qwen/Qwen3-Embedding-0.6B",
+      "gated": false,
+      "license": "apache-2.0",
+      "downloads": 8687121,
+      "verdict": "use_first",
+      "probe": "train-review user/item semantic profiles + residualized cosine"
+    },
+    {
+      "priority": 2,
+      "model": "nomic-ai/modernbert-embed-base",
+      "gated": false,
+      "license": "apache-2.0",
+      "downloads": 163848,
+      "verdict": "fallback_ablation",
+      "probe": "same review semantic profile, possibly 256-dim truncation"
+    },
+    {
+      "priority": 3,
+      "model": "BAAI/bge-m3",
+      "gated": false,
+      "license": "mit",
+      "downloads": 31537672,
+      "verdict": "baseline_embedding_ablation",
+      "probe": "same review semantic profile"
+    },
+    {
+      "priority": 4,
+      "model": "Qwen/Qwen3-Reranker-0.6B",
+      "gated": false,
+      "license": "apache-2.0",
+      "downloads": 1319590,
+      "verdict": "boundary_only_after_embedding_signal",
+      "probe": "rank K/K+1 boundary reranking using user/game review summaries"
+    },
+    {
+      "priority": 5,
+      "model": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+      "gated": false,
+      "license": "apache-2.0",
+      "downloads": 353403,
+      "verdict": "optional_embedding_ablation"
+    },
+    {
+      "priority": 6,
+      "model": "jinaai/jina-embeddings-v4",
+      "gated": false,
+      "license": "not_exposed_in_probe_tags",
+      "downloads": 572733,
+      "verdict": "defer_heavy_multimodal_not_needed"
+    },
+    {
+      "priority": 7,
+      "model": "Qwen/Qwen3-VL-Embedding-2B",
+      "gated": false,
+      "license": "apache-2.0",
+      "downloads": 1231407,
+      "verdict": "defer_no_visual_candidate_metadata"
+    }
+  ],
+  "recommended_next_step": {
+    "name": "Qwen3 review semantic residual probe",
+    "strict_gate": "fixed 3-split mean delta >= 0.00355, fixes > breaks, paired exact/McNemar support",
+    "kill_condition": "if residualized semantic score is <= 0 or non-sign-stable, close HF text embedding axes"
+  }
+}

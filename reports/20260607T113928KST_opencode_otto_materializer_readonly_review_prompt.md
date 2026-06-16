@@ -1,0 +1,3 @@
+CRITICAL EXECUTION RULES: Answer ENTIRELY YOURSELF in this single response. Do NOT delegate. Do NOT edit files. Do NOT run Kaggle submit. Do NOT create candidate/submission CSVs. Do NOT print secrets.
+
+Read-only review `scripts/materialize_otto_forced_candidate.py` for a user-approved forced/manual-risk Kaggle Steam binary candidate. Check: schema/order/top-half preflight, formula matches fixed OTTO row (`z_score_base + 0.090*z_score_coplay_top5_mean + 0.040*z_score_reverse_recent`), no hidden/private/external data, no Kaggle submit inside script, and obvious runtime bugs. Return PASS/FAIL with concise findings and end exactly `OPENCODE_MATERIALIZER_REVIEW_DONE`.
