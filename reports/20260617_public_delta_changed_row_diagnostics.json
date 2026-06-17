@@ -1,0 +1,344 @@
+{
+  "safety": {
+    "analysis_only": true,
+    "kaggle_submit_executed": false,
+    "candidate_csv_written": false,
+    "hidden_label_access": false
+  },
+  "reference": "rankblend_public_best",
+  "n_public_assumption": 9999,
+  "all_test_pair_feature_means": {
+    "item_pop": 129.45599559955997,
+    "log_item_pop": 4.28793337016916,
+    "user_deg": 39.08000800080008,
+    "cand_count": 6.4868486848684865,
+    "pop_rank_pct_in_user": 0.5
+  },
+  "rows": [
+    {
+      "candidate": "rankblend_public_best",
+      "file": "submissions/candidate_rank_blend_emb128_emb192.csv",
+      "public": 0.77825,
+      "public_delta_vs_ref": 0.0,
+      "sha256": "835b8b90ce30116a3df7a7575e6ccdaec268af9c1acb01ca0c15c733b3152b2e",
+      "row_diff_vs_ref": 0,
+      "row_diff_frac": 0.0,
+      "approx_net_public_rows_vs_ref": 0,
+      "approx_candidate_better_frac_on_changed_public_rows": null,
+      "changed_feature_means": {
+        "item_pop": null,
+        "log_item_pop": null,
+        "user_deg": null,
+        "cand_count": null,
+        "pop_rank_pct_in_user": null
+      },
+      "changed_feature_lift_vs_all": {
+        "item_pop": 0.0,
+        "log_item_pop": 0.0,
+        "user_deg": 0.0,
+        "cand_count": 0.0,
+        "pop_rank_pct_in_user": 0.0
+      }
+    },
+    {
+      "candidate": "otto_forced",
+      "file": "submissions/candidate_otto_coplay_top5_reverse_recent_w0090_w0040_forced_20260607T114059KST.csv",
+      "public": 0.77815,
+      "public_delta_vs_ref": -9.999999999998899e-05,
+      "sha256": "d70af0f1e325c5c59985ed0df6dbc4232950edf6971f0ad26c72f7da8205985e",
+      "row_diff_vs_ref": 508,
+      "row_diff_frac": 0.025402540254025403,
+      "approx_net_public_rows_vs_ref": -1,
+      "approx_candidate_better_frac_on_changed_public_rows": 0.49803169291338606,
+      "changed_feature_means": {
+        "item_pop": 78.40354330708661,
+        "log_item_pop": 4.067670527834519,
+        "user_deg": 40.42913385826772,
+        "cand_count": 6.803149606299213,
+        "pop_rank_pct_in_user": 0.5177234813062803
+      },
+      "changed_feature_lift_vs_all": {
+        "item_pop": -51.05245229247336,
+        "log_item_pop": -0.2202628423346411,
+        "user_deg": 1.3491258574676408,
+        "cand_count": 0.3163009214307264,
+        "pop_rank_pct_in_user": 0.01772348130628032
+      }
+    },
+    {
+      "candidate": "als_htr_w0.025",
+      "file": "submissions/candidate_autorun_rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.025.csv",
+      "public": 0.77805,
+      "public_delta_vs_ref": -0.00019999999999997797,
+      "sha256": "85c5c2ddd73f7bbe78e20d0ee682a41650518957fa6d5e0fb8c0942932129a77",
+      "row_diff_vs_ref": 278,
+      "row_diff_frac": 0.0139013901390139,
+      "approx_net_public_rows_vs_ref": -2,
+      "approx_candidate_better_frac_on_changed_public_rows": 0.49280647482014467,
+      "changed_feature_means": {
+        "item_pop": 79.89208633093526,
+        "log_item_pop": 4.091912072334873,
+        "user_deg": 35.74820143884892,
+        "cand_count": 5.697841726618705,
+        "pop_rank_pct_in_user": 0.5264713374742997
+      },
+      "changed_feature_lift_vs_all": {
+        "item_pop": -49.56390926862471,
+        "log_item_pop": -0.196021297834287,
+        "user_deg": -3.3318065619511543,
+        "cand_count": -0.7890069582497814,
+        "pop_rank_pct_in_user": 0.02647133747429975
+      }
+    },
+    {
+      "candidate": "als_htr_w0.05",
+      "file": "submissions/candidate_autorun_rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.05.csv",
+      "public": 0.77805,
+      "public_delta_vs_ref": -0.00019999999999997797,
+      "sha256": "85c5c2ddd73f7bbe78e20d0ee682a41650518957fa6d5e0fb8c0942932129a77",
+      "row_diff_vs_ref": 278,
+      "row_diff_frac": 0.0139013901390139,
+      "approx_net_public_rows_vs_ref": -2,
+      "approx_candidate_better_frac_on_changed_public_rows": 0.49280647482014467,
+      "changed_feature_means": {
+        "item_pop": 79.89208633093526,
+        "log_item_pop": 4.091912072334873,
+        "user_deg": 35.74820143884892,
+        "cand_count": 5.697841726618705,
+        "pop_rank_pct_in_user": 0.5264713374742997
+      },
+      "changed_feature_lift_vs_all": {
+        "item_pop": -49.56390926862471,
+        "log_item_pop": -0.196021297834287,
+        "user_deg": -3.3318065619511543,
+        "cand_count": -0.7890069582497814,
+        "pop_rank_pct_in_user": 0.02647133747429975
+      }
+    },
+    {
+      "candidate": "als_htr_w0.1",
+      "file": "submissions/candidate_autorun_rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.1.csv",
+      "public": 0.77805,
+      "public_delta_vs_ref": -0.00019999999999997797,
+      "sha256": "85c5c2ddd73f7bbe78e20d0ee682a41650518957fa6d5e0fb8c0942932129a77",
+      "row_diff_vs_ref": 278,
+      "row_diff_frac": 0.0139013901390139,
+      "approx_net_public_rows_vs_ref": -2,
+      "approx_candidate_better_frac_on_changed_public_rows": 0.49280647482014467,
+      "changed_feature_means": {
+        "item_pop": 79.89208633093526,
+        "log_item_pop": 4.091912072334873,
+        "user_deg": 35.74820143884892,
+        "cand_count": 5.697841726618705,
+        "pop_rank_pct_in_user": 0.5264713374742997
+      },
+      "changed_feature_lift_vs_all": {
+        "item_pop": -49.56390926862471,
+        "log_item_pop": -0.196021297834287,
+        "user_deg": -3.3318065619511543,
+        "cand_count": -0.7890069582497814,
+        "pop_rank_pct_in_user": 0.02647133747429975
+      }
+    },
+    {
+      "candidate": "als_raw_w0.2",
+      "file": "submissions/candidate_autorun_rankblend_z_plus_score_als_f32_it30_alpha20_popa4_w0.2.csv",
+      "public": 0.77795,
+      "public_delta_vs_ref": -0.00029999999999996696,
+      "sha256": "1a2e52854e1771f525e1fcc0f80cb939f82488bcce65866459668d7d8f257c42",
+      "row_diff_vs_ref": 276,
+      "row_diff_frac": 0.013801380138013802,
+      "approx_net_public_rows_vs_ref": -3,
+      "approx_candidate_better_frac_on_changed_public_rows": 0.48913152173913166,
+      "changed_feature_means": {
+        "item_pop": 82.73913043478261,
+        "log_item_pop": 4.093769757603095,
+        "user_deg": 39.666666666666664,
+        "cand_count": 6.405797101449275,
+        "pop_rank_pct_in_user": 0.5204527736712418
+      },
+      "changed_feature_lift_vs_all": {
+        "item_pop": -46.71686516477736,
+        "log_item_pop": -0.19416361256606507,
+        "user_deg": 0.5866586658665867,
+        "cand_count": -0.08105158341921115,
+        "pop_rank_pct_in_user": 0.020452773671241764
+      }
+    },
+    {
+      "candidate": "als_htr_w0.2",
+      "file": "submissions/candidate_autorun_rankblend_z_plus_score_als_htr_f32_it30_alpha20_popa4_w0.2.csv",
+      "public": 0.77785,
+      "public_delta_vs_ref": -0.00039999999999995595,
+      "sha256": "23f01b4e8354e0b4ee49f2cd266f10b558e1da9f85c1d6b7d357c0488a9cdd22",
+      "row_diff_vs_ref": 300,
+      "row_diff_frac": 0.015001500150015001,
+      "approx_net_public_rows_vs_ref": -4,
+      "approx_candidate_better_frac_on_changed_public_rows": 0.4866680000000015,
+      "changed_feature_means": {
+        "item_pop": 82.92666666666666,
+        "log_item_pop": 4.103168698582893,
+        "user_deg": 36.71333333333333,
+        "cand_count": 6.16,
+        "pop_rank_pct_in_user": 0.520052486213477
+      },
+      "changed_feature_lift_vs_all": {
+        "item_pop": -46.52932893289331,
+        "log_item_pop": -0.18476467158626697,
+        "user_deg": -2.3666746674667465,
+        "cand_count": -0.3268486848684864,
+        "pop_rank_pct_in_user": 0.020052486213476994
+      }
+    },
+    {
+      "candidate": "boundary_w_neg075",
+      "file": "submissions/candidate_autorun_boundary_scoreblend_z128_z192_z64_w-0.75.csv",
+      "public": 0.77755,
+      "public_delta_vs_ref": -0.0007000000000000339,
+      "sha256": "8966b80f4a5c807f5747d9766e9b004624c9671a8adb2e03e30f38d7733a9822",
+      "row_diff_vs_ref": 582,
+      "row_diff_frac": 0.029102910291029103,
+      "approx_net_public_rows_vs_ref": -7,
+      "approx_candidate_better_frac_on_changed_public_rows": 0.4879737113402056,
+      "changed_feature_means": {
+        "item_pop": 75.69243986254295,
+        "log_item_pop": 4.036629442080431,
+        "user_deg": 42.72508591065292,
+        "cand_count": 7.195876288659794,
+        "pop_rank_pct_in_user": 0.5442064358693395
+      },
+      "changed_feature_lift_vs_all": {
+        "item_pop": -53.763555737017015,
+        "log_item_pop": -0.2513039280887286,
+        "user_deg": 3.6450779098528443,
+        "cand_count": 0.7090276037913075,
+        "pop_rank_pct_in_user": 0.04420643586933948
+      }
+    },
+    {
+      "candidate": "emb128_stable",
+      "file": "final_package/final_slot2_lightgcn_emb128L4r3_4seed_LABEL.csv",
+      "public": 0.77745,
+      "public_delta_vs_ref": -0.0008000000000000229,
+      "sha256": "7e3191dead2d85637dbf01f7ad50aeb61394c6b709959f2c2850bc53c430c195",
+      "row_diff_vs_ref": 368,
+      "row_diff_frac": 0.0184018401840184,
+      "approx_net_public_rows_vs_ref": -8,
+      "approx_candidate_better_frac_on_changed_public_rows": 0.47826304347826026,
+      "changed_feature_means": {
+        "item_pop": 70.14945652173913,
+        "log_item_pop": 3.9735208514299454,
+        "user_deg": 37.97282608695652,
+        "cand_count": 6.456521739130435,
+        "pop_rank_pct_in_user": 0.5353351622129385
+      },
+      "changed_feature_lift_vs_all": {
+        "item_pop": -59.306539077820844,
+        "log_item_pop": -0.3144125187392146,
+        "user_deg": -1.1071819138435544,
+        "cand_count": -0.030326945738051947,
+        "pop_rank_pct_in_user": 0.03533516221293853
+      }
+    },
+    {
+      "candidate": "frontier_w1920_w64neg025",
+      "file": "submissions/candidate_autorun_frontier_z_w1920_w64-0.25.csv",
+      "public": 0.77715,
+      "public_delta_vs_ref": -0.0010999999999999899,
+      "sha256": "e2872806738cb511d6c45cd828508cdb2f31f9040a463a8091235271adc26b1d",
+      "row_diff_vs_ref": 556,
+      "row_diff_frac": 0.0278027802780278,
+      "approx_net_public_rows_vs_ref": -11,
+      "approx_candidate_better_frac_on_changed_public_rows": 0.48021780575539585,
+      "changed_feature_means": {
+        "item_pop": 74.93345323741008,
+        "log_item_pop": 4.028885832355952,
+        "user_deg": 41.13309352517986,
+        "cand_count": 7.079136690647482,
+        "pop_rank_pct_in_user": 0.5366566823921581
+      },
+      "changed_feature_lift_vs_all": {
+        "item_pop": -54.52254236214989,
+        "log_item_pop": -0.259047537813208,
+        "user_deg": 2.0530855243797816,
+        "cand_count": 0.5922880057789959,
+        "pop_rank_pct_in_user": 0.036656682392158135
+      }
+    },
+    {
+      "candidate": "boundary_v1_forced",
+      "file": "submissions/candidate_boundary_v1_ridge_fast_panel20_forced.csv",
+      "public": 0.77705,
+      "public_delta_vs_ref": -0.0011999999999999789,
+      "sha256": "ebca52d0ea2c185c3dc4770dbf471553213b1fd1cf6a0a5d5a2d22668117f4a6",
+      "row_diff_vs_ref": 176,
+      "row_diff_frac": 0.0088008800880088,
+      "approx_net_public_rows_vs_ref": -12,
+      "approx_candidate_better_frac_on_changed_public_rows": 0.43182500000000124,
+      "changed_feature_means": {
+        "item_pop": 87.4034090909091,
+        "log_item_pop": 4.107041427804874,
+        "user_deg": 39.65909090909091,
+        "cand_count": 6.295454545454546,
+        "pop_rank_pct_in_user": 0.5159817455272001
+      },
+      "changed_feature_lift_vs_all": {
+        "item_pop": -42.052586508650876,
+        "log_item_pop": -0.18089194236428607,
+        "user_deg": 0.5790829082908289,
+        "cand_count": -0.19139413941394068,
+        "pop_rank_pct_in_user": 0.01598174552720011
+      }
+    },
+    {
+      "candidate": "tagcf_seed2024",
+      "file": "submissions/candidate_autorun_tagcf_fulltest_seed2024_sym_a0.1_raw_zblend_bw0.5.csv",
+      "public": 0.77615,
+      "public_delta_vs_ref": -0.0020999999999999908,
+      "sha256": "96b28feafda52740866b37f3128eb9015d53d15a1dfa7604f6643f60d09755eb",
+      "row_diff_vs_ref": 646,
+      "row_diff_frac": 0.032303230323032305,
+      "approx_net_public_rows_vs_ref": -21,
+      "approx_candidate_better_frac_on_changed_public_rows": 0.46749551083591345,
+      "changed_feature_means": {
+        "item_pop": 76.71052631578948,
+        "log_item_pop": 4.046702033382285,
+        "user_deg": 37.34984520123839,
+        "cand_count": 6.309597523219814,
+        "pop_rank_pct_in_user": 0.5305816404007703
+      },
+      "changed_feature_lift_vs_all": {
+        "item_pop": -52.74546928377049,
+        "log_item_pop": -0.2412313367868748,
+        "user_deg": -1.7301627995616897,
+        "cand_count": -0.17725116164867227,
+        "pop_rank_pct_in_user": 0.03058164040077027
+      }
+    },
+    {
+      "candidate": "boundary_w2",
+      "file": "submissions/candidate_autorun_boundary_scoreblend_z128_z192_z64_w2.csv",
+      "public": 0.77575,
+      "public_delta_vs_ref": -0.0024999999999999467,
+      "sha256": "74b19a3c32559aef6a53b1f68b022f279a48bc7b6983a438dec68cda2b18137e",
+      "row_diff_vs_ref": 596,
+      "row_diff_frac": 0.029802980298029802,
+      "approx_net_public_rows_vs_ref": -25,
+      "approx_candidate_better_frac_on_changed_public_rows": 0.4580578859060412,
+      "changed_feature_means": {
+        "item_pop": 77.4244966442953,
+        "log_item_pop": 4.042564599620686,
+        "user_deg": 40.285234899328856,
+        "cand_count": 6.604026845637584,
+        "pop_rank_pct_in_user": 0.521715083203437
+      },
+      "changed_feature_lift_vs_all": {
+        "item_pop": -52.03149895526467,
+        "log_item_pop": -0.24536877054847395,
+        "user_deg": 1.2052268985287782,
+        "cand_count": 0.1171781607690976,
+        "pop_rank_pct_in_user": 0.021715083203436958
+      }
+    }
+  ]
+}
