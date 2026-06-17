@@ -1,0 +1,148 @@
+{
+  "source_live_submissions_csv": "reports/20260617T143141KST_live_submissions_for_final5_plan.csv",
+  "live_submission_count_seen": 22,
+  "today_utc_count_status_complete_or_pending": 0,
+  "assumed_remaining_daily_slots": 5,
+  "duplicate_definition": "block exact SHA, block previously submitted filename, require min rowdiff_vs_live >= 500 labels",
+  "submit_now": false,
+  "selected": [
+    {
+      "slot": "slot1",
+      "role": "TAGCF smoke: graph-family lottery. 기존 TAGCF 제출과 family는 같지만 fulltest smoke로 row-diff가 가장 큼.",
+      "path": "submissions/candidate_smoke_tagcf_fulltest.csv",
+      "upload_filename": "candidate_smoke_tagcf_fulltest.csv",
+      "sha256": "9d9c5b01f0fbc29e1f38c637565f75abf374a346b01d501a128c644550bb6c20",
+      "sha8": "9d9c5b01",
+      "exact_sha_already_submitted": false,
+      "filename_already_submitted": false,
+      "min_rowdiff_vs_live": 3144,
+      "nearest_live_filename": "candidate_autorun_tagcf_fulltest_seed2024_sym_a0.1_raw_zblend_bw0.5.csv",
+      "rowdiff_vs_rankblend": 3280,
+      "rowdiff_vs_emb128": 3258,
+      "label_1": 9999,
+      "label_0": 9999,
+      "bad_users_tophalf": 0
+    },
+    {
+      "slot": "slot2",
+      "role": "Pure ALS CF baseline: rankblend/ALS-residual 제출과 다른 원본 ALS top-half 후보.",
+      "path": "artifacts/scores/test_pairs_full_train_stage2_cf/prediction_csv/candidate_score_als_f32_it30_alpha20_popa2.csv",
+      "upload_filename": "candidate_score_als_f32_it30_alpha20_popa2.csv",
+      "sha256": "dbeba05b2d4b2a862064e9270ef14c800ad45869996587ca46b4c4560eed8f0e",
+      "sha8": "dbeba05b",
+      "exact_sha_already_submitted": false,
+      "filename_already_submitted": false,
+      "min_rowdiff_vs_live": 2604,
+      "nearest_live_filename": "candidate_score_blend_mean_z.csv",
+      "rowdiff_vs_rankblend": 3264,
+      "rowdiff_vs_emb128": 3386,
+      "label_1": 9999,
+      "label_0": 9999,
+      "bad_users_tophalf": 0
+    },
+    {
+      "slot": "slot3",
+      "role": "Pure itemKNN BM25 max baseline: item-neighborhood 계열의 강한 비상관 후보.",
+      "path": "artifacts/scores/test_pairs_full_train_stage2_itemease/prediction_csv/candidate_score_itemknn_bm25_max.csv",
+      "upload_filename": "candidate_score_itemknn_bm25_max.csv",
+      "sha256": "16519ee1b42128619e69cc277783c862faf630c8c1cf0423824bf7131a96c83d",
+      "sha8": "16519ee1",
+      "exact_sha_already_submitted": false,
+      "filename_already_submitted": false,
+      "min_rowdiff_vs_live": 3556,
+      "nearest_live_filename": "candidate_score_blend_mean_z.csv",
+      "rowdiff_vs_rankblend": 4824,
+      "rowdiff_vs_emb128": 4888,
+      "label_1": 9999,
+      "label_0": 9999,
+      "bad_users_tophalf": 0
+    },
+    {
+      "slot": "slot4",
+      "role": "RRF pop+itemKNN+EASE hybrid: pure ALS/itemKNN과 다른 고전 CF ensemble 후보.",
+      "path": "artifacts/scores/test_pairs_full_train_stage2_itemease/prediction_csv/candidate_score_rrf_pop_itemknn_ease.csv",
+      "upload_filename": "candidate_score_rrf_pop_itemknn_ease.csv",
+      "sha256": "644bc71be4720f20b0fff2c8c5ee00fe0d1e20aac68fa2bfc3ffd2d56112d307",
+      "sha8": "644bc71b",
+      "exact_sha_already_submitted": false,
+      "filename_already_submitted": false,
+      "min_rowdiff_vs_live": 2796,
+      "nearest_live_filename": "candidate_score_blend_mean_z.csv",
+      "rowdiff_vs_rankblend": 3134,
+      "rowdiff_vs_emb128": 3142,
+      "label_1": 9999,
+      "label_0": 9999,
+      "bad_users_tophalf": 0
+    },
+    {
+      "slot": "slot5",
+      "role": "Stage2 median-z blend: 이미 제출한 mean-z와 다른 rank/score blend baseline.",
+      "path": "artifacts/scores/test_pairs_full_train_stage2_blend/prediction_csv/candidate_score_blend_median_z.csv",
+      "upload_filename": "candidate_score_blend_median_z.csv",
+      "sha256": "af5362b4303074edb55ba6580a572686dd56e622cb38e0f14b572c4ee22259e4",
+      "sha8": "af5362b4",
+      "exact_sha_already_submitted": false,
+      "filename_already_submitted": false,
+      "min_rowdiff_vs_live": 906,
+      "nearest_live_filename": "candidate_score_blend_mean_z.csv",
+      "rowdiff_vs_rankblend": 2800,
+      "rowdiff_vs_emb128": 2908,
+      "label_1": 9999,
+      "label_0": 9999,
+      "bad_users_tophalf": 0
+    }
+  ],
+  "pairwise_selected_rowdiff": [
+    {
+      "a": "slot1",
+      "b": "slot2",
+      "rowdiff": 3946
+    },
+    {
+      "a": "slot1",
+      "b": "slot3",
+      "rowdiff": 5450
+    },
+    {
+      "a": "slot1",
+      "b": "slot4",
+      "rowdiff": 1444
+    },
+    {
+      "a": "slot1",
+      "b": "slot5",
+      "rowdiff": 3338
+    },
+    {
+      "a": "slot2",
+      "b": "slot3",
+      "rowdiff": 5262
+    },
+    {
+      "a": "slot2",
+      "b": "slot4",
+      "rowdiff": 3650
+    },
+    {
+      "a": "slot2",
+      "b": "slot5",
+      "rowdiff": 2554
+    },
+    {
+      "a": "slot3",
+      "b": "slot4",
+      "rowdiff": 5038
+    },
+    {
+      "a": "slot3",
+      "b": "slot5",
+      "rowdiff": 3726
+    },
+    {
+      "a": "slot4",
+      "b": "slot5",
+      "rowdiff": 2606
+    }
+  ],
+  "final_selection_policy_after_results": "Default final remains emb128 reproducible #1 and rankblend #2. Promote a new file only if it beats public best clearly or gives an explicitly desired private hedge after result review."
+}

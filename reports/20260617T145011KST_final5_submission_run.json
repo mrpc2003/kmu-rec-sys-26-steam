@@ -1,0 +1,286 @@
+{
+  "timestamp_kst": "20260617T145011KST",
+  "competition": "kmu-rec-sys-26-steam",
+  "safety": {
+    "user_approved_remaining_5_execution": true,
+    "new_model_predictions_created": false,
+    "external_metadata_used": false,
+    "hidden_label_access": false,
+    "submit_now": true
+  },
+  "results": [
+    {
+      "slot": "slot1",
+      "source": "submissions/candidate_smoke_tagcf_fulltest.csv",
+      "upload_name": "final5_slot1_tagcf_smoke_LABEL.csv",
+      "role": "TAGCF smoke graph-family lottery; largest non-duplicate TAGCF variant",
+      "upload": "submissions/final5_nonduplicate/final5_slot1_tagcf_smoke_LABEL.csv",
+      "source_sha256": "9d9c5b01f0fbc29e1f38c637565f75abf374a346b01d501a128c644550bb6c20",
+      "upload_sha256": "9a8d9bb17bfaef3427c99410055c65521deb98cf9ee695b80eb533f015f5d004",
+      "rows": 19998,
+      "label_1": 9999,
+      "label_0": 9999,
+      "bad_users_tophalf": 0,
+      "duplicate_checks": {
+        "filename_already_submitted": false,
+        "exact_upload_sha_already_submitted_locally": false,
+        "min_rowdiff_vs_live": 3144,
+        "nearest_live_filename": "candidate_autorun_tagcf_fulltest_seed2024_sym_a0.1_raw_zblend_bw0.5.csv"
+      },
+      "quota_count_before_submit_utc_day": 0,
+      "submit_message": "FINAL5 non-duplicate burn slot1; TAGCF smoke graph-family lottery; largest non-duplicate TAGCF variant; SHA 9a8d9bb1; no external metadata/hidden labels.",
+      "submit_stdout": "reports/20260617T145011KST_final5_slot1_submit_stdout.txt",
+      "submit_returncode": 0,
+      "poll": {
+        "final": {
+          "attempt": 2,
+          "found": true,
+          "status": "SubmissionStatus.COMPLETE",
+          "publicScore": "0.72674",
+          "date": "2026-06-17 05:50:17.270000",
+          "csv": "reports/20260617T145011KST_final5_slot1_poll02.csv"
+        },
+        "history": [
+          {
+            "attempt": 1,
+            "found": true,
+            "status": "SubmissionStatus.PENDING",
+            "publicScore": "",
+            "date": "2026-06-17 05:50:17.270000",
+            "csv": "reports/20260617T145011KST_final5_slot1_poll01.csv"
+          },
+          {
+            "attempt": 2,
+            "found": true,
+            "status": "SubmissionStatus.COMPLETE",
+            "publicScore": "0.72674",
+            "date": "2026-06-17 05:50:17.270000",
+            "csv": "reports/20260617T145011KST_final5_slot1_poll02.csv"
+          }
+        ]
+      }
+    },
+    {
+      "slot": "slot2",
+      "source": "artifacts/scores/test_pairs_full_train_stage2_cf/prediction_csv/candidate_score_als_f32_it30_alpha20_popa2.csv",
+      "upload_name": "final5_slot2_pure_als_popa2_LABEL.csv",
+      "role": "Pure ALS CF baseline distinct from rankblend/ALS-residual submissions",
+      "upload": "submissions/final5_nonduplicate/final5_slot2_pure_als_popa2_LABEL.csv",
+      "source_sha256": "dbeba05b2d4b2a862064e9270ef14c800ad45869996587ca46b4c4560eed8f0e",
+      "upload_sha256": "dbeba05b2d4b2a862064e9270ef14c800ad45869996587ca46b4c4560eed8f0e",
+      "rows": 19998,
+      "label_1": 9999,
+      "label_0": 9999,
+      "bad_users_tophalf": 0,
+      "duplicate_checks": {
+        "filename_already_submitted": false,
+        "exact_upload_sha_already_submitted_locally": false,
+        "min_rowdiff_vs_live": 2604,
+        "nearest_live_filename": "candidate_score_blend_mean_z.csv"
+      },
+      "quota_count_before_submit_utc_day": 1,
+      "submit_message": "FINAL5 non-duplicate burn slot2; Pure ALS CF baseline distinct from rankblend/ALS-residual submissions; SHA dbeba05b; no external metadata/hidden labels.",
+      "submit_stdout": "reports/20260617T145011KST_final5_slot2_submit_stdout.txt",
+      "submit_returncode": 0,
+      "poll": {
+        "final": {
+          "attempt": 2,
+          "found": true,
+          "status": "SubmissionStatus.COMPLETE",
+          "publicScore": "0.73304",
+          "date": "2026-06-17 05:50:40.857000",
+          "csv": "reports/20260617T145011KST_final5_slot2_poll02.csv"
+        },
+        "history": [
+          {
+            "attempt": 1,
+            "found": true,
+            "status": "SubmissionStatus.PENDING",
+            "publicScore": "",
+            "date": "2026-06-17 05:50:40.857000",
+            "csv": "reports/20260617T145011KST_final5_slot2_poll01.csv"
+          },
+          {
+            "attempt": 2,
+            "found": true,
+            "status": "SubmissionStatus.COMPLETE",
+            "publicScore": "0.73304",
+            "date": "2026-06-17 05:50:40.857000",
+            "csv": "reports/20260617T145011KST_final5_slot2_poll02.csv"
+          }
+        ]
+      }
+    },
+    {
+      "slot": "slot3",
+      "source": "artifacts/scores/test_pairs_full_train_stage2_itemease/prediction_csv/candidate_score_itemknn_bm25_max.csv",
+      "upload_name": "final5_slot3_itemknn_bm25_max_LABEL.csv",
+      "role": "Pure itemKNN BM25 max baseline; high row-diff classical CF hedge",
+      "upload": "submissions/final5_nonduplicate/final5_slot3_itemknn_bm25_max_LABEL.csv",
+      "source_sha256": "16519ee1b42128619e69cc277783c862faf630c8c1cf0423824bf7131a96c83d",
+      "upload_sha256": "16519ee1b42128619e69cc277783c862faf630c8c1cf0423824bf7131a96c83d",
+      "rows": 19998,
+      "label_1": 9999,
+      "label_0": 9999,
+      "bad_users_tophalf": 0,
+      "duplicate_checks": {
+        "filename_already_submitted": false,
+        "exact_upload_sha_already_submitted_locally": false,
+        "min_rowdiff_vs_live": 3556,
+        "nearest_live_filename": "candidate_score_blend_mean_z.csv"
+      },
+      "quota_count_before_submit_utc_day": 2,
+      "submit_message": "FINAL5 non-duplicate burn slot3; Pure itemKNN BM25 max baseline; high row-diff classical CF hedge; SHA 16519ee1; no external metadata/hidden labels.",
+      "submit_stdout": "reports/20260617T145011KST_final5_slot3_submit_stdout.txt",
+      "submit_returncode": 0,
+      "poll": {
+        "final": {
+          "attempt": 2,
+          "found": true,
+          "status": "SubmissionStatus.COMPLETE",
+          "publicScore": "0.69333",
+          "date": "2026-06-17 05:51:03.663000",
+          "csv": "reports/20260617T145011KST_final5_slot3_poll02.csv"
+        },
+        "history": [
+          {
+            "attempt": 1,
+            "found": true,
+            "status": "SubmissionStatus.PENDING",
+            "publicScore": "",
+            "date": "2026-06-17 05:51:03.663000",
+            "csv": "reports/20260617T145011KST_final5_slot3_poll01.csv"
+          },
+          {
+            "attempt": 2,
+            "found": true,
+            "status": "SubmissionStatus.COMPLETE",
+            "publicScore": "0.69333",
+            "date": "2026-06-17 05:51:03.663000",
+            "csv": "reports/20260617T145011KST_final5_slot3_poll02.csv"
+          }
+        ]
+      }
+    },
+    {
+      "slot": "slot4",
+      "source": "artifacts/scores/test_pairs_full_train_stage2_itemease/prediction_csv/candidate_score_rrf_pop_itemknn_ease.csv",
+      "upload_name": "final5_slot4_rrf_pop_itemknn_ease_LABEL.csv",
+      "role": "RRF popularity+itemKNN+EASE hybrid, distinct from pure ALS/itemKNN",
+      "upload": "submissions/final5_nonduplicate/final5_slot4_rrf_pop_itemknn_ease_LABEL.csv",
+      "source_sha256": "644bc71be4720f20b0fff2c8c5ee00fe0d1e20aac68fa2bfc3ffd2d56112d307",
+      "upload_sha256": "644bc71be4720f20b0fff2c8c5ee00fe0d1e20aac68fa2bfc3ffd2d56112d307",
+      "rows": 19998,
+      "label_1": 9999,
+      "label_0": 9999,
+      "bad_users_tophalf": 0,
+      "duplicate_checks": {
+        "filename_already_submitted": false,
+        "exact_upload_sha_already_submitted_locally": false,
+        "min_rowdiff_vs_live": 2796,
+        "nearest_live_filename": "candidate_score_blend_mean_z.csv"
+      },
+      "quota_count_before_submit_utc_day": 3,
+      "submit_message": "FINAL5 non-duplicate burn slot4; RRF popularity+itemKNN+EASE hybrid, distinct from pure ALS/itemKNN; SHA 644bc71b; no external metadata/hidden labels.",
+      "submit_stdout": "reports/20260617T145011KST_final5_slot4_submit_stdout.txt",
+      "submit_returncode": 0,
+      "poll": {
+        "final": {
+          "attempt": 2,
+          "found": true,
+          "status": "SubmissionStatus.COMPLETE",
+          "publicScore": "0.73704",
+          "date": "2026-06-17 05:51:25.713000",
+          "csv": "reports/20260617T145011KST_final5_slot4_poll02.csv"
+        },
+        "history": [
+          {
+            "attempt": 1,
+            "found": true,
+            "status": "SubmissionStatus.PENDING",
+            "publicScore": "",
+            "date": "2026-06-17 05:51:25.713000",
+            "csv": "reports/20260617T145011KST_final5_slot4_poll01.csv"
+          },
+          {
+            "attempt": 2,
+            "found": true,
+            "status": "SubmissionStatus.COMPLETE",
+            "publicScore": "0.73704",
+            "date": "2026-06-17 05:51:25.713000",
+            "csv": "reports/20260617T145011KST_final5_slot4_poll02.csv"
+          }
+        ]
+      }
+    },
+    {
+      "slot": "slot5",
+      "source": "artifacts/scores/test_pairs_full_train_stage2_blend/prediction_csv/candidate_score_blend_median_z.csv",
+      "upload_name": "final5_slot5_stage2_median_z_LABEL.csv",
+      "role": "Stage2 median-z blend baseline distinct from submitted mean-z baseline",
+      "upload": "submissions/final5_nonduplicate/final5_slot5_stage2_median_z_LABEL.csv",
+      "source_sha256": "af5362b4303074edb55ba6580a572686dd56e622cb38e0f14b572c4ee22259e4",
+      "upload_sha256": "af5362b4303074edb55ba6580a572686dd56e622cb38e0f14b572c4ee22259e4",
+      "rows": 19998,
+      "label_1": 9999,
+      "label_0": 9999,
+      "bad_users_tophalf": 0,
+      "duplicate_checks": {
+        "filename_already_submitted": false,
+        "exact_upload_sha_already_submitted_locally": false,
+        "min_rowdiff_vs_live": 906,
+        "nearest_live_filename": "candidate_score_blend_mean_z.csv"
+      },
+      "quota_count_before_submit_utc_day": 4,
+      "submit_message": "FINAL5 non-duplicate burn slot5; Stage2 median-z blend baseline distinct from submitted mean-z baseline; SHA af5362b4; no external metadata/hidden labels.",
+      "submit_stdout": "reports/20260617T145011KST_final5_slot5_submit_stdout.txt",
+      "submit_returncode": 0,
+      "poll": {
+        "final": {
+          "attempt": 3,
+          "found": true,
+          "status": "SubmissionStatus.COMPLETE",
+          "publicScore": "0.74174",
+          "date": "2026-06-17 05:51:48.030000",
+          "csv": "reports/20260617T145011KST_final5_slot5_poll03.csv"
+        },
+        "history": [
+          {
+            "attempt": 1,
+            "found": true,
+            "status": "SubmissionStatus.PENDING",
+            "publicScore": "",
+            "date": "2026-06-17 05:51:48.030000",
+            "csv": "reports/20260617T145011KST_final5_slot5_poll01.csv"
+          },
+          {
+            "attempt": 2,
+            "found": true,
+            "status": "SubmissionStatus.PENDING",
+            "publicScore": "",
+            "date": "2026-06-17 05:51:48.030000",
+            "csv": "reports/20260617T145011KST_final5_slot5_poll02.csv"
+          },
+          {
+            "attempt": 3,
+            "found": true,
+            "status": "SubmissionStatus.COMPLETE",
+            "publicScore": "0.74174",
+            "date": "2026-06-17 05:51:48.030000",
+            "csv": "reports/20260617T145011KST_final5_slot5_poll03.csv"
+          }
+        ]
+      }
+    }
+  ],
+  "initial_live": {
+    "csv": "reports/20260617T145011KST_final5_initial_live_submissions.csv",
+    "today_count_complete_or_pending": 0,
+    "live_rows": 22
+  },
+  "final_live": {
+    "csv": "reports/20260617T145011KST_final5_final_live_submissions.csv",
+    "today_count_complete_or_pending": 5,
+    "live_rows": 27
+  }
+}

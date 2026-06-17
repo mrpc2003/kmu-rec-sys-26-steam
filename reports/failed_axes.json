@@ -280,5 +280,34 @@
     "method": "Validation-only BiVAE/RecVAE-style user-row reconstruction one-shot: fold-train binary user-item matrix, residual encoder with hidden=600 latent=200 dropout=0.3, multinomial reconstruction loss with beta warmup to 0.15 plus latent L2, 120 CPU epochs, validation candidate decoder-logit scoring, per-user top-half decode, and fixed 50/50 within-user z-blend with emb128 4-seed base.",
     "failure_hypothesis": "The Dacon-observed BiVAE/RecVAE family does not provide enough ranking strength in this fixed-candidate played prediction setting. The RecVAE-style user-row model was stronger than the previous BM25+LMF one-shot but still below the 0.735 solo smoke floor, and the fixed 50/50 z-blend regressed by about 0.0191 against the emb128 4-seed base with negative fixes/breaks across item-degree buckets.",
     "correlation_policy": "Treat this RecVAE/BiVAE-style user-row smoke as closed at the current one-shot design. Do not expand to panel, seed ensemble, dependency-heavy Cornac BiVAE, or full-test materialization unless a materially different autoencoder formulation first clears seed42: solo >= 0.735, fixed blend delta > +0.0007 versus emb128 4-seed, fixes > breaks, corr_z <= 0.95, and no head-only guard failure."
+  },
+  {
+    "id": "final5_nonduplicate_burn_20260617",
+    "submitted_files": [
+      "submissions/final5_nonduplicate/final5_slot1_tagcf_smoke_LABEL.csv",
+      "submissions/final5_nonduplicate/final5_slot2_pure_als_popa2_LABEL.csv",
+      "submissions/final5_nonduplicate/final5_slot3_itemknn_bm25_max_LABEL.csv",
+      "submissions/final5_nonduplicate/final5_slot4_rrf_pop_itemknn_ease_LABEL.csv",
+      "submissions/final5_nonduplicate/final5_slot5_stage2_median_z_LABEL.csv"
+    ],
+    "public_scores": {
+      "slot1": 0.72674,
+      "slot2": 0.73304,
+      "slot3": 0.69333,
+      "slot4": 0.73704,
+      "slot5": 0.74174
+    },
+    "current_live_best_reference": 0.77825,
+    "kaggle_submit_executed": true,
+    "submission_purpose": "user-approved remaining-quota non-duplicate burn; not a score-improvement gate pass",
+    "method_families": {
+      "slot1": "TAGCF smoke graph-family lottery; largest non-duplicate TAGCF variant",
+      "slot2": "Pure ALS CF baseline distinct from rankblend/ALS-residual submissions",
+      "slot3": "Pure itemKNN BM25 max baseline; high row-diff classical CF hedge",
+      "slot4": "RRF popularity+itemKNN+EASE hybrid, distinct from pure ALS/itemKNN",
+      "slot5": "Stage2 median-z blend baseline distinct from submitted mean-z baseline"
+    },
+    "failure_hypothesis": "Large row-diff classical CF/TAGCF/Stage2 candidates are far below the saturated LightGCN/rankblend graph signal; diversity without validation strength does not help private hedge.",
+    "correlation_policy": "Do not reopen these submitted final5 burn families for score-seeking unless new side information or a substantially stronger validation signal appears; exact submitted files are closed."
   }
 ]
